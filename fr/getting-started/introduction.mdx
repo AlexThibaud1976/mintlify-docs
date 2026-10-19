@@ -11,30 +11,32 @@ TestPulse Studio est une **extension Azure DevOps** qui a son propre groupe, **T
 
 TestPulse Studio a sa **propre place dans la navigation du projet** : le groupe **TestPulse Studio**, dans la barre de gauche (navigation du projet › TestPulse Studio) — sa seule entrée, visible même quand le service Test Plans est désactivé. Il réunit quatre espaces :
 
-- **Pilotage** — où en est la campagne, peut-on livrer ? Sous-onglets **Rapport**, **Cockpit**, **Historique**, **Explore** (les sessions exploratoires y restent jusqu'à l'arrivée d'un espace dédié aux campagnes), **Qualité des exigences** (voir [La qualité des exigences par itération](/fr/user-guide/requirement-quality)).
-- **Couverture** — les exigences sont-elles testées, les tests sont-ils alignés ? **Couverture**, **Dérive d'exigences**, **Référentiel**.
-- **Conception** — concevoir les tests d'une exigence : **Conception de tests** (voir [Concevoir des tests avec l'assistant IA](/fr/user-guide/test-design-hub)).
-- **Outils** — ce qu'on ouvre de temps en temps : **Import**, **Réaffectation en masse**, **Paramètres**, **Documentation**.
+- **Insights** (le pilotage de la campagne) — où en est la campagne, peut-on livrer ? Sous-onglets **Rapport**, **Cockpit**, **Historique**, **Explore** (les sessions exploratoires y restent jusqu'à l'arrivée d'un espace dédié aux campagnes), **Qualité des exigences** (voir [La qualité des exigences par itération](/fr/user-guide/requirement-quality)).
+- **Coverage** (la couverture des exigences) — les exigences sont-elles testées, les tests sont-ils alignés ? **Couverture**, **Dérive d'exigences**, **Référentiel**.
+- **Design** (la conception des tests) — concevoir les tests d'une exigence : **Conception de tests** (voir [Concevoir des tests avec l'assistant IA](/fr/user-guide/test-design-hub)).
+- **Tools** (les outils) — ce qu'on ouvre de temps en temps : **Import**, **Réaffectation en masse**, **Paramètres**, **Documentation**.
+
+Azure DevOps n'affiche la navigation du projet qu'en une langue : les espaces y gardent ces noms anglais, quelle que soit la vôtre.
 
 L'icône **?** en haut de chaque espace ouvre cette documentation.
 
-**Passer d'un espace à l'autre recharge la page.** TestPulse Studio garde votre plan sélectionné (avec ses suites cochées, ou vos plans en multi-plans), les champs du formulaire du rapport (sauf la date, qui suit le jour) et le dernier sous-onglet ouvert dans chaque espace. **Le rapport affiché n'est pas conservé** : il reste dans l'Historique s'il a été enregistré, et Pilotage vous le rappelle à votre retour. Un lien d'un espace à l'autre porte son contexte dans l'URL — l'adresse copiée dans un autre onglet du navigateur rouvre le même écran.
+**Passer d'un espace à l'autre recharge la page.** TestPulse Studio garde votre plan sélectionné (avec ses suites cochées, ou vos plans en multi-plans), les champs du formulaire du rapport (sauf la date, qui suit le jour) et le dernier sous-onglet ouvert dans chaque espace. **Le rapport affiché n'est pas conservé** : il reste dans l'Historique s'il a été enregistré, et Insights vous le rappelle à votre retour. Un lien d'un espace à l'autre porte son contexte dans l'URL — l'adresse copiée dans un autre onglet du navigateur rouvre le même écran.
 
-**Les réglages du projet** (exigences et conception, grille de test, profils de configuration, verdict et campagnes, assistant IA, usage) sont dans **Paramètres du projet › Extensions › TestPulse Studio**, réservés aux administrateurs du projet : neuf pages dans un rail latéral, chacune enregistrée par un seul **Enregistrer** (voir [L’administration du projet : neuf pages, un seul enregistrement](/fr/user-guide/project-administration)). Les **Paramètres** de l'espace Outils ouvrent **Mes préférences** : vos valeurs personnelles, sauf là où le projet ou le profil du plan sélectionné impose la sienne (voir [S’orienter dans Mes préférences](/fr/settings/settings-navigation)). Les onglets **Couverture** et **Exploration** des fiches de work item ne changent pas.
+**Les réglages du projet** (exigences et conception, grille de test, profils de configuration, verdict et campagnes, assistant IA, usage) sont dans **Paramètres du projet › Extensions › TestPulse Studio**, réservés aux administrateurs du projet : neuf pages dans un rail latéral, chacune enregistrée par un seul **Enregistrer** (voir [L’administration du projet : neuf pages, un seul enregistrement](/fr/user-guide/project-administration)). Les **Paramètres** de l'espace Tools ouvrent **Mes préférences** : vos valeurs personnelles, sauf là où le projet ou le profil du plan sélectionné impose la sienne (voir [S’orienter dans Mes préférences](/fr/settings/settings-navigation)). Les onglets **Couverture** et **Exploration** des fiches de work item ne changent pas.
 
 | Ancien onglet | Désormais dans |
 | --- | --- |
-| Rapport | Pilotage |
-| Cockpit | Pilotage |
-| Historique | Pilotage |
-| Explore | Pilotage |
-| Couverture | Couverture |
-| Dérive d’exigences | Couverture |
-| Référentiel | Couverture |
-| Import | Outils |
-| Réaffectation en masse | Outils |
-| Paramètres | Outils |
-| Documentation | Outils |
+| Rapport | Insights |
+| Cockpit | Insights |
+| Historique | Insights |
+| Explore | Insights |
+| Couverture | Coverage |
+| Dérive d’exigences | Coverage |
+| Référentiel | Coverage |
+| Import | Tools |
+| Réaffectation en masse | Tools |
+| Paramètres | Tools |
+| Documentation | Tools |
 
 ## Se repérer dans cette documentation {#using-the-docs}
 
@@ -65,5 +67,5 @@ TestPulse Studio se met à jour automatiquement sur Azure DevOps Services, en si
 | Cible | Statut |
 | --- | --- |
 | Azure DevOps Services (cloud) | ✅ Supporté |
-| ADO Server 2022.1 (on-premise) | ✅ Supporté |
-| ADO Server 2019 / 2020 / 2022 | ✅ Supporté |
+| Azure DevOps Server 2022.1 (on-premise) | Vérification en cours |
+| Azure DevOps Server 2019 / 2020 / 2022 | Non vérifié : l’extension s’installe, rien de plus n’est promis |

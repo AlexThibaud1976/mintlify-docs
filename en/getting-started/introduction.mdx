@@ -11,30 +11,32 @@ TestPulse Studio is an **Azure DevOps extension** with its own **TestPulse Studi
 
 TestPulse Studio has its **own place in the project navigation**: the **TestPulse Studio** group in the left bar (project navigation › TestPulse Studio) — its only entry, visible even when the Test Plans service is turned off. It gathers four areas:
 
-- **Pilotage** — where is the campaign, can we ship? Sub-tabs **Report**, **Cockpit**, **History**, **Explore** (exploratory sessions stay here until an area dedicated to campaigns exists), **Requirement quality** (see [Requirement quality per iteration](/en/user-guide/requirement-quality)).
-- **Couverture** — are the requirements tested, are the tests aligned? **Coverage**, **Requirement drift**, **Repository**.
-- **Conception** — design the tests of a requirement: **Test design** (see [Designing tests with the AI assistant](/en/user-guide/test-design-hub)).
-- **Outils** — what you open now and then: **Import**, **Bulk reassignment**, **Settings**, **User Guide**.
+- **Insights** — where is the campaign, can we ship? Sub-tabs **Report**, **Cockpit**, **History**, **Explore** (exploratory sessions stay here until an area dedicated to campaigns exists), **Requirement quality** (see [Requirement quality per iteration](/en/user-guide/requirement-quality)).
+- **Coverage** — are the requirements tested, are the tests aligned? **Coverage**, **Requirement drift**, **Repository**.
+- **Design** — design the tests of a requirement: **Test design** (see [Designing tests with the AI assistant](/en/user-guide/test-design-hub)).
+- **Tools** — what you open now and then: **Import**, **Bulk reassignment**, **Settings**, **User Guide**.
+
+Azure DevOps shows the project navigation in one language: the areas keep these English names whatever your language.
 
 The **?** icon at the top of every area opens this documentation.
 
-**Moving from one area to another reloads the page.** TestPulse Studio keeps your selected plan (with its checked suites, or your plans in multi-plan mode), the report form fields (except the date, which follows the day) and the last sub-tab you opened in each area. **The report on screen is not kept**: it stays in History if it was saved, and Pilotage reminds you when you come back. A link from one area to another carries its context in the URL — the address copied into another browser tab opens the same screen.
+**Moving from one area to another reloads the page.** TestPulse Studio keeps your selected plan (with its checked suites, or your plans in multi-plan mode), the report form fields (except the date, which follows the day) and the last sub-tab you opened in each area. **The report on screen is not kept**: it stays in History if it was saved, and Insights reminds you when you come back. A link from one area to another carries its context in the URL — the address copied into another browser tab opens the same screen.
 
-**Project settings** (requirements and design, the test grid, configuration profiles, the verdict and campaign settings, the AI assistant, usage) are in **Project settings › Extensions › TestPulse Studio**, reserved for project administrators: nine pages in a side rail, each saved with one **Save** (see [Project administration: nine pages, one way to save](/en/user-guide/project-administration)). The **Settings** of the Outils area open **My preferences**: your own values, except where the project or the profile of the selected plan sets its own (see [Finding your way around My preferences](/en/settings/settings-navigation)). The **Couverture** and **Exploration** tabs of work item forms do not change.
+**Project settings** (requirements and design, the test grid, configuration profiles, the verdict and campaign settings, the AI assistant, usage) are in **Project settings › Extensions › TestPulse Studio**, reserved for project administrators: nine pages in a side rail, each saved with one **Save** (see [Project administration: nine pages, one way to save](/en/user-guide/project-administration)). The **Settings** of the Tools area open **My preferences**: your own values, except where the project or the profile of the selected plan sets its own (see [Finding your way around My preferences](/en/settings/settings-navigation)). The **Couverture** and **Exploration** tabs of work item forms do not change.
 
 | Former tab | Now in |
 | --- | --- |
-| Report | Pilotage |
-| Cockpit | Pilotage |
-| History | Pilotage |
-| Explore | Pilotage |
-| Coverage | Couverture |
-| Requirement drift | Couverture |
-| Repository | Couverture |
-| Import | Outils |
-| Bulk reassignment | Outils |
-| Settings | Outils |
-| User Guide | Outils |
+| Report | Insights |
+| Cockpit | Insights |
+| History | Insights |
+| Explore | Insights |
+| Coverage | Coverage |
+| Requirement drift | Coverage |
+| Repository | Coverage |
+| Import | Tools |
+| Bulk reassignment | Tools |
+| Settings | Tools |
+| User Guide | Tools |
 
 ## Finding your way around these docs {#using-the-docs}
 
@@ -64,6 +66,6 @@ TestPulse Studio updates automatically on Azure DevOps Services, silently — no
 
 | Target | Status |
 | --- | --- |
-| Azure DevOps Services (cloud) | ✅ Fully supported |
-| ADO Server 2022.1 (on-premise) | ✅ Fully supported |
-| ADO Server 2019 / 2020 / 2022 | ✅ Supported |
+| Azure DevOps Services (cloud) | ✅ Supported |
+| Azure DevOps Server 2022.1 (on-premises) | Verification in progress |
+| Azure DevOps Server 2019 / 2020 / 2022 | Not checked: the extension installs, nothing more is promised |

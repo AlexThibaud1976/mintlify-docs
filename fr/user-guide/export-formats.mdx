@@ -27,7 +27,7 @@ L'export PDF inclut jusqu'à 12 sections configurables :
 - **Section bugs** — les bugs du rapport (bugs de la campagne par défaut) avec état, sévérité, date de création et cas de test, du plus récent au plus ancien, sous une ligne qui dit la source
 - **Tests flaky** — tests dont l'issue a changé entre **exécutions réelles** consécutives (au moins deux nécessaires pour se prononcer) ; un point jamais exécuté ne compte pas comme une exécution, donc un test exécuté une seule fois n'est jamais signalé comme instable, quoi qu'il ait précédé
 - **Graphiques** — donut pass/fail + barres par suite, rendus localement via chart.js (fonctionne hors-ligne)
-- **Pièces jointes** *(affichée par défaut depuis la v2.69.0)* — images PNG/JPEG intégrées ; tout autre fichier apparaît dans un tableau dont le **nom est un lien cliquable** vers la pièce jointe dans Azure DevOps, avec un **type lisible** (PDF, Word, Excel, Archive, E-mail…) au lieu d’un type MIME brut. Une extension non reconnue affiche le libellé générique **Fichier** et **conserve son lien** — l’extension décide du libellé, jamais de la présence du lien. Un fichier dont l’URL est absente ou n’utilise ni `http` ni `https` est affiché en texte simple, sans lien
+- **Pièces jointes** *(affichée par défaut)* — images PNG/JPEG intégrées ; tout autre fichier apparaît dans un tableau dont le **nom est un lien cliquable** vers la pièce jointe dans Azure DevOps, avec un **type lisible** (PDF, Word, Excel, Archive, E-mail…) au lieu d’un type MIME brut. Une extension non reconnue affiche le libellé générique **Fichier** et **conserve son lien** — l’extension décide du libellé, jamais de la présence du lien. Un fichier dont l’URL est absente ou n’utilise ni `http` ni `https` est affiché en texte simple, sans lien
 - **Objectifs, Critères d'entrée, Critères de sortie** — champs de cadrage multi-lignes
 - **Page de signature** — signataires configurables avec pré-remplissage et ligne de signature
 
@@ -41,7 +41,7 @@ L'export HTML produit un **fichier autonome** — aucun serveur nécessaire pour
 - **Tableau des résultats** complet avec badges d'outcome et groupage par suite
 - **Matrice de traçabilité** (lignes plates) et **liste des bugs**
 - Compatible avec l'ouverture de fichiers locaux dans les navigateurs
-- Section **Pièces jointes**, **affichée par défaut depuis la v2.69.0** — images en ligne, autres fichiers en liens cliquables (le rapport HTML posait déjà ces liens)
+- Section **Pièces jointes**, **affichée par défaut** — images en ligne, autres fichiers en liens cliquables (le rapport HTML posait déjà ces liens)
 
 ## Détail de l'export Word {#word-detail}
 

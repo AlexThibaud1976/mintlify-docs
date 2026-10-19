@@ -5,7 +5,7 @@ description: "Where."
 
 {/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
 
-**Where.** Under the list of files of **Read the code** (step 0 **Requirement** of **Conception**, and the **Exigence** tab). **Compare with the code** is active once code has been read and ticked, the **Source code** data category is on and the **Comparison with the code** function is on (**AI assistant › Functions and data**); otherwise the button says why.
+**Where.** Under the list of files of **Read the code** (step 0 **Requirement** of **Design**, and the **Exigence** tab). **Compare with the code** is active once code has been read and ticked, the **Source code** data category is on and the **Comparison with the code** function is on (**AI assistant › Functions and data**); otherwise the button says why.
 
 **The gaps.** The AI assistant compares the requirement, the test model and the existing cases with the files read. Each gap has its kind — rule missing from the code read, check missing from the requirement, different value, cannot conclude from the code —, the rule concerned, the lines of code cited (highlighted, with a link to the file at the version read) and a confidence. A rule without trace is said to be absent **from the files read**: the code read is partial.
 
@@ -19,4 +19,4 @@ description: "Where."
 
 **What you do with a gap.** **Question for the PO** adds it to the requirement assessment (source “code”, priority set by Studio); **Copy** puts it on the clipboard; **Ignore** puts it aside. Nothing is written to the story or to Azure DevOps.
 
-**Proposals on the test model.** In Conception, **Propose to the model** sends a proposal (a partition, a value, a rule numbered C-n, a corrected reference) to the model step, where you accept or refuse each one. The design is then recomputed by Studio: new coverage elements, new cases to write with the usual flow, existing cases to review (never changed). Cases that come from the code are tagged “source:code”.
+**Proposals on the test model.** In Design, **Propose to the model** sends a proposal (a partition, a value, a rule numbered C-n, a corrected reference) to the model step, where you accept or refuse each one. The design is then recomputed by Studio: new coverage elements, new cases to write with the usual flow, existing cases to review (never changed). Cases that come from the code are tagged “source:code”.
