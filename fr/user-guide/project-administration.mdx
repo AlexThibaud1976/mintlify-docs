@@ -1,0 +1,25 @@
+---
+title: "L’administration du projet : neuf pages, un seul enregistrement"
+description: "Où et qui."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+**Où et qui.** *Paramètres du projet › Extensions › TestPulse Studio*, réservé aux administrateurs du projet. Les autres membres voient la raison à la place des champs, et le service refuse d’écrire. Chaque modification est attribuée et datée.
+
+**Un rail latéral de neuf pages, en quatre groupes**, à la place des onglets :
+- **Vue d’ensemble** — la page d’arrivée.
+- **Exigences et tests** — **Exigences et conception**, **Grille de test**.
+- **Rapports et campagnes** — **Profils de configuration**, **Verdict et campagnes**.
+- **Assistant IA** — **Connexion**, **Fonctions et données**, **Journal et échecs**.
+- **Suivi** — **Usage et télémétrie**.
+
+En bas du rail, un renvoi mène au côté des membres, **Mes préférences**. Un lien qui se termine par `?page=<page>` ouvre directement une page précise.
+
+**Vue d’ensemble.** **À regarder** liste ce que Studio a repéré dans la configuration actuelle — des classements orphelins dans la grille de test, un modèle de contrôle identique au modèle de conception, des fonctions de campagne coupées dans la connexion alors qu’un profil les règle, un plafond de réponse sous 12 000 tokens —, chacun avec un lien vers la page qui le traite. Puis une carte résumé par page, avec ce qui est en vigueur, et **Dernières modifications**.
+
+**Un seul enregistrement, sur chaque page.** Chaque page tient un **brouillon**. Un bandeau collant, en tête, dit « N modifications non enregistrées », avec **Annuler** et **Enregistrer** ; quand le brouillon est invalide, **Enregistrer** est désactivé et le bandeau dit pourquoi. Le bandeau montre aussi « Modifié par … le … à … ». Rien ne s’enregistre au changement — interrupteurs et choix compris (source des bugs, Cockpit, envoi à l’éditeur). Quitter une page qui a un brouillon, par le rail ou en fermant la fenêtre, demande « Quitter sans enregistrer ? ». Si quelqu’un a enregistré la page entre-temps, Studio dit « La configuration a changé pendant votre modification », en nommant l’auteur et l’heure, et propose **Recharger** (sa version, votre brouillon abandonné) ou **Écraser sa version**. Un enregistrement qui échoue garde votre brouillon : réessayez.
+
+**Exigences et conception.** Les réglages de l’exigence, avant qu’elle appartienne à un plan, pour tout le projet. **Definition of Ready** : note minimale, note minimale d’un essentiel, « Small » bloque jusqu’à, part vérifiable minimale — avec un **aperçu en direct** recalculé sur les deux dernières évaluations du projet, par Studio, sans appel au modèle. **Si la DoR n’est pas atteinte** : *Autoriser*, *Avertir* ou *Bloquer*. **Pondération des familles** (le total doit faire 100, sinon l’enregistrement est bloqué), critères **actifs** et **essentiels ★**, affichage et historique, **conception par défaut** (niveau, type, techniques, « Contrôle par le juge, à la demande ») et **lecture du code** (trois plafonds, chacun avec une estimation en tokens). Les fonctions IA de l’exigence ne sont plus sur cette page : elles s’ouvrent ou se coupent dans *Assistant IA › Fonctions et données*. Des réglages de l’exigence encore posés dans des profils de plan n’étaient pas appliqués : quand il n’y a plus rien à enregistrer, **Retirer ces réglages inactifs** les efface après confirmation.
+
+**Verdict et campagnes.** En un seul brouillon : la **Source des bugs** (deux choix, voir [Bugs de la campagne : d’où viennent les bugs d’un rapport](/fr/user-guide/report-bug-source)), la **Décision de passage** — l’échelle des paliers d’environnement et le report de la décision sur le work item hôte ; sans aucun palier, la décision de passage disparaît du produit — et le **Cockpit** (« Afficher la charge par testeur »). Le barème qualité se règle par profil, dans *Profils de configuration › Défaut du projet › Seuils et qualité*.

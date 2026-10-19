@@ -1,0 +1,18 @@
+---
+title: "Classer les tests sans type avec l’assistant IA"
+description: "Classer les tests sans type — sous les tests sans type de l'onglet Grille de test, quand la connexion IA du projet est réglée et que le Classement des tests est actif (dans Assistant IA › Fonctions et données, et non coupé par le profil du plan du rapport)."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+**Classer les tests sans type** — sous les tests sans type de l'onglet *Grille de test*, quand la connexion IA du projet est réglée et que le *Classement des tests* est actif (dans *Assistant IA › Fonctions et données*, et non coupé par le profil du plan du rapport). Sinon, l'onglet dit pourquoi et n'affiche pas de bouton.
+
+**Ce qui est envoyé.** Les types de la grille (identifiant, libellé, consigne de conception), ses niveaux (identifiant, libellé) et, pour chaque test sans type, son identifiant et son titre — et ses **étapes** seulement si *Titres et étapes des cas de test* est cochée dans *Assistant IA › Fonctions et données › Données envoyées au modèle* ; décochée, elles ne sont même pas lues. Titres et étapes partent comme des données : un titre qui ressemble à une consigne est traité comme du texte. Les tests partent par 40 ; au plus les 400 premiers tests sans type sont classés, et l'onglet le dit.
+
+**L'IA propose, vous décidez.** Chaque proposition montre le test, le type proposé — et, quand le modèle en donne un, un niveau —, une courte justification, une confiance (en nombre et en barre), et porte la mention *Proposé par l'IA*, avec le modèle et la date. Pour chacune : **Valider**, **Changer** (choisir un autre type) ou **Ignorer**. Rien n'est validé par défaut ; *Tout valider ≥ 0,8* est un raccourci que vous choisissez d'utiliser. Une proposition qui nomme un type absent du catalogue est écartée, et l'onglet dit combien. Rien n'est enregistré avant **Enregistrer les classements validés** ; ils comptent *par IA* au **prochain** rapport — utilisez *Régénérer*.
+
+**Rien n'est écrit dans Azure DevOps** sans que vous le demandiez : l'option *Écrire le tag du type sur les cas de test* est décochée par défaut. Cochée, un dialogue liste chaque cas de test et les tags qui seront ajoutés (`type:<nom>`, et `niveau:<nom>` quand un niveau a été proposé), avec vos droits ; seul le tag est ajouté, les autres tags et tous les autres champs restent tels quels. Le compte rendu montre ensuite chaque cas : tag ajouté, déjà présent, ou refusé (avec le motif d'Azure DevOps). Un refus n'annule pas les classements enregistrés. Les tests tagués sont détectés *par règle* au prochain rapport.
+
+**Où ils vivent.** Les classements validés sont stockés dans l'extension, pour tout le projet. Quand un type est supprimé du catalogue, ses classements sont ignorés ; la page *Grille de test* de l'administration les compte et **Purger…** les retire.
+
+**En cas d'échec**, vous lisez un message court ; le détail est réservé à l'administrateur. Quand l'accès est refusé (clé, quota, passerelle), la pastille IA passe à *indisponible* jusqu'au rechargement de la page.

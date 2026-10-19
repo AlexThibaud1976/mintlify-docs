@@ -1,0 +1,34 @@
+---
+title: "Piloter une campagne avec le Cockpit"
+description: "Le Cockpit est fait pour le point du matin : on l'ouvre, on lit une phrase, et l'équipe sait si la campagne tiendra sa date, ce qui a bougé depuis la veille, quoi lancer aujourd'hui et ce qui gêne."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+Le Cockpit est fait pour le **point du matin** : on l'ouvre, on lit une phrase, et l'équipe sait si la campagne tiendra sa date, ce qui a bougé depuis la veille, quoi lancer aujourd'hui et ce qui gêne. **L'écran n'écrit rien dans Azure DevOps et ne réaffecte rien.** Tout ce qu'il montre est calculé par TestPulse Studio à partir des points du plan, de ses instantanés et, quand ils peuvent être lus, des priorités des exigences et des liens vers les bugs.
+
+**Un point en cinq temps**
+1. **Lire la phrase d'en-tête** — une phrase par état : en retard ou dans les temps (fin projetée, écart à la cible en jours ouvrés), pas encore assez de recul, aucun progrès, non démarrée, projection suspendue, terminée, ou sans date cible. Sa bordure prend la couleur de l'état. Dessous : le rythme observé et le rythme à tenir, puis trois ou quatre chiffres.
+2. **Depuis le dernier point** — ce qui a changé depuis le dernier instantané d'un jour antérieur.
+3. **Tiendra-t-on la date ?** — regarder la courbe, puis bouger le simulateur.
+4. **À lancer aujourd'hui** — se répartir les tests, motif par motif.
+5. **Ce qui bloque** — qualifier les échecs, attribuer ce que personne ne porte.
+
+**Ce que calcule chaque bloc**
+- **Jours ouvrés** — du lundi au vendredi, sans jours fériés. Aujourd'hui compte.
+- **Phrase d'en-tête** — *rythme observé* : tests exécutés par jour ouvré sur les 3 derniers jours mesurés (réglage du projet) ; une fin projetée demande au moins 3 jours ouvrés d'exécution. *Rythme à tenir* : tests restants ÷ jours ouvrés jusqu'à la cible, aujourd'hui compris, arrondi au supérieur. *Fin projetée* : les tests restants au rythme observé. *Écart* : jours ouvrés entre la fin projetée et la cible.
+- **Chiffres** — exécutés / total, restants, tests d'avance ou de retard sur l'**idéal** (une progression régulière du premier au dernier jour ouvré de la campagne), réussite des tests exécutés. Un chiffre qu'on ne peut pas calculer n'est pas affiché.
+- **Depuis le dernier point** — comparaison avec le dernier instantané d'un jour antérieur : tests exécutés, réussis, échecs (dont nouveaux), bugs ouverts et corrigés, tests débloqués, variation du périmètre. Quand cet instantané n'est pas celui de la veille ouvrée, le titre le dit ; quand il ne portait pas encore les échecs et les bugs, la ligne dit qu'ils ne sont pas comparables. Pas d'instantané antérieur : pas de ligne.
+- **Tiendra-t-on la date ?** — réel, idéal, projection, cible et *ce matin* sur **une seule échelle**, changements de périmètre annotés. Le **simulateur** part de l'observé (testeurs vus sur la fenêtre de rythme, tests par testeur et par jour) ; le bouger déplace la projection et écrit la fin et l'écart. Rien n'est gardé. Dessous, le **temps d'exécution pur** observé par test (médiane et quartiles) — il ne compte ni la préparation ni l'analyse, c'est pourquoi le simulateur part du rythme réel.
+- **Charge par testeur** — pour chaque testeur assigné : tests restants, rythme observé, fin projetée et écart à la cible ; les non assignés en dernier. Un lien ouvre l'onglet **Réaffectation en masse**. Afficher ou non cette carte est un **réglage du projet** : *Paramètres du projet › Extensions › TestPulse Studio › Verdict et campagnes › Cockpit* (« Afficher la charge par testeur », pris en compte à l’enregistrement de la page), **réservé aux administrateurs du projet**, et chaque modification est attribuée et datée. Coupée, la carte disparaît pour tous les membres ; un administrateur du projet voit à sa place une ligne discrète qui dit où la rétablir.
+- **À lancer aujourd'hui** — les tests à lancer, par motif : **échecs à rejouer**, **débloqués depuis le dernier point** (un bug lié a été corrigé), **priorité 1 et 2 jamais exécutés** (la priorité de l'exigence — par la suite d'exigence ou par le lien *Tested By* du cas de test — ou, quand le cas de test ne teste aucune exigence, la priorité du cas de test lui-même ; priorité 1 d'abord, exigence avant cas de test), **suites en retard**, et en dernier **jamais exécutés dans ce plan** (dans l'ordre des suites), pour que la sélection du jour atteigne le rythme à tenir — dans l'ordre réglé pour le projet. Un test n'apparaît que sous le premier motif qui le retient. La puce donne le rythme à tenir. Chaque motif s'ouvre sur ses tests, par suite, avec un lien pour les exécuter dans Test Plans. Un motif qu'on ne peut pas calculer dit pourquoi.
+- **Ce qui bloque** — tests bloqués par un bug ouvert (sévérité, âge), échecs sans bug lié (anomalie, test à corriger ou environnement ?), tests sans testeur.
+- **Progression par suite et journal du périmètre** — replié, en bas.
+
+**Quand chaque chose apparaît**
+- **Date cible** — la date de fin du plan ; sinon, saisie dans l'écran (gardée par le projet).
+- **Courbe** — dès la première journée d'exécution ; **projection** après 3 jours ouvrés ; suspendue après 14 jours sans exécution.
+- **Priorités et liens vers les bugs** — lus après l'en-tête, sans bloquer l'écran, dans les mêmes lectures de work items (la priorité des cas de test et les exigences liées par *Tested By* viennent avec les liens vers les bugs, sans appel de plus). Le réglage de traçabilité *Suites d'exigences uniquement* du rapport ne s'applique pas au Cockpit. *Priorités lues* dit ce qui ordonne réellement la liste : les exigences qui portent une priorité, sinon la priorité des cas de test, sinon l'ordre de la suite ; non lus pour un plan de plus de 1 000 cas de test.
+- **Campagne non démarrée** — l'écran donne le rythme à tenir dès le premier jour, *Ce que l'écran affichera, et quand* (cible, courbe, charge par testeur fiable, priorités) et *Par où commencer*.
+
+La ligne de reliquat en jours-testeur du rapport (dans le rapport et ses exports PDF/Word) ne change pas.

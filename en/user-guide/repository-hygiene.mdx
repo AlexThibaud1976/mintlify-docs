@@ -1,0 +1,18 @@
+---
+title: "Repository hygiene diagnostic"
+description: "A test repository ages badly, and nothing in Azure DevOps says so."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+A test repository ages badly, and nothing in Azure DevOps says so. A **HYGIENE** toggle joins Tree view / Flat view with a **read-only diagnostic**: it never deletes, merges or cleans anything — not even on explicit action — and its action vocabulary is always **"to review"**, never an imperative. It runs in two cost tiers, never confused: **Tier 1** is instant (already-loaded data, zero extra ADO call) and five findings; **Tier 2** reads plans/suites/results behind its own button with the cost announced up front, and adds two more.
+
+- **Near-duplicate cases** — two cases whose **title and steps**, once normalised, are **strictly identical** (no fuzzy distance, no tunable threshold — deterministic and contestable). Grouped, sorted by group size then lowest id.
+- **Same title, different steps** — informative, never a warning: often a legitimate variant (by country, by role…), kept distinct from true duplicates.
+- **Empty shells** — no step written **and** no description; a case with a description but no step (an exploratory case) is never flagged.
+- **Dead references** — an id filed in the TestPulse Studio tree that no longer exists in Azure DevOps, grouped by folder. If the case universe can't be read, this finding shows **"—"**, never a fake "0" that would make the whole repository look dead.
+- **Empty folders** — no case anywhere in the subtree, computed nodes ("Unclassified", "Not in any plan") never evaluated.
+- **Tier 2 — planned, never executed**: a case in an active plan whose every point has a not-executed outcome.
+- **Tier 2 — inert configurations & suites**: a configuration with no executed point on its plan (reuses the existing suite × configuration engine), or a static suite with no case at all.
+
+Each finding opens in **one shared dialog** (never six), showing the plain-language **detection criterion** so a result can be challenged without reading the docs, capped rendering (25 groups / 100 rows, "show all" in increments — the header count and the export always carry the real total), and a case link that opens in a new tab exactly like the coverage tab does. **"View in flat view"** jumps to Flat view pre-filtered on the finding's cases, with a visible, reversible filter banner. Everything **exports to Excel** — one sheet per non-empty finding plus a summary sheet (organisation, project, timestamp, volume, extension version) — a single finding at a time, in full, from the modal, or the whole diagnostic at once. The result lives only for the tab session — leaving and coming back always starts from "not run yet", never a stale result.

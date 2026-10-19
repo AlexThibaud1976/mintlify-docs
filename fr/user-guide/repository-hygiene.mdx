@@ -1,0 +1,18 @@
+---
+title: "Diagnostic Hygiène du référentiel"
+description: "Un référentiel de test vieillit mal, et rien dans Azure DevOps ne le dit."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+Un référentiel de test vieillit mal, et rien dans Azure DevOps ne le dit. Une bascule **HYGIÈNE** rejoint Vue arbre / Vue plate avec un **diagnostic en lecture seule** : elle ne supprime, ne fusionne ni ne nettoie jamais rien — pas même sur action explicite — et son vocabulaire d'action est toujours **« à revoir »**, jamais un impératif. Il tourne en deux paliers de coût, jamais confondus : le **palier 1** est instantané (données déjà chargées, zéro appel ADO supplémentaire) et compte cinq constats ; le **palier 2** lit plans/suites/résultats derrière son propre bouton, coût annoncé avant lancement, et en ajoute deux.
+
+- **Cas quasi-doublons** — deux cas dont le **titre et les étapes**, une fois normalisés, sont **strictement identiques** (aucune distance floue, aucun seuil réglable — déterministe et contestable). Groupés, triés par taille de groupe puis plus petit identifiant.
+- **Même titre, étapes différentes** — informatif, jamais un avertissement : souvent une variante légitime (par pays, par rôle…), gardée distincte des vrais doublons.
+- **Coquilles vides** — aucune étape rédigée **et** aucune description ; un cas avec une description mais sans étape (cas exploratoire) n'est jamais signalé.
+- **Références mortes** — un identifiant rangé dans l'arbre TestPulse Studio qui n'existe plus côté Azure DevOps, regroupé par dossier. Si l'univers des cas ne peut pas être lu, ce constat affiche **« — »**, jamais un faux « 0 » qui ferait passer tout le référentiel pour mort.
+- **Dossiers vides** — aucun cas nulle part dans le sous-arbre, les nœuds calculés (« Non classés », « Non planifiés ») ne sont jamais évalués.
+- **Palier 2 — planifiés jamais exécutés** : un cas présent dans un plan actif dont tous les points ont une issue non exécutée.
+- **Palier 2 — configurations et suites inertes** : une configuration sans le moindre point exécuté sur son plan (réutilise le moteur suite × configuration existant), ou une suite statique sans aucun cas.
+
+Chaque constat s'ouvre dans **une seule modale partagée** (jamais six), affichant le **critère de détection en clair** pour pouvoir contester un résultat sans lire la doc, un rendu plafonné (25 groupes / 100 lignes, « afficher tout » par incréments — le compteur d'en-tête et l'export portent toujours le total réel), et un lien de cas qui ouvre un nouvel onglet exactement comme l'onglet couverture. **« Voir dans la vue plate »** bascule vers la vue plate filtrée sur les cas du constat, avec un bandeau de filtre visible et réversible. Tout **s'exporte en Excel** — un onglet par constat non vide plus un onglet de synthèse (organisation, projet, horodatage, volume, version de l'extension) — un seul constat à la fois, en entier, depuis la modale, ou tout le diagnostic d'un coup. Le résultat ne vit que pour la session de l'onglet — quitter puis revenir repart toujours de « non lancée », jamais d'un résultat périmé.

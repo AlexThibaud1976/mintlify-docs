@@ -1,0 +1,15 @@
+---
+title: "Execution cockpit (burndown)"
+description: "The Cockpit hub tab is the campaign's morning stand-up screen for one plan: whether the campaign will make its date, what moved since the last stand-up, what to run today and what is blocking (see Running a campaign with the Cockpit)."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+The **Cockpit** hub tab is the campaign's **morning stand-up** screen for one plan: whether the campaign will make its date, what moved since the last stand-up, what to run today and what is blocking (see [Running a campaign with the Cockpit](/en/user-guide/cockpit-standup)). It is **read-only against your test data**: the only things it keeps are its own dated **snapshots** and, when the plan has no end date, a **target date** you enter — both stored in the project's Extension Data (**nothing leaves your Azure DevOps tenant**). It reassigns nothing.
+
+- **Daily snapshots** — each time you open the Cockpit or generate a report, TestPulse Studio records a small dated snapshot of the plan (counts, per-suite / per-config breakdown, today's failures and, once read, the open bugs linked to the plan's tests), **once per day per plan** (the last of the day wins). The actual curve is drawn from these snapshots, so it stays correct when the **perimeter moves**.
+- **Scope changes, honestly** — adding/removing/resizing a suite or config shows up as a **step** on the curve, annotated with its size; a suite deleted and re-created for the same requirement is reconciled as a **re-org** (by requirement id only — never guessed by name).
+- **Ideal line & projection** — the ideal line is **piecewise, rebased on the current remaining** at each scope change toward **0 at the end date**, so it never erases lateness. The **projection** runs from this morning at the **observed pace** (tests run per working day over the last measured days) — it needs **3 working days** of execution, and is **paused** when the last execution is more than **14 days** old instead of showing an invented date.
+- **Cold start** — before snapshots accumulate, the curve is **reconstructed** from the points' completion dates and labelled as such.
+
+Working days are Monday to Friday; public holidays are not known to the Cockpit.

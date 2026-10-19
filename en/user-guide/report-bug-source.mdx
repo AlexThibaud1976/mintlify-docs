@@ -1,0 +1,20 @@
+---
+title: "Campaign bugs: where the bugs of a report come from"
+description: "By default, the bugs of a report are the bugs from the plan runs: the bugs attached to a result of a run of the selected plans, in the selected suites, across all the runs read — not only the latest result."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+By default, the bugs of a report are the **bugs from the plan runs**: the bugs attached to a result of a run of the selected plans, in the selected suites, across **all** the runs read — not only the latest result. A copied plan inherits the links of its test cases and requirements; with this source, the bugs of earlier campaigns no longer show up. Each bug appears once, lists its **test cases**, and the list is sorted by **creation date**, newest first (then by ID), with **Created** and **Test cases** columns on screen and in every export. Only the `Bug` work item type counts.
+
+The same list feeds the whole report: bug list and counters, Quality Score and GO / NO-GO verdict (open blocking bugs), **failures without defect**, the bug column of the traceability matrix, the multi-plan report and the five exports. A banner above the bug list says the source and how many runs were read; exports carry a source line; each saved report shows a **Source: runs / links** chip in the history, and comparing two reports of different sources shows a warning. If the plan has more runs than the number read (**Maximum runs** setting), a warning says so.
+
+**Consequences.** A bug linked to a test case only by a *Tested By* link, or only to the requirement, is not in the report. If its test failed, that test becomes a **failure without defect** — and can trigger the *Block the release while failures without defect remain* gate. The **Bugs** curve of the history **trends** shows a break at the report where the source changed. A bug attached to a run whose results were deleted is not counted.
+
+**Attach a forgotten bug afterwards**: open the run in Azure DevOps and link the bug to the **run result** (from the run, or with a *Test Result* link from the bug) — it is counted at the next generation.
+
+**Go back to the former behavior**: in **Project settings › Extensions › TestPulse Studio › Verdict and campaigns › Bug source**, choose **Test case and User Story links** (every bug linked to the test cases by *Tested By* and to the User Stories, whatever the campaign), then **Save**. It is a project setting, **reserved for project administrators**, stamped with who changed it and when, and read at every generation. Every member sees it, read-only, in **My preferences › Thresholds and calculations**, in the **GO / NO-GO verdict** card (**Bugs taken into account**) — where the **Change the source** link of the bug banner leads — and in **My preferences › Project rules**.
+
+The **AI analysis** of the campaign (and the question box) is told which source the report uses, so it does not read « no campaign bug » as « no linked bug ».
+
+> **Not affected:** the **Cockpit** still reads the *Tested By* links of the test cases, and the **Couverture** tab of a User Story is unchanged. Saved reports keep the bugs they had.

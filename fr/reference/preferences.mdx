@@ -1,0 +1,21 @@
+---
+title: "Préférences et synchronisation"
+description: "Toutes les préférences utilisateur sont persistées via ADO Extension Data (clé user-scoped), ce qui signifie qu'elles vous suivent automatiquement entre navigateurs et machines."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+Toutes les préférences utilisateur sont persistées via **ADO Extension Data** (clé user-scoped), ce qui signifie qu'elles vous suivent automatiquement entre navigateurs et machines.
+
+Les données sont compressées avec **LZString** avant le stockage pour tenir dans le quota de 5 Mo. Dans **Mes préférences**, rien ne s'écrit au changement : chaque page tient un brouillon, enregistré par **Enregistrer**.
+
+**Préférences synchronisées :**
+- Templates de formulaire (save/load)
+- Configuration des champs (visibilité, labels, champs personnalisés)
+- Mes préférences (couleur, libellé d'en-tête et de pied de page, seuils, sections et leur ordre, logo)
+- Langue (FR/EN) — bascule en haut à droite de TestPulse Studio
+- Préférence de vue traçabilité (tableau vs cartes)
+- Pondération du taux de succès (par config vs par TC)
+- Limite de runs
+
+**Pas de réinitialisation globale :** *Mes préférences › Sections et export* propose **Rétablir l'ordre livré**, qui ne remet que l'ordre des sections — ni les sections cochées, ni la marque, ni les seuils. **Annuler**, dans le bandeau d'une page, abandonne un brouillon pas encore enregistré.

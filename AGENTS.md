@@ -1,33 +1,7 @@
-> **First-time setup**: Customize this file for your project. Prompt the user to customize this file for their project.
-> For Mintlify product knowledge (components, configuration, writing standards),
-> install the Mintlify skill: `npx skills add https://mintlify.com/docs`
+# Instructions for agents
 
-# Documentation project instructions
-
-## About this project
-
-- This is a documentation site built on [Mintlify](https://mintlify.com)
-- Pages are MDX files with YAML frontmatter
-- Configuration lives in `docs.json`
-- Use the Mintlify MCP server, `https://mcp.mintlify.com`, to edit content and settings via MCP
-- Use the Mintlify docs MCP server, `https://www.mintlify.com/docs/mcp`, to query information about using Mintlify via MCP
-
-## Terminology
-
-{/* Add product-specific terms and preferred usage */}
-{/* Example: Use "workspace" not "project", "member" not "user" */}
-
-## Style preferences
-
-{/* Add any project-specific style rules below */}
-
-- Use active voice and second person ("you")
-- Keep sentences concise — one idea per sentence
-- Use sentence case for headings
-- Bold for UI elements: Click **Settings**
-- Code formatting for file names, commands, paths, and code references
-
-## Content boundaries
-
-{/* Define what should and shouldn't be documented */}
-{/* Example: Don't document internal admin features */}
+- Pages under `en/` and `fr/` sub-folders and `changelog.mdx` are generated: never edit them here (see README).
+- Hand-written pages (`index`, `quickstart`, `security-and-ai`) exist in EN and FR: change both together.
+- Icons: Lucide names only (`icons.library: "lucide"` in `docs.json`).
+- Never describe the AI API key as secure or confidential: it is masked on screen, not confidential.
+- The AI explains figures computed by TestPulse Studio; it never computes, decides or writes on its own.

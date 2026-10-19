@@ -1,0 +1,36 @@
+---
+title: "Requirement drift"
+description: "The Requirement Drift tab answers one question, read-only: is my regression plan still aligned with the requirements?"
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+The **Requirement Drift** tab answers one question, read-only: *is my regression plan still aligned with the requirements?* You pick **two plans** you consider equivalent — a **baseline** (already executed) and a **new** one — and TestPulse Studio flags the requirements that **changed since the baseline execution**, so you can target your review. It is an **advisory signal, never a verdict**: "this requirement moved, re-check its tests", not "these tests are obsolete". The **Configuration panel** switch folds the plan and field selection away once the result is shown; the compared plans and the number of fields stay visible as chips, and **Analyze drift** stays in the bar.
+
+## Picking the two plans (shared picker,) {#drift-plan-picker}
+
+Both plan selectors use the **same picker as the Report page**: type to **search by plan name *or* iteration**, and use the single **"include inactive plans"** switch above them to bring in older campaigns (each inactive plan is tagged with an **INACTIVE** badge). The switch is **shared** — one toggle drives both selectors — and its state is **remembered** (same preference as the Report page). This is especially useful for drift, where the baseline is often an **inactive** plan (an already-executed campaign) compared to a newer, active one. Picking the same plan on both sides shows a warning; the analysis itself is unchanged.
+
+## How the baseline date works (implicit freeze) {#drift-freeze}
+
+There is **no stored baseline** to maintain. The reference point in time is the **baseline plan’s execution date** — the most recent `completedDate` of its latest results — reconstructed on the fly. A requirement is a **drift candidate** if its substance changed *after* that date. You also get a free **set delta**: requirements **added / removed / common** between the two plans, derived from the suites’ `requirementId` with no extra call. If the two plans share **no common requirement**, you get an explicit message (not an empty table) — a hint that the pairing may be wrong. If the baseline plan has **no execution**, no reference date can be computed and TestPulse Studio says so.
+
+## Deep analysis (default) vs Fast mode {#drift-deep-fast}
+
+**Deep analysis is on by default.** It reads each common requirement’s **revisions**, takes the revision as of the baseline date, and **diffs the rendered text** of the substance fields — so it names **which field moved** (Title / Description / Acceptance Criteria). The comparison is on **rendered text, not markup**: a bold, a reformatted `<div>`, a double space or an invisible typo is **never** a drift; a change of **words** is. **Fast mode** (a per-analysis toggle, **off by default**, not persisted) skips the text diff and only returns the set delta plus a date-based flag — faster, less precise, and labelled as such. **Per-requirement graceful degradation**: if a requirement’s revisions can’t be read (permission, throttling), only **that** requirement falls back to *date-only* ("not deeply verified") while the rest continue in deep mode — the analysis never fails as a whole. On large plans (\~40+ common requirements) a gentle hint reminds you how many reads deep mode will do and that fast mode exists — it **never** switches on its own.
+
+## Configurable substance fields & advisory helper {#drift-fields}
+
+You decide **what counts as a change**: pick **1 to 3 substance fields** (default Title + Description + Acceptance Criteria). The choice is stored at **project level** (Extension Data `Default`) so two QAs comparing the same plans get the **same** drifts — with a per-analysis override. The pool is **curated**: only **requirement text** fields (your project’s custom html / long-text fields are listed too), **never** State / Tags / Iteration / Assigned To. A floor of **1 field is forced** (you can never end up with zero). A non-blocking **3-level advisory helper** guides you: a neutral reminder always visible; a warning when you uncheck a standard field (it reduces detection); and a warning when you add a custom field that often changes for unrelated reasons (risk of false alarms). It informs the consequence on detection — it never blocks and never moralises.
+
+## Advisory & read-only by design {#drift-advisory}
+
+Drift is **advisory and orthogonal to execution outcome**: a test can be **green and still have drifted**, so there is **no OK/NOK column** mixed into the drift table and **no gate or blocking** anywhere — the framing is always "review candidate", never "obsolete". The whole feature is **strictly read-only**: it never creates, modifies or deletes anything in Azure DevOps, adds **no new permission scope** (`vso.work` is enough), and the existing report/traceability output is **unchanged**. The substance fields (`ChangedDate`, `Rev`, `Description`, `Acceptance Criteria`) come from the **existing** work-item batch; the only added call is reading requirement **revisions**.
+
+## Your analysis is kept when you switch tabs {#drift-persistence}
+
+Like the Report tab, the **Drift** and **Coverage** tabs now **keep their state when you switch tabs**: run a drift analysis, jump to the Report or History tab to check something, come back — and your selection **and** the computed result (the candidates table, the cards) are **still there**, with no re-fetch and no re-analysis. This is **in-session only** (kept in memory): a **full page reload starts fresh**, exactly like the Report tab’s data — there is no local storage. Nothing "in progress" survives falsely (a progress bar or an open dialog never reappears on return), and the very first visit behaves exactly as before.
+
+## Stale coverage: Passed that no longer prove anything {#drift-stale}
+
+Below the drift candidates, a **Stale coverage** section lists the requirements **modified after the last run of their linked tests** (scope = the executed baseline plan): id + title, change date, last run date, number of **Passed** results and a **Stale — re-test** status. A conditional counter — *N Passed no longer prove anything* — leads the section; with **zero stale requirement it collapses** to a neutral *all covered requirements are fresh* line (no noise, no reads). The **changed field** (acceptance criteria / description / title, gravity in that order) is resolved **lazily, only for the flagged requirements**, by reading their revisions with the same per-requirement graceful degradation as the drift itself (a failed read shows “—”, the row stays). **Filter chips** (All / Acceptance criteria / Description / Title only) follow the counter, and a **project option** lets the team ignore title-only changes. Equality of dates is never stale, and a requirement without a dated run is never stale (no false positive). Advisory and read-only, like the whole tab.

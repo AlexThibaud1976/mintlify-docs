@@ -1,0 +1,29 @@
+---
+title: "Permissions"
+description: "TestPulse Studio requests the scopes needed to read your test data and to keep its own data, and the write scopes it uses only after an explicit action of yours."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+TestPulse Studio requests the scopes needed to read your test data and to keep its own data, and the write scopes it uses only after an explicit action of yours.
+
+## Required OAuth scopes {#scopes-table}
+
+| Scope | Why it is needed |
+| --- | --- |
+| vso.test | Read test plans, suites, test cases, results and runs |
+| vso.work | Read Work Items (User Stories, Epics, Bugs) for traceability |
+| vso.identity | ADO user search for autocomplete fields (tester, approver) |
+| vso.build | List recent builds for the Associated build autocomplete |
+| vso.extension.data | Keep your preferences, your history and the project settings in Azure DevOps Extension Data |
+| vso.test_write | Create a test plan and its suites, add test cases to suites, reassign test points — after your confirmation |
+| vso.work_write | Write designed test cases, the improved requirement, a test-type tag, Explore captures and work items — after your confirmation |
+| vso.code | Read the code linked to a requirement, when the project allows it |
+| vso.code_write | Create a pull request of automated tests on a new branch — after your confirmation |
+
+## What TestPulse Studio does NOT do {#what-not}
+
+- Does not write to Azure DevOps on its own, and never writes a test result: everything it writes — for example designed test cases after your review, the improved requirement on the story after your confirmation, a test-type tag, a test plan created from Coverage, a test-point reassignment, a pull request of automated tests, Explore captures and work items — follows an explicit action of yours, with your rights
+- Does not send data outside Azure DevOps on its own: the AI functions, off until a project administrator turns them on, send the AI provider configured by the administrator only the data the administrator allowed; sending usage counters to the publisher is off by default, and not configured in this version
+- Does not store data outside your ADO Extension Data — most of it scoped to your own user, but **exploratory session records (Exploration tab, Explore hub) are stored at the project scope** and are readable by anyone with access to the project, regardless of Azure DevOps team boundaries
+- Does not require admin permissions to use (admin needed for installation; the project administration pages are reserved for project administrators)

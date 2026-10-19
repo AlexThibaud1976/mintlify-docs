@@ -1,0 +1,14 @@
+---
+title: "Knowing when code arrives for a designed requirement"
+description: "What."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+**What.** Once a requirement’s test design has been written in Studio, Studio remembers the development links of the story and of its child tasks (pull requests, commits, branches). When new links appear later, it tells you **code is available** — **without AI**, from the work item links only: the content of the code is not read yet. A design written before this version is tracked too: the reference is rebuilt from the date the test cases were linked to the story, and a link that may have been there before is never reported.
+
+**Coverage.** The **Linked code** column shows “● Code available since the design of &lt;date&gt; · 1 PR, 4 commits”, “no new development link” or “not tracked: no design written”. It is computed for the requirements shown, after the analysis, without making the page wait (“…” first). GitHub links are listed “not read (V1)”. **With new code (n)** keeps only those requirements; the badge opens the requirement in **Conception**.
+
+**Conception and the Exigence tab.** When you open the requirement, the same banner says since when code is available; Conception also lists the new links — the link, the work item that carries it, “Azure Repos repository” (its identifier as a tooltip), the date it was linked.
+
+**Ignore these links.** Hides the badge for everyone in the project until another link arrives; who ignored and when are shown, with **undo**. **Compare with the code** is shown disabled until your organisation allows reading the code.

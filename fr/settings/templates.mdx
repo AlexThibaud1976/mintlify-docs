@@ -1,0 +1,16 @@
+---
+title: "Templates et vues"
+description: "Les templates et vues permettent de sauvegarder et restaurer des configurations de formulaire pour les campagnes récurrentes."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+Les templates et vues permettent de sauvegarder et restaurer des configurations de formulaire pour les campagnes récurrentes. Ils s’enregistrent et se chargent depuis le formulaire du rapport, pas depuis Mes préférences.
+
+## Templates vs Vues {#templates-views}
+
+**Templates** — sauvegardent uniquement les métadonnées (titre, environnement, testeur, approbateur, etc.). Rapide à charger ; la sélection du plan est laissée à l'utilisateur.
+
+**Vues** — sauvegardent l'ID du plan + les suites cochées + les métadonnées. Charger une vue resélectionne le plan, attend les suites, puis coche l'intersection sauvegardée. Les suites supprimées sont ignorées silencieusement.
+
+Les deux types : **Sauvegarder** (entrer un nom) → **Charger** (un clic) → **Supprimer**.

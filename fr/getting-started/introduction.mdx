@@ -1,0 +1,69 @@
+---
+title: "Introduction"
+description: "TestPulse Studio est une extension Azure DevOps qui a son propre groupe, TestPulse Studio, dans la navigation du projet."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+TestPulse Studio est une **extension Azure DevOps** qui a son propre groupe, **TestPulse Studio**, dans la navigation du projet. Elle génère des rapports de tests professionnels (PDF, HTML, Word, Excel) dans votre navigateur depuis vos plans de test existants. Rien ne quitte Azure DevOps, sauf ce que vous activez : l’assistant IA (vers le fournisseur de modèle de votre organisation) et la télémétrie d’usage (voir « Usage et télémétrie »).
+
+## Se repérer dans TestPulse Studio {#finding-your-way}
+
+TestPulse Studio a sa **propre place dans la navigation du projet** : le groupe **TestPulse Studio**, dans la barre de gauche (navigation du projet › TestPulse Studio) — sa seule entrée, visible même quand le service Test Plans est désactivé. Il réunit quatre espaces :
+
+- **Pilotage** — où en est la campagne, peut-on livrer ? Sous-onglets **Rapport**, **Cockpit**, **Historique**, **Explore** (les sessions exploratoires y restent jusqu'à l'arrivée d'un espace dédié aux campagnes), **Qualité des exigences** (voir [La qualité des exigences par itération](/fr/user-guide/requirement-quality)).
+- **Couverture** — les exigences sont-elles testées, les tests sont-ils alignés ? **Couverture**, **Dérive d'exigences**, **Référentiel**.
+- **Conception** — concevoir les tests d'une exigence : **Conception de tests** (voir [Concevoir des tests avec l'assistant IA](/fr/user-guide/test-design-hub)).
+- **Outils** — ce qu'on ouvre de temps en temps : **Import**, **Réaffectation en masse**, **Paramètres**, **Documentation**.
+
+L'icône **?** en haut de chaque espace ouvre cette documentation.
+
+**Passer d'un espace à l'autre recharge la page.** TestPulse Studio garde votre plan sélectionné (avec ses suites cochées, ou vos plans en multi-plans), les champs du formulaire du rapport (sauf la date, qui suit le jour) et le dernier sous-onglet ouvert dans chaque espace. **Le rapport affiché n'est pas conservé** : il reste dans l'Historique s'il a été enregistré, et Pilotage vous le rappelle à votre retour. Un lien d'un espace à l'autre porte son contexte dans l'URL — l'adresse copiée dans un autre onglet du navigateur rouvre le même écran.
+
+**Les réglages du projet** (exigences et conception, grille de test, profils de configuration, verdict et campagnes, assistant IA, usage) sont dans **Paramètres du projet › Extensions › TestPulse Studio**, réservés aux administrateurs du projet : neuf pages dans un rail latéral, chacune enregistrée par un seul **Enregistrer** (voir [L’administration du projet : neuf pages, un seul enregistrement](/fr/user-guide/project-administration)). Les **Paramètres** de l'espace Outils ouvrent **Mes préférences** : vos valeurs personnelles, sauf là où le projet ou le profil du plan sélectionné impose la sienne (voir [S’orienter dans Mes préférences](/fr/settings/settings-navigation)). Les onglets **Couverture** et **Exploration** des fiches de work item ne changent pas.
+
+| Ancien onglet | Désormais dans |
+| --- | --- |
+| Rapport | Pilotage |
+| Cockpit | Pilotage |
+| Historique | Pilotage |
+| Explore | Pilotage |
+| Couverture | Couverture |
+| Dérive d’exigences | Couverture |
+| Référentiel | Couverture |
+| Import | Outils |
+| Réaffectation en masse | Outils |
+| Paramètres | Outils |
+| Documentation | Outils |
+
+## Se repérer dans cette documentation {#using-the-docs}
+
+Cette documentation est répartie en **onglets** (Démarrage, Guide utilisateur, Paramètres, Référence, Nouveautés). Dans chaque onglet, un **sommaire collant (table des matières)** à gauche liste les sections de l’onglet — cliquez-en une pour y sauter directement. Utilisez la **barre de recherche** en haut pour trouver n’importe quoi dans tous les onglets ; cliquer un résultat ouvre son onglet et défile jusqu’à la section. Le sommaire et la recherche partagent les mêmes ancres, donc les deep-links restent stables.
+
+## Rester informé des mises à jour {#update-banner}
+
+TestPulse Studio se met à jour automatiquement sur Azure DevOps Services, en silence — rien ne signalait jusqu'ici qu'une nouvelle version était arrivée. Le hub affiche désormais un petit bandeau d'information au-dessus de vos rapports dès que le **major** ou le **minor** change (ex. 2.60 → 2.61), nommant la nouvelle version avec un résumé d'une ligne et un lien vers l'onglet **Nouveautés** ; un changement de **patch** (ex. 2.60.0 → 2.60.1) reste silencieux — il ne vous interrompt jamais pour un simple correctif. Fermer le bandeau est **propre à chaque utilisateur** : cela ne masque rien pour le reste du projet, et il ne réapparaît qu'au prochain major ou minor. Affiché uniquement dans le hub, jamais sur les onglets work item.
+
+## Quand utiliser TestPulse Studio {#use-cases}
+
+| Cas d'usage | Format recommandé |
+| --- | --- |
+| Livraison QA formelle | PDF avec page de signature |
+| Dashboard revue sprint | HTML (interactif) |
+| Traçabilité audit (ISO, SOC2) | PDF + Excel |
+| Résumé direction | PDF avec graphiques |
+| Analyse de données brutes | Excel (6 onglets) |
+
+## Ce que ce n'est PAS {#not-a}
+
+- Pas un **runner de tests** — TestPulse Studio lit les résultats existants, il n'exécute pas les tests
+- Pas un **service cloud** — vos données restent dans votre instance Azure DevOps ; seules les fonctions IA, une fois activées par un administrateur du projet, envoient les données qu'il a autorisées au fournisseur IA qu'il a réglé
+- Pas un **remplacement** d'ADO Test Plans — il le complète avec du reporting
+
+## Cibles supportées {#supported}
+
+| Cible | Statut |
+| --- | --- |
+| Azure DevOps Services (cloud) | ✅ Supporté |
+| ADO Server 2022.1 (on-premise) | ✅ Supporté |
+| ADO Server 2019 / 2020 / 2022 | ✅ Supporté |

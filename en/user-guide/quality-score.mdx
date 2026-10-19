@@ -1,0 +1,29 @@
+---
+title: "Quality score (A–E) & GO/NO-GO"
+description: "Every report carries a quality score graded A→E with a 0–100 value and a GO / NO-GO verdict, shown in the report header and the PDF/HTML exports."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+Every report carries a **quality score** graded **A→E** with a **0–100** value and a **GO / NO-GO** verdict, shown in the report header and the PDF/HTML exports. It is computed by a **single deterministic engine** from the report data already on screen — no extra API call, no AI. The badge is a summary **on top of** the metrics, never a replacement.
+
+## How the grade is built {#quality-meaning}
+
+The 0–100 composite weighs four components: **pass rate** (40), **execution rate** (20), **requirements coverage** (20) and **defect hygiene** (20). Grades: **A** ≥ 90, **B** 75–89, **C** 60–74, **D** 40–59, **E** &lt; 40. When traceability is absent, coverage is dropped and the remaining weights are renormalised (a flag says so). Fewer than 5 executed tests raises a "low confidence" flag.
+
+## The pass-rate floor {#quality-floor}
+
+A weighted average **compensates**: three perfect components used to drown a collapsed pass rate. With execution, coverage and defect hygiene at their maximum the composite was already worth 60 points, so a **GO** remained reachable at a 12.5 % pass rate on the most tolerant scale. Each scale now carries a **pass-rate floor**, equal to its own GO threshold — **85 %** on Strict, **75 %** on Standard, **65 %** on Ramp-up. There is no new number to learn.
+
+- Below the floor, the verdict is **NO-GO** and the grade is **capped at C**. The composite itself does not move: only the grade shown is capped, so that the note and the verdict tell the same story.
+- The floor is a **hard** rule. Unlike a weight, it cannot be compensated by another component.
+- A report with **no executed test** stays "not evaluated" — no floor is applied to an absence of data.
+- A second floor covers the mirror hole. The pass-rate floor is measured on what was **executed**, so running less could satisfy it: 30 passed out of 100 cases, with 60 never run, gives a 75 % pass rate. The **execution rate** carries the same floor, at the same value. A case marked **Not Applicable** is not a skipped case — taking something out of scope deliberately costs nothing.
+
+Alongside it, the **failure without a linked defect** criterion is now **on by default** on all three scales. Defect hygiene only ever counted **declared** bugs, so a failed test with no bug attached scored a perfect 20/20 — while declaring the bug properly dropped hygiene to 10/20 **and** capped the grade. Not declaring the bug improved the note. It now forces NO-GO and caps the grade at C, exactly like an open blocking bug.
+
+> Reports **already saved** never change verdict: each one carries the scale captured when it was generated, and is re-read under that scale. Reports generated before scales existed at all are re-scored under the current one — see the release notes.
+
+## Transparency & invariants {#quality-transparency}
+
+Click **Show details** to expand the breakdown: each component (value, points, weight), the caps applied and any flags — the score is never an opaque number. Non-negotiable rules: **≥ 1 open blocking bug** (open + Critical/High) caps the grade at **C** and forces **NO-GO**; a **pass rate below the scale's floor** does the same; a **failed test with no linked defect** does the same; an **untested in-scope requirement** forces NO-GO; **no executed test** shows "not evaluated" (never an E). GO also requires the score ≥ 75 and coverage ≥ 70%.

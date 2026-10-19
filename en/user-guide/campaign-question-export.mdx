@@ -1,0 +1,16 @@
+---
+title: "Asking a question, and putting the analysis in an export"
+description: "Ask a question."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+**Ask a question.** Under the analysis, in the **AI analysis** tab, a free-text box answers questions **about this campaign only**. It does not wait for the analysis: it reads the same bounded context — the report's KPIs, the computed verdict and the rules behind it, the grouped failures, the blocked and flaky tests, the uncovered requirements, the open bugs, the landing projection.
+
+**The same evidence rule.** Every answer cites ids from the report (test cases, bugs, requirements, suites) as clickable chips. An id the report does not contain is removed, and an answer left without any is shown all the same, marked *no evidence in the report: check it before relying on it* — it is an answer, never a finding.
+
+**Off topic.** A question that is not about this campaign gets one sentence — *the assistant only handles this campaign* — and nothing else: the model's own text is not shown.
+
+**The thread lives with the report on screen.** The last exchanges travel with the next question so the assistant keeps the thread; **Clear the thread** empties it, and generating a new report clears it too. Nothing is stored, and the thread never enters an export.
+
+**Include the analysis in the export.** A switch in the same tab, **off by default** and asked again for every report — a report reloaded from History starts off. It turns on once an analysis exists. When it is on, the export buttons say so, and **PDF, Word, PowerPoint and HTML** end with an **AI analysis — advisory** section: opinion, confidence, summary, findings with their evidence, conditions for a GO, the comment on the projection, and always the model, the date, the tokens and the sentence *this opinion is advisory; the verdict is the one from the scale*. It sits after the existing sections and before the signature page, so nothing else moves. **Excel never receives it**, and neither does the question thread.

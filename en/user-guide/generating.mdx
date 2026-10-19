@@ -1,0 +1,87 @@
+---
+title: "Generating a Report"
+description: "Follow these steps to generate a complete test report from your Azure DevOps Test Plan."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+Follow these steps to generate a complete test report from your Azure DevOps Test Plan. Once the report is shown, the **Configuration panel** switch above the page folds the left column away so the report uses the full width; the selected plan and environment stay visible as chips, and **Generate report** stays in the bar.
+
+## Selecting a Test Plan {#plan-selector}
+
+Use the **autocomplete** dropdown to search plans by name, iteration path, or **plan ID** — typing an ID matches it directly against the already-loaded list (no extra call); if it isn't found, you're invited to enable **Include inactive plans**. Suites load **exhaustively, in Azure Test Plans' own display order, with their native hierarchy** — a plan with hundreds of suites loads them all, in one response, exactly as ordered in ADO (not by creation order or alphabetically). If suites are ever confirmed missing, or their completeness simply couldn't be verified, a small non-blocking banner says so on the report — with a distinct message for each case, never confusing the two — never inside an export. The same guarantee covers **execution outcomes**, which is what the pass rate is computed from: they are fetched page by page until the collection is exhausted, and if some are confirmed missing or their completeness couldn't be verified, its own distinct banner says so rather than letting a rate be read as if it were computed on everything. The same guarantee extends to a suite's **test cases** themselves and to **execution history** (trends, durations, per-run detail): each is fetched to exhaustion and, if either can't be confirmed complete, its own distinct banner says so — the case-content banner never implies the pass rate is affected, and the history banner never implies the suite list or pass rate are. Use **Expand all** / **Collapse all** to navigate. Uncheck suites to exclude them. Plans marked **INACTIVE** are hidden by default; use the toggle to show them.
+
+**Filtering suites by name** — type in the **Filter suites** field to narrow the tree to a name match (accents and case are ignored); any ancestor of a match stays visible so you never lose your place in the hierarchy, and a "no suite matches" message appears if nothing does.
+
+**Empty suites are shown by default.** You can still hide them with the **Show empty suites** switch in *My preferences › Execution* — an explicit choice to hide them is always remembered, never silently overridden. Regardless of that toggle, the hierarchy shown always matches Azure DevOps: an empty parent with a visible descendant is never dropped, and a hidden child is never promoted to the wrong level.
+
+**Exclude empty suites** — click the **Exclude empty** button to uncheck all suites that contain zero test cases in one click. Degraded suites (loading error) are never touched. When empty suites are hidden from view, a badge **(N hidden)** appears next to the suite count.
+
+## Form Fields {#form-fields}
+
+All visible fields are required unless configured otherwise in *My preferences › Form fields*. **IT Contact**, **Business Contact**, **Tester** and **Approver** support Azure DevOps user autocomplete (type ≥ 2 characters).
+
+| Field | Description |
+| --- | --- |
+| Report title | Name displayed on the cover page |
+| Environment | DEV / QA / UAT / PREPROD / PROD (configurable) |
+| Project reference | Project code or identifier |
+| Change number | Optional — change reference |
+| Incident / Request | Optional reference fields adjacent to Change number |
+| Application | Name of the tested application |
+| Functional domain | Relevant domain or module |
+| Tested features | Description of covered features |
+| Test scope | Testing scope and boundaries |
+| Objectives | Multi-line scoping field — line breaks preserved in exports |
+| Entry criteria | Multi-line — conditions for starting the test campaign |
+| Exit criteria | Multi-line — conditions for stopping the test campaign |
+| Tester | Person who performed the tests (ADO autocomplete) |
+| Approver | Person approving the report (ADO autocomplete) |
+| Approver role | Approver's function |
+| Report date | Pre-filled with today's date |
+| Associated build | Link an ADO build — autocomplete from recent builds, branch and status shown. Clickable link in PDF, HTML and Word. |
+
+## Validation {#validation}
+
+Each field can be configured with a **regex pattern** in *My preferences › Form fields* (**Edit**, in the *Expected format* column):
+- **Blocking** mode — generation is prevented if the field fails validation
+- **Warning** mode — generation continues, an orange alert is shown
+Validation runs in real-time in the form (red/orange indicator per field) and again at generation time.
+
+**Soft length** — each field can also carry an optional **soft length** threshold. Beyond it, an **orange, non-blocking** helper appears ("n/threshold — may overflow on the cover page"). It **never blocks generation and never truncates** the value — it just nudges you toward a readable cover page.
+
+**Contacts are Azure DevOps identities** — IT Contact, Business Contact, Tester and Approver are picked from your ADO users, so they carry **no regex and no soft length** (any stored pattern is ignored). They are grouped under **"Contacts & validation"** with a short explanation.
+
+## Cover page: header label vs report title, and field selection {#cover-clarity}
+
+The PDF **cover page** now lays out at **dynamic height**: a long report title or a long field value can never overlap the badge, the info grid or the KPIs — including on older history reports that already contain long values. The title pushes the rest down, and long values wrap to their column. Short reports look exactly as before.
+
+**Two distinct "titles"** — no more confusion:
+- **Header and footer label** (*My preferences › Branding and signature*) replaces "TestPulse Studio" in the header, footer and file name. It is **not** the report title. (Renamed from the ambiguous "Report title"; this is a label change only — no data migration.)
+- **Report title** (form) is the big title shown on the cover page of each report.
+
+**Choose what appears on the cover** — in *My preferences › Form fields*, each **visible** cover field has a **"Cover page"** checkbox. Default = today's behaviour (every visible field is on the cover). Unchecking a field removes it from the cover **but keeps it in the body and in every export** — it only trims the cover. There is no hard cap on the number of fields (the dynamic layout absorbs them).
+
+## Generation Process {#generation-process}
+
+The **Generate report** button follows a state machine:
+1. **Generate report** — idle, click to start
+2. **Starting…** — synchronous disable on click
+3. **Generating N%** — progress bar updates as data is fetched
+4. **Done / Error** — report displayed or error message shown
+
+A **Cancel** button appears during generation. Clicking it aborts all in-flight ADO API requests via `AbortController` — no partial file is generated. The button returns to idle state.
+
+> The plan list uses **stale-while-revalidate**: last known plans appear instantly with a "Refreshing" badge while fresh data loads.
+
+## Templates and Saved Views {#form-templates}
+
+**Save as template** — saves metadata only (form fields, environment, tester, approver, etc.) under a custom name. Load it to pre-fill the form instantly.
+
+**Save as view** — saves the plan ID, the selected suites *and* all metadata in one action. Loading a view:
+1. Re-selects the saved plan and waits for suites to load
+2. Checks the saved suite intersection
+3. Restores all metadata fields, **except the report date, which is set to today** — a view is a reusable model, not a snapshot, and a report generated in August should not be dated June. A non-blocking banner names both dates and offers to restore the saved one; it says nothing when the view was saved today, and disappears as soon as you edit the date yourself. Nothing is written back to the view: its saved date stays its own until you save it again.
+Suites that have been deleted since the save are ignored silently.
+
+> Use views for recurring campaigns where the same plan, suites and metadata are used repeatedly (e.g. weekly regression on a fixed perimeter).

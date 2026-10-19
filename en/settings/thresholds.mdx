@@ -1,0 +1,36 @@
+---
+title: "Thresholds and calculations"
+description: "How your reports colour and calculate results — My preferences › Thresholds and calculations, the page you land on."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+How your reports colour and calculate results — **My preferences › Thresholds and calculations**, the page you land on.
+
+- **Pass rate colours** — the success threshold (green from) and the warning threshold (orange from), with a **preview** of the three bands: green, orange, red.
+- **Calculations** — the **pass rate**, by configuration or by test case; the **unstable (flaky) test** threshold; the **regression alert**, the drop in pass rate between two consecutive reports.
+- **Bounds are checked when you save**, not at every keystroke: a percentage from 0 to 100, a warning lower than or equal to the success, a regression alert as a whole number from 1 to 100. The reason shows next to **Save**.
+
+A value set by the project or by the profile of the plan is read with its lock. The values in force are captured in each report the day it is generated: changing them later never changes an archived report.
+
+## Threshold values {#thresholds-table}
+
+| Threshold | Default | Colour |
+| --- | --- | --- |
+| Pass rate — green (success) | 80% | Green (#107c10) |
+| Pass rate — orange (warning) | 50% | Orange (#a47300) |
+| Below warning threshold | &lt; 50% | Red (#a4262c) |
+| Unstable (flaky) test | 30% | Red alert on KPI card |
+| Regression alert | 10 points | Regression alert badge in Trends dashboard if pass rate drops by this amount between two consecutive reports |
+
+## Pass rate weighting {#passrate-weighting-settings}
+
+Choose how the pass rate is calculated when the same test case runs on several configurations:
+- **By configuration (default)** — every test point counts (a test case × 3 configurations = 3 votes)
+- **By test case** — one vote per test case, the worst result across its configurations
+
+See the Test Configurations section for a detailed comparison.
+
+## The GO / NO-GO verdict card (read-only) {#thresholds-verdict}
+
+At the bottom of the page, the **GO / NO-GO verdict** card shows, read-only, what decides the verdict of the selected plan: the **quality scoring** — the one set by the plan’s profile, otherwise by the project — and the **bugs taken into account** (the bug source). Both belong to the project and are the same for every member on that plan. **The scoring is no longer changed from My preferences**: it is set in the administration, per profile, in *Configuration profiles › Project default › Thresholds and quality*, reserved for project administrators. The **Change the source** link of the bug banner of a report leads to this card.

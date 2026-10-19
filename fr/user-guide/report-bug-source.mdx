@@ -1,0 +1,20 @@
+---
+title: "Bugs de la campagne : d’où viennent les bugs d’un rapport"
+description: "Par défaut, les bugs d’un rapport sont les bugs des exécutions du plan : les bugs rattachés à un résultat d’un run des plans sélectionnés, dans les suites sélectionnées, sur tous les runs lus — pas seulement le dernier résultat."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+Par défaut, les bugs d’un rapport sont les **bugs des exécutions du plan** : les bugs rattachés à un résultat d’un run des plans sélectionnés, dans les suites sélectionnées, sur **tous** les runs lus — pas seulement le dernier résultat. Un plan copié hérite des liens de ses cas de test et de ses exigences ; avec cette source, les bugs des campagnes précédentes ne remontent plus. Chaque bug apparaît une fois, liste ses **cas de test**, et la liste est triée par **date de création**, du plus récent au plus ancien (puis par ID), avec les colonnes **Créé le** et **Cas de test** à l’écran et dans chaque export. Seul le type de work item `Bug` compte.
+
+Cette même liste alimente tout le rapport : liste et compteurs des bugs, Quality Score et verdict GO / NO-GO (bugs bloquants ouverts), **échecs sans défaut**, colonne des bugs de la matrice de traçabilité, rapport multi-plans et les cinq exports. Un bandeau au-dessus de la liste dit la source et le nombre de runs lus ; les exports portent une ligne de source ; chaque rapport enregistré affiche une puce **Source : exécutions / liens** dans l’historique, et la comparaison de deux rapports de sources différentes affiche un avertissement. Si le plan a plus de runs que le nombre lu (réglage **Runs maximum**), un avertissement le dit.
+
+**Conséquences.** Un bug lié à un cas de test seulement par un lien *Tested By*, ou seulement à l’exigence, n’est pas dans le rapport. Si son test est en échec, ce test devient un **échec sans défaut** — et peut déclencher la porte *Bloquer la release s’il reste des échecs sans défaut*. La courbe **Bugs** des **tendances** de l’historique marque une rupture au rapport où la source a changé. Un bug rattaché à un run dont les résultats ont été supprimés n’est pas compté.
+
+**Rattacher un bug oublié après coup** : ouvrez le run dans Azure DevOps et liez le bug au **résultat du run** (depuis le run, ou par un lien *Test Result* depuis le bug) — il est compté à la génération suivante.
+
+**Revenir au comportement historique** : dans **Paramètres du projet › Extensions › TestPulse Studio › Verdict et campagnes › Source des bugs**, choisissez **Liens des cas de test et des User Stories** (tous les bugs liés aux cas de test par *Tested By* et aux User Stories, quelle que soit la campagne), puis **Enregistrer**. C’est un réglage de projet, **réservé aux administrateurs du projet**, estampillé de son auteur et de sa date, et lu à chaque génération. Chaque membre le voit, en lecture seule, dans **Mes préférences › Seuils et calculs**, dans la carte **Verdict GO / NO-GO** (**Bugs pris en compte**) — là où mène le lien **Modifier la source** du bandeau des bugs — et dans **Mes préférences › Règles du projet**.
+
+L’**analyse IA** de la campagne (et le champ de question) reçoit la source du rapport : elle ne confond pas « aucun bug de la campagne » et « aucun bug lié ».
+
+> **Non concernés :** le **Cockpit** lit toujours les liens *Tested By* des cas de test, et l’onglet **Couverture** d’une User Story ne change pas. Les rapports enregistrés gardent les bugs qu’ils avaient.

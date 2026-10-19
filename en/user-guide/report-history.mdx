@@ -1,0 +1,70 @@
+---
+title: "Report History"
+description: "Every generated report is automatically saved to your personal Azure DevOps Extension Data storage."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+Every generated report is automatically saved to your personal Azure DevOps Extension Data storage.
+
+## Auto-save {#auto-save}
+
+Reports are saved automatically after each generation. Storage is user-scoped (5 MB quota) and **synchronized cross-browser** via ADO Extension Data — your history is available on any machine. Attachments (images) are stripped before saving to avoid quota bloat; they are re-fetched from the `ImageCache` when restoring a report.
+
+## Which project a report comes from {#history-project}
+
+Your personal history is stored **per user, across the whole organisation** — so if you work on several projects, all of your reports sit in the same list. A **Project** column, right after Test plan, now says where each one comes from, and a **Project** selector in the filter bar narrows the list down.
+
+- **The filter opens on your current project** when it has reports to show, so you land on what concerns you. If none of your reports belong to it — a history built before this version, for instance — it opens on **All projects** instead, never on an empty list.
+- The header count reads **&#123;n&#125; of &#123;total&#125; reports** as soon as a project filter is active, so a shorter list never reads as lost data.
+- Reports generated from now on **record their project** as they are saved. Older ones keep nothing on disk: their project is **worked out from the Azure DevOps links** they contain, at display time only — such a value is shown with a dotted underline and says so on hover. **Nothing is ever rewritten** in your stored history.
+- When neither is possible, the report is grouped under **Unknown project**, an entry of its own in the selector, with its count. Those reports are never hidden from you.
+
+> Loading a report from another project still works — a report is a self-contained snapshot. Only the links back to Azure DevOps and the plan repositioning follow your **current** project.
+
+## Reloading a report {#reload}
+
+Click **Load** on any history entry to restore it as the current report. You are taken straight to the **Report** tab, with the plan selector put back on the report's own context: its plan is selected and its suites re-checked — a suite deleted since is skipped silently. A report consolidating several test plans switches the selector to multi-plan mode and ticks all of its plans; that mode has no suite selection to restore. The suites put back are the scope the report actually covered, not a record of which boxes were originally ticked. A report saved before this behaviour existed is restored and shown all the same, simply without repositioning. The restored snapshot is used directly — **no re-fetch from ADO** is performed. Screenshots are rehydrated from the `ImageCache` (in-memory) or refetched just-in-time when the PDF is generated.
+
+## Report comparison {#comparison}
+
+Select **two reports** from history to compare them side-by-side:
+- **Metrics diff** — pass rate delta, total delta, passed/failed/blocked/bugs
+- **Improved tests** — tests that changed from Failed/Blocked/NotExecuted to Passed
+- **Regressed tests** — tests that changed from Passed to Failed/Blocked
+- **Added tests** — new test cases in the newer report
+- **Removed tests** — test cases absent from the newer report
+
+Click **Export HTML** to download a standalone comparison file.
+
+## Report Workflow {#report-workflow}
+
+Each report has a **status** that follows the lifecycle: **Draft → Submitted → Approved** (and back to Draft via Reopen).
+
+- Colour-coded badges in the History list: grey (Draft), orange (Submitted), green (Approved)
+- Contextual action buttons: **Submit** / **Approve** / **Reopen** depending on current status
+- Each transition is recorded with the ADO username and timestamp
+- **Filter by status** in the History control bar
+- **APPROVED badge** in the PDF footer of an approved report, with the date and the approver — nothing to turn on
+
+> Only users with the appropriate role should Approve. The Reopen action resets status to Draft and adds a history entry.
+
+## Report Sharing {#report-sharing}
+
+Toggle **Share with project** on any report to make it visible to all project members (stored in ADO Extension Data with `scopeType: Default`).
+
+- A **Shared** blue badge appears in the History list, next to the plan name, with a **Shared by** line under it naming who produced the report — your own reports read **Shared by you**
+- **Filter** between My reports / Project reports / All
+- **Any project member** can move a shared report through its workflow (Draft → Submitted → Approved); the change is written to the **project copy** and audited in `statusHistory` (who/when)
+- Only the **original author** can unshare a report (`sharedBy` field)
+- A **project quota indicator** warns at 80% to avoid storage saturation
+
+> Sharing **copies a snapshot** of the report into the project scope. The **status of a shared report is carried by that project copy** — the source of truth, editable by any member. There is no real-time push: others see the new status on their next History refresh. Unsharing immediately hides it from other users.
+
+## CSV export, notes and storage {#csv-notes}
+
+- **CSV export** — download all history entries as a spreadsheet (plan, date, title, passed, total, pass rate)
+- **Per-report notes** — 500-character persistent notes field on each entry
+- **Storage indicator** — progress bar (green → red above 80% of quota)
+
+> If the storage indicator shows &gt; 80%, delete old reports to free space.

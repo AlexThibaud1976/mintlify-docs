@@ -1,0 +1,18 @@
+---
+title: "Rapports multi-plans et profils"
+description: "Un rapport consolidé réunit plusieurs plans de test, et ces plans peuvent ne pas suivre le même profil."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+Un rapport consolidé réunit plusieurs plans de test, et ces plans peuvent ne pas suivre le même profil.
+
+**Chaque plan est jugé selon son propre profil.** Son barème qualité et sa limite de runs sont ceux que son profil définit : le verdict d'un plan ne change pas selon la compagnie qu'il tient. Le verdict consolidé retient le **moins favorable** : un plan NO-GO rend tout le rapport NO-GO.
+
+**La présentation suit le défaut du projet.** Libellé d'en-tête, couleur, logo, mise en page de la signature et sections d'export n'appartiennent à aucun profil en particulier — en choisir un serait arbitraire. Les canaux de notification et les rapports programmés suivent eux aussi le défaut du projet.
+
+**Une chose reste commune à tous les plans : la pondération du taux de réussite.** Additionner des plans comptés différemment donnerait un chiffre qui ne veut rien dire. Si un profil du périmètre la pondère autrement, le rapport le dit plutôt que de l'appliquer en silence.
+
+**Quand les plans ne partagent pas le même profil, le rapport le dit** — un bandeau nommant chaque plan et son profil, une colonne Profil dans le tableau qualité, et la même phrase sur la page de garde des exports PDF et Word. Des plans qui partagent tous un profil ne changent rien : ni bandeau, ni colonne.
+
+Une conséquence à connaître : le verdict d'un plan dans un rapport consolidé peut différer de son verdict en rapport seul **uniquement** si son profil pondère le taux de réussite autrement.

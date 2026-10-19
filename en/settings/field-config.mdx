@@ -1,0 +1,43 @@
+---
+title: "Form fields"
+description: "The fields you fill in before generating a report, their label, and what appears on the cover page — My preferences › Form fields."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+The fields you fill in before generating a report, their label, and what appears on the cover page — **My preferences › Form fields**.
+
+## Standard fields {#form-fields-settings}
+
+One table, one row per field: **Shown** · **Field** · **Label shown** · **Required** · **Cover page** · **Expected format**.
+- **Shown** — a hidden field is neither asked for nor printed
+- **Label shown** — the label of the field in the form
+- **Required** — a required field left empty blocks generation
+- **Cover page** — whether the field is printed on the cover page
+- **Expected format** — **Edit** opens it (see below)
+
+The contacts (IT, business, tester, approver) are Azure DevOps identities: no format to check. The **Associated build** is chosen from a list: neither required nor format — hidden, the build selector disappears from the form and no build lookup is performed.
+
+## Expected format {#validation-dialog}
+
+**Edit**, in the *Expected format* column, opens what Studio checks while you fill in the field, before generating:
+- **Advised length** — beyond it, an orange warning; never blocking, never truncated. Empty: no limit
+- **Regular expression** — for example `^[A-Z]{2}-\d{4,6}$`. Empty: no format
+- **Message when the entry does not match**
+- **Prevent generation when the entry does not match** — otherwise an orange warning, and generation stays possible
+- **Test a value** — type a value and see at once whether it matches
+
+Validation runs in real time in the form (red or orange border) and again at generation time.
+
+## Environment values {#env-values}
+
+The values offered in the **Environment** field. Add or remove them; a value already offered is refused, and a value holds 20 characters at most.
+
+## Additional fields {#custom-fields}
+
+Up to **3 fields** specific to your reports, printed after the standard fields, in the form and in every export:
+- **Label**
+- **Type** — free text, or a list of choices (separated by commas)
+- **Required field** — or not
+
+Their values are included in the PDF cover page, the HTML header and the Word cover section.

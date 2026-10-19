@@ -1,0 +1,21 @@
+---
+title: "Preferences & Sync"
+description: "All user preferences are persisted via ADO Extension Data (user-scoped key), meaning they follow you across browsers and machines automatically."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+All user preferences are persisted via **ADO Extension Data** (user-scoped key), meaning they follow you across browsers and machines automatically.
+
+Data is compressed with **LZString** before storage to fit within the 5 MB quota. In **My preferences**, nothing is written as you change it: each page keeps a draft, saved with **Save**.
+
+**Preferences that sync:**
+- Form templates (save/load)
+- Field configuration (visibility, labels, custom fields)
+- My preferences (colour, header and footer label, thresholds, sections and their order, logo)
+- Language (FR/EN) — toggled in the top-right of TestPulse Studio
+- Traceability view preference (table vs cards)
+- Pass rate weighting (by config vs by test case)
+- Max runs limit
+
+**No global reset:** *My preferences › Sections and export* offers **Restore the delivered order**, which resets the section order only — not the ticked sections, the branding or the thresholds. **Cancel**, in the banner of a page, discards a draft that is not saved yet.

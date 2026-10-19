@@ -1,0 +1,24 @@
+---
+title: "Execution"
+description: "How much history your reports read, and how they show suites — My preferences › Execution."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+How much history your reports read, and how they show suites — **My preferences › Execution**.
+
+- **Runs analysed at most** — older ones beyond that are ignored. When the project or the profile of the plan sets the value, it is read with its lock; otherwise you choose between 100, 200, 500 or 1,000.
+- **Empty suites** — **Show empty suites** displays the suites without any test point in the plan.
+
+The pass-rate weighting is no longer here: it is in **Thresholds and calculations**.
+
+## Runs analysed per test case {#max-runs}
+
+Beyond 200, generation slows down on large plans, and the page warns you.
+
+| Value | Use case | Warning |
+| --- | --- | --- |
+| 100 | Small plans, fast generation |  |
+| 200 | Standard (recommended) |  |
+| 500 | Large plans with deep history | Slower generation |
+| 1,000 | Exhaustive audit | ⚠ May be slow on large plans |

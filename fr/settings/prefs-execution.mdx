@@ -1,0 +1,24 @@
+---
+title: "Exécution"
+description: "Combien d’historique vos rapports lisent, et comment ils montrent les suites — Mes préférences › Exécution."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+Combien d’historique vos rapports lisent, et comment ils montrent les suites — **Mes préférences › Exécution**.
+
+- **Runs analysés au plus** — les plus anciens au-delà sont ignorés. Quand le projet ou le profil du plan impose la valeur, elle se lit avec son cadenas ; sinon vous choisissez entre 100, 200, 500 ou 1 000.
+- **Suites vides** — **Afficher les suites vides** montre les suites sans aucun point de test dans le plan.
+
+La pondération du taux de réussite n’est plus ici : elle est dans **Seuils et calculs**.
+
+## Runs analysés par cas de test {#max-runs}
+
+Au-delà de 200, la génération ralentit sur les grands plans, et la page vous prévient.
+
+| Valeur | Cas d'usage | Avertissement |
+| --- | --- | --- |
+| 100 | Plans petits, génération rapide |  |
+| 200 | Standard (recommandé) |  |
+| 500 | Plans larges avec historique profond | Génération plus lente |
+| 1 000 | Audit exhaustif | ⚠ Peut être lent sur les grands plans |

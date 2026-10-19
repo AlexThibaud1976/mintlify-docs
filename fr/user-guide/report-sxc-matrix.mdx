@@ -1,0 +1,13 @@
+---
+title: "Matrice suite × configuration"
+description: "Le taux de réussite agrégé peut masquer une configuration passée à travers."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+Le taux de réussite agrégé peut masquer une configuration passée à travers. Le rapport gagne un onglet interne **Suite × Configuration** croisant **chaque suite avec chaque configuration du plan** — y compris les combinaisons **sans aucun point de test**, affichées comme des trous assumés. Quatre états de cellule textuels (**Réussi n/n · Échecs présents · Partiellement exécutée · Jamais exécutée**), calculés depuis les points déjà chargés — aucun appel supplémentaire.
+
+- **Nudge conditionnel à deux étages** — une **pastille rouge de comptage** sur l’onglet (visible depuis tout sous-onglet du rapport) et une **alerte cliquable dans le Résumé** qui navigue vers la matrice. Les deux **n’apparaissent que s’il y a des trous** — zéro trou, zéro bruit. L’onglet lui-même **s’auto-masque** quand le plan ne déclare aucune configuration (jamais de grille vide).
+- **« Non applicable » partagé** — cliquez une cellule pour voir son détail (exécutés/total, dernière exécution, un lien **execute** en un clic) et la marquer **non applicable** : une décision assumée, **partagée par tout le projet** (stockée au niveau projet), réversible, et **exclue de tous les comptages**. Une cellule n/a s’affiche grisée avec « n/a ».
+- **Outils de focus** — un filtre *Trous et échecs uniquement*, et sur les gros plans (**plus de 12 suites**) la grille se replie sur les suites porteuses d’un signal, avec un bouton *Afficher toutes les suites*.
+- **Exports** — la grille peut embarquer dans les exports **PDF et Word**, marquages n/a inclus. **Opt-in depuis cette version** : cochez la case **Grille suite × configuration** dans *Mes préférences › Sections et export*, sous **Sections facultatives** (désactivée par défaut). Même activée, la grille reste absente si le plan ne déclare aucune configuration.

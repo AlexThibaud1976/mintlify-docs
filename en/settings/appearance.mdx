@@ -1,0 +1,31 @@
+---
+title: "Branding and signature"
+description: "The visual identity of PDF and HTML reports, and the page where acceptance is signed — My preferences › Branding and signature."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+The visual identity of PDF and HTML reports, and the page where acceptance is signed — **My preferences › Branding and signature**.
+
+- **Header and footer label** — on every page and in the file name. It is not the report title, which is entered in the form.
+- **Colour** — written `#RRGGBB`, for the banner, the headings and the tables.
+- **Cover page logo** — a PNG, JPEG or SVG (1 MB at most at import), in the top right corner of the banner, PDF only. SVGs are converted to PNG before embedding. The logo is synced through your Azure DevOps preferences — it follows you across devices, and reaches the Exploration tab on Azure DevOps Server on-premises too. If the image is still too large to sync, it is automatically reduced and you are told so; if it stays too large even after that, it is rejected with a clear message and your previous logo is kept.
+- **Cover page preview** — the page updates as you change the label, the colour, the logo or the signatories.
+
+When the project or the profile of the plan sets the label, the colour, the logo or the signature sheet, the value is read with its lock.
+
+## Signature sheet {#signature-options}
+
+A page at the end of the PDF where each signatory dates and signs. The signature is printed in the **PDF only** (not in PowerPoint). When PDF is not one of your formats (*Sections and export › Formats offered*), the sheet stays saved but is no longer used.
+
+- **Signature page** — on or off
+- **On each box** — date and signature line, date only, signature line only, or name only
+- **Prefilled from the form when possible** — the tester and the approver come from their form fields
+
+## Signatories {#signature-boxes}
+
+Up to **5 signatories**. For each one:
+- **Label** — the role or name shown above the box; every signatory has a label
+- **Prefill** — from the Tester field, from the Approver field, or to be entered
+
+Boxes are rendered in a grid — 2 per row on A4 landscape, 1 per row on portrait.

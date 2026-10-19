@@ -1,0 +1,13 @@
+---
+title: "Suite × Configuration matrix"
+description: "The aggregated pass rate can hide a configuration that slipped through."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+The aggregated pass rate can hide a configuration that slipped through. The report gains an internal **Suite × Configuration** tab crossing **every suite with every plan configuration** — including combinations with **no test point at all**, shown as assumed gaps. Four textual cell states (**Passed n/n · Failures present · Partially run · Never run**), computed from the points already loaded — no extra call.
+
+- **Two-stage conditional nudge** — a **red count badge** on the tab (visible from any report sub-tab) and a **clickable alert in the Summary** that navigates to the matrix. Both **only appear when gaps exist** — zero gaps, zero noise. The tab itself **auto-hides** when the plan declares no configuration (never an empty grid).
+- **Shared “not applicable”** — click a cell to see its detail (executed/total, last run, a one-click **execute** deep-link) and mark it **not applicable**: an assumed decision, **shared by the whole project** (stored at project level), reversible, and **excluded from every count**. An n/a cell shows greyed with “n/a”.
+- **Focus tools** — a *Gaps & failures only* filter, and on large plans (**more than 12 suites**) the grid collapses to the suites that carry a signal, with a *Show all suites* button.
+- **Exports** — the grid can ship in the **PDF and Word** exports, n/a markings included. **Opt-in since this version**: tick the **Suite × configuration grid** checkbox in *My preferences › Sections and export*, under **Optional sections** (disabled by default). Even when enabled, the grid stays absent if the plan declares no configuration.

@@ -1,0 +1,53 @@
+---
+title: "Traceability"
+description: "The Traceability tab shows the full Epic → User Story → Test Case → Bug hierarchy for your test plan."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+The Traceability tab shows the full **Epic → User Story → Test Case → Bug** hierarchy for your test plan.
+
+## Hierarchy model {#hierarchy}
+
+TestPulse Studio uses a **hybrid strategy** to build traceability:
+1. **Requirement-based suites** — suites of type `requirementTestSuite` with a `requirementId` (linked US) are the primary source
+2. **Direct TC→US links** — fallback for test cases without a requirement-based parent suite
+
+A test case can be linked to **multiple User Stories and multiple Epics** — all are shown. Bugs are collected via WIQL queries (TC→Bug and US→Bug relations) and deduplicated automatically.
+
+**Choosing which source counts** — the plan selection panel carries a **"Requirement suites only"** toggle (next to "Include inactive plans") that restricts traceability to source 1 above, ignoring source 2 entirely. It defaults to off (today's behaviour, both sources combined) — turn it on for a regression plan whose test cases still carry links to older, unrelated user stories, and off again for a requirement-based plan where those links are exactly what you want. Your choice is remembered, and an in-place help icon next to the toggle explains both modes without leaving the screen. With no requirement-based suite at all in the plan, turning it on empties traceability and the quality score reports coverage as unavailable (weights redistributed to the other criteria) rather than a misleading number.
+
+## Views: Table vs Cards {#views}
+
+**Table view (3 columns)** — Exigence | Tests | Défauts. Epics are shown in bold with a gray background (expandable). User Stories are indented with a dashed vertical line. Test Cases are listed with outcome badges. Bugs show state + truncated title.
+
+**Cards view** — One MUI Card per Epic (expandable). Each User Story has sub-cards with Tests / Bugs columns. Outcome pills are clickable and open the ADO work item.
+
+Your preferred view persists across sessions.
+
+## Status aggregation rules {#status-rules}
+
+| Status | Rule |
+| --- | --- |
+| OK | All test cases linked to the US are Passed |
+| NOK | At least one test case is Failed or Blocked |
+| PARTIAL | Mix of Passed + (Failed or Blocked), no NotExecuted |
+| NOT EXECUTED | At least one test case is NotExecuted or None, no failures |
+
+## Untraced suites {#untraced}
+
+The **Untraced suites** block (collapsed by default) lists all suites that have no linked User Story (`requirementId` is absent or null). These represent **traceability blind spots** — test cases that are not covered by any requirement.
+
+> Empty parent suites (no test cases) are excluded from this block.
+
+## Traceability KPIs and Links {#traceability-links}
+
+Four KPIs are computed for User Story coverage:
+- **Covered requirements** — total US linked to at least one test case
+- **OK** — US where all TCs are Passed
+- **NOK** — US with at least one Failed/Blocked TC
+- **Not executed** — US with no executed TCs
+
+A **status filter** in the control bar lets you show only NOK, not-executed, or a combination.
+
+**Clickable links** — Epic, US, TC and Bug titles are hyperlinks that call `openLink()` from the ADO SDK, opening the work item in a new tab. Work items deleted since report generation are excluded silently (guard 404). User Stories without an Epic parent are grouped under **"No Epic"**.

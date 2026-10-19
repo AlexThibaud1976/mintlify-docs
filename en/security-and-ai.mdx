@@ -1,0 +1,42 @@
+---
+title: "Security and AI"
+description: "What TestPulse Studio reads, writes and sends — and what it never does."
+---
+
+## Your data stays in Azure DevOps
+
+TestPulse Studio runs in your browser, inside Azure DevOps. It reads your test plans, results and work items with your rights, and keeps its own data in Azure DevOps **Extension Data**. It does not send data outside Azure DevOps on its own.
+
+- Most of the data is scoped to your own user. **Exploratory session records are stored at the project scope** and can be read by anyone with access to the project.
+- Sending usage counters to the publisher is **off by default**. See [Usage and telemetry](/en/user-guide/usage-statistics).
+
+## Nothing is written without you
+
+TestPulse Studio never writes on its own and never writes a test result. Everything it writes — designed test cases, an improved requirement, a test-type tag, a test plan created from Coverage, a test-point reassignment, a pull request of automated tests, Explore captures and work items — follows an explicit action of yours, with your rights.
+
+<Note>
+The assistant proposes manual test cases. Nothing is created in Azure DevOps until you have reviewed and confirmed.
+</Note>
+
+The scopes the extension requests, and why, are listed in [Permissions](/en/reference/permissions).
+
+## The AI assistant is optional
+
+- Every AI function is **off when shipped**. A project administrator connects a model provider and turns functions on, in **Project settings › Extensions › TestPulse Studio › AI assistant**.
+- The administrator decides **which data** may enter a prompt (test case titles and steps, requirement text, error messages, images, linked work items, code excerpts…) and can replace people’s names with aliases. An unchecked box never enters a prompt.
+- A provider outside your Azure tenant shows a warning and asks for an explicit confirmation.
+- The figures, scores and verdicts are computed by TestPulse Studio; the AI explains them, it never produces them.
+
+## Access modes and the API key
+
+| Mode | What it means |
+| --- | --- |
+| **Entra ID** | Each member signs in with their own identity. Not available in this version. |
+| **Enterprise gateway** | TestPulse Studio calls your gateway (APIM, proxy), which holds the provider’s key. No key goes through the browser. |
+| **Direct API key** | The key is typed once and never shown again. |
+
+<Warning>
+With a direct API key, the key is masked on screen but remains accessible to any project member with developer tools. Use a key dedicated to TestPulse Studio, with a limited quota, that you can revoke.
+</Warning>
+
+The AI settings are reserved for project administrators. Each change is attributed and dated. See [AI assistant: connection, functions and log](/en/user-guide/ai-connection-admin).

@@ -1,0 +1,29 @@
+---
+title: "Permissions"
+description: "TestPulse Studio demande les scopes nécessaires pour lire vos données de test et garder ses propres données, et les scopes d'écriture qu'il n'utilise qu'après un geste explicite de votre part."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+TestPulse Studio demande les scopes nécessaires pour lire vos données de test et garder ses propres données, et les scopes d'écriture qu'il n'utilise qu'après un geste explicite de votre part.
+
+## Scopes OAuth requis {#scopes-table}
+
+| Scope | Pourquoi il est nécessaire |
+| --- | --- |
+| vso.test | Lecture des plans, suites, cas de test, résultats et runs |
+| vso.work | Lecture des Work Items (User Stories, Epics, Bugs) pour la traçabilité |
+| vso.identity | Recherche d'utilisateurs ADO pour les champs d'autocomplétion (testeur, approbateur) |
+| vso.build | Lister les builds récents pour l'autocomplétion Build associé |
+| vso.extension.data | Garder vos préférences, votre historique et les réglages du projet dans l'Extension Data d'Azure DevOps |
+| vso.test_write | Créer un plan de test et ses suites, ajouter des cas de test à des suites, réaffecter des test points — après votre confirmation |
+| vso.work_write | Écrire les cas de test conçus, l'exigence améliorée, le tag d'un type de test, les captures et work items d'Explore — après votre confirmation |
+| vso.code | Lire le code lié à une exigence, quand le projet l'autorise |
+| vso.code_write | Créer une pull request de tests automatisés sur une nouvelle branche — après votre confirmation |
+
+## Ce que TestPulse Studio NE fait PAS {#what-not}
+
+- N'écrit pas dans Azure DevOps de lui-même, et n'écrit jamais un résultat de test : tout ce qu'il écrit — par exemple les cas de test conçus après votre revue, l'exigence améliorée dans l'US après votre confirmation, le tag d'un type de test, un plan de test créé depuis Couverture, une réaffectation de test points, une pull request de tests automatisés, les captures et work items d'Explore — suit un geste explicite de votre part, avec vos droits
+- N'envoie pas de données hors d'Azure DevOps de lui-même : les fonctions IA, coupées tant qu'un administrateur du projet ne les active pas, n'envoient au fournisseur IA réglé par l'administrateur que les données qu'il a autorisées ; l'envoi des compteurs d'usage à l'éditeur est coupé par défaut, et non configuré dans cette version
+- Ne stocke pas de données en dehors de votre ADO Extension Data — la plupart limitée à votre propre utilisateur, mais **les sessions exploratoires (onglet/hub Explore) sont stockées au niveau du projet** et lisibles par toute personne ayant accès au projet, indépendamment des équipes Azure DevOps
+- Ne nécessite pas de permissions admin pour l'utilisation (admin requis pour l'installation ; les pages de l'administration du projet sont réservées aux administrateurs du projet)

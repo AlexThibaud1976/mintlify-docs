@@ -1,0 +1,28 @@
+---
+title: "Your First Report"
+description: "Generate your first PDF report in under 5 minutes."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+Generate your first PDF report in under 5 minutes.
+
+## Step by step {#first-report-steps}
+
+1. Open the **Report** tab in TestPulse Studio
+2. Select a **Test Plan** from the dropdown — suites load automatically
+3. Uncheck any suites you want to **exclude**
+4. Fill in the **project information** (title, environment, tester, approver…)
+5. Click **Generate report** — data is fetched from ADO
+6. Click **PDF** to download — or choose HTML, Word, or Excel
+
+## What your report contains by default {#default-content}
+
+- **Cover page** — project info, date, environment, tester, approver
+- **Executive summary** — automated verdict (Pass/Warning/Fail) with strengths and recommendations, or your own **custom** text via the Auto/Custom toggle in the report screen (saved per-report, optional forced verdict). The custom summary supports **light markdown formatting**: `**bold**`, `*italic*`, and bullet lines starting with `- ` — use the B / I / • toolbar and the Edit/Preview toggle
+- **KPI cards** — pass rate, execution rate, passed/failed/blocked, campaign bugs (or linked bugs with the links source)
+- **Results table** — latest outcome per test case with suite path, duration, tester
+- **Traceability matrix** — Epic → User Story → Test Case → Bug
+- **Bugs section** — the bugs attached to the run results of the plan (or, with the *Test case and User Story links* source, the bugs linked to its test cases and User Stories), newest first, with their test cases
+- **Charts** — pass/fail donut, results-by-suite bar chart
+- **Attachments** — evidence attached to test results: images inline, other files as clickable links with a readable type. Shown by default since v2.69.0; if you had already saved your own section selection, your choice is kept

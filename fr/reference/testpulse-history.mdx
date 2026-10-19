@@ -1,0 +1,184 @@
+---
+title: "Historique de TestPulse"
+description: "Les versions ci-dessous sont celles de TestPulse, l'extension dont TestPulse Studio est issu — pas celles de TestPulse Studio, dont les jalons sont dans l'onglet Nouveautés."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+Les versions ci-dessous sont celles de **TestPulse**, l'extension dont TestPulse Studio est issu — pas celles de TestPulse Studio, dont les jalons sont dans l'onglet **Nouveautés**. Le widget de dashboard qu'elles mentionnent ne fait pas partie de TestPulse Studio.
+
+**v2.61.1 — 2026-08-19**
+- Corrigé : le bandeau de mise à jour du hub pouvait afficher des astérisques Markdown à nu et s'étaler sur quatre lignes — il reprenait tel quel le texte de l'item du panneau Nouveautés, un champ écrit pour la documentation, pas pour une ligne de bandeau. Une phrase de bandeau dédiée et optionnelle le remplace ; absente dans la langue courante, elle n'affiche aucune deuxième ligne plutôt que de basculer vers l'autre langue ou vers ce texte d'item. Le panneau Nouveautés lui-même est inchangé.
+
+**v2.61.0 — 2026-08-19**
+- Repository : la source d'amorçage « Plans & suites » est retirée — Area Paths est désormais l'unique source, le dialogue ouvre donc directement sur l'aperçu chiffré et la confirmation, sans sélecteur de source. Sur un projet réel très chargé en plans, la source plans/suites produisait un arbre plusieurs fois plus encombré qu'Area Paths, au prix de bien plus de requêtes, et un arbre à parent unique ne peut structurellement pas refléter des plans qui partagent leurs cas — optimiser ces requêtes aurait produit le même arbre encombré. Rien de ce qui en a déjà été amorcé n'est touché. Le Coverage Builder n'est pas affecté — il partage l'appel de résolution des suites sous-jacent, strictement inchangé.
+- Repository : quatre évolutions pour laisser respirer l'arbre. Les actions de ligne (renommer, ajouter, supprimer, générer un plan) restent désormais masquées tant que vous ne survolez pas, ne sélectionnez pas, ou ne focalisez pas la ligne au clavier, avec leur espace toujours réservé pour ne jamais décaler la mise en page à l'apparition. Les noms de dossier longs se tronquent sur une ligne avec le nom complet en infobulle plutôt que de passer à la ligne. Un séparateur glissable et ajustable au clavier (borné, mémorisé par utilisateur) permet de redimensionner l'arbre face à la liste des cas. Sans sélection, l'arbre occupe toute la largeur au lieu d'un panneau « 0 selected » qui mangeait la moitié de l'écran.
+
+**v2.60.1 — 2026-08-19**
+- Bandeau de mise à jour du hub : un petit bandeau d'information au-dessus de vos rapports nomme la nouvelle version et renvoie vers Nouveautés dès qu'un major ou un minor arrive (silencieux sur un simple patch, y compris celui-ci — aucune version de lancement ne peut l'afficher pour elle-même). Le fermer est propre à chaque utilisateur (ADO Extension Data, scope User) et n'affecte jamais les autres membres du projet. Aucun appel ADO ni dépendance supplémentaire.
+
+**v2.16.3 — 2026-06-26**
+- Corrigé (suite de la 2.16.2) : le widget de dashboard « Quality overview » et sa blade de configuration se chargent désormais sur Azure DevOps Services. Les ids de contribution pleinement qualifiés sont maintenant enregistrés avant l'init du SDK, donc disponibles au moment du lookup unique de l'hôte cloud — le ré-enregistrement post-handshake de la 2.16.2 arrivait trop tard. L'enregistrement par id court (on-prem Server 2022.1) et le log diagnostic restent inchangés. Aucune nouvelle dépendance, aucun appel/scope ADO, manifeste inchangé.
+- 741 tests Vitest (4 nouveaux)
+
+**v2.16.2 — 2026-06-26**
+- Corrigé : le widget de dashboard « Quality overview » se charge désormais sur Azure DevOps Services. L'hôte cloud résout les contributions par leur id pleinement qualifié ; après le handshake SDK, le widget se ré-enregistre sous cet id exact (en plus de l'id court). Ceinture + bretelles, purement additif — l'enregistrement par id court est inchangé, donc le chemin on-prem (Server 2022.1) n'est pas affecté. Un log diagnostic indique l'id de contribution résolu. Aucune nouvelle dépendance, aucun appel/scope ADO, manifeste inchangé.
+- 737 tests Vitest (9 nouveaux)
+
+**v2.16.0 — 2026-06-26**
+- Mise en forme légère du résumé exécutif personnalisé (Kit C) : gras, italique et listes à puces en markdown restreint, avec barre d'outils (G / I / •) et bascule Éditer/Aperçu dans l'écran du rapport, rendue fidèlement en PDF et HTML. Parser + renderers maison, zéro dépendance, zéro XSS ; les résumés plain existants restent littéraux et le mode automatique est inchangé. Word/PowerPoint/Excel non affectés.
+- 728 tests Vitest (44 nouveaux)
+
+**v2.15.5 — 2026-06-26**
+- Résumé exécutif personnalisé repensé **par rapport** : un toggle Automatique/Personnalisé dans l'écran du rapport permet de rédiger votre propre résumé (sauvegardé dans l'historique, restauré à la réouverture), rendu de façon cohérente à l'écran, en PDF et en HTML — en paragraphe, sans le titre parasite « Recommandations ». Verdict forçable en option ; pré-remplissage depuis le résumé automatique. L'ancien champ global a été retiré des Paramètres (les préférences cloud legacy se chargent toujours — drop silencieux, aucune migration). Word/PowerPoint/Excel inchangés.
+- 684 tests Vitest (34 nouveaux)
+
+**v2.15.0 — 2026-06-24**
+- Profils de barème & pondération risk-based : (A) un profil de barème qualité **au niveau projet** (Strict / Standard / Rodage, ajustement borné, hors preset = Personnalisé) stocké au scope projet pour que tout le monde note un rapport à l’identique ; Standard = barème actuel à l’identique. (B) un toggle **pondération risk-based** optionnel affichant une **confiance pondérée** à côté du badge (rapport, tuile widget, PDF) — exécution/couverture pondérées par la priorité des cas de test et le risque/story points des US via des paliers additifs, jamais multiplicatifs. Le score A–E à plat n’est jamais modifié (toggle off ⇒ sortie identique) ; dimensions creuses auto-désactivées ; aucun appel ADO supplémentaire.
+- 639 tests Vitest (40 nouveaux)
+
+**v2.14.0 — 2026-06-24**
+- Points de vigilance : un nouvel encart sous le badge qualité (et un cartouche PDF) nomme ce qui pèse déjà sur le verdict — bugs bloquants ouverts, exigences en périmètre sans test, et rappel des US in-scope non exécutées, chacun en lien cliquable. Mise en exergue de données déjà calculées : aucune nouvelle métrique, le score A–E est inchangé, sans appel réseau. « Bloquant » repose sur la définition unique de ; les exigences non couvertes sont dérivées au build (suite-based, couverture 100 % ⟺ liste vide). Masqué si non évalué, état vide explicite, rapports historiques tolérés.
+- 599 tests Vitest (23 nouveaux)
+
+**v2.13.0 — 2026-06-15**
+- Couverture d’exigences historique : l’onglet Tendances ajoute un 5ᵉ graphique « Couverture des exigences » + une colonne Couverture dans la table comparative, traçant le taux de couverture dans le temps par plan ; la tuile Couverture du widget gagne une sparkline de la couverture historique. Dérivé de l’historique sauvegardé (aucun appel réseau, aucun stockage) ; les rapports non mesurables sont des trous (jamais un 0 % trompeur). L’export PNG inclut désormais le graphique de couverture.
+- 576 tests Vitest (18 nouveaux)
+
+**v2.12.0 — 2026-06-15**
+- Échecs sans défaut : TestPulse signale désormais les cas de test en échec sans bug lié (TestedBy), en lecture seule et sans appel API supplémentaire. Nouvelle section **Échecs sans défaut** (cas de test cliquables, configs en échec, bouton **Ouvrir un bug** pré-rempli par navigation), un compteur sur la tuile Couverture du widget, et un critère **optionnel** du Quality Gate (désactivé par défaut ; NO-GO si compteur &gt; 0, grade jamais plafonné). Section complète en PDF/HTML, compteur sur une ligne en Word/Excel. Les rapports historiques se dégradent proprement.
+- 558 tests Vitest (42 nouveaux)
+
+**v2.11.0 — 2026-06-15**
+- Les rapports multi-plans agrègent désormais la couverture des exigences, les configurations, les étapes marquées et le verdict GO/NO-GO (le pire plan l'emporte) : les KPIs qualité consolidés ne tombent plus à 0 et le verdict est NO-GO dès qu'un plan est NO-GO ; nouveau tableau **Qualité par plan** (Plan, Verdict, Couverture US, Exigences, OK, NOK, Étapes marquées, Configs + ligne Consolidé) à l'écran et dans les quatre exports (section PDF/HTML/Word + onglet Excel) ; N/A quand aucun plan n'a d'exigence/configuration
+- 516 tests Vitest (32 nouveaux)
+
+**v2.10.4 — 2026-06-15**
+- Correctif (on-prem) : le widget de dashboard « Vue d'ensemble qualité » s'affiche désormais dès le **premier** chargement du dashboard sur ADO Server 2022.1 — les contributions SDK sont enregistrées avant l'init et le widget ne se signale « chargé » qu'après son premier rendu, au lieu de rester blanc jusqu'à ce qu'on sorte et revienne. Aucun changement sur cloud (déjà immédiat).
+- 484 tests Vitest (4 nouveaux)
+
+**v2.10.3 — 2026-06-15**
+- Vue par plan à l'écran + exports enrichis (multi-plans) : un détail par plan sous les KPIs consolidés (total, taux de réussite, taux d'exécution, passés/échoués/bloqués/non exécutés), à l'écran et dans PDF/HTML/Word/Excel ; colonne d'export « Status » renommée « Taux de réussite » ; note chiffres bruts vs dédoublonnés en cas de recouvrement
+- Statut partagé & vivant : le statut de tout rapport partagé vit désormais sur la copie projet (source de vérité), modifiable par tout membre et tracé dans statusHistory au lieu de se perdre ; la copie partagée est prioritaire au rendu ; régénérer un rapport déjà partagé affiche une notif info non bloquante
+- 480 tests Vitest (39 nouveaux)
+
+**v2.10.2 — 2026-06-14**
+- Correctifs widget : le score qualité ne pénalise plus un rapport sans exigence liée (couverture retirée + score renormalisé → A / GO ; tuile Couverture « N/A ») ; correction du rendu des couleurs SVG du widget (barre de couverture, piste du donut, ligne de tendance) ; nouvelle icône catalogue + image de preview
+- 441 tests Vitest (2 nouveaux)
+
+**v2.10.1 — 2026-06-14**
+- Widget de dashboard « TestPulse — Vue d'ensemble qualité » (KPIs / tendance / couverture en lecture seule depuis le dernier rapport publié au projet, sans appel API Test Plans — fonctionne pour les Stakeholders)
+- Score qualité de release A→E + verdict GO/NO-GO via un moteur unique déterministe, affiché dans l'en-tête du rapport, le widget et les exports PDF/HTML
+- 439 tests Vitest (68 nouveaux)
+
+**v2.9.0 — 2026-06-13**
+- Import JUnit / NUnit / xUnit (onglet Import, mapping auto vers ADO, badge [AUTO])
+- Rapport consolidé multi-plans (métriques globales + détail par plan, colonne Plan)
+- Notifications Teams / Slack (3 webhooks max, repli copier-coller si CORS)
+- Rapports programmés (rappels hebdo/bimensuel/mensuel au démarrage)
+- Annotations par cas de test (500 car., colonne Commentaire dans tous les exports)
+- Sélection en cascade (tri-state) + persistance intra-session du plan
+- 367 tests Vitest (51 nouveaux)
+
+**v2.8.0 — 2026-06-09**
+- Bouton Exclure vides (un clic, préserve les suites dégradées), préférence persistée
+- Barre de recherche historique avec debounce 200 ms (titre, env, réf projet, plan, notes)
+- Vues sauvegardées : snapshot plan + suites + metadata ; suites supprimées gérées silencieusement
+- Workflow de statut : Brouillon → Soumis → Approuvé avec historique complet et badge PDF
+- Dashboard tendances : graphiques pass rate, exécution, bugs et flaky sur les 5/10/20 derniers rapports
+- Partage projet : scope Default, filtre Mes/Projet/Tous, indicateur quota projet
+- Export PowerPoint : 6 diapositives (Couverture, KPIs, Résultats, Traçabilité, Bugs, Signature)
+- Build associé ADO : autocomplétion getRecentBuilds, lien cliquable dans PDF/HTML/Word
+- 316 tests Vitest (53 nouveaux)
+
+**v2.7.7 — 2026-06-09**
+- Documentation embarquée : 5 onglets (Prise en main, Guide utilisateur, Paramètres, Référence, Nouveautés)
+- Recherche plein texte avec debounce 200 ms et navigation scroll-to
+- Contenu EN+FR intégré — aucune dépendance externe
+- Chunk asynchrone chargé lazily : impact hub.js seulement +2 Ko
+- 263 tests Vitest (13 nouveaux)
+
+**v2.7.6 — 2026-06-09**
+- 109 nouveaux tests Vitest (Word, UserPreferences, migration v274, Excel, PDF, HTML)
+- Aucun changement fonctionnel — release qualité interne. 250 tests au total.
+
+**v2.7.5 — 2026-06-01**
+- Contrôle de la visibilité des boutons d'export (PDF, HTML, Word, Excel) dans la barre d'outils
+- Slot PowerPoint réservé dans les Paramètres (bientôt disponible)
+- Désactiver PDF grise la section ordre des sections PDF
+- Préférences synchronisées cross-navigateur via ADO Extension Data
+
+**v2.7.4 — 2026-05-29**
+- Nouvelles sections PDF : Objectifs, Critères d'entrée, Critères de sortie (réordonnables)
+- Champs Incident et Request adjacents au Numéro de change
+- Contrôle d'inclusion des tests flaky
+- Cache stale-while-revalidate avec skeleton loader pour le chargement des plans
+- Annulation basée sur AbortController pour la génération
+- Correction i18n des libellés ordre des sections PDF (FR → EN)
+
+**v2.7.1 — 2026-05-07**
+- Corrigé : bouton export PDF toujours grisé dans l'onglet Traçabilité
+- Corrigé : lien "Voir X autres" non cliquable
+- Corrigé : doublons de cas de test avec plusieurs configurations ADO
+- Icônes work items enrichies dans la vue Traçabilité
+
+**v2.7.0 — 2026-05-05**
+- Colonne Configuration dans les tables Résultats et Historique (conditionnelle)
+- KPI "Configurations couvertes" (X / Y définies dans le projet)
+- Matrice TC × Configurations dans le PDF (≤ 3 configs)
+- Option de pondération du taux de succès (par configuration vs par TC)
+
+**v2.6.0 — 2026-05-05**
+- Traçabilité V2 complète : hiérarchie Epic → US → TC → Bug, vues Tableau + Cartes
+- Agrégation de statuts OK/NOK/PARTIEL/NON EXÉCUTÉ par US, propagée vers Epic
+- Bloc "Suites non tracées" (angles morts de traçabilité)
+- 4 KPIs orientés US (Exigences couvertes / OK / NOK / Non exécutés)
+- Page traçabilité PDF refondue (tableau 3 colonnes)
+
+**v2.5.5 — 2026-05-05**
+- Lignes de traçabilité multi-US et multi-Epic
+- KPI "Marquage par étape" (alerte sous 80%)
+- Sélecteur de configurations de test (filtre multiselect)
+- Onglet Matrice TC × Configurations (heatmap)
+
+**v2.5.1 — 2026-04-22**
+- Sélecteur de suites arborescent (indenté, dépliable/repliable)
+- Captures d'écran toujours présentes dans le PDF après restauration depuis l'historique (ImageCache)
+
+**v2.5.0 — 2026-04-21**
+- Recherche auto-complétion sur les plans de test (filtre par nom et itération)
+- Statut courant des test points privilégié sur l'historique des runs (taux de succès fiable pour les plans non-possédés)
+
+**v2.4.x — 2026-03**
+- Export Excel (XLSX) via ExcelJS — 4 onglets (KPIs, Résultats, Traçabilité, Bugs)
+- Limite de runs configurable (100 / 200 / 500 / 1000)
+- Export HTML de la comparaison depuis l'Historique
+- Appels API parallélisés (batches de 10)
+- Graphiques PDF rendus localement via chart.js (sans QuickChart.io — fonctionne hors-ligne)
+
+**v2.3.x — 2026-03**
+- Web Worker PDF supprimé (conflit CSP) — PDF sur le thread principal, fiable
+- Compatibilité ADO on-premise (IProjectPageService)
+- Multiples corrections pièces jointes et étapes pour Test Runner et TFS on-prem
+- Guide utilisateur intégré dans l'application
+
+**v2.2.x — 2026-03**
+- Templates de formulaire (save / load / delete)
+- Visibilité conditionnelle des champs (showIfField / showIfValue)
+- Graphiques intégrés dans le PDF via chart.js
+- Résumé exécutif personnalisable
+- Réordonnancement des sections PDF par drag-and-drop
+- Export CSV historique, notes par rapport, indicateur de stockage
+- Sync cross-navigateur des préférences via ADO Extension Data (v2.2.6)
+
+**v2.1.0 — 2026-03**
+- Validation regex par champ (modes bloquant + avertissement)
+- Page de signature PDF configurable
+- Export Word (.docx)
+
+**v2.0.x — 2026-03**
+- Pièces jointes des runs (PNG/JPEG intégrés, autres fichiers en tableau)
+- Champs du formulaire configurables (renommage, masquage)
+- Valeurs d'environnement configurables
+- Jusqu'à 3 champs supplémentaires personnalisés
+- Configuration des champs obligatoires

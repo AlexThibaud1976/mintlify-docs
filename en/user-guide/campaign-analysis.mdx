@@ -1,0 +1,18 @@
+---
+title: "AI analysis of a campaign (report tab)"
+description: "Where."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+**Where.** The **AI analysis** tab of a report, after *Test grid*. It is there in every report of a project; it analyses a report **generated in this session** — a report reloaded from History says so and asks you to generate it again. When the AI assistant is not set up, or *Campaign analysis* is off (in *AI assistant › Functions and data*, by the plan's profile or by the project default), the tab says it in one sentence; the report itself is unchanged.
+
+**What it is — and is not.** Two cards side by side: **Computed verdict · &lt;profile&gt; scale** — the badge of the report, untouched — and **AI opinion · advisory**. A permanent banner reminds you: *read-only — the AI comments, it does not decide; the verdict remains the one from the scale*. The AI computes **no figure and no verdict**: counts, rates, grade, verdict and projection all come from TestPulse Studio; its answer has no measurement field at all. Its opinion (GO, NO-GO, GO with conditions) comes with a confidence, the model, the date and the tokens used.
+
+**Evidence.** Every finding and every condition for a GO cites ids from the report — test cases, bugs, requirements, suites — as clickable chips that open them in Azure DevOps. An id the report does not contain is removed; a finding left without evidence is **discarded and counted** (« 1 finding discarded: evidence not found »). Findings are grouped by impact, high first.
+
+**What is sent.** KPIs, the computed verdict and the rules of the scale behind it, failures grouped by suite and by linked bug (at most 40 detailed, the rest counted), blocked and flaky tests, uncovered requirements, open bugs, the projection. Never the test steps or attachments. Run comments only if the project's data policy allows them; tester names replaced by aliases when the policy asks.
+
+**Landing projection.** Computed by TestPulse Studio from the **Cockpit snapshots**, with the Cockpit's own rules: observed pace over the pace window, projected end, gap to the target (plan end date, or the target set in the Cockpit), and the pass and execution rates observed over that window (lowest and highest, no smoothing). Fewer than 3 working days of snapshots: « insufficient data », and the analysis still runs. Several plans: one projection per plan, then the latest one. The AI's comment comes **after** the figures, set apart.
+
+**Kept for the report on screen.** The analysis stays while the report is displayed; generating a new report clears it. Nothing is stored, and **no export contains it** in this version.
