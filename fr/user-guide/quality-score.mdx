@@ -1,0 +1,29 @@
+---
+title: "Score qualité (A–E) & GO/NO-GO"
+description: "Chaque rapport porte un score qualité noté A→E avec une valeur sur 100 et un verdict GO / NO-GO, affiché dans l'en-tête du rapport et les exports PDF/HTML."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+Chaque rapport porte un **score qualité** noté **A→E** avec une valeur **sur 100** et un verdict **GO / NO-GO**, affiché dans l'en-tête du rapport et les exports PDF/HTML. Il est calculé par un **moteur unique et déterministe** depuis les données déjà à l'écran — aucun appel supplémentaire, pas d'IA. Le badge est un résumé **par-dessus** les métriques, jamais à leur place.
+
+## Comment la note est construite {#quality-meaning}
+
+Le composite 0–100 pondère quatre composantes : **taux de réussite** (40), **taux d'exécution** (20), **couverture des exigences** (20) et **hygiène des défauts** (20). Grades : **A** ≥ 90, **B** 75–89, **C** 60–74, **D** 40–59, **E** &lt; 40. Si la traçabilité est absente, la couverture est retirée et les poids restants sont renormalisés (un drapeau le signale). Moins de 5 tests exécutés lève un drapeau « confiance faible ».
+
+## Le plancher de réussite {#quality-floor}
+
+Une moyenne pondérée **compense** : trois composantes parfaites noyaient un taux de réussite effondré. Avec exécution, couverture et hygiène au maximum, le composite valait déjà 60 points — un **GO** restait donc atteignable à 12,5 % de réussite sur le barème le plus tolérant. Chaque barème porte désormais un **plancher de réussite**, égal à son propre seuil GO : **85 %** en Strict, **75 %** en Standard, **65 %** en Rodage. Aucun nombre nouveau à retenir.
+
+- Sous le plancher, le verdict est **NO-GO** et la note est **plafonnée à C**. Le composite, lui, ne bouge pas : seule la note affichée est plafonnée, pour que la note et le verdict racontent la même chose.
+- Le plancher est une règle **dure**. Contrairement à un poids, il ne se compense pas par une autre composante.
+- Un rapport **sans aucun test exécuté** reste « non évalué » : aucun plancher ne s'applique à une absence de donnée.
+- Un second plancher ferme le trou symétrique. Le plancher de réussite se mesure sur ce qui a été **exécuté**, si bien qu'en exécuter moins pouvait suffire à le franchir : 30 cas passés sur 100, dont 60 jamais lancés, donne un taux de réussite de 75 %. Le **taux d'exécution** porte donc le même plancher, à la même valeur. Un cas marqué **Non applicable** n'est pas un cas sauté : sortir délibérément quelque chose du périmètre ne coûte rien.
+
+À côté, le critère **échec sans défaut lié** est désormais **actif par défaut** sur les trois barèmes. L'hygiène des défauts ne comptait que les bugs **déclarés** : un test en échec sans bug attaché valait donc 20/20, alors que déclarer correctement le bug faisait tomber l'hygiène à 10/20 **et** plafonnait la note. Ne pas déclarer le bug améliorait la note. Il force maintenant le NO-GO et plafonne la note à C, exactement comme un bug bloquant ouvert.
+
+> Les rapports **déjà enregistrés** ne changent jamais de verdict : chacun embarque le barème capturé à sa génération et se relit sous celui-là. Les rapports antérieurs à l'existence même des barèmes sont re-notés sous le barème courant — voir les notes de version.
+
+## Transparence & invariants {#quality-transparency}
+
+Cliquez sur **Voir le détail** pour déplier la décomposition : chaque composante (valeur, points, poids), les plafonnements appliqués et les drapeaux — la note n'est jamais un chiffre opaque. Règles non négociables : **≥ 1 bug bloquant ouvert** (ouvert + Critique/Élevée) plafonne la note à **C** et force **NO-GO** ; un **taux de réussite sous le plancher du barème** fait de même ; un **test en échec sans défaut lié** fait de même ; une **exigence in-scope non testée** force NO-GO ; **aucun test exécuté** affiche « non évalué » (jamais un E). GO exige aussi un score ≥ 75 et une couverture ≥ 70 %.

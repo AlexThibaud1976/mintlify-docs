@@ -1,0 +1,18 @@
+---
+title: "Consolidated reports and profiles"
+description: "A consolidated report gathers several test plans, and those plans may not follow the same profile."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+A consolidated report gathers several test plans, and those plans may not follow the same profile.
+
+**Each plan is judged by its own profile.** Its quality scoring and its run limit are the ones its profile defines, so a plan's verdict does not change because of the company it keeps. The consolidated verdict keeps the **least favourable** of them: one plan at NO-GO makes the whole report NO-GO.
+
+**The presentation follows the project default.** Header label, colour, logo, signature layout and export sections belong to no single profile, so picking one would be arbitrary. Notification channels and scheduled reports follow the project default too.
+
+**One thing stays common to every plan: how the pass rate is weighted.** Adding up plans counted differently would produce a figure that means nothing. If a profile in scope weighs it differently, the report says so rather than applying it silently.
+
+**When the plans do not share a profile, the report says it** — a banner naming each plan and its profile, a Profile column in the quality table, and the same sentence on the cover page of the PDF and Word exports. Plans that all share one profile change nothing: no banner, no column.
+
+A consequence worth knowing: a plan's verdict inside a consolidated report can differ from its verdict in a report of its own **only** if its profile weighs the pass rate differently.

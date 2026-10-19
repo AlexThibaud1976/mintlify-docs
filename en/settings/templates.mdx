@@ -1,0 +1,16 @@
+---
+title: "Form Templates & Views"
+description: "Templates and views let you save and restore form configurations for recurring campaigns."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+Templates and views let you save and restore form configurations for recurring campaigns. They are saved and loaded from the report form, not from My preferences.
+
+## Templates vs Views {#templates-views}
+
+**Templates** — save metadata only (title, environment, tester, approver, etc.). Fast to load; plan selection is left to the user.
+
+**Views** — save plan ID + selected suites + metadata. Loading a view re-selects the plan, waits for suites, then checks the saved intersection. Deleted suites are ignored silently.
+
+Both types: **Save** (enter a name) → **Load** (one click) → **Delete**.

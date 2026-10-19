@@ -1,0 +1,36 @@
+---
+title: "Seuils et calculs"
+description: "Comment vos rapports colorent et calculent les résultats — Mes préférences › Seuils et calculs, la page d’arrivée."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+Comment vos rapports colorent et calculent les résultats — **Mes préférences › Seuils et calculs**, la page d’arrivée.
+
+- **Couleurs du taux de réussite** — le seuil de succès (vert à partir de) et le seuil d’avertissement (orange à partir de), avec un **aperçu** des trois bandes : vert, orange, rouge.
+- **Calculs** — le **taux de réussite**, par configuration ou par cas de test ; le seuil de **test instable (flaky)** ; l’**alerte de régression**, la baisse du taux de réussite entre deux rapports consécutifs.
+- **Les bornes se vérifient à l’enregistrement**, pas à chaque frappe : un pourcentage de 0 à 100, un avertissement inférieur ou égal au succès, une alerte de régression en nombre entier de 1 à 100. La raison s’affiche à côté d’**Enregistrer**.
+
+Une valeur imposée par le projet ou par le profil du plan se lit, avec son cadenas. Les valeurs en vigueur sont figées dans chaque rapport le jour de sa génération : les changer ensuite ne modifie jamais un rapport archivé.
+
+## Valeurs des seuils {#thresholds-table}
+
+| Seuil | Défaut | Couleur |
+| --- | --- | --- |
+| Taux de succès — vert (succès) | 80% | Vert (#107c10) |
+| Taux de succès — orange (avertissement) | 50% | Orange (#a47300) |
+| En dessous du seuil warning | &lt; 50% | Rouge (#a4262c) |
+| Test instable (flaky) | 30% | Alerte rouge sur la KPI card |
+| Alerte de régression | 10 points | Badge d’alerte régression dans le dashboard Tendances si le taux de réussite chute de cette valeur entre deux rapports consécutifs |
+
+## Pondération du taux de succès {#passrate-weighting-settings}
+
+Choisissez comment le taux de succès est calculé quand le même cas de test s’exécute sur plusieurs configurations :
+- **Par configuration (défaut)** — chaque point de test compte (un cas de test × 3 configurations = 3 votes)
+- **Par cas de test** — un vote par cas de test, le pire résultat parmi ses configurations
+
+Consultez la section Configurations de test pour une comparaison détaillée.
+
+## La carte « Verdict GO / NO-GO » (en lecture) {#thresholds-verdict}
+
+En bas de la page, la carte **Verdict GO / NO-GO** montre, en lecture, ce qui décide du verdict du plan sélectionné : le **barème qualité** — celui du profil du plan, sinon celui du projet — et les **bugs pris en compte** (la source des bugs). Les deux appartiennent au projet et sont les mêmes pour tous les membres sur ce plan. **Le barème ne se modifie plus depuis Mes préférences** : il se règle dans l’administration, par profil, dans *Profils de configuration › Défaut du projet › Seuils et qualité*, réservé aux administrateurs du projet. Le lien **Modifier la source** du bandeau des bugs d’un rapport mène à cette carte.

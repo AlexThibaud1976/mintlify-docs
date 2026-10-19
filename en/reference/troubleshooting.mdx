@@ -1,0 +1,23 @@
+---
+title: "Troubleshooting"
+description: "Common issues and their solutions."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+Common issues and their solutions.
+
+## Issue list {#issues-table}
+
+| Problem | Solution |
+| --- | --- |
+| TestPulse Studio missing from Test Plans | Extension not installed in your organisation. Clear browser cache and reload. |
+| Test plans list is empty | Check that plans exist in the project. Click Refresh. Requires Basic access level minimum. |
+| Traceability shows "—" | Link your Test Cases to User Stories/Epics in Azure DevOps Work Items. |
+| Autocomplete not working | Type ≥ 2 characters. Check network connection. vso.identity may be limited on-premise. |
+| Couverture tab shows Not Run on-prem while tests passed | Fixed in 2.26.1 — on Azure DevOps Server the coverage tab now reads results correctly. Update TestPulse Studio. |
+| Generating a report on a whole plan fails with "Cannot read properties of null (reading 'id')" on-prem | Fixed in 2.53.1 — on Azure DevOps Server 2022.1, a batch read of deleted work items does not omit them as it does on Azure DevOps Services: it returns a null entry in their place, which used to crash the read. TestPulse Studio now filters those out. Update TestPulse Studio. |
+| Error 401 / CORS | TestPulse Studio must be used from within Azure DevOps (Test Plans menu), not accessed directly. |
+| Slow report generation | Untick Run attachments in My preferences › Sections and export. Lower the runs analysed in My preferences › Execution, unless the project sets them. |
+| The section order or the signature sheet has no effect | PDF is not one of your formats: tick it again in My preferences › Sections and export › Formats offered. The order and the sheet stayed saved. |
+| Full History shows more rows than Azure DevOps for the same test case | Expected, not a bug. A mass "Blocked" action creates a run that Azure DevOps exposes through its API but hides from a test point's own history because no outcome was published for it (shown as "None" in TestPulse Studio, with an explanation on hover). TestPulse Studio keeps every run — the Run column in both the Results and Full History tables is now clickable (opens the exact result, same portal navigation already used by the Couverture tab's run link, reliable inside the sandboxed on-prem work-item form too) so you can match each row against Azure DevOps directly. |

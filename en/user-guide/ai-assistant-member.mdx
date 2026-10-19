@@ -1,0 +1,16 @@
+---
+title: "AI assistant: what every member sees"
+description: "Where."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+**Where.** *My preferences › Project rules* (Outils › Settings), under **AI assistant**, open to every member, read-only for everyone — a project administrator sees the same thing, plus the **Open the administration** button. The **AI badge** at the top of every area (Pilotage, Couverture, Conception, Outils) says the same in two words: **AI · configured**, **AI · not configured** or **AI · unavailable**; a click opens this page.
+
+**What you see**: the state, the provider and the default model, the AI functions open for the selected plan (and those a profile turns off, with its name), the data that may be sent to the model, and the access mode — each line with its provenance. With an API key, the page says it plainly: the key is hidden on screen but remains reachable by any project member with developer tools. **What you never see**: an endpoint, a gateway address, a tenant or application identifier, a key, the change log.
+
+**Configured is not a promise.** It means an administrator set the connection up; it does not prove that a call will succeed for your account. When a call fails because of access (permission, quota, gateway), the badge turns **unavailable** until you reload the page.
+
+**Two levels decide whether a function is on.** The **connection** is the project's master switch (an administrator sets it in *AI assistant › Functions and data*): a function turned off there is off for the whole project, and no profile can turn it back on. **Configuration profiles** can then only **restrict**: per function, *inherit*, *on* or *off*, resolved like every other profile setting. With nothing set, a function turned on in the connection is on for every plan. On a consolidated report, a function is on only if it is on for **every** plan. The page lists the functions open for the selected plan, or for the project default when no plan is selected, and names the profile that turns a function off.
+
+**TestPulse Studio is complete without AI.** Reports, verdicts, coverage and the Cockpit depend on no AI; nine AI functions are available today. Before the plan, on the requirement: *Requirement assessment* (the score and the verdict are computed by Studio, never by the model), *Requirement improvement*, *Test design*, which proposes manual test cases for a requirement, *Designed-case review*, which reviews the proposed cases with the judge model, *Comparison with the code* and *Automated tests*. During the campaign: *Campaign analysis*, which comments on a report, *Coverage axes*, which comments on a coverage analysis, and *Test classification*, which proposes a type for untyped tests. None of them decides.

@@ -1,0 +1,18 @@
+---
+title: "Improving a requirement and writing it to the story"
+description: "Where."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+**Where.** From the assessment shown in step 0 **Requirement** of **Conception** or in the **Exigence** tab, **Propose an improvement** opens the improvement screen. It is offered when the **Requirement improvement** function is on (in the project administration, *AI assistant › Functions and data*), like the other AI functions.
+
+**1. Choose.** Tick the findings and open questions the proposal should address (gaps and open questions are ticked by default). **Propose** reads the story again and makes one call to the AI assistant.
+
+**2. The proposal.** The assistant rewrites the definition (*As a … I want … so that …*, with the business value) and proposes, for the acceptance criteria, only three operations: **keep**, **made more precise** (amend) and **added** (the next identifier, one Gherkin scenario per criterion, a *Scenario Outline* with *Examples* when data varies). It never proposes a removal. At the top, the **non-regression check** — computed by the code on what would actually be written, not by the model — compares before and after: criteria, scenarios, *Examples* rows of each criterion (exact values, spaces included), *Scenario Outline* kept, rules and identifiers cited. **Any loss is shown and disables writing**, with no way around it; refusing the change that loses content makes it possible again. Each criterion shows before and after rendered side by side (keywords, *Examples* table), differences highlighted; **Accept**, **Edit** (the Gherkin is checked before it is kept) or **Refuse** it. Removing an existing criterion is your decision only: **Remove this criterion myself**, with a required reason and a confirmation; the check then shows it *removed by you*. An open question can stay open: it joins the *Questions* section of the description.
+
+**3. Review before writing.** The fields touched (*System.Description*, *Microsoft.VSTS.Common.AcceptanceCriteria*; a field missing from the work item type is reported and not written), the number of criteria before and after, a preview and the HTML source, and a discussion comment, ticked by default. The original HTML of the story is kept outside the changed blocks: a criterion made more precise is replaced in place, an added one goes at the end of its section (keywords in bold, steps indented).
+
+**4. Write.** **Write to the story** uses your rights and carries a test on the **revision** read: if the story changed since it was read, **nothing is written** and the screen offers to read it again (the check is redone). The Azure DevOps history keeps the previous version. The report then offers to **Reassess** the requirement — never automatically.
+
+**What it does not do.** No removal proposed by the AI, no value invented (a missing value becomes a question), nothing written without your confirmation.

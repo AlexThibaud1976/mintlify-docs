@@ -1,0 +1,17 @@
+---
+title: "Generate a plan from a folder"
+description: "From a folder, \"Generate a plan\" materialises your Repository organisation into a real Azure DevOps plan/suites — Xray-style."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+From a folder, **"Generate a plan"** materialises your Repository organisation into a real Azure DevOps plan/suites — Xray-style. This is the **only** Repository action that writes to ADO; everything else in the tab stays read-only.
+
+- **Three destinations** — a **new plan** (name, Area/Iteration Path — empty means project root — and an option to **reproduce the folder tree** as static suites, depth preserved; switched off, every case lands directly at the plan's root), an **existing plan** (searched by name, cases added under its root suite), or an **existing suite** (navigate the target plan's suite tree, loaded **lazily** — only requirement-based suites are greyed out, since they self-populate from a query and can't take a manual addition).
+- **Numeric preview before any write** — plans/suites to create, suites reused (a same-named sibling under the same parent is reused, never duplicated), cases to add **after deduplication**, and cases already present that are skipped. Nothing is written until you press **"Create in ADO"**.
+- **Snapshot, not a mirror** — the generated plan is a picture of the folder at that instant. Editing the folder afterwards never touches the plan, and vice versa — there is no live link and no resync.
+- **Adding to an existing plan or suite carries a distinct warning** (you may be adding to a shared, possibly in-progress structure) — a different tone from the reversible "new plan" path.
+- **Partial-failure report** — Azure DevOps has no multi-write transaction; if something fails partway through, nothing already created is rolled back. The report lists exactly what was created (plan, suites, cases) and what failed, with a link to the plan. Creation only, never a delete/update of anything pre-existing.
+- **Guided assistant** — a **breadcrumb** tracks your progress (Destination → Configuration → Preview for a new plan; Destination → Preview for an existing target), the current step highlighted, no phantom steps. A proper **"Back"** on every step keeps everything already entered. The plan **name is pre-filled** from the folder (still fully editable), and your last **Area/Iteration Path + "reproduce tree"** choice are **remembered per user** across sessions — never the name, which always comes from the folder.
+- **Explicit preview & live progress** — a plain-language sentence states exactly what will be written before you confirm ("this creates N plan(s) and M suite(s)…, adds K cases"), and created/reused/skipped are shown with **both a colour and a text label** (never colour alone). Once you confirm, a **live progress indicator** ("Creating suite 2/4…") tracks the real write instead of leaving large folders looking frozen.
+- **Honest result & safe retry** — the report clearly distinguishes a **full success** from a **partial** one, with real **x/y counts** (e.g. 3/4 suites, 9/12 cases). The plan link now opens through Azure DevOps' own navigation, so it also works reliably from a **sandboxed on-premises** work-item frame. On a partial failure, **Retry** re-reads the plan's **current state — every suite already created, not just its root** — before rebuilding the preview, so nothing already written is ever added a second time.

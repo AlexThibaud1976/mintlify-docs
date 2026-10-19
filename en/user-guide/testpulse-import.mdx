@@ -1,0 +1,16 @@
+---
+title: "Import from TestPulse"
+description: "Where."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+**Where.** *Outils › Settings* (**My preferences**), page **Import from TestPulse**, in the **Project** group of the rail. Every member now sees it. The import reads the data of the TestPulse extension (publisher Kisskool) on the organization: **your data** (user scope) — preferences, templates and views, personal history, Cockpit snapshots — and **the project data** (project scope) — published reports, scoring scale, drift fields, promotion tiers, bug source, exploratory sessions. No AI is involved.
+
+**Reading, with a token.** Studio first tries a direct read, but Azure DevOps refuses to let an extension read another one’s data, and the screen says so: “TestPulse is installed, but Azure DevOps refuses the direct read”. **The normal path is therefore a personal access token**, scoped to “Extension data (read)” only: create it with the link **Create an “Extension data (read)” token**, paste it in the screen, then **Read with this token**. The token serves this read and nothing else: kept in the screen’s memory, it is never saved or logged, and it is cleared after the read and when the screen closes.
+
+**The preview.** For each set: its origin, its destination in Studio, its status, its items, its size and the **If already present** rule — *Keep the existing one* (default), *Replace*, *Keep both* or *Skip duplicates*; preferences and single settings only offer keep or replace. For templates and reports, only their **names** are shown, never their content. **Nothing is ticked by default**: tick the sets one by one, or use **Select all (your data)** / **Select all (project, administrators)**. **Import the selection** stays disabled while nothing is ticked. The project sets are **reserved for project administrators**: a member sees them listed, not selectable, with the reason. When **Preferences** is ticked, the **In your preferences** option shows the webhooks and the scheduled reports, with their number, unticked by default — a webhook sends messages, a scheduled report generates by itself; unticking Preferences unticks them too.
+
+**Writing.** **Import the selection** writes to TestPulse Studio only: **TestPulse is never modified**. The import can be replayed without duplicates: an item already imported is recognised by its origin. The storage quota is checked before anything is written: if it would be exceeded, nothing is written. Templates, webhooks and scheduled reports are skipped when Studio has no preferences yet to put them in (“no Studio preferences to put them in”); TestPulse’s “last seen version” is never taken. The project bug source becomes Studio’s **Bug source** setting. An item in a format newer than Studio knows is set aside, never guessed.
+
+**The report.** For each set: written, kept, skipped, unreadable and failed, with their reasons; an empty set shows “0 — empty”. Imported reports show “Imported from TestPulse x.y.z” in History. Reload TestPulse Studio to see the imported items.

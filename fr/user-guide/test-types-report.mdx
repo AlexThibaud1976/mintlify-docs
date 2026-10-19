@@ -1,0 +1,16 @@
+---
+title: "La grille de test dans le rapport"
+description: "L'onglet Grille de test."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+**L'onglet Grille de test.** Un rapport généré porte un onglet *Grille de test (N sans type)*, rangé par axe — niveaux, types, objectifs — puis par entrée. Pour chaque entrée : s'il est **attendu** (et pourquoi — *profil …*, *défaut du projet* ou *catalogue*, avec son minimum), sa **présence** — *Présent*, *Sous le minimum*, *Absent* ou *Non attendu*, toujours en mot et en icône, jamais par la seule couleur —, le nombre de tests, leur part du plan, combien ont été trouvés **par règle** et **par IA** (tests classés avec l'assistant et validés), et les suites concernées. Un test peut porter plusieurs types : il compte dans chacun, et le total peut dépasser la taille du plan. Les tests **sans type** sont listés à part, avec un lien vers chaque cas de test. Les tests classés sous un type retiré de la grille sont montrés à part comme « ancien type », avec leur nombre. L'onglet se lit seulement.
+
+**Les attentes n'existent que sous gouvernance.** Sans configuration de projet (rien d'adopté dans *Paramètres du projet › Extensions › TestPulse Studio › Profils de configuration*), aucun type n'est attendu : l'onglet montre la répartition détectée et dit qu'aucune attente n'est définie, et rien n'est ajouté aux points de vigilance. Dès qu'une configuration existe, les attentes résolues s'appliquent — *attendu par défaut* du catalogue compris. Sur un rapport multi-plans, c'est le défaut du projet qui s'applique, et l'onglet le dit.
+
+**Points de vigilance.** Une entrée attendue absente ou sous son minimum dit son axe — « Niveau attendu absent : Tests d'acceptation », « Type attendu absent : Sécurité », « Objectif sous le minimum : Tests de régression (3 / 10 attendus) » — rejoint l'encart *Points de vigilance*, après les points existants, à l'écran et dans le PDF. **Il ne change jamais le verdict, la note ni le score.** Les autres exports n'affichent pas l'encart.
+
+**Figé avec le rapport.** La détection et les attentes sont capturées à la génération du rapport, à partir de ce qu'il a déjà chargé — aucun appel supplémentaire. Un rapport rouvert plus tard les garde, même si le catalogue ou les profils ont changé depuis. Un rapport plus ancien n'a pas d'onglet *Grille de test*.
+
+**Pour chaque membre : Mes préférences › Règles du projet**, en lecture seule — sous *Grille de test*, ce que le rapport attend du plan sélectionné (ou du défaut du projet quand aucun ne l'est) avec chaque minimum, le catalogue (niveaux, types, objectifs et l'ordre de détection) et la conception par défaut, chaque ligne avec sa provenance. Un administrateur du projet dispose d'un seul bouton, **Ouvrir l'administration**.

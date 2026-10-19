@@ -1,0 +1,18 @@
+---
+title: "Améliorer une exigence et l’écrire dans l’US"
+description: "Où."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+**Où.** Depuis l’évaluation affichée à l’étape 0 **Exigence** de **Conception** ou dans l’onglet **Exigence**, **Proposer une amélioration** ouvre l’écran d’amélioration. Le bouton est proposé quand la fonction **Amélioration de l’exigence** est active (dans l’administration du projet, *Assistant IA › Fonctions et données*), comme les autres fonctions IA.
+
+**1. Choisir.** Cochez les constats et les questions ouvertes que la proposition doit traiter (manques et questions ouvertes cochés par défaut). **Proposer** relit l’US et fait un appel à l’assistant IA.
+
+**2. La proposition.** L’assistant réécrit la définition (*En tant que … je souhaite … afin de …*, avec la valeur métier) et ne propose, pour les critères d’acceptation, que trois opérations : **conservé**, **précisé** et **ajouté** (l’identifiant suivant, un scénario Gherkin par critère, un *Scenario Outline* avec ses *Examples* quand des données varient). Il ne propose jamais de retrait. En tête, le **contrôle de non-régression** — calculé par le code sur ce qui serait réellement écrit, pas par le modèle — compare l’avant et l’après : critères, scénarios, lignes d’*Examples* de chaque critère (valeurs exactes, espaces compris), forme *Scenario Outline*, règles et identifiants cités. **Toute perte se voit et désactive l’écriture**, sans contournement ; refuser la modification qui perd du contenu la rend de nouveau possible. Chaque critère montre l’avant et l’après rendus côte à côte (mots-clés, tableau d’*Examples*), différences surlignées ; **Accepter**, **Modifier** (le Gherkin est vérifié avant d’être retenu) ou **Refuser**. Retirer un critère existant n’appartient qu’à vous : **Retirer ce critère moi-même**, avec un motif obligatoire et une confirmation ; le contrôle l’affiche alors *retiré par vous*. Une question ouverte peut le rester : elle rejoint la section *Questions* de la description.
+
+**3. Revue avant écriture.** Les champs touchés (*System.Description*, *Microsoft.VSTS.Common.AcceptanceCriteria* ; un champ absent du type de work item est signalé et n’est pas écrit), le nombre de critères avant et après, un aperçu et le HTML source, et un commentaire de discussion, coché par défaut. Le HTML d’origine de l’US est conservé hors des blocs modifiés : un critère précisé est remplacé à sa place, un critère ajouté va en fin de sa section (mots-clés en gras, étapes indentées).
+
+**4. Écrire.** **Écrire dans l’US** utilise vos droits et porte un test sur la **révision** lue : si l’US a changé depuis la lecture, **rien n’est écrit** et l’écran propose de la relire (le contrôle est refait). L’historique d’ADO garde la version précédente. Le compte rendu propose ensuite de **Réévaluer** l’exigence — jamais automatiquement.
+
+**Ce qu’elle ne fait pas.** Aucun retrait proposé par l’IA, aucune valeur inventée (une valeur absente devient une question), rien d’écrit sans votre confirmation.

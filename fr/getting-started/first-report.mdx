@@ -1,0 +1,28 @@
+---
+title: "Premier rapport"
+description: "Générez votre premier rapport PDF en moins de 5 minutes."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+Générez votre premier rapport PDF en moins de 5 minutes.
+
+## Étape par étape {#first-report-steps}
+
+1. Ouvrez l'onglet **Rapport** dans TestPulse Studio
+2. Sélectionnez un **plan de test** dans le menu déroulant — les suites se chargent automatiquement
+3. Décochez les suites à **exclure**
+4. Renseignez les **informations projet** (titre, environnement, testeur, approbateur…)
+5. Cliquez sur **Générer le rapport** — les données sont récupérées depuis ADO
+6. Cliquez sur **PDF** pour télécharger — ou choisissez HTML, Word ou Excel
+
+## Contenu par défaut {#default-content}
+
+- **Page de garde** — infos projet, date, environnement, testeur, approbateur
+- **Résumé exécutif** — verdict automatisé (Succès/Attention/Critique) avec points forts et recommandations, ou votre propre texte **personnalisé** via le toggle Automatique/Personnalisé dans l'écran du rapport (sauvegardé par rapport, verdict forçable en option). Le résumé personnalisé accepte une **mise en forme markdown légère** : `**gras**`, `*italique*` et lignes de liste commençant par `- ` — utilisez la barre d'outils G / I / • et la bascule Éditer/Aperçu
+- **KPI cards** — taux de succès, taux d'exécution, passés/échoués/bloqués, bugs de la campagne (ou bugs liés avec la source des liens)
+- **Tableau des résultats** — dernier résultat par cas de test avec chemin de suite, durée, testeur
+- **Matrice de traçabilité** — Epic → User Story → Cas de test → Bug
+- **Section bugs** — les bugs rattachés aux résultats des exécutions du plan (ou, avec la source *Liens des cas de test et des User Stories*, les bugs liés à ses cas de test et User Stories), du plus récent au plus ancien, avec leurs cas de test
+- **Graphiques** — donut pass/fail, histogramme résultats par suite
+- **Pièces jointes** — preuves attachées aux résultats de test : images en ligne, autres fichiers en liens cliquables avec un type lisible. Affichée par défaut depuis la v2.69.0 ; si vous aviez déjà enregistré votre propre sélection de sections, votre choix est conservé

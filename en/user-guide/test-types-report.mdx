@@ -1,0 +1,16 @@
+---
+title: "The test grid in the report"
+description: "The Test grid tab."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+**The Test grid tab.** A generated report has a *Test grid (N untyped)* tab, arranged by axis — levels, types, objectives — then by entry. For each entry: whether it is **expected** (and why — *profile …*, *project default* or *catalogue*, with its minimum), its **presence** — *Present*, *Below minimum*, *Missing* or *Not expected*, always as a word and an icon, never a colour alone —, the number of tests, their share of the plan, how many were found **by rule** and **by AI** (tests classified with the assistant and accepted), and the suites concerned. A test may carry several types: it counts in each, so the total may exceed the size of the plan. The **untyped** tests are listed apart, with a link to each test case. Tests classified under a type removed from the grid are shown apart as a « former type », with their number. The tab is read-only.
+
+**Expectations exist only under governance.** Without a project configuration (nothing adopted in *Project settings › Extensions › TestPulse Studio › Configuration profiles*), no type is expected: the tab shows the detected distribution and says that no expectation is set, and nothing is added to the points of attention. Once a configuration exists, the resolved expectations apply — including the catalogue's *expected by default*. On a consolidated report, the project default applies, and the tab says so.
+
+**Points of attention.** An expected entry that is missing or below its minimum says its axis — « Expected level missing: Acceptance testing », « Expected type missing: Security », « Objective below its minimum: Regression testing (3 / 10 expected) » — is added to the *Points of attention* box, after the existing points, on screen and in the PDF. **It never changes the verdict, the grade or the score.** The other exports do not show the box.
+
+**Frozen with the report.** Detection and expectations are captured when the report is generated, from what the report already loaded — no additional call. A report reopened later keeps them, even if the catalogue or the profiles changed since. An older report has no *Test grid* tab.
+
+**For every member: My preferences › Project rules**, read-only — under *Test grid*, what the report expects from the selected plan (or from the project default when none is selected) with each minimum, the catalogue (levels, types, objectives and the detection order) and the default design, each line with its provenance. A project administrator gets a single **Open the administration** button.

@@ -1,0 +1,42 @@
+---
+title: "Sécurité et IA"
+description: "Ce que TestPulse Studio lit, écrit et envoie — et ce qu’il ne fait jamais."
+---
+
+## Vos données restent dans Azure DevOps
+
+TestPulse Studio fonctionne dans votre navigateur, à l’intérieur d’Azure DevOps. Il lit vos plans de test, vos résultats et vos work items avec vos droits, et garde ses propres données dans l’**Extension Data** d’Azure DevOps. Il n’envoie pas de données hors d’Azure DevOps de lui-même.
+
+- La plupart des données sont propres à votre utilisateur. **Les sessions exploratoires sont enregistrées au niveau du projet** et peuvent être lues par toute personne ayant accès au projet.
+- L’envoi de compteurs d’usage à l’éditeur est **désactivé par défaut**. Voir [Usage et télémétrie](/fr/user-guide/usage-statistics).
+
+## Rien n’est écrit sans vous
+
+TestPulse Studio n’écrit jamais de lui-même et n’écrit jamais de résultat de test. Tout ce qu’il écrit — cas de test conçus, exigence améliorée, tag de type de test, plan de test créé depuis Couverture, réaffectation de test points, pull request de tests automatisés, captures et work items d’Explore — suit une action explicite de votre part, avec vos droits.
+
+<Note>
+L’assistant propose des cas de test manuels. Rien n’est créé dans Azure DevOps tant que vous n’avez pas relu et confirmé.
+</Note>
+
+Les portées demandées par l’extension, et leur raison, sont listées dans [Permissions](/fr/reference/permissions).
+
+## L’assistant IA est facultatif
+
+- Chaque fonction IA est **désactivée à la livraison**. Un administrateur du projet connecte un fournisseur de modèle et active les fonctions, dans **Paramètres du projet › Extensions › TestPulse Studio › Assistant IA**.
+- L’administrateur décide **quelles données** peuvent entrer dans une requête (titres et étapes des cas de test, texte de l’exigence, messages d’erreur, images, work items liés, extraits de code…) et peut remplacer les noms des personnes par des alias. Une case décochée n’entre jamais dans une requête.
+- Un fournisseur hors de votre tenant Azure affiche un avertissement et demande une confirmation explicite.
+- Les chiffres, les scores et les verdicts sont calculés par TestPulse Studio ; l’IA les explique, elle ne les produit jamais.
+
+## Modes d’accès et clé d’API
+
+| Mode | Ce que cela signifie |
+| --- | --- |
+| **Entra ID** | Chaque membre se connecte avec sa propre identité. Non disponible dans cette version. |
+| **Passerelle d’entreprise** | TestPulse Studio appelle votre passerelle (APIM, proxy), qui détient la clé du fournisseur. Aucune clé ne passe par le navigateur. |
+| **Clé d’API directe** | La clé est saisie une fois et n’est plus jamais affichée. |
+
+<Warning>
+Avec une clé d’API directe, la clé est masquée à l’écran mais reste accessible à tout membre du projet disposant d’outils développeur. Utilisez une clé dédiée à TestPulse Studio, à quota limité et révocable.
+</Warning>
+
+Les réglages de l’IA sont réservés aux administrateurs du projet. Chaque modification est attribuée et datée. Voir [Assistant IA : connexion, fonctions et journal](/fr/user-guide/ai-connection-admin).

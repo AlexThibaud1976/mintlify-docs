@@ -1,0 +1,34 @@
+---
+title: "Running a campaign with the Cockpit"
+description: "The Cockpit is built for the morning stand-up: open it, read one sentence, and the team knows whether the campaign will make its date, what moved since yesterday, what to run today and what is in the way."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+The Cockpit is built for the **morning stand-up**: open it, read one sentence, and the team knows whether the campaign will make its date, what moved since yesterday, what to run today and what is in the way. **The screen writes nothing to Azure DevOps and reassigns nothing.** Everything it shows is computed by TestPulse Studio from the plan's points, its snapshots and, when they can be read, requirement priorities and links to bugs.
+
+**A stand-up in five steps**
+1. **Read the headline** — one sentence per state: late or on track (projected end, gap to the target in working days), not enough history yet, no progress, not started, projection paused, complete, or no target. Its border takes the state's colour. Below it: the observed pace and the pace needed to make the date, then three or four figures.
+2. **Since the last stand-up** — what changed since the last snapshot of an earlier day.
+3. **Will we make the date?** — look at the curve, then move the simulator.
+4. **What to run today** — share the tests out, reason by reason.
+5. **What is blocking** — qualify failures, assign what nobody owns.
+
+**What each block computes**
+- **Working days** — Monday to Friday, no public holidays. Today counts.
+- **Headline** — *observed pace*: tests run per working day over the last 3 measured days (a project setting); a projected end needs at least 3 working days of execution. *Pace to keep*: remaining tests ÷ working days until the target, today included, rounded up. *Projected end*: remaining tests at the observed pace. *Gap*: working days between the projected end and the target.
+- **Figures** — run / total, remaining, tests ahead of or behind the **ideal** (even progress from the first to the last working day of the campaign), pass rate of the tests run. A figure that cannot be computed is not shown.
+- **Since the last stand-up** — compared with the latest snapshot from an earlier day: tests run, passed, failures (and how many are new), bugs opened and fixed, tests unblocked, scope change. When that snapshot is not from the previous working day, the title says so; when it predates failures and bugs being recorded, the line says they are not comparable. No earlier snapshot: no line.
+- **Will we make the date?** — actual, ideal, projection, target and *this morning* on a **single scale**, scope changes annotated. The **simulator** starts from what was observed (testers seen over the pace window, tests per tester per day); moving it moves the projection and writes the end date and the gap. Nothing is saved. Underneath, the observed **pure execution time** per test (median and quartiles) — it counts neither preparation nor analysis, which is why the simulator starts from the real pace.
+- **Load per tester** — for each assigned tester: tests left, observed pace, projected end and gap to the target; unassigned tests last. A link opens the **Bulk reassignment** tab. Whether this card is shown is a **project setting**: *Project settings › Extensions › TestPulse Studio › Verdict and campaigns › Cockpit* (« Show load per tester », applied when the page is saved), **reserved for project administrators**, and each change records who made it and when. When it is off, the card disappears for every member; a project administrator sees a discreet line in its place saying where to turn it back on.
+- **What to run today** — the tests to run, grouped by reason: **failures to retry**, **unblocked since the last stand-up** (a linked bug was fixed), **priority 1 and 2, never run** (the requirement's priority — from a requirement-based suite or from the test case's *Tested By* link — or, when the test case tests no requirement, the test case's own priority; priority 1 first, requirement before test case), **late suites**, and, last, **never run in this plan** (in suite order), so that the day's selection reaches the pace to keep — in the order set for the project. A test only appears under the first reason that picks it. The chip shows the pace to keep. Each reason opens on its tests, by suite, with a link to run them in Test Plans. A reason that cannot be computed says why.
+- **What is blocking** — tests blocked by an open bug (severity, age), failures with no linked bug (defect, test to fix or environment?), tests without a tester.
+- **Progress per suite and scope log** — collapsed, at the bottom.
+
+**When things show up**
+- **Target date** — the plan's end date; otherwise enter one in the screen (kept by the project).
+- **Curve** — from the first day of execution; **projection** after 3 working days; paused after 14 days without execution.
+- **Priorities and links to bugs** — read after the headline, without holding the screen, in the same work item reads (the test case priorities and the requirements linked by *Tested By* come with the links to bugs, at no extra call). The *Requirement-based suites only* traceability setting of the report does not apply to the Cockpit. *Priorities read* says what really orders the list: requirements that carry a priority, otherwise test case priority, otherwise suite order; not read for plans over 1,000 test cases.
+- **Campaign not started** — the screen shows the pace to keep from day one, *What the screen will show, and when* (target, curve, reliable tester load, priorities) and *Where to start*.
+
+The report's one-line remaining-effort echo (tester-days, in the report and its PDF/Word exports) is unchanged.

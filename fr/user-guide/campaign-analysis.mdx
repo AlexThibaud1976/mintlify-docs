@@ -1,0 +1,18 @@
+---
+title: "Analyse IA de la campagne (onglet du rapport)"
+description: "Où."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+**Où.** L'onglet **Analyse IA** d'un rapport, après *Grille de test*. Il est là dans tout rapport d'un projet ; il analyse un rapport **généré dans cette session** — un rapport rechargé depuis l'Historique le dit et demande de le régénérer. Quand l'assistant IA n'est pas configuré, ou que l'*Analyse de campagne* est coupée (dans *Assistant IA › Fonctions et données*, par le profil du plan ou par le défaut du projet), l'onglet le dit en une phrase ; le rapport, lui, ne change pas.
+
+**Ce qu'elle est — et n'est pas.** Deux encarts côte à côte : **Verdict calculé · barème &lt;profil&gt;** — la pastille du rapport, intacte — et **Avis IA · consultatif**. Un bandeau permanent le rappelle : *lecture seule — l'IA commente, elle ne décide pas ; le verdict reste celui du barème*. L'IA ne calcule **aucun chiffre et aucun verdict** : comptes, taux, note, verdict et projection viennent de TestPulse Studio ; sa réponse n'a aucun champ de mesure. Son avis (GO, NO-GO, GO sous conditions) vient avec une confiance, le modèle, la date et les tokens consommés.
+
+**Preuves.** Chaque constat et chaque condition pour un GO cite des identifiants du rapport — cas de test, bugs, exigences, suites — en pastilles cliquables qui les ouvrent dans Azure DevOps. Un identifiant que le rapport ne contient pas est retiré ; un constat resté sans preuve est **écarté et compté** (« 1 constat écarté : preuve introuvable »). Les constats sont rangés par impact, le plus fort d'abord.
+
+**Ce qui part.** Les KPI, le verdict calculé et les règles du barème qui l'ont produit, les échecs regroupés par suite et par bug lié (40 détaillés au plus, le reste compté), les bloqués et les flaky, les exigences non couvertes, les bugs ouverts, la projection. Jamais les étapes des tests ni les pièces jointes. Les commentaires d'exécution seulement si la politique de données du projet les autorise ; les noms des testeurs remplacés par des alias quand elle le demande.
+
+**Projection d'atterrissage.** Calculée par TestPulse Studio depuis les **instantanés du Cockpit**, avec les règles du Cockpit : rythme observé sur la fenêtre de rythme, fin projetée, écart à la cible (date de fin du plan, ou cible saisie dans le Cockpit), et les taux de passage et d'exécution observés sur cette fenêtre (le plus bas et le plus haut, sans lissage). Moins de 3 jours ouvrés d'instantanés : « données insuffisantes », et l'analyse tourne quand même. Plusieurs plans : une projection par plan, puis la plus tardive. Le commentaire de l'IA vient **après** les chiffres, à part.
+
+**Gardée pour le rapport affiché.** L'analyse reste tant que le rapport est affiché ; générer un nouveau rapport l'efface. Rien n'est conservé, et **aucun export ne la contient** dans cette version.

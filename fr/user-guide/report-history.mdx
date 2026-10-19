@@ -1,0 +1,70 @@
+---
+title: "Historique des rapports"
+description: "Chaque rapport généré est automatiquement sauvegardé dans votre stockage Azure DevOps Extension Data personnel."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+Chaque rapport généré est automatiquement sauvegardé dans votre stockage Azure DevOps Extension Data personnel.
+
+## Sauvegarde automatique {#auto-save}
+
+Les rapports sont sauvegardés automatiquement après chaque génération. Le stockage est user-scoped (quota 5 Mo) et **synchronisé cross-navigateur** via ADO Extension Data — votre historique est disponible sur toutes les machines. Les pièces jointes (images) sont retirées avant la sauvegarde pour éviter le bloat du quota ; elles sont rechargées depuis l'`ImageCache` lors de la restauration d'un rapport.
+
+## Le projet d'origine d'un rapport {#history-project}
+
+Votre historique personnel est stocké **par utilisateur, à l'échelle de toute l'organisation** — si vous travaillez sur plusieurs projets, tous vos rapports se retrouvent donc dans la même liste. Une colonne **Projet**, juste après Plan de test, indique désormais d'où vient chacun, et un sélecteur **Projet** dans la barre de filtres restreint la liste.
+
+- **Le filtre s'ouvre sur votre projet courant** lorsqu'il a des rapports à montrer, pour vous poser d'emblée sur ce qui vous concerne. Si aucun de vos rapports ne lui appartient — un historique constitué avant cette version, par exemple — il s'ouvre sur **Tous les projets**, jamais sur une liste vide.
+- Le compteur d'en-tête affiche **&#123;n&#125; sur &#123;total&#125; rapports** dès qu'un filtre projet est actif : une liste plus courte ne se lit ainsi jamais comme une perte de données.
+- Les rapports générés à partir de maintenant **enregistrent leur projet** au moment de la sauvegarde. Les précédents n'en gardent rien : leur projet est **déduit des liens Azure DevOps** qu'ils contiennent, à l'affichage seulement — une telle valeur est soulignée en pointillé et le dit au survol. **Rien n'est jamais réécrit** dans votre historique enregistré.
+- Quand ni l'un ni l'autre n'est possible, le rapport est regroupé sous **Projet inconnu**, une entrée à part entière du sélecteur, avec son compte. Ces rapports ne vous sont jamais cachés.
+
+> Charger un rapport d'un autre projet fonctionne toujours — un rapport est un instantané autoporteur. Seuls les liens de retour vers Azure DevOps et le repositionnement du plan suivent votre projet **courant**.
+
+## Recharger un rapport {#reload}
+
+Cliquez sur **Charger** sur une entrée de l'historique pour la restaurer comme rapport courant. Vous êtes amené directement sur l'onglet **Rapport**, le sélecteur de plan repositionné sur le contexte du rapport : son plan est sélectionné et ses suites recochées — une suite supprimée depuis est ignorée silencieusement. Un rapport consolidant plusieurs plans de test bascule le sélecteur en mode multi-plans et coche tous ses plans ; ce mode n'a aucune sélection de suites à restaurer. Les suites remises sont le périmètre réellement couvert par le rapport, pas la trace des cases cochées à l'origine. Un rapport enregistré avant ce comportement est restauré et affiché quand même, simplement sans repositionnement. Le snapshot restauré est utilisé directement — **aucun re-fetch vers ADO** n'est effectué. Les captures d'écran sont réhydratées depuis l'`ImageCache` (en mémoire) ou rechargées juste-à-temps lors de la génération du PDF.
+
+## Comparaison de rapports {#comparison}
+
+Sélectionnez **deux rapports** de l'historique pour les comparer côte à côte :
+- **Diff métriques** — delta taux de succès, delta total, passés/échoués/bloqués/bugs
+- **Tests améliorés** — tests passés de Failed/Blocked/NotExecuted à Passed
+- **Tests régressés** — tests passés de Passed à Failed/Blocked
+- **Tests ajoutés** — nouveaux cas de test dans le rapport le plus récent
+- **Tests supprimés** — cas de test absents du rapport le plus récent
+
+Cliquez sur **Exporter HTML** pour télécharger un fichier de comparaison autonome.
+
+## Workflow de statut {#report-workflow}
+
+Chaque rapport possède un **statut** qui suit le cycle : **Brouillon → Soumis → Approuvé** (et retour en Brouillon via Rouvrir).
+
+- Badges colorés dans la liste Historique : gris (Brouillon), orange (Soumis), vert (Approuvé)
+- Boutons d'action contextuels : **Soumettre** / **Approuver** / **Rouvrir** selon le statut courant
+- Chaque transition est enregistrée avec le nom d'utilisateur ADO et l'horodatage
+- **Filtre par statut** dans la barre de contrôle de l'Historique
+- **Badge APPROVED** dans le pied de page du PDF d'un rapport approuvé, avec la date et l'approbateur — rien à activer
+
+> Seuls les utilisateurs ayant le rôle approprié doivent Approuver. L'action Rouvrir remet le statut à Brouillon et ajoute une entrée dans l'historique.
+
+## Partage de rapports {#report-sharing}
+
+Activez le toggle **Partager avec le projet** sur n'importe quel rapport pour le rendre visible à tous les membres du projet (stocké dans ADO Extension Data avec `scopeType: Default`).
+
+- Un badge bleu **Partagé** apparaît dans la liste Historique, à côté du nom du plan, avec en dessous une ligne **Partagé par** qui nomme l'auteur du rapport — vos propres rapports affichent **Partagé par vous**
+- **Filtre** entre Mes rapports / Rapports du projet / Tous
+- **Tout membre du projet** peut faire évoluer le statut d'un rapport partagé (Brouillon → Soumis → Approuvé) ; le changement est écrit sur la **copie projet** et tracé dans `statusHistory` (qui/quand)
+- Seul l'**auteur original** peut dépublier un rapport (champ `sharedBy`)
+- Un **indicateur de quota projet** avertit à 80% pour éviter la saturation du stockage
+
+> Le partage **copie un instantané** du rapport dans le scope projet. Le **statut d'un rapport partagé est porté par cette copie projet** — la source de vérité, éditable par tout membre. Pas de notification temps réel : les autres voient le nouveau statut au prochain rafraîchissement de l'Historique. Dépublier le masque immédiatement aux autres utilisateurs.
+
+## Export CSV, notes et stockage {#csv-notes}
+
+- **Export CSV** — téléchargez tous les rapports de l'historique sous forme de tableur (plan, date, titre, passés, total, taux de succès)
+- **Notes par rapport** — champ de notes persistant de 500 caractères sur chaque entrée
+- **Indicateur de stockage** — barre de progression (vert → rouge au-delà de 80% du quota)
+
+> Si l'indicateur de stockage dépasse 80%, supprimez d'anciens rapports pour libérer de l'espace.

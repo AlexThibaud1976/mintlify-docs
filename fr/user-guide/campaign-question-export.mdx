@@ -1,0 +1,16 @@
+---
+title: "Poser une question, et mettre l’analyse dans un export"
+description: "Poser une question."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+**Poser une question.** Sous l'analyse, dans l'onglet **Analyse IA**, un champ libre répond aux questions **sur cette campagne seulement**. Il n'attend pas l'analyse : il lit le même contexte borné — les KPI du rapport, le verdict calculé et les règles qui l'ont produit, les échecs regroupés, les tests bloqués et flaky, les exigences non couvertes, les bugs ouverts, la projection d'atterrissage.
+
+**La même règle de preuve.** Chaque réponse cite des identifiants du rapport (cas de test, bugs, exigences, suites) en pastilles cliquables. Un identifiant que le rapport ne contient pas est retiré, et une réponse qui n'en garde aucun est affichée quand même, marquée *sans preuve dans le rapport : à vérifier avant de s'en servir* — c'est une réponse, jamais un constat.
+
+**Hors sujet.** Une question qui ne porte pas sur cette campagne reçoit une phrase — *l'assistant ne traite que cette campagne* — et rien d'autre : le texte du modèle n'est pas affiché.
+
+**Le fil vit avec le rapport affiché.** Les derniers échanges accompagnent la question suivante pour que l'assistant suive le fil ; **Effacer le fil** le vide, et générer un nouveau rapport l'efface aussi. Rien n'est conservé, et le fil n'entre dans aucun export.
+
+**Inclure l'analyse dans l'export.** Un interrupteur, dans le même onglet, **coupé par défaut** et redemandé pour chaque rapport — un rapport rechargé depuis l'Historique repart coupé. Il s'active dès qu'une analyse existe. Quand il est actif, les boutons d'export le rappellent, et **PDF, Word, PowerPoint et HTML** se terminent par une section **Analyse IA — consultatif** : avis, confiance, synthèse, constats avec leurs preuves, conditions pour un GO, commentaire de la projection, et toujours le modèle, la date, les tokens et la phrase *cet avis est consultatif ; le verdict est celui du barème*. Elle se place après les sections existantes et avant la page de signature : rien d'autre ne bouge. **Excel n'en reçoit jamais rien**, le fil de questions non plus.

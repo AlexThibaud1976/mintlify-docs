@@ -1,0 +1,33 @@
+---
+title: "Test Configurations"
+description: "When a test plan uses multiple Azure DevOps Test Configurations, TestPulse Studio surfaces configuration data throughout the UI and exports."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+When a test plan uses multiple **Azure DevOps Test Configurations**, TestPulse Studio surfaces configuration data throughout the UI and exports.
+
+## Auto-detection {#auto-detection}
+
+TestPulse Studio detects the number of distinct configurations (`configurationName`) in the test scope. If **more than one** is found:
+- A **Configuration column** appears in the Results and Full History tables
+- The **Configuration filter** (multiselect) appears in the filter bar
+- The **Matrix tab** (TC × Configurations heatmap) becomes available
+- PDF and all other exports include the Configuration column
+
+## TC × Configurations matrix {#matrix}
+
+The matrix tab shows a **heatmap**: rows = test cases, columns = configurations. Cells are colored by outcome. Pale grey = not executed ("hole"). Clicking a cell opens the ADO run in a new tab.
+
+In the **PDF**, a compact matrix is included when the scope has 2 or 3 distinct configurations. Beyond 3, the flat results table is used instead.
+
+## Covered configurations KPI {#config-kpi}
+
+The **Covered configurations** KPI shows `X / Y` where X = configurations seen in latest results, Y = configurations defined at project level (read from `/_apis/testplan/configurations`, with `/_apis/test/configurations` in v5.0 as a fallback). When both routes are unavailable (older ADO Server, permissions), only X is shown.
+
+## Pass rate weighting {#passrate-weighting}
+
+| Mode | How it works | Best for |
+| --- | --- | --- |
+| By configuration (default) | Each test point counts — a TC × 3 configs = 3 votes | Cross-config coverage reports |
+| By test case | 1 vote per TC, worst outcome across configs wins | Per-feature quality gate |

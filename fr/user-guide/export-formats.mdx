@@ -1,0 +1,75 @@
+---
+title: "Formats d'export"
+description: "TestPulse Studio prend en charge quatre formats d'export — PDF, HTML, Word et Excel — chacun optimisé pour un usage différent."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+TestPulse Studio prend en charge quatre formats d'export — PDF, HTML, Word et Excel — chacun optimisé pour un usage différent.
+
+## Comparaison des formats {#format-comparison}
+
+| Format | Cas d'usage | Points clés |
+| --- | --- | --- |
+| PDF | Livraison formelle, audits | Paginé, page de signature, graphiques, ordre des sections par drag-and-drop |
+| HTML | Revues sprint, tableaux de bord | Fichier autonome, Chart.js interactif, liens ADO cliquables |
+| Word (.docx) | Rapports éditables | 6 sections, pas de graphiques — éditable dans Microsoft Word |
+| Excel (.xlsx) | Analyse de données | Jusqu’à 6 onglets : KPIs, Résultats, Traçabilité, Bugs, plus 2 autres en consolidation de plusieurs plans |
+
+## Détail de l'export PDF {#pdf-detail}
+
+L'export PDF inclut jusqu'à 12 sections configurables :
+- **Page de garde** — grille d'infos projet, logo (PNG/JPEG/SVG), badge environnement
+- **Résumé exécutif** — verdict automatisé, ou un résumé **personnalisé** par rapport rédigé via le toggle Automatique/Personnalisé dans l'écran du rapport (rendu en paragraphe propre, sans titre « Recommandations »)
+- **KPI cards** — taux de succès, taux d'exécution, passés/échoués/bloqués, bugs liés
+- **Tableau des résultats** — dernier résultat par TC ; matrice multi-config si 2–3 configurations détectées
+- **Traçabilité** — hiérarchie Epic → US → TC → Bug (tableau 3 colonnes), bloc suites non tracées
+- **Section bugs** — les bugs du rapport (bugs de la campagne par défaut) avec état, sévérité, date de création et cas de test, du plus récent au plus ancien, sous une ligne qui dit la source
+- **Tests flaky** — tests dont l'issue a changé entre **exécutions réelles** consécutives (au moins deux nécessaires pour se prononcer) ; un point jamais exécuté ne compte pas comme une exécution, donc un test exécuté une seule fois n'est jamais signalé comme instable, quoi qu'il ait précédé
+- **Graphiques** — donut pass/fail + barres par suite, rendus localement via chart.js (fonctionne hors-ligne)
+- **Pièces jointes** *(affichée par défaut depuis la v2.69.0)* — images PNG/JPEG intégrées ; tout autre fichier apparaît dans un tableau dont le **nom est un lien cliquable** vers la pièce jointe dans Azure DevOps, avec un **type lisible** (PDF, Word, Excel, Archive, E-mail…) au lieu d’un type MIME brut. Une extension non reconnue affiche le libellé générique **Fichier** et **conserve son lien** — l’extension décide du libellé, jamais de la présence du lien. Un fichier dont l’URL est absente ou n’utilise ni `http` ni `https` est affiché en texte simple, sans lien
+- **Objectifs, Critères d'entrée, Critères de sortie** — champs de cadrage multi-lignes
+- **Page de signature** — signataires configurables avec pré-remplissage et ligne de signature
+
+Les sections sont **réordonnables** dans *Mes préférences › Sections et export* — déplacez une ligne par sa poignée ou avec les flèches. Chaque section peut être activée/désactivée indépendamment.
+
+## Détail de l'export HTML {#html-detail}
+
+L'export HTML produit un **fichier autonome** — aucun serveur nécessaire pour l'ouvrir. Caractéristiques :
+- Graphiques **Chart.js** interactifs (donut + barres) intégrés en base64
+- **Liens ADO cliquables** vers les work items, bugs et cas de test
+- **Tableau des résultats** complet avec badges d'outcome et groupage par suite
+- **Matrice de traçabilité** (lignes plates) et **liste des bugs**
+- Compatible avec l'ouverture de fichiers locaux dans les navigateurs
+- Section **Pièces jointes**, **affichée par défaut depuis la v2.69.0** — images en ligne, autres fichiers en liens cliquables (le rapport HTML posait déjà ces liens)
+
+## Détail de l'export Word {#word-detail}
+
+L'export Word (.docx) est généré via la bibliothèque `docx` et est **entièrement éditable**. Il inclut :
+1. Page de garde (infos projet, environnement, dates)
+2. Tableau de métriques KPI
+3. Tableau des résultats (tous les cas de test)
+4. Tableau de traçabilité (TC → US → Epic → Bug)
+5. Tableau des bugs
+6. Page de signature (si activée)
+
+> Word n'inclut ni graphiques ni pièces jointes. Pour les rapports avec graphiques, utilisez le PDF.
+
+## Détail de l'export Excel {#excel-detail}
+
+L'export Excel (.xlsx) via ExcelJS produit 4 onglets, plus 2 autres lorsque vous consolidez plusieurs plans de test :
+- **KPIs** — taux de succès, taux d'exécution, comptages, métadonnées
+- **Résultats** — tous les cas de test avec outcome, suite, date, testeur, configuration
+- **Détail par plan** *(plusieurs plans uniquement)* — total, taux de réussite et taux d'exécution de chaque plan
+- **Qualité par plan** *(plusieurs plans uniquement)* — verdict, couverture US et configurations couvertes de chaque plan, plus une ligne consolidée
+- **Traçabilité** — TC → US → Epic → Bug (jointure multi-exigences)
+- **Bugs** — les bugs du rapport avec état, sévérité, priorité, assigné, date de création et cas de test, suivis de la ligne de source ; les onglets de résultats portent aussi une colonne **Chemin de la suite**
+
+L'ensemble du classeur suit la langue sélectionnée dans l'extension, noms d'onglets compris.
+
+## Contrôle de la visibilité des boutons d'export {#export-visibility}
+
+Dans *Mes préférences › Sections et export › Formats proposés*, vous choisissez les boutons d'export que propose la barre d'outils :
+- Sans le PDF, l'**ordre des sections** et la **fiche de signature** restent enregistrés mais ne sont plus utilisés (la signature ne concerne que le PDF) — une note sur la page le dit
+- **PowerPoint** génère une présentation 5 diapositives (Couverture, KPIs, Résultats, Traçabilité, Bugs). La signature n'est **pas** incluse dans PowerPoint.
+- Un format décoché n'est plus proposé ; ses réglages restent en place. Votre choix est enregistré avec vos préférences, au clic sur **Enregistrer**

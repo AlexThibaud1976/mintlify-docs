@@ -1,0 +1,18 @@
+---
+title: "Classifying untyped tests with the AI assistant"
+description: "Classify the untyped tests — under the untyped tests of the Test grid tab, when the project's AI connection is set up and Test classification is on (in AI assistant › Functions and data, and not turned off by the profile of the report's plan)."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+**Classify the untyped tests** — under the untyped tests of the *Test grid* tab, when the project's AI connection is set up and *Test classification* is on (in *AI assistant › Functions and data*, and not turned off by the profile of the report's plan). Otherwise the tab says why, and shows no button.
+
+**What is sent.** The types of the grid (id, label, design guidance), its levels (id, label) and, for each untyped test, its id and title — and its **steps** only if *Test case titles and steps* is checked in *AI assistant › Functions and data › Data sent to the model*; unchecked, they are not even read. Titles and steps are sent as data: a title that looks like an instruction is treated as text. Tests are sent 40 at a time; at most the first 400 untyped tests are classified, and the tab says so.
+
+**The AI proposes, you decide.** Each proposal shows the test, the proposed type — and, when the model gives one, a level —, a short justification, a confidence (as a number and a bar), and is marked *Proposed by AI*, with the model and the date. For each: **Accept**, **Change** (pick another type) or **Ignore**. Nothing is accepted by default; *Accept all ≥ 0.8* is a shortcut you choose to use. Proposals naming a type that is not in the catalogue are discarded, and the tab says how many. Nothing is stored until you click **Save the accepted classifications**; they count *by AI* in the **next** report — use *Regenerate*.
+
+**Nothing is written in Azure DevOps** unless you ask for it: the option *Write the type tag on the test cases* is off by default. Checked, a dialog lists every test case and the tags that will be added (`type:<name>`, and `niveau:<name>` when a level was proposed), with your permissions; only the tag is added, the other tags and every other field stay as they are. The report then shows each case: tag added, already present, or refused (with Azure DevOps's reason). A refusal does not undo the saved classifications. Tagged tests are detected *by rule* in the next report.
+
+**Where they live.** Accepted classifications are stored in the extension, for the whole project. When a type is deleted from the catalogue, its classifications are ignored; the *Test grid* page of the administration counts them and **Purge…** removes them.
+
+**If it fails**, you read a short message; the details are for the administrator. When access is refused (key, quota, gateway), the AI badge turns *unavailable* until the page is reloaded.

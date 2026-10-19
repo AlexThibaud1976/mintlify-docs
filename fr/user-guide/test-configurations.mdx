@@ -1,0 +1,33 @@
+---
+title: "Configurations de test"
+description: "Lorsqu'un plan de test utilise plusieurs configurations de test Azure DevOps, TestPulse Studio expose les données de configuration dans toute l'interface et les exports."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+Lorsqu'un plan de test utilise plusieurs **configurations de test Azure DevOps**, TestPulse Studio expose les données de configuration dans toute l'interface et les exports.
+
+## Détection automatique {#auto-detection}
+
+TestPulse Studio détecte le nombre de configurations distinctes (`configurationName`) dans le périmètre. Si **plus d'une** est trouvée :
+- Une **colonne Configuration** apparaît dans les tables Résultats et Historique complet
+- Le **filtre Configuration** (multiselect) apparaît dans la barre de filtres
+- L'**onglet Matrice** (heatmap TC × Configurations) devient disponible
+- PDF et tous les autres exports incluent la colonne Configuration
+
+## Matrice TC × Configurations {#matrix}
+
+L'onglet matrice affiche une **heatmap** : lignes = cas de test, colonnes = configurations. Les cellules sont colorées par outcome. Gris pâle = non exécuté ("trou"). Cliquer sur une cellule ouvre le run ADO dans un nouvel onglet.
+
+Dans le **PDF**, une matrice compacte est incluse quand le périmètre contient 2 ou 3 configurations distinctes. Au-delà de 3, la liste plate est utilisée à la place.
+
+## KPI configurations couvertes {#config-kpi}
+
+Le KPI **Configurations couvertes** affiche `X / Y` où X = configurations vues dans les résultats latest, Y = configurations définies au niveau projet (lues depuis `/_apis/testplan/configurations`, avec `/_apis/test/configurations` en v5.0 comme repli). Quand les deux routes sont indisponibles (ancien ADO Server, permissions), seul X est affiché.
+
+## Pondération du taux de succès {#passrate-weighting}
+
+| Mode | Fonctionnement | Idéal pour |
+| --- | --- | --- |
+| Par configuration (défaut) | Chaque point compte — un TC × 3 configs = 3 votes | Rapports de couverture cross-config |
+| Par test case | 1 vote par TC, pire outcome parmi les configs | Gate qualité par fonctionnalité |

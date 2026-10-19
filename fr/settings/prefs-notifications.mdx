@@ -1,0 +1,13 @@
+---
+title: "Notifications et envois"
+description: "Où publier un rapport une fois généré, et les rappels de génération — Mes préférences › Notifications et envois."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+Où publier un rapport une fois généré, et les rappels de génération — **Mes préférences › Notifications et envois**.
+
+- **Canaux de publication** — **Microsoft Teams** ou **Slack**, **3 au plus** en tout. Les canaux que le projet impose pour le plan viennent en tête, en lecture avec leur cadenas ; les vôtres suivent, et vous les ajoutez ou les retirez. Une adresse de webhook permet à quiconque de publier dans le canal : elle est **masquée** à l’écran, jamais affichée en entier, et doit commencer par `https`. **Envoyer un test** est proposé sur chaque canal, imposés compris, et n’écrit rien. Quand le navigateur bloque l’envoi (cela peut arriver sur Azure DevOps Server), Studio propose le message à copier-coller.
+- **Rappels de génération** — chaque ligne donne le plan, la fréquence en mots (chaque semaine, toutes les deux semaines, chaque mois) et le **dernier rapport**. Les rappels que le projet impose viennent en tête, en lecture ; vous programmez ou retirez les vôtres (**+ Programmer un rappel** : plan, fréquence, jour, vue sauvegardée). Studio vous le rappelle une fois l’échéance passée, à son ouverture — aucun serveur n’envoie le rappel : rien ne vous le rappelle tant que Studio est fermé.
+
+Une fois un rapport généré, son bouton **Notifier** propose d’abord les canaux du projet pour le plan, puis les vôtres.

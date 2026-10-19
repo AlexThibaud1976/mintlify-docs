@@ -1,0 +1,31 @@
+---
+title: "Marque et signature"
+description: "L’identité visuelle des rapports PDF et HTML, et la page où la recette se signe — Mes préférences › Marque et signature."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+L’identité visuelle des rapports PDF et HTML, et la page où la recette se signe — **Mes préférences › Marque et signature**.
+
+- **Libellé d’en-tête et de pied de page** — sur chaque page et dans le nom du fichier. Ce n’est pas le titre du rapport, qui se saisit dans le formulaire.
+- **Couleur** — écrite `#RRGGBB`, pour le bandeau, les titres et les tableaux.
+- **Logo de la page de garde** — un PNG, JPEG ou SVG (1 Mo au plus à l’import), dans le coin supérieur droit du bandeau, PDF seulement. Les SVG sont convertis en PNG avant l’intégration. Le logo est synchronisé via vos préférences Azure DevOps — il vous suit d’un appareil à l’autre, et atteint aussi l’onglet Exploration sur Azure DevOps Server on-premises. Si l’image reste trop lourde pour être synchronisée, elle est automatiquement réduite et vous en êtes informé ; si elle reste trop lourde malgré la réduction, elle est refusée avec un message explicite et votre logo précédent est conservé.
+- **Aperçu de la page de garde** — la page suit vos changements de libellé, de couleur, de logo et de signataires.
+
+Quand le projet ou le profil du plan impose le libellé, la couleur, le logo ou la fiche de signature, la valeur se lit avec son cadenas.
+
+## Fiche de signature {#signature-options}
+
+Une page en fin de PDF où chaque signataire date et signe. La signature est imprimée dans le **PDF seulement** (pas dans le PowerPoint). Quand le PDF ne fait pas partie de vos formats (*Sections et export › Formats proposés*), la fiche reste enregistrée mais n’est plus utilisée.
+
+- **Page de signature** — activée ou non
+- **Sur chaque case** — date et ligne de signature, date seule, ligne de signature seule, ou nom seul
+- **Pré-remplie depuis le formulaire quand c’est possible** — le testeur et l’approbateur viennent de leurs champs du formulaire
+
+## Signataires {#signature-boxes}
+
+Jusqu’à **5 signataires**. Pour chacun :
+- **Libellé** — le rôle ou le nom affiché au-dessus de la case ; chaque signataire a un libellé
+- **Pré-remplissage** — depuis le champ Testeur, depuis le champ Approbateur, ou à saisir
+
+Les cases sont affichées en grille — 2 par ligne en paysage A4, 1 par ligne en portrait.

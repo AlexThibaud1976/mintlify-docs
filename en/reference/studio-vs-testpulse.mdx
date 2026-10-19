@@ -1,0 +1,32 @@
+---
+title: "What Studio does differently from TestPulse"
+description: "TestPulse Studio comes from TestPulse 2.72.2, and a parity test suite checks, report by report, that it behaves like TestPulse 2.73.0."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+TestPulse Studio comes from TestPulse 2.72.2, and a parity test suite checks, report by report, that it behaves like **TestPulse 2.73.0**. It departs from TestPulse only where TestPulse is wrong, by explicit decision, one case at a time. There are nine such cases today.
+
+**The default product name.** With no brand label entered, reports (PDF header, Word cover page, HTML title) and Explore PDFs carry **TestPulse Studio**; TestPulse writes “TestPulse” there. A label already entered by the project does not change.
+
+**A capped consolidated verdict says why, in the exports too.** A consolidated report with one NO-GO plan is NO-GO even when its score clears the GO threshold. The sentence **Capped: at least one plan is NO-GO (…)**, naming those plans, accompanies the consolidated verdict wherever it is written — on screen, under the quality badge of the PDF and HTML, under the per-plan quality table of the Word and Excel files — whether or not the project has a project configuration. PowerPoint does not write the consolidated verdict, so nothing changes there. TestPulse writes the reason only in the collapsed score breakdown.
+
+**Depth analysis counts criteria, not lines.** In a work item's Coverage tab and in the Couverture hub, the number of acceptance criteria is the number of Gherkin scenarios (`Scenario:`, `Scenario Outline:`, `Scénario :`…), otherwise of distinct `CA-nn` identifiers, otherwise of bullets — a line counts as a criterion only when none of these is found. Gherkin keywords (Feature, Scenario, Given, When, Then…, and their French forms) are never reported as business terms missing from the tests. TestPulse counts lines: a story with 12 scenarios is announced there with over a hundred criteria.
+
+**An exploratory session verdict is a prefixed tag.** The tracking Task of a closed session carries `verdict:passed`, `verdict:failed` or `verdict:blocked`; TestPulse writes the bare tag (`Passed`, `Failed`, `Blocked`), which sessions closed by Studio up to 0.2.6 also carry. Nothing is migrated: to find every passed session in an Azure DevOps query, look for both forms.
+
+**No longer a difference: the executive summary follows the verdict.** When the release verdict is NO-GO, the summary badge is never green — it reads **Attention required** (or stays **Insufficient quality**) — and the risks open with **Release verdict: NO-GO —** followed by the first reason from the score breakdown. Studio shipped this in 0.1.9 and TestPulse shipped the same fix, word for word, in its 2.72.3: both products now behave the same way.
+
+**Not a difference either: the Cockpit.** TestPulse 2.72.4 took over the Studio Cockpit — same screen, same figures. Two details differ: in Studio, the « Show the load per tester » setting is **reserved for project administrators** (in TestPulse it is set in Settings › Cockpit, with no lock), and Studio shows the **configuration profile** applied to the plan (TestPulse has no profiles).
+
+**Not a difference either: the bug source.** TestPulse 2.73.0 reads the bugs of a report in the plan runs by default, and so does Studio — same list, same sorting, same suite paths, same grouped matrix. Only where the setting is changed differs: in Studio, the **Bug source** setting is set in the project administration, **reserved for project administrators**, and read-only in *My preferences › Thresholds and calculations* (in TestPulse it is set in Settings › Thresholds & quality, with no lock).
+
+**The HTML export works offline.** Its two charts (results breakdown, results per suite) are drawn in the file itself, with the same figures; the file runs no script and loads nothing from outside. TestPulse loads a chart library from a third-party site: offline, its charts are missing.
+
+**The Cockpit reads the plan's dates.** The plan's start and end dates come from Azure DevOps, and an end date in the past shows **Ended on …**; TestPulse found no end date and asked for a target.
+
+**Nothing executed: Not evaluated, everywhere.** A plan with no execution shows **Not evaluated** — on the Quality card and on the grey executive summary badge, on screen, in the PDF and in the HTML — with no pass-rate alert or risk: the pass-rate bar reads **no execution**, the **Pass rate** card shows **—** in grey, on screen and in every export (the **Execution rate** card stays at 0 %), and no configuration gap is reported. The executive summary says **complete execution** only at 100 % (**near-complete** otherwise). TestPulse showed a critical 0 % rate and insufficient quality.
+
+**A never-run point has no date.** In the report's Results tab and in the HTML export, its Date column shows **—**; TestPulse writes “Invalid Date” there.
+
+**A report no longer takes over the requirement coverage of the previous one.** Generating a report reads the plan's test cases twice at once, with and without their links; in TestPulse, the second read could replace the first in the session cache, and the next report on a plan sharing those test cases (a copied plan, another selection of suites) showed a 0 % requirement coverage and a lower score until the page was reloaded. In TestPulse Studio, each generation gives its own figures.

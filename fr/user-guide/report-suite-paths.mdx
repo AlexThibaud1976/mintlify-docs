@@ -1,0 +1,12 @@
+---
+title: "Chemins de suite et matrice de traçabilité regroupée"
+description: "Une suite s’identifie par son identifiant et s’affiche par son chemin depuis le premier niveau sous la racine du plan, par exemple CH › SALES › Pre-Payment — à l’écran (dernier niveau en gras, chemin complet en infobulle) et dans les cinq exports."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+Une suite s’identifie par son identifiant et s’affiche par son **chemin** depuis le premier niveau sous la racine du plan, par exemple `CH › SALES › Pre-Payment` — à l’écran (dernier niveau en gras, chemin complet en infobulle) et dans les cinq exports. Un chemin long est coupé au milieu : il garde son **premier niveau** (ce qui distingue les suites homonymes, par exemple le pays) et ses deux derniers. Le classeur Excel garde la colonne **Suite** (nom) et ajoute une colonne **Chemin de la suite**, jamais coupée, pour filtrer par pays. Un rapport enregistré avant cette version affiche le nom de la suite seul.
+
+Tous les compteurs par suite — répartition par suite à l’écran, graphiques par suite des exports PDF et HTML, tableau des *Suites incluses*, suites non tracées — rapprochent résultats et suites **par identifiant** : deux suites homonymes gardent leurs propres chiffres. La colonne des *Suites incluses* est **Résultats (derniers)** : les derniers résultats de la suite, comparables aux *Cas définis*.
+
+**Matrice de traçabilité : une ligne par cas de test.** Un cas de test exécuté dans plusieurs suites ou configurations apparaît une fois, avec un **statut regroupé** — au moins un Failed : *NOK* ; sinon au moins un non passé : *Non exécuté* ; sinon *Réussi* (la même règle que le verdict de l’onglet Couverture) — et *n/m réussis · k suites*. À l’écran, le bouton de dépliage (au clavier aussi) liste chaque chemin de suite, configuration et résultat ; les exports PDF, Word et HTML portent la ligne compacte. C’est un affichage : les statuts d’exigence (OK / NOK / PARTIEL) et les KPIs de la matrice ne changent pas.

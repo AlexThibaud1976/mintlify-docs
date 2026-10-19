@@ -1,0 +1,2288 @@
+---
+title: "Journal des versions"
+description: "Toutes les versions publiées de TestPulse Studio, la plus récente en tête."
+---
+
+{/* Généré depuis docs/CHANGELOG.md et src/data/whats-new.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+Les versions récentes sont décrites en français, telles que les présente l’onglet Nouveautés ; les plus anciennes en anglais, la langue du journal des versions.
+
+<Update label="0.2.9" description="2026-10-16">
+
+Two follow-ups of the 0.2.8 check on Azure DevOps Services (TPS-261).
+
+- **Fixed**: on a plan with nothing executed, the "Pass rate" KPI card shows "—" in a neutral style (it showed 0 %),
+  on screen and in the PDF, Word, Excel, HTML and PowerPoint exports; "Execution rate" stays 0 %.
+- **Fixed**: in bulk reassignment, a destination tester chosen from the directory search ("Other testers") shows by
+  name in the Recap, with the account address on hover, instead of its identifier.
+
+</Update>
+
+<Update label="0.2.8" description="2026-10-16">
+
+Follow-ups of the 0.2.7 check on Azure DevOps Services (TPS-260).
+
+- **Fixed**: generating a report right after another one, in the same page, on a plan sharing test cases with it (a
+  copied plan, another selection of suites), could show a 0 % requirement coverage and a lower score until the page
+  was reloaded. Each generation now gives its own figures.
+- **Fixed**: a plan with nothing executed is "Not evaluated" everywhere: the executive summary badge (screen, PDF, HTML),
+  the pass-rate bar ("no execution", no warning), no configuration-gap signal; a never-executed point shows "—" as
+  its date instead of "Invalid Date" (Results and Full history tabs, HTML export).
+- **Changed**: the HTML export only allows embedded images (its images were all embedded already).
+- **Fixed**: bulk reassignment shows people by name at every step (Operation, destination picker, Recap), with the
+  account address on hover.
+- **Fixed**: Conception's existing coverage shows one entry per acceptance criterion — a criterion's title no longer
+  sticks to the previous scenario, and criteria written as `CA-nn Scenario Outline:` are no longer merged; the depth
+  analysis counts with the same splitting.
+- **Documentation**: parity gaps D-010 and D-011 added, D-004, D-006 and D-009 completed, in the help (nine differences)
+  and in `docs/ecarts-testpulse.md`.
+
+</Update>
+
+<Update label="0.2.7" description="2026-10-16">
+
+Fixes from the cloud acceptance run of 0.2.6 on Azure DevOps Services (TPS-259).
+
+- **Fixed**: Bulk reassignment to "Unassigned" reported every point as reassigned while Azure DevOps kept the tester
+  (the request was accepted and ignored). Unassigning now uses the form Azure DevOps applies, and the points are **read
+  back** after the write: a point whose value did not change is counted as a failure, "Not applied", never as a
+  success. The inventory shows a person's name, with the account address on hover.
+- **Fixed**: in Conception, an open point of the test model that cites an unknown rule no longer makes the whole
+  analysis fail: the reference is removed with a note and the point stays.
+- **Added**: an **AI** pill on the linked test cases proposed by the AI (tag `ai-generated`, or the former tag) in
+  Conception's existing coverage, and in the Couverture hub when the depth analysis is on.
+- **Fixed**: the HTML export is self-contained: its two charts are drawn in the file (SVG), it runs no script and loads
+  nothing from a third-party site, so it also works offline; results per suite become horizontal bars. Its title
+  follows the profile's header label, like the PDF and Word.
+- **Fixed**: a plan with nothing executed no longer shows a critical 0 % pass-rate alert next to "Not evaluated", and
+  the executive summary says "complete execution" only at 100 % ("near-complete" otherwise).
+- **Fixed**: the Cockpit reads the plan's start and end dates and says "Ended on …" when the end date has passed.
+- **Fixed**: the depth analysis counts acceptance criteria (Gherkin scenarios, `CA-nn` identifiers, bullets) instead of
+  lines, and no longer reports a Gherkin keyword as a missing business term.
+- **Changed**: an exploratory session's verdict is written on its Task as `verdict:passed` (`verdict:failed`,
+  `verdict:blocked`) instead of a bare `Passed` tag; sessions closed before keep their tag.
+- **Fixed**: History › Compare shows a rise in failures in red, and A and B with their time; Référentiel: « 1 dossier »,
+  an offer to refresh data cached for a week or more, and the tab named « Référentiel » in French; the work item tabs
+  follow Studio's language; the Preferences breadcrumb no longer says "Test Plans"; Conception no longer asks "Leave
+  site?" once the cases are written; the requirement improvement shows "Before" without raw Markdown and the new
+  revision at once; "What goes to the model" counts the code files read; an AI finding names a verdict rule by its
+  label; the administration overview says when a function uses its own model.
+- **Documentation**: one label, "Propose an improvement"; the link to the TestPulse documentation site is removed from
+  the help, the user guide and the Marketplace listing (TestPulse Studio will have its own); README at 0.2.7, scopes
+  table completed, no dead links; the parity gaps D-004, D-005, D-006, D-008 and D-009 are listed in the help and in
+  `docs/ecarts-testpulse.md`.
+
+</Update>
+
+<Update label="0.2.6" description="2026-10-16">
+
+End-of-step-one debts: a neutral origin tag on AI-proposed test cases, Traceability links that open on Azure DevOps
+Server, a shorter README (TPS-258).
+
+- **Changed**: a test case created from an AI proposal in Conception is tagged `ai-generated` (it used to carry the
+  product's name). Cases written before keep their former tag; TestPulse Studio reads both and never rewrites them.
+- **Fixed**: in the report's Traceability tab, opening a work item now goes through the same link handling as the other
+  report links, so it also works in the sandboxed Azure DevOps Server frame instead of opening a blank page.
+- **Changed**: the README describes TestPulse Studio by area and points to this changelog; the sections inherited from
+  TestPulse (feature highlights, version history v2.7.3 to v2.13.0) are removed.
+- **Internal**: the audit gate is `npm audit --audit-level=high --omit=dev`, as in CI, with development-tooling
+  advisories tracked in `docs/dette-outillage.md`; the false-claims guard also reads the architecture and privacy
+  documents; tracking table aligned with Jira.
+
+</Update>
+
+<Update label="0.2.5" description="2026-10-16">
+
+A false statement corrected in the embedded help; the end-of-step-one acceptance checklist and coherence audit (TPS-257).
+
+- **Fixed**: Documentation › Getting Started › Introduction said that no server was needed and that your data never
+  left your ADO instance. It now reads: reports are generated in your browser from your test plans; nothing leaves Azure DevOps
+  except what you turn on — the AI assistant (to your organization's model provider) and usage telemetry (see "Usage
+  and telemetry"). French text corrected the same way.
+- **Fixed**: the scheduled reminders no longer claim that Studio has no backend or no server: no server sends them,
+  so they only appear when TestPulse Studio is open. The Marketplace listing no longer opens on "No server" and says
+  "Nothing to host".
+- **Internal**: a guard keeps every surface (help in English and French, What's New, Marketplace listing, README, user
+  guide) free of claims that nothing ever leaves Azure DevOps; manual acceptance checklist for Azure DevOps Services and Server
+  2022.1 prepared; coherence audit of the specification, plan, tasks, code and documentation.
+
+</Update>
+
+<Update label="0.2.4" description="2026-10-16">
+
+- Importer depuis TestPulse, dans Outils › Paramètres, pour tous les membres : vos préférences, modèles et vues, historique et snapshots du Cockpit ; pour un administrateur du projet, les rapports publiés, le barème, les champs de dérive, les paliers, la source des bugs et les sessions exploratoires.
+- Azure DevOps refuse qu’une extension lise les données d’une autre : la lecture passe par un jeton d’accès personnel à portée « Extension data (read) », collé dans l’écran, jamais enregistré ni journalisé, effacé après la lecture.
+- Un aperçu par ensemble où rien n’est coché d’office : vous choisissez ce qui est importé et ce qui se passe si l’élément existe déjà. L’import n’écrit que dans TestPulse Studio (TestPulse n’est jamais modifiée), se rejoue sans doublon et se termine par un compte rendu complet.
+- Qualité des exigences : « Exporter en CSV » et « Rapport PDF » sont grisés quand la vue choisie ne compte aucune US, même si l’itération en compte aujourd’hui.
+
+</Update>
+
+<Update label="0.2.3" description="2026-10-14">
+
+Import from TestPulse: preview and import, still behind the `testpulseImport` flag (off) (TPS-256).
+
+- **Added (behind the flag)**: Azure DevOps refuses the direct read of TestPulse data, so reading with a pasted token
+  scoped to "Extension data (read)" is now the normal path, with short instructions and a link to create the token. The
+  screen says "TestPulse is installed, but Azure DevOps refuses the direct read" instead of "presence not established".
+- **Added (behind the flag)**: an import preview per set — origin, destination in TestPulse Studio, what to do when the
+  item already exists (keep the existing one by default, replace, keep both, skip duplicates); webhooks and scheduled
+  reports unchecked by default; project sets reserved for project administrators, with the reason; only template and
+  report names are shown.
+- **Added (behind the flag)**: "Import the selection" writes to TestPulse Studio only — never to TestPulse — and can be
+  replayed without duplicates; the storage quota is checked before anything is written; a final report lists what was
+  written, kept, skipped, unreadable or failed. The project bug source becomes TestPulse Studio's bug source setting.
+  Imported reports show "Imported from TestPulse x.y.z" in History. Items in a format newer than TestPulse Studio knows
+  are set aside, never guessed.
+
+</Update>
+
+<Update label="0.2.2" description="2026-10-13">
+
+Import from TestPulse, first step: a read-only check, behind a flag that is off (TPS-144).
+
+- **Added (behind the `testpulseImport` flag, off)**: Settings › "Import from TestPulse" reads the TestPulse data of the
+  organization — your preferences, templates and views, personal history and Cockpit snapshots; the project's published
+  reports, scoring scale, drift fields, promotion tiers, bug source and exploratory sessions — and shows, per scope and
+  per set, whether it can be read, how many items and what size. No content is shown and nothing is imported or
+  written. When the direct read is refused, a personal access token scoped to "Extension data (read)" can be pasted for
+  that read only; it is never saved or logged. Shown with `TPS_FLAGS=testpulseImport` at build time, or `import=1` in
+  the Tools hub URL.
+
+</Update>
+
+<Update label="0.2.1" description="2026-10-13">
+
+Requirement quality: the "At start" view counts only the stories that were in the iteration at its start (TPS-255).
+
+- **Fixed**: "At start" counted every story of the iteration today, including those added after its start. It now counts
+  only the stories present at the start — the ones added since are left out of the tiles, Why, criteria, stories to
+  handle, area paths, trend and comparison, and the view says how many ("N stories added after start, outside this
+  view"); they are counted in "Today". A story moved out since is read like the others, counts at start (effort
+  included) and is listed "moved out since".
+- **Fixed**: when the stories present at the start cannot be read, "At start" is unavailable and says so; it is never
+  computed on today's stories.
+- **Fixed**: "8 stories out of 10 in under 0 d" now reads "8 stories out of 10 in 0 days or less"; a story assessed before
+  its creation counts as 0 days and is counted apart. In the PDF, the committed tile reads "1 story · effort 2 points"
+  (unit when the process gives one) instead of "1 story · 2". The CSV and PDF exports are disabled when no story matches
+  the filters.
+
+</Update>
+
+<Update label="0.2.0" description="2026-10-13">
+
+- La qualité des exigences, nouvel onglet de Pilotage : pour une itération et un chemin de zone, la Definition of Ready atteinte, les US engagées sans elle au démarrage, la note médiane, les questions critiques ouvertes et les US à traiter, avec une vue par zone, une vue d’efficacité et une tendance sur six itérations.
+- Les chiffres sont calculés par TestPulse Studio sur les évaluations enregistrées : aucun appel IA, rien n’est écrit. Exports CSV et PDF de ce que la page montre.
+- Le produit se nomme « TestPulse Studio » partout, y compris dans le titre par défaut des rapports ; un titre déjà saisi par un projet est conservé.
+
+</Update>
+
+<Update label="0.1.165" description="2026-10-13">
+
+Help: the gesture recorded when an improvement is written; its written revision is now shown (TPS-253).
+
+- **Help**: the "Gestures" passage (English and French) explains that writing an improvement to a story records the
+  gesture "Improvement written to the story" in the assessment it came from, with the written revision and the criteria
+  added, amended or removed — in its gestures and its PDF.
+- **Fixed**: the gesture now shows the revision written ("… in revision 2"), on screen and in the PDF.
+- **Fixed**: the requirement assessment PDF said "TestPulse" in its header and footer; it now says "TestPulse Studio".
+- **Requirement quality** (still switched off): an area path view (one row per child path, low assessed share written on
+  the row), a trend over the last six iterations computed on demand, the difference with a compared iteration on each
+  tile, and an efficiency view (assessments before the DoR is met, time to reach it, improvements written, designs on
+  an unmet DoR). No AI call; nothing is written.
+
+</Update>
+
+<Update label="0.1.164" description="2026-10-13">
+
+Requirement quality per iteration and area path, built but switched off; an improvement written to a story is now
+recorded with its assessment (TPS-252).
+
+- **Requirement quality** page in Pilotage (off until its honest states — reading, limit, unreadable histories, fewer
+  than five stories — are complete): iteration, area path and type filters; state at the iteration start or today;
+  five tiles (Definition of Ready met, committed without DoR at start, median score, open critical questions, DoR at
+  first assessment); why the DoR is not met; INVEST criteria against the project target; stories to handle. Computed
+  from the saved assessments with each assessment's own grid, never recomputed; no AI call; nothing is written.
+- **Improvement written**: when an improvement is written to a story, the assessment it came from now records it (written
+  revision, criteria added, amended and removed, definition rewritten), shown in its gestures and its PDF. Score and
+  verdict are unchanged.
+
+</Update>
+
+<Update label="0.1.163" description="2026-10-13">
+
+Internal only — no visible change: requirement-quality specification (TPS-251).
+
+</Update>
+
+<Update label="0.1.162" description="2026-10-12">
+
+Automated tests: screen limits followed through the Page Object; pytest-bdd case read from its step definitions; the
+application root cited "/" is never a marker (TPS-250).
+
+- **Screen limits through a Page Object**: the model bench (gpt-6-sol, Playwright TS, TC 3055) showed a test "ready to
+  review" three times out of three although iteration 2 types 21 characters into a field limited to 20 — red when run.
+  The test called `po.fillAddress(row.codePostal, row.telephone, row.rue)` and the method typed `phone` into
+  `getByTestId("phone")`: replacing the parameter by the value of the call also rewrote the selector string, so the field
+  was no longer found. The parameter is now replaced in the code only; the argument of rank n (or named, Python / C#) is
+  the value of the parameter of rank n (or of that name), in TS / JS, Python, Java and C#. The check of ignored data
+  follows the call too: data passed to a method that never reads it, or replaces it with a fixed value, is marked.
+- **pytest-bdd "without a usable result"** (gpt-5.4, three runs out of three, the case asked again included): in BDD
+  the `tests` entry of a case carries nothing; a case left out of it (or `tests` left out) whose step definitions bind
+  its scenario is now read from its definitions and noted in **Log and failures**. Also read: an identifier written like
+  the tag (`tc_3056`, `@tc:3056`), `code` returned as an object, the keyword `@given`.
+- **Citation "/"** (Selenium, gpt-5.4 and gpt-6-sol): `driver.get(baseUrl + "/")` with the citation "/" was marked
+  "converted into markers". A citation designating the root (`/`, `baseUrl`, `baseUrl + "/"`) that is not found is now
+  the application root, shown as such under **Citations returned by the model**.
+
+</Update>
+
+<Update label="0.1.161" description="2026-10-12">
+
+Automated tests: a refusal step is checked by the error message read, never marked for lack of a positive witness; a
+case missing from the AI assistant's answer is asked again alone (TPS-249).
+
+- **Witness of a refusal**: the replay found Selenium's "Refuser une rue vide" (TC 3054) marked "to complete — no positive
+  validation witness is exposed; only the street error message is visible", although `error-street` ("MSG-01 — La rue
+  est obligatoire.") is the right witness. The instructions now say it once: only a positive result needs a positive
+  witness (accepted ⇒ `save-success`); for a refusal, the witness is the error message read (refused ⇒ `error-street`).
+  To stay within budget, sentences the JSON shape or another rule already say were removed: the instructions grow by
+  163 characters (Cucumber JS 6, Cucumber Java and pytest-bdd 87).
+- **"Without a usable result, to regenerate"**: a case missing from the answer (3 generations out of 15 at the replay)
+  is now asked again alone, once, with the methods and definitions already written — never the whole generation;
+  counted in the checks. **Log and failures** names the missing cases and any test returned under an identifier that is
+  not a case sent; an identifier written "TC 3056" is read as 3056.
+
+</Update>
+
+<Update label="0.1.160" description="2026-10-11">
+
+Automated tests: a sub-rule without its own witness is a review note, never an item to complete; BDD instructions
+shortened; the AI assistant receives the fields declared in the screens read; a Cucumber expression that differs only in
+form is bound (TPS-248).
+
+- **Sub-rule without its own witness**: the replay found BDD at 0/9 — the step "the combination of country and postal
+  code respects the length rule" was marked "to complete — no positive witness dedicated to the length rule" (pytest-bdd
+  3/3, C#, Cucumber Java), blocking the test. The instructions now say: check what the code exposes (the global
+  witness `save-success`, the value kept, the absence of the rule's error) and write a review note; an item to complete
+  only when nothing checkable exists. An item to complete written by the AI assistant still blocks: Studio never turns
+  it into a note silently.
+- **BDD instructions read again and shortened** (Cucumber Java 6,892 → about 5,900 characters): the binding said once,
+  the BDD assertion rule merged into the common rule on results, one complete example per template (Given, When, Then
+  with the success witness, Then for a sub-rule), the contradiction between "add a todo" and "not a todo" removed.
+- **Fields of the screens read**: every combination receives the table of the elements declared in the screens read —
+  selector, element, `name`, label, text shown, file and line to cite (`postal-code` ⇒ input `postalCode` « Code
+  postal », `save-success` « Adresse enregistrée »).
+- **Expression that differs only in form** (Cucumber): `{string}` for `{}`, a typographic apostrophe, a final period —
+  the definition is bound to the expected binding and counted in the checks; different words are never bound.
+
+</Update>
+
+<Update label="0.1.159" description="2026-10-11">
+
+Names in Azure DevOps: the extension is called "TestPulse Studio", its work item tabs "Couverture", "Exigence" and
+"Exploration" (TPS-247).
+
+- **Extension name**: "TestPulse Studio" in the Azure DevOps banner, the extension management page and the Marketplace
+  listing; the tagline "Executive quality reporting for Azure DevOps" now opens the description and the overview.
+- **Work item tabs**: "Test coverage AI" becomes **Couverture**, "Requirement AI" **Exigence**, "Explore AI"
+  **Exploration** — aligned on the hubs (Pilotage, Couverture, Conception, Outils). The help, the README and the screen
+  texts that name a tab follow.
+- **Nothing to reinstall**: the extension identifier, the publisher and the contribution identifiers do not change —
+  installations, extension data and shares are kept.
+
+Automated tests: a Cypress test no longer nested in a test; Cucumber Java and Selenium told that the data-testid read
+are the selectors; a positive result checked by its success witness (TPS-246).
+
+- **Test block of the AI assistant**: in JavaScript and TypeScript (Cypress, Playwright TS, Cucumber JS), when the
+  answer wraps all the code of a test in its own `it(…)` / `test(…)` / `describe(…)` block — the replay found a full
+  `it('Refuser une rue vide', () => { cy.visit('/') … })` placed inside Studio's `it.skip(…)`, marked "test nested in a
+  test" with its 3 steps not mapped —, Studio keeps only its body before the checks (and splits it by its "Step n"
+  comments when it all sits in one step); listed in **Journal and failures** ("kept, gaps marked"). A block never
+  closed, or followed by other code, stays marked.
+- **Cucumber Java and Selenium**: the instructions say that the data-testid attributes found in the code read (TSX,
+  HTML, Vue…) are the selectors to use, targeted with `By.cssSelector("[data-testid='x']")` — "never getByTestId"
+  forbids the Playwright call, not the attributes (the replay found 5 definitions refused "no selector established").
+- **Positive result**: a step expected to be accepted, saved or created is asked to check the success witness the code
+  read shows (`save-success`, "Adresse enregistrée") with an explicit wait — the absence of an error only as a
+  complement; without a witness in the code read, a review note says so.
+
+</Update>
+
+<Update label="0.1.158" description="2026-10-10">
+
+Automated tests: an iterated test that ignores the data of its case is never "ready to review"; screen limits follow
+accessors; Cucumber Java instructions in Java only; fewer "unusable answer" failures (TPS-245).
+
+- **Data of the case never ignored**: in an iterated test (loop, `@ParameterizedTest`, `[TestCaseSource]`,
+  `parametrize`, `Examples`), a value typed as a literal that equals the value of a single iteration, or a column that
+  varies and is never read, gets the marker "value set by the test instead of the data … — the iterations do not vary"
+  (the replay found a Selenium test that typed the first iteration's values in both iterations).
+- **Screen limits through accessors**: `data.telephone()`, `getTelephone()`, `row["telephone"]`, `row.Telephone`,
+  destructured variables are checked like the parameter itself.
+- **Cucumber Java**: the instructions say "Java only" and show a complete Java step definition; the steps class declares
+  `wait()` (a 10-second `WebDriverWait`) and imports `Select` and `ExpectedConditions`.
+- **Unusable answer**: local gaps in the automated-test answer (a citation at line "12-14" or 0, code given as one
+  string, an `And` keyword, missing `params`) are corrected before the check and listed in **Journal and failures**
+  ("kept, gaps marked") instead of failing the whole answer.
+
+</Update>
+
+<Update label="0.1.157" description="2026-10-10">
+
+Conception, step 0 of a requirement not assessed yet: one decision, one screen (TPS-242).
+
+- **Existing coverage** fits on one line on first display, whether the requirement is assessed or not.
+- **Not assessed yet**: the same layout as an assessed requirement — the header "Requirement assessment · not assessed
+  yet", one help sentence and **Assess the requirement**; a **What will be sent** line (requirement tokens, links,
+  attachments, code read — or **Read the code**), each item opening the detail; then a single **Code and context**
+  panel, folded and remembered, holding the linked code, the context read and *What is sent to the model* (its only
+  place at step 0). The **Requirement** tab of a work item has the same layout. Measured at 1 366 × 768: step 0 of
+  #3053 goes from 1.48 to 0.67 screen, #2891 from 3.16 to 0.67; *Assess the requirement* is above the fold.
+- **Loading**: each hub and tab writes its loading time in the browser console; the **Requirement** tab no longer leaves
+  Azure DevOps waiting when its start fails, and **Test coverage** signals its load before reading the linked test
+  cases.
+
+Automated tests: no test is "ready to review" with a value the screen would not take, nor with a marker announced or
+written in its files (TPS-243).
+
+- **Screen limits on every input**: a value typed into a field is checked against the screen read whatever the
+  framework and however it is written — inline `sendKeys` in Selenium (the false "ready to review" of the replay, a
+  21-character phone number in a field limited to 20), `fill`, `type`, `pressSequentially`, WebdriverIO `setValue`,
+  BDD step definitions (the value the step expression binds at each iteration) —, as a literal or as a parameter. The
+  marker reads "value that cannot be entered as is (maxLength 20) — iteration 2"; `minLength`, `min`, `max` and
+  `pattern` are read too.
+- **A marker, never "ready"**: an AI citation that is not found is marked on the line that writes its value
+  (`getByRole(…, { name: … })` included), and the "turned into markers" alert only lists values actually marked; a
+  marker in a step definition that no step binds, or in a Page Object method that no test calls, keeps the tests of the
+  file skeletons.
+- **BDD**: an assertion step without a dedicated message in the code read is written from the state of the screen (the
+  value kept in the field, no error for it), with a Java, Python and JavaScript example.
+
+</Update>
+
+<Update label="0.1.156" description="2026-10-09">
+
+Design and automated tests: the analysis keeps the model despite a local gap, Python tests no longer lost to the
+JavaScript API, BDD Java and pytest-bdd written from the code read (TPS-241).
+
+- **Analyse the requirement** no longer fails for one partition: a representative value that repeats the partition's
+  name is emptied and the partition is **to complete** (counted; *Generate* waits for its value); other local gaps are
+  removed. Only a gap of the whole model is sent back once, then fails. **Journal and failures** now also lists the
+  retries that succeeded and the answers kept with gaps marked.
+- **Python**: the JavaScript Playwright API written by the assistant (`getByTestId`, `{ name: … }`, `toBeVisible`) is
+  translated to Python by Studio, commented and counted; the instructions give a Python example.
+- **BDD Java and pytest-bdd** get the same instructions as Cucumber JS (the code read is enough to write each step);
+  bare citations (`country`) and option texts run together (`SuisseFranceBelgique`) are found in the screen.
+- **Application root**: `cy.visit('/')`, `driver.get(baseUrl)`, `browser.url('/')` count as a source, like
+  `page.goto('/')`.
+
+</Update>
+
+<Update label="0.1.155" description="2026-10-09">
+
+Automated tests: no more false “ready to review”, the assistant’s markers sorted, Selenium inline; code check
+proposals contradicted by their own citations discarded (TPS-239).
+
+- **Never ready with a broken file**: a syntax error in a file of a test (its own, the Page Object it calls, the step
+  definitions) marks it “syntax error”; a step whose body has no statement (comments, `pass`, a lone `return`) is not
+  mapped — the pytest-bdd case where five step definitions held only `# todo: …` is a skeleton again.
+- **The assistant’s markers**: `# todo`, `// TODO`, `# FIXME`, “to complete” become Studio markers. On a complete step
+  (its citations found, no built value) the assistant’s remark becomes a non-blocking **review note**, counted apart.
+  The instructions say when to mark: only a missing selector, route, message or value; an empty value is a value.
+- **Other language**: the JavaScript Playwright API in a Python file (`getByTestId`, `toHaveText`, `toBeVisible`) and
+  the Python one in Java, C# or JavaScript files are marked.
+- **Selenium**: actions inline (`driver.findElement(By…)`, `wait.until(…)`), no Page Object suggested; the test
+  declares `wait`.
+- **Code check**: a proposal contradicted by another of its citations (a README line counts) is discarded; a “rule
+  from the code” that the cited code contradicts (“the `L-` prefix is not accepted”, “8 to 20”) is discarded, never
+  shown as taken from the code.
+
+Conception, step 0 of an assessed requirement: one decision, one screen (TPS-240).
+
+- **The page fits**: the requirement is named once (#id · title, then type, state, revision and *Change requirement*);
+  *Existing coverage* is one line as soon as an assessment exists (“N linked tests · per technique · matches”), folded
+  and remembered for you and this requirement; generation settings and *What goes to the model* leave step 0.
+- **Header and Why**: score (“56,9 / 100” in French), verdict, threshold and the main action, then a **Why** line — the
+  rules that fired, one per cause (“2 critical questions open”, “Estimable ★ 2 / 5, minimum 3”…, Small no longer
+  twice), each a button that opens the tab that deals with it — and one help line (date, model, verdict computed by
+  the rules, share of the grid and why).
+- **Tabs, one panel open**: Questions for the PO (critical first, origin in plain words, *Undo* reopens a closed
+  question), Criteria (*Below target* by default, the not assessable ones summed up with *Read the code*, families
+  folded), Findings (gaps then deductions, facts folded, *Correct the nature* on demand), Split, Code and context,
+  History. The tab open by default follows the assessment, then your last choice for the requirement.
+- **No internal identifier** on screen (q2, f7, estimable=2, “na”) outside *Technical details*; the same wording in
+  the step 0 tile, the work item tab, the PDF and the settings preview. Nothing in the computation changes.
+
+</Update>
+
+<Update label="0.1.154" description="2026-10-09">
+
+Requirement assessment: each criterion shows its effective weight, and a family with no active criterion no longer
+lowers the verifiable share (TPS-238).
+
+- **Effective weight**: a criterion weighs its family's weight divided by the active criteria of the family (by
+  default INVEST 7.5 points, Definition 5, Criteria 6.7, Links and Flow 3.3). It is shown in *Requirements and
+  design* (a read-only *Effective weight* column, updated live on the draft), in each row's details of the assessment
+  and on the bar's tooltip. Turning a criterion off passes its weight to the others of its family — now visible.
+- **A family turned off entirely** by the administrator is taken out of the total: the score and the verifiable share
+  are on the other families (before, turning off all of INVEST capped the verifiable share at 55 % and made the 60 %
+  threshold unreachable). The settings page says so in an amber note. A family whose criteria are active but not
+  scored (not applicable, not verifiable, evidence not found) still counts, as before. Turning off every criterion is
+  refused.
+- Default settings give the same scores, verifiable shares and verdicts as before.
+
+</Update>
+
+<Update label="0.1.153" description="2026-10-09">
+
+- Une interface plus calme : cinq tailles de texte, deux graisses, et le thème sombre d’Azure DevOps suivi.
+- Les Paramètres des membres deviennent « Mes préférences » : sept pages, les valeurs fixées par le projet affichées avec un cadenas, et le même enregistrement que l’administration du projet.
+- Conception et l’évaluation de l’exigence montrent une chose à la fois : une action principale par écran, les détails repliés, des barres lues face à une cible.
+
+</Update>
+
+<Update label="0.1.152" description="2026-10-09">
+
+Member settings become "My preferences": seven pages, values set by the project shown with a lock, the same way of
+saving as the administration (TPS-236).
+
+- **My preferences** (*Test Plans › TestPulse Studio › Settings*): your own values, except where the project or the
+  profile of the selected plan sets its own — those read with a lock ("Set by the project", "Set by the profile
+  "X"") and where they come from, never as a greyed field without explanation. The header says which profile applies
+  to the selected plan. Seven pages under a side rail: *Thresholds and calculations*, *Branding and signature*,
+  *Sections and export*, *Form fields*, *Execution*, *Notifications and sending*, *Project rules*. Opens on the first
+  one (it used to open on Branding).
+- **One way of saving**, as in the administration: a draft per page, "N unsaved changes" with Cancel and Save, bounds
+  checked when saving (not at every keystroke), "Leave without saving?" when leaving a page with changes.
+- **A member no longer writes project data**: the quality scoring is shown read-only (it is set per profile in the
+  administration) and the promotion stage ladder left the member settings (*Verdict and campaigns* in the
+  administration).
+- **Sections and export**: one list for sections and their order (drag handle and arrows); when the project sets the
+  sections, their boxes read-only and **the order stays yours** — exports now keep your order on project sections.
+  "Restore the shipped order" only touches the order (it also reset the title, color and thresholds).
+- **Form fields**: one table (shown, field, label, required, cover page, expected format); the expected format opens
+  in a dialog with "Test a value".
+- **Notifications and sending**: webhook addresses are **masked**, "Send a test" everywhere, add forms folded; the
+  report's **Notify** button offers the project's channels for the plan, then yours.
+- **Project rules**: what the administrators set for the selected plan — verdict and reports, test grid, AI assistant —
+  each line with where it comes from, and one **Open the administration** button for administrators.
+
+Project administration redesigned: a side rail of nine pages, one way of saving everywhere, a test grid you can read and
+check (TPS-235).
+
+- **Side rail**: *Project settings › Extensions › TestPulse Studio* opens on an **Overview** (what to look at — orphan
+  classifications, control model identical to the design model, campaign functions turned off in the connection while a
+  profile sets them, answer cap under 12,000 —, one summary card per page, latest changes). Then *Requirements and
+  design*, *Test grid*, *Configuration profiles*, *Verdict and campaigns*, *Connection*, *Functions and data*, *Log and
+  failures*, *Usage and telemetry*. A link with `?page=…` opens a given page. Below 900 px the rail moves above the
+  page.
+- **One way of saving**: every page keeps a draft; a sticky header says "N unsaved changes" with **Cancel** and
+  **Save** (disabled, with the reason, while the draft is invalid) and who changed the page last. Nothing is saved on
+  change any more — bug source, Cockpit and usage sending switches included. Leaving a page with a draft asks "Leave
+  without saving?"; if someone saved meanwhile, Studio names them and offers **Reload** or **Overwrite their
+  version**. A failed save keeps the draft.
+- **Test grid**: a three-step explanation of how Studio files a test, then a list per axis and the detail of the chosen
+  entry — "Recognized when…" with the canonical tag always active and each condition read as a sentence ("→ the test
+  title contains the word "injection""), an empty pattern blocking the save, "In every plan" (expected, minimum one
+  test / N tests / N % of the plan, the project default) and the design instruction. **Test the detection** replaces
+  "Test the rules": describe a test (title, suite, area path, tags) and see, per axis, where Studio files it and which
+  condition decided, computed on the draft with the real detection. A test may carry several entries of one axis, as
+  before. One name everywhere: "Expected grid".
+- **Configuration profiles**: profile list on the left (a "changed" pill on profiles touched by the draft), real tabs
+  with the number of redefined settings, "Where a value comes from" (plan profile › project default › member's personal
+  value › shipped value). One editor per setting, shared with the member settings: header and footer label, `#RRGGBB`
+  color, 100 / 200 / 500 / 1,000 runs, regression threshold ≥ 1, PNG / JPEG / SVG logo with preview, up to five
+  signatories, readable weekday for scheduled reports, `https` webhooks shown **masked** with **Send a test**.
+- **Verdict and campaigns**: bug source, **promotion decision** (stage ladder and report on the host work item, now set
+  here) and Cockpit in one page.
+- **AI assistant** split in three pages. *Connection*: status and test, access mode cards, the "outside your Azure
+  tenant" warning shown as soon as the provider is chosen, models with the warnings next to them — no Save button in
+  the middle of the page any more. *Functions and data*: nine functions in two groups (requirement, campaign), model
+  and provenance; the one-option "Run by" column is gone. *Log and failures*: the log sorts by date, filters by
+  category with counts, searches without accents or case, exports to CSV.
+- **Requirements and design**: Definition of Ready with a live preview on the project's two latest assessments
+  (recomputed by Studio, no model call), weights with a total of 100, criteria, default design with the judge **on
+  demand**, code reading caps with a token estimate. The requirement AI functions moved to *Functions and data*.
+- **Usage and telemetry**: tiles, daily bars, four tables in view and the others folded; the sending switch goes
+  through the page header.
+
+</Update>
+
+<Update label="0.1.151" description="2026-10-08">
+
+A calmer, more regular interface: five text sizes, two weights, Azure DevOps dark theme followed (TPS-233).
+
+- **Dark theme**: when Azure DevOps uses its dark theme, Studio follows it — colors, tables, buttons and dialogs — and
+  switches back when you change the theme, without reloading. The test coverage tab of a work item keeps its current
+  colors for now.
+- **Typography**: five sizes (12, 14, 16, 20 and 28 px) and two weights (regular and semi-bold) everywhere; buttons
+  are no longer in capitals. Sizes moved to the nearest step: 7 to 12.5 px become 12, 13 becomes 14 (12 for secondary
+  text), 13.5 becomes 14, 15 becomes 16, 18 becomes 20, 24 and 30 become 28. Exported documents (PDF, Word,
+  PowerPoint, HTML) are unchanged.
+- **Colors**: screens use the shared color set only, including score bars below, at and above target (green at the
+  target, blue beyond), quality grades and design techniques.
+- **Common controls** for the coming screen redesigns: button, pill, number field, switch, segmented control, card
+  and a collapsible "Details" section that remembers, for you, whether you left it open.
+
+Every combination finds selectors the same way; Selenium, Cypress and Cucumber fixes (TPS-231).
+
+- **One way of finding**: a selector, text or route used by a test is looked up by Studio in the code read even when
+  the AI did not cite it, or cited it in the wrong file — a test identifier through its declaration in a screen
+  (`By.id` looks for an `id`, `By.name` for a `name`), a tag selector (`h1`) through the tag of the screen, a text
+  through its only occurrence outside tests and documentation, the screen being preferred to a validator. Cucumber
+  step definitions, Cypress `[data-testid="…"]` and Selenium `By.cssSelector` now get the same sources as Playwright.
+- **Selenium**: screen limits are checked when the element is kept in a variable before `sendKeys`;
+  `assertEquals("…", …)` and `getText().contains("…")` are expected texts.
+- **pytest-bdd**: a step definition only links the steps of its keyword (`@when` does not link a `Given` step), as
+  pytest-bdd does; Cucumber still ignores the keyword.
+- A value typed by the test that is not in the data of the test case is noted in a comment and counted in the checks,
+  without a marker. On a shared step definitions file, the preview counter also gives the items of the test shown.
+- **Comparison with the code**: a code fragment written on one line by the AI and on several lines in the code is found
+  (blanks and line breaks normalized), instead of being discarded as "code cited not in the file read".
+
+</Update>
+
+<Update label="0.1.150" description="2026-10-08">
+
+Second step closed: drop-down lists, Page Object only when useful, per-file counter, documentation (TPS-230).
+
+- **Drop-down lists**: a keyed selector (`select[name="country"]`, `[data-testid="x"]`, `#id`, `By.id`, `By.name`) is an
+  identifier declared in the screen, so the model's citation of `country` in the README is resolved to the `<select>`
+  of the screen read. A test that types into a drop-down list (`fill`, `type`, `sendKeys`…) gets the marker "drop-down
+  list filled like a text field": the option selection of the framework is expected.
+- **Page Object only when it has content**: with no method and no call, no Page Object file is produced, and the
+  tests neither import it nor declare `po` (5 combinations; the 3 Cucumber ones have none). Generating the cited
+  locators in the Page Object stays in the backlog.
+- **Preview**: the counter above the code is the one of the file shown — "no item to complete in this file" on a Page
+  Object without marker.
+- **Help and privacy statement**: what "ready to review" establishes and what it does not (Studio runs nothing), the citations
+  block, drop-down lists; privacy: second step summary (what goes to the model, three categories off by default,
+  nothing written without your action) and `vso.code_write` used for the pull request of automated tests only.
+
+</Update>
+
+<Update label="0.1.149" description="2026-10-08">
+
+Form fields cited by their whole tag are found again; what the model cited is shown (TPS-229).
+
+- A citation that **contains** a declaration — the whole tag `<input data-testid="postal-code" name="postalCode" />`,
+  or a few attributes `data-testid="phone" name="phone" maxLength={20}` — is recognised by its test identifier
+  (otherwise its `id`, otherwise its `name`) and found through the declaration in the screen read. The screen limits
+  and the citations now read declarations the same way.
+- **Preview**: a collapsible **Citations returned by the model** block lists each citation (value, file, line) and what
+  Studio's check did with it — found, relocated, built value, composed message, or not found and why (not in the code
+  read, seen only in the documentation or a test, declaration not found in the screens read). Nothing is sent.
+
+</Update>
+
+<Update label="0.1.148" description="2026-10-08">
+
+Fix: selectors declared in the screen are found again (TPS-228).
+
+- A test identifier cited **between quotes or backticks** (`'postal-code'`, `"phone"`) is recognised as the same
+  identifier and found through its declaration in the screen read.
+- A screen read twice (another version through another link, a path with or without the leading "/", a repository
+  identifier in another case) counts once: its declaration is no longer "ambiguous", and **Read the code** sends the file
+  only once (the version of the first link read).
+- **Screen limits**: a list accepts the value **or the label** of its options (`Suisse` for `CH`), so only the values
+  the screen really cannot take are marked.
+
+</Update>
+
+<Update label="0.1.147" description="2026-10-08">
+
+A selector is worth its declaration in the screen; screen limits checked (TPS-227).
+
+- **A selector is worth its declaration in the screen**: a test identifier (`postal-code`, `save-button`…) is accepted
+  only through its declaration in a screen read — never through a mention in the README or an existing test, which is
+  shown as a hint ("also mentioned in README.md:38"). A text seen only in the documentation is marked.
+- **Screen limits checked, without AI**: a value of an iteration longer than the `maxLength` of the field it fills (the
+  browser truncates it), outside the options of a list, or not a number for a numeric field gets a marker with two ways
+  out — test the rule through the API, or correct the data of the case. The checks count these values.
+- **Tests placed under the test root read**: with a `playwright.config.ts` read, the generated Playwright · TypeScript
+  files go under its `testDir`; **Next steps** says which root was read.
+- **Comparison with the code**: code quoted between backticks is checked with tolerance (quotations of the requirement
+  and plain words are not checked, `==` / `===` and curly quotes are the same, `…` stands for anything, the fragment is
+  looked for in every cited file and then in the other files read) and the missing fragment is shown when a gap is
+  discarded; a "rule taken from the code" contradicted by a comment of the cited lines is discarded; a screen limiting
+  a field more strictly than the validator gives a gap added by Studio.
+
+</Update>
+
+<Update label="0.1.146" description="2026-10-08">
+
+Automated tests: the first "ready to review" — home page, composed messages, declared identifiers (TPS-226).
+
+- **Opening the home page needs no citation**: `page.goto('/')`, `cy.visit('/')` or the base URL with path `/` are
+  marked **application root**. An absolute URL is accepted when its origin (host and port) is in a file read
+  (`playwright.config.ts`, `vite.config.ts`, the server, the README) — otherwise "base URL to confirm".
+- **Composed messages found**: `MSG-08 — The phone number is not valid.` built by the code from a table of messages is
+  found on the line of that table (**composed message**) when a template of the file joins the two values.
+- **Identifiers found through their declaration**: a test identifier (`postal-code`, `save-button`…) cited in the wrong
+  file is found by its `data-testid=` / `id=` / `name=` in a screen read; existing tests, documentation or a
+  correspondence table no longer make it ambiguous.
+- The AI assistant is asked to navigate from the base URL and to cite the heading of the page it opens.
+- **Cucumber**: a precondition that uses parameters of the plan becomes the first step of the scenario outline (a
+  `Background` does not receive the examples); the **Generate** button counts only the cases the combination can use.
+- **Comparison with the code**: **Add to the selection** now also reads a dependency that is in the repository but was
+  not read (same version, reading caps applied, reason shown if refused); a gap attached to a question (Q-nn) says
+  **question Q-nn**, never "rule missing"; a citation is never moved onto a declaration (`import`, `type`).
+
+</Update>
+
+<Update label="0.1.145" description="2026-10-08">
+
+Automated tests: citations found in all the code read, strings repaired, Gherkin in one language (TPS-225).
+
+- **Citations found in all the code read**: a selector, route or message that the AI cites at the wrong line or in the
+  wrong file is looked for in the whole cited file, then in the other files read (when it occurs there only once), and
+  the test says **relocated** next to its source. `getByTestId('x')`, `[data-testid='x']` and `data-testid="x"` are
+  recognised as the same element, and a value built by the code read (`error-${field}`) is found as a **built value**.
+- **Strings repaired by Studio**: a string cut by an apostrophe (`'n'est pas valide'`) is rewritten with double quotes
+  (or a template literal) in TypeScript, JavaScript and Python before the syntax check — "2 strings repaired by Studio".
+- **Cucumber says why**: a manual case in steps + data is **not offered** for Cucumber (Gherkin required) — greyed in
+  the list of cases and said in grey under the result, no longer "no usable result, to regenerate".
+- **A `.feature` in one language**: keywords follow most keywords of the scenario (English on a tie; Conception writes
+  them in English), "Verify:" steps read back from Azure DevOps follow the other keywords, and the **precondition** of
+  the case becomes the `Background` of the feature — never lost. The syntax check now rejects a keyword of another
+  language than the one declared.
+- The count of session cases "not yet written to Azure DevOps" only counts cases that no listed case carries; server
+  files (`server/…`, `api.ts`, `*.routes.ts`) are now in the "Routes and controllers" category of **Read the code**.
+
+Exact code citations, unread dependencies flagged — the comparison with the code checks itself better (TPS-224).
+
+- **Every file read is sent with its line numbers** — to the comparison with the code and to the automated tests — so
+  the AI assistant cites the lines it sees instead of counting them. The files kept in Studio stay as they were read.
+- **Studio checks more**: a gap whose cited lines are all blank, or whose quoted code is not in the file read, is
+  discarded and counted. When the quoted code is at most 10 lines away in the same file, the citation is moved onto it
+  and marked **citation relocated**. A proposed value must be in the cited lines — or be accepted by a regular
+  expression written there (`L-1234` with `/^(L-)?\d{4}$/`) —, and a rule taken from the code must carry the numbers and
+  quoted texts of those lines (a "phone 8 to 20" rule against `< 10 || > 20` is discarded).
+- **"Rule missing from the code read" double-checked**: when at least two elements of the rule appear in one file read,
+  the gap becomes **cannot conclude from the code** and Studio says where.
+- **Unread dependencies**, found by Studio without AI: under **Read the code**, the modules imported by a ticked file and
+  not read, checked at the same version — not ticked (**Add to the selection**), in the repository but not read, or
+  **missing from the repository** — with a **Question for the PO**. The AI assistant is told and must not assume what
+  they do.
+- **A failure no longer clears the screen**: the previous result stays (greyed while the comparison runs, with its time
+  after a failure or a cancel), and the questions already added stay added.
+
+</Update>
+
+<Update label="0.1.144" description="2026-10-07">
+
+Internal only — no visible change: test bench for the automated tests (TPS-223).
+
+</Update>
+
+<Update label="0.1.143" description="2026-10-07">
+
+- Les tests automatisés, nouvelle étape « Automatiser » de Conception : à partir de vos cas de test manuels et du code lu, un test par cas, dans l’une des huit combinaisons framework · langage (Playwright, Selenium, Cypress, Cucumber).
+- Un statut honnête calculé par TestPulse Studio : « prêt à relire » quand chaque sélecteur est cité dans le code lu, sinon « squelette » avec des marqueurs à compléter. Studio n’exécute rien ; vous relisez, puis récupérez une archive ou ouvrez une pull request.
+
+</Update>
+
+<Update label="0.1.142" description="2026-10-07">
+
+Compare the requirement with the code read and enrich the manual tests, while you arbitrate (TPS-221).
+
+- **Compare with the code** is now active, under the list of files of **Read the code** (step 0 of Conception and the
+  **Requirement AI** tab), once code has been read and ticked and the **Comparison with the code** function is on (AI
+  connection, then **Requirements and design**). The AI assistant compares the requirement, the test model and the
+  existing cases with the files read, and lists the gaps by kind — rule missing from the code read, check missing from
+  the requirement, different value, cannot conclude from the code — each with the rule, the lines of code cited
+  (highlighted, with a link to the file at the version read) and a confidence. A rule without trace is always said to be
+  absent **from the files read**, never "from the code".
+- **Studio checks every citation**: a gap that cites a file that was not sent, lines outside the excerpt sent, an unknown
+  rule or a value that is not in the cited lines is discarded and counted ("2 gaps discarded: file not sent (1), lines
+  outside the excerpt (1)"), never shown as a result.
+- **For each gap**: **Question for the PO** — added to the requirement assessment with the source "code" and a priority
+  set by Studio, never by the AI —, **Copy**, **Ignore**. Nothing is written to the story or to Azure DevOps from this
+  screen.
+- **Proposals on the test model** (a partition, a value, a rule numbered C-n, a corrected reference) go to the model step
+  of Conception, where each one is accepted or refused; the design is then recomputed by Studio: new coverage elements,
+  **new cases** to write with the usual flow, **existing cases to review** (never changed). Cases that exercise what came
+  from the code are tagged `source:code`.
+
+</Update>
+
+<Update label="0.1.141" description="2026-10-07">
+
+TestPulse Studio can read the code linked to a requirement, once your organization approves it (TPS-220).
+
+- **New permissions, asked once**: read the code (`vso.code`), write code (`vso.code_write`, requested now so that the
+  organization approves a single time — not used in this version) and extension data (`vso.extension.data`). An
+  organization administrator approves the update in **Organization settings › Extensions**; until then, code reading
+  says so and nothing else changes.
+- **Read the code**, at step 0 of Conception and in the **Requirement AI** tab of a work item: the pull requests,
+  commits and branches linked to the story and its child tasks are read on demand (Azure Repos; GitHub links stay
+  "not read" in this version). Before anything is sent you see the list: file, repository, version, category, whole or
+  changed parts, size and tokens, why it was chosen — untick what must not be sent. Lock files, generated, minified and
+  binary files are always excluded; **a secret file is never offered**, even unticked. The ticked files join the next
+  requirement assessment, and the criteria that depend on code (observability, traceability…) can then be verified.
+- **Off by default**: the new **Source code** category of the AI connection data policy must be turned on by a project
+  administrator; off, Studio makes no call to the code at all. Caps (files, characters per file, in total) are set in
+  **Requirements and design**.
+- **Clearer reasons when a link is not read**: "the organization has not approved code reading yet", "you do not have
+  access to this repository", "repository or version not found" — always what Azure DevOps answered, never a guess.
+  Before this version, every Azure Repos link was wrongly said to wait for an approval that had not been asked.
+- **Compare with the code** stays disabled until a future version. Azure DevOps Server: code reading is not validated.
+
+</Update>
+
+<Update label="0.1.140" description="2026-10-07">
+
+Studio tells you when code arrives for a requirement already designed (TPS-209).
+
+- **Coverage has a new "Linked code" column**: "● Code available since the design of &lt;date&gt; · 1 PR, 4 commits" when
+  pull requests, commits or branches were linked to the story or its child tasks after its test design was written in
+  Studio; otherwise "no new development link" or "not tracked: no design written". It is **detected without AI**, from
+  the work item links only, for the requirements shown — the content of the code is not read yet. GitHub links are
+  listed "not read (V1)". **With new code (n)** filters the list; the badge opens the requirement in Design.
+- **Design and the Requirement tab of the work item show the same banner** when the requirement is opened; Design also
+  lists the new links (link, carried by, Azure Repos repository, linked on).
+- **Ignore these links** hides the badge for everyone in the project until another link arrives (who and when are
+  shown, with **undo**). **Compare with the code** is shown disabled until the organisation allows reading the code.
+- Designs written before this version are tracked too: the reference is rebuilt from the date the test cases were
+  linked to the story, without ever reporting a link that may have been there before.
+
+</Update>
+
+<Update label="0.1.139" description="2026-10-06">
+
+Requirement and design settings for the whole project (TPS-208).
+
+- **Requirement assessment and design are now set for the whole project**, in a new administration tab, **Requirements
+  and design**: assessment weights and thresholds, the design gate, default test level, type and techniques, and the
+  four requirement AI functions (assessment, improvement, test design, case review). They are about the requirement,
+  before it belongs to a plan. Plan profiles keep the campaign settings (thresholds, quality score, notifications,
+  signature, branding, execution, export, expected grid, campaign AI functions).
+- **Nothing changes in how assessments and designs run**: a value set in a named plan profile was never applied. Settings
+  now shows the value actually applied, whatever the plan chosen ("project value" or "product value").
+- The first save starts from the project default values. Requirement settings still set in plan profiles are listed
+  with **Remove these inactive settings** (after confirmation); nothing is removed automatically.
+
+</Update>
+
+<Update label="0.1.138" description="2026-10-06">
+
+Designing a requirement whose Definition of Ready is not met (TPS-188).
+
+- **New profile setting: "Designing a requirement whose DoR is not met"** — Allow, Warn (recommended) or Block, in
+  the Requirement assessment section, read-only in Settings for members. It applies only when the story's assessment
+  is up to date and its Definition of Ready is not met; the verdict stays advice.
+- **Warn (default)**: the first action that starts a design — **Analyse the requirement** or entering the model by hand
+  — opens a dialog with the revision, the date and the main reason; **Back to the requirement** (default) or **Design
+  anyway**, remembered for you, that work item and that revision. Opening the screen or a tab never asks.
+- **Block**: steps 1 to 3 stay visible but inactive, with **Improve the requirement** and **Reassess**; an
+  administrator can **Design anyway (administrator)** for the page. A design already started is never locked; step 0,
+  the history, the PDF and the cases already designed stay available.
+
+</Update>
+
+<Update label="0.1.137" description="2026-10-06">
+
+The assessment at a glance in Conception (TPS-187).
+
+- **The step 0 tile now sums up the requirement's assessment** in the Conception step bar, so it stays visible when you
+  arrive on the test model: the score and "DoR met" with when it was assessed and the revision read; "DoR not met" with
+  its main reason (for example "critical question open: Q-06"); "to reassess" when the story changed since; "not
+  assessed"; "assessment not read" with **Try again** when the history cannot be read; "assessment running…" during an
+  assessment, then the result without changing step. It is read from the history — no call to the AI assistant —,
+  keeps the size of the other steps and still opens step 0.
+
+</Update>
+
+<Update label="0.1.136" description="2026-10-06">
+
+A steadier and clearer requirement verdict (TPS-186).
+
+- **Fixed: the verdict could flip between two assessments of an unchanged story.** A question written in the
+  requirement (Q-01, Q-02…) used to count as critical only when the AI assistant ranked it so — the same story could be
+  "not ready" once and "ready" the next time. Its criticality is now **set by the requirement**: words such as
+  "blocking", "critical" or "must be answered before…" make it critical, "optional", "not blocking" or "nice to have"
+  make it non-critical, a written answer closes it; with no such word it is non-critical. The assistant's priority stays
+  shown, marked "criticality set by the requirement" when they differ. Questions the assistant adds itself keep its
+  priority.
+- **The verdict now reads "Definition of Ready met", "not met" or "undetermined"** — the assessment is about a story
+  before development. The Coverage badge shows "DoR ✓" or "DoR ✕", with the full label in its tooltip.
+- **A "met" verdict says what is still open**: "1 open non-critical question: Q-06", each question a link to its row —
+  on screen, in the PDF and in the Coverage tooltip.
+- **Conception opens on the requirement when it needs it**: a requirement never assessed, or whose assessment is
+  outdated, opens on step 0 Requirement; an up-to-date one opens the test model directly. A design in progress is
+  never moved.
+
+</Update>
+
+<Update label="0.1.135" description="2026-10-06">
+
+Fixes to the requirement assessment history and project logos (TPS-185).
+
+- **Fixed: the history of a story could disappear on reload.** Azure DevOps only tells stored documents apart by the
+  first 50 characters of their name, and ours were longer: a story whose number started like another's (3034 and 3027)
+  read the other's history, showed "not assessed yet" after a reload and refused to save new assessments. Stored names
+  are now short enough for every story to have its own history. The previous history cannot be trusted and is not read:
+  it **starts empty** from this version (nothing is written to the stories).
+- **Fixed: an older assessment could show the latest one.** All assessments of a story were saved in the same document,
+  so opening or exporting an older entry of the history showed the latest assessment. Each assessment now has its own.
+- **Fixed: a project could keep only one logo.** Each logo now has its own document; the current logo uploaded with an
+  earlier version is still read when it can be verified.
+- When the history cannot be read, the assessment screen now says "The history of this work item could not be read"
+  with **Try again**, instead of showing the requirement as never assessed.
+
+</Update>
+
+<Update label="0.1.134" description="2026-10-06">
+
+Improve a requirement and write it to the story, without losing anything (TPS-184).
+
+- **Propose an improvement** from the assessment (step 0 of Conception, Requirement AI tab): choose the findings and
+  open questions to address; the AI assistant rewrites the definition and proposes, for the acceptance criteria, only to
+  keep, make more precise or add — never to remove. Added criteria take the next identifier and are written in Gherkin
+  (a Scenario Outline with its Examples when data varies).
+- **A non-regression check, computed by the code**, comes first: criteria, scenarios, Examples rows of each criterion
+  (exact values, spaces included), Scenario Outline form, rules cited — on what would actually be written. Any loss is
+  shown and **disables writing**, with no way around it, so nothing is lost: a proposal that turns seven Examples rows
+  into one, nine required fields into "Street" or drops two criteria cannot be written.
+- **Before and after side by side**, rendered (keywords, Examples tables), differences highlighted; accept, edit
+  (Gherkin checked) or refuse each criterion. Removing an existing criterion is a separate, confirmed gesture with a
+  reason, shown "removed by you". Open questions can stay open in the description's Questions section.
+- **Write to the story**: review the fields touched, the criteria before and after and a preview; the original HTML is
+  kept outside the changed blocks; an optional discussion comment says where the change comes from. The write tests the
+  revision read: if the story changed meanwhile, nothing is written and the screen offers to read it again. Fields
+  missing from the work item type are reported and not written. Reassessing is then offered, never automatic.
+- The **Requirement improvement** function appears in Settings › AI connection and in profiles, off until an
+  administrator turns it on, like the other AI functions.
+
+</Update>
+
+<Update label="0.1.133" description="2026-10-06">
+
+A warning before reassessing an unchanged requirement (TPS-183).
+
+- **Reassess** now warns when the story has not changed since its last assessment: "This requirement has not changed
+  since its last assessment (revision N, on DD/MM HH:MM)". The warning lists what you risk — the score can vary by
+  several points with no change to the story, and near the threshold the verdict can flip (the current margin is shown
+  when it is narrow); a new call is billed to the project's AI connection; the current assessment stays in the history
+  — and advises improving the requirement first. **Cancel** is selected by default; **Reassess anyway** goes ahead.
+  The same warning protects the **Reassess** button of step 0 of Conception, of the Requirement AI tab and of the
+  **narrowly** tag, which now reads "improve the requirement before reassessing it". A first assessment, or a story
+  whose revision has changed, is assessed as before. The score, the verdict rules and the number of calls are unchanged.
+
+</Update>
+
+<Update label="0.1.132" description="2026-10-05">
+
+Fixes to the requirement assessment history and PDF (TPS-181).
+
+- **Fixed: the history of a story could get stuck.** Azure DevOps stored the assessments of different stories in one
+  shared document, so a story could refuse every new assessment ("the history of this work item is unreadable"), show
+  another story's assessment, or list the same assessment twice. Each story now has its own documents. Because the
+  previous history was shared between stories, it cannot be trusted and is not read: the history **starts empty** from
+  this version. Nothing is written to the stories.
+- **Fixed: the verdict was misprinted in the PDF.** "Ready" printed as "? Ready", easy to read as "Undetermined". The
+  PDF now shows the verdict as a word with its colour and a dot, and the rules with drawn bullets.
+- **Fixed: a PDF of an older assessment had an empty title.** It now shows the story's current title, marked as such.
+- **Fixed: replacing the project logo could lose the new logo.** All logos of a project shared one stored document.
+  Each logo now has its own; a logo uploaded before this version is still read.
+- When the storage cannot be read, saving an assessment is refused with "try again" instead of risking the history.
+
+</Update>
+
+<Update label="0.1.131" description="2026-10-05">
+
+Requirement assessment history and PDF export (TPS-181).
+
+- **History.** Every assessment of a work item is kept, even when the story has not changed — 20 by default, from 5 to
+  100 in the profile's **Requirement assessment** section; beyond that, the oldest is removed. **History (n)** lists
+  date, revision, score, verdict, model and author, with the score curve against the Ready threshold; an entry opens
+  read-only, and **Back to the current assessment** returns. The single assessment saved by the previous version becomes
+  the first entry. Reading the history never calls the assistant.
+- **PDF export** from the current assessment or from a history entry: score, verdict and its rules, family radar,
+  criteria, code checks, questions, split, next actions, sources read and not read with their reason, gestures, and an
+  **Evolution** appendix. The PDF never contains the connection key, the resource address or the text sent to the
+  assistant.
+- **Fixed.** After moving to another work item, the assessment of the previous story could appear on the new one,
+  marked outdated. A story now only ever shows its own assessment — in Conception, in the Requirement AI tab and in
+  Coverage; an assessment still running for the previous story is cancelled, or kept for that story if it had finished.
+- The **narrowly** margin can now be set in the profile, next to the history size; members see both, read-only, in
+  Settings.
+
+</Update>
+
+<Update label="0.1.130" description="2026-10-05">
+
+- L’évaluation de l’exigence, à l’étape 0 de Conception et dans l’onglet « Exigence » d’un work item : l’assistant IA lit l’exigence critère par critère et cite ses preuves ; la note et le verdict Ready sont calculés par TestPulse Studio, avec chaque règle déclenchée.
+- Fermer une question, corriger un constat, marquer un critère non applicable : la note et le verdict se recalculent sans appel, chaque geste daté et signé. Rien n’est écrit dans l’US.
+
+</Update>
+
+<Update label="0.1.129" description="2026-10-04">
+
+Internal only — no visible change. Groundwork for requirement assessment (TPS-178), switched off in this release.
+
+- **Requirement assessment, switched off.** An AI function rates a requirement against a closed grid (INVEST
+  and four other families, eighteen criteria, 0 to 5, each score backed by an identifier or an exact quote). The
+  product then checks it: a quote that cannot be found in what was sent is discarded, a criterion whose source was not
+  read is "not verifiable", a gap whose terms are in the text is contested, a question the requirement asks itself and
+  the AI left out is flagged. The score and the "Ready" verdict are computed by the product from written rules, never
+  asked of the AI; on the reference bench, the rules give back the expert's ten verdicts.
+- **Project settings, switched off.** A profile section "Requirement assessment" (family weights that add up to 100,
+  active and essential criteria, verdict thresholds) and the function's line in AI Connection are built but hidden.
+
+</Update>
+
+<Update label="0.1.128" description="2026-10-04">
+
+Internal only — no visible change. Groundwork for the second step's requirement assessment (TPS-177): Studio can now
+read a requirement and its context without AI, and turn Azure DevOps rich text into Markdown that keeps tables as
+tables. Both screens that use it are built but switched off in this release.
+
+- **Requirement context, read without AI** (switched off). The story, its first-level links and its ancestors are read
+  in batches, under caps (20 links, 4,000 characters per link); every source is listed as read, truncated (with the cut
+  line) or not read (with its reason: permissions, cap, unsupported type, GitHub link, data policy). Image attachments
+  can be downloaded from Azure DevOps one by one, under a new data-policy category, off by default. A "What is sent to
+  the model" panel shows sizes, estimated tokens and the exact Markdown before any call. Nothing calls a model yet.
+- **Tables kept as tables** (switched off for test design). Descriptions and acceptance criteria convert to Markdown:
+  headings, nested lists, Gherkin blocks unchanged, tables with their header row and the same rows and columns. Test
+  design keeps sending the current text until stability benchmarks confirm the switch causes no regression.
+
+</Update>
+
+<Update label="0.1.127" description="2026-10-02">
+
+Usage counters move to their second version, ready for the second step (requirement assessment, linked code, automated
+tests). Nothing is sent yet: no build of the extension has an endpoint.
+
+### Changed
+
+- **Usage tab — second-step counters.** The list of what would be sent now shows `tallies`, eleven tables of counts under
+  closed lists (Ready verdicts, verdict rules, assessment checks, PO questions by priority, sources not read by reason,
+  losses detected in proposals, story writes refused, requirement ↔ code gaps, automated tests drafted and delivered by
+  framework × language combination, drafted tests by status). A **Requirement, code and automation** family appears in
+  the tab, its CSV and the preview of the next send as soon as one of them is not zero; the AI table lists the four
+  second-step functions. They all stay at zero until those features ship.
+- **Usage counters document.** It is rewritten in the new version on its first write, without losing a single counter.
+
+### Fixed
+
+- **Usage counters document.** A counter document that could not be read was replaced by an empty one. It is now set
+  aside under its own key and kept; counting starts again from zero. A document written by a newer version is never
+  touched.
+
+</Update>
+
+<Update label="0.1.126" description="2026-10-02">
+
+Internal only — no visible change. Republished after closing the probes of the second step (TPS-170): the private
+probe extension is replaced by a live check when the new permissions are introduced, and the list of permissions to
+request then is fixed. The extension's code is identical to 0.1.125.
+
+</Update>
+
+<Update label="0.1.125" description="2026-10-02">
+
+Correctif de l'onglet **Explore AI** ouvert sur la Task de suivi d'une session exploratoire (TPS-171).
+
+### Fixed
+
+- **Explore AI tab on a session's tracking Task.** Opened from *Previous sessions* on the story, the tracking Task could
+  show the start form instead of the closed session, and its export said « The session could not be read ». The Task
+  now finds its session through the identifier it carries in its `explore-session:` tag, read straight from the session
+  record; export and work-item creation work there again. The hub list entry that had missed the update is repaired on
+  the way, without delaying the tab.
+- **Closing a session.** The list entry is now retried once when another write got there first, an autosave already in
+  flight is allowed to finish before the closing write, and with a promotion decision the story form is refreshed only
+  after the session is saved — a refresh during the save could cut it short.
+- **Messages on the tracking Task.** A Task whose session was run in the Explore tab of TestPulse now says so and points
+  to that tab, in French and English. The notice on a tracking Task no longer says it was created by TestPulse, and the
+  heading inside the tab reads **Explore AI**, like the tab itself.
+
+</Update>
+
+<Update label="0.1.124" description="2026-10-01">
+
+Internal only — no visible change. Republished after the documentation of the automated-test decisions of the second
+step (supported frameworks, delivery as a downloaded archive or a pull request on a new branch, TPS-170). The
+extension's code is identical to 0.1.123.
+
+</Update>
+
+<Update label="0.1.123" description="2026-10-01">
+
+Internal only — no visible change. Republished after the documentation of the second step (requirement assessment,
+linked code, automated tests: decisions, inventory of the reused design logic, assessment bench preparation, TPS-170). The extension's
+code is identical to 0.1.122.
+
+</Update>
+
+<Update label="0.1.122" description="2026-10-01">
+
+Correctifs de l'onglet **Usage** après revue de la 0.1.121 : l'onglet sur lequel l'administration s'ouvre est compté, ce
+qui vient d'être compté apparaît tout de suite, chaque écran, action et espace est affiché par son nom (le CSV porte
+l'identifiant et le nom), l'aperçu du prochain envoi reprend la police de l'écran, les tokens du modèle de test se lisent
+à part de ceux de la rédaction des cas, et la famille de modèle est donnée pour chaque fonction IA. Toujours sans donnée
+nominative, toujours réservé aux administrateurs ; l'envoi à l'éditeur reste non configuré dans cette version.
+
+### Changed
+
+- **Usage tab — names instead of codes.** Screens, tabs, actions and areas show their name in French or English; the
+  identifier that would be sent shows as a tooltip. The CSV export now has five columns:
+  `Date;Family;Identifier;Label;Count`.
+- **Usage tab — tokens per AI function.** The AI table gains a *Tokens* column: the test model and the free question on
+  a campaign are counted apart from case writing and campaign analysis. Counters recorded before this version keep them
+  together (they are not split afterwards).
+- **Send preview — model family per AI function.** The preview and the list of sent fields show, for each AI function
+  turned on, the family of its model (`other` when the name is not recognised — never the model or deployment name),
+  instead of a single family that could be missing without notice.
+- Privacy statement and in-app help (**Usage and statistics**) updated accordingly.
+
+### Fixed
+
+- The tab the project administration opens on (*Configuration profiles*) and the panel a profile opens on are counted,
+  like the screen any other area opens on.
+- Opening the **Usage** tab first writes what was just counted on the page: its own opening shows at once instead of up
+  to a minute later.
+- **Preview next send** and **Forget this installation** use the font of the screen (they were shown in the browser's
+  default serif font); with no complete day to send, the preview says that today's counters will go tomorrow (if
+  sending is turned on).
+
+</Update>
+
+<Update label="0.1.121" description="2026-10-01">
+
+L'onglet **Usage** de l'administration du projet dit désormais quels écrans, onglets et fonctions de TestPulse Studio
+servent : une famille « Écrans et fonctions » (écrans et onglets ouverts, actions qui aboutissent, sessions par espace),
+et pour chaque fonction IA les lancements, réussites, échecs et annulations. Toujours sans donnée nominative, toujours
+réservé aux administrateurs ; l'envoi à l'éditeur reste non configuré dans cette version.
+
+### Added
+
+- **Usage tab — Screens and features.** Screens and tabs opened by users (a click or a link, never a re-display or a
+  screen's default tab), completed actions (a file produced, a successful write, a result displayed — never a mere
+  click) and loads of each area (Pilotage, Couverture, Conception, Outils, administration), by identifier from a closed
+  list, for the chosen period, in the CSV export and in the send preview.
+- **Usage tab — AI functions launched, succeeded, failed, cancelled**, per function; "launched" is computed, the AI tile
+  shows failures and cancellations.
+- The project administration and the work item **Test coverage** and **Explore** tabs now keep their usage counters too
+  (locally; they never send).
+
+### Changed
+
+- Monthly usage totals older than 24 months are deleted from the project storage.
+- A send after a long interruption is capped in size; the remaining days leave with the next sends (sending is still not
+  configured in this version).
+- Privacy statement and in-app help (**Usage and statistics**) list the new counters exactly.
+
+</Update>
+
+<Update label="0.1.120" description="2026-10-01">
+
+Aucun changement visible : la spécification de la prochaine famille de statistiques d'usage (écrans et fonctions) est
+écrite ; l'extension est construite à partir du même code que la 0.1.119.
+
+### Changed
+
+- **Internal only — no visible change.** Same reports, exports, settings and Usage tab as in 0.1.119.
+
+</Update>
+
+<Update label="0.1.119" description="2026-10-01">
+
+Aucun changement visible : les compteurs d'usage s'appuient sur une définition partagée avec le futur service de
+l'éditeur. Ce qui est compté, ce qui serait envoyé et l'onglet Usage sont inchangés ; l'envoi reste non configuré.
+
+### Changed
+
+- **Internal only — no visible change.** The usage counters now use a definition shared with the publisher's future
+  service. What is counted, what would be sent and the Usage tab are unchanged; sending is still not configured.
+
+</Update>
+
+<Update label="0.1.118" description="2026-10-01">
+
+Aucun changement visible : le dépôt est réorganisé pour accueillir le futur service de l'éditeur. L'extension est
+construite à partir du même code et se comporte à l'identique.
+
+### Changed
+
+- **Internal only — no visible change.** The source repository is now organised in packages (the extension, a shared
+  package and a future publisher service, empty for now). Same code, same reports, same exports, same settings; the
+  Usage tab and the sending switch behave exactly as in 0.1.117 (sending is still not configured).
+
+</Update>
+
+<Update label="0.1.117" description="2026-09-30">
+
+Administration : un onglet **Usage** montre comment TestPulse Studio est utilisé dans le projet — compteurs locaux, sans
+donnée nominative — et prépare un **envoi à l'éditeur**, coupé par défaut.
+
+### Added
+
+- **Usage tab** (*Project settings › Extensions › TestPulse Studio › Usage*, project administrators only). Counters of
+  the day, kept in the project storage: reports generated and profiles applied (by identifier), exports by format,
+  successful AI functions by function with their tokens, designed cases (generated, checked, written, ignored) with the
+  written / generated ratio and the judge's issues, validated classifications, AI errors by code, durations by range.
+  A period of 7, 30 or 90 days, tiles, tables by family, a day-by-day trend and **Export as CSV** (a local file). A member
+  sees neither the tab nor the counters. No person, organization, project, work item, prompt, model answer or URL is
+  ever counted.
+- **Sending to the publisher — off by default.** An administrator can turn it on while seeing the exact list of what
+  would be sent, a **preview of the next send** (the same screen, for the days not sent yet — it sends nothing), the last
+  send and a log of every switch (author, date); **Forget this installation** replaces the random installation
+  identifier. At most one send a day, a failed send is silent and retried the next day. **In this version sending is
+  not configured**: the switch is disabled and says so, nothing is sent. The Marketplace privacy statement is in
+  `docs/privacy.md`.
+
+### Unchanged on purpose
+
+- Counting never blocks and never shows anything to a member: a write that fails is ignored. Reports, exports and
+  their contents are unchanged (parity).
+- The counters count in the project storage gauge; when the quota is reached they are no longer written and the Usage
+  tab says so.
+
+</Update>
+
+<Update label="0.1.116" description="2026-09-30">
+
+Conception : des **constats justes et lisibles**, la devinette d'erreur **décochée quand elle ne teste rien de plus**,
+la **nature de chaque condition** obligatoire, la correction du juge en **avant / après**, et **Régénérer** avec
+confirmation.
+
+### Fixed
+
+- **Partitions not exercised.** The findings panel could list many anonymous « A partition of RB-xx is exercised by no
+  case » lines while the summary said every rule was covered and *Complete the coverage…* said there was nothing to do.
+  The partitions no case exercises are now computed from the plan of the cases present, **named** (« input : partition »),
+  **one line per rule**, and the counter matches the lines. A case ignored or removed no longer counts, and *Complete the
+  coverage…* writes its planned case again.
+
+### Changed
+
+- **Error guessing unchecked by default** when it tests nothing more: every blank input equals « empty field » (a rule
+  removes the spaces) and that empty value is already tested by a finer technique. The card says why; you can check it
+  again.
+- **Every condition has a nature.** The analysis must say *Validation* or *Behaviour* for each decision table; a model
+  from an earlier analysis without it shows « Nature to choose ». Concurrency, atomicity between sessions, load or
+  performance become a point to clarify, never a condition.
+- **The judge's correction reads before / after**, step by step or field by field; the word diff is still there on
+  demand (*Show the differences*), with its legend.
+- **Regenerate.** Once the cases are generated, the button becomes *Regenerate the N cases* and asks for confirmation;
+  if the plan changes afterwards, it says so (« The plan has changed: M cases (N generated) »).
+
+</Update>
+
+<Update label="0.1.115" description="2026-09-30">
+
+Conception : un **second modèle relit les cas** proposés — le juge — et **pré-remplit l'arbitrage**. Il donne un avis, il
+ne décide jamais.
+
+### Added
+
+- **Review of the cases by the judge model.** After a generation, when *Designed-case review* is on and a judge model is
+  set in the AI connection, a second model — never the one that wrote the cases — reads each case with the requirement
+  and the test model and gives a verdict (*holds*, *to rework*, *dropped*) with issues from a closed list of twelve:
+  abstract step, unobservable expected result, missing data, data not representative, technique misapplied, coverage
+  element not exercised, duplicate, contradiction, incompatible preconditions, not runnable by hand, conditional expected
+  result, outside the requirement. Without a judge model, or with the function turned off, the summary says why and
+  everything else works.
+- **On each case.** A text badge « Judge (AI): … »; the checks first, then the judge's issues; a duplicate or a
+  contradiction links to the other case; a proposed correction shows word by word with **Apply** (the case becomes
+  edited, « correction applied ») or **Ignore**. An edited case is « to review again »; *Review this case* reads it alone.
+- **In the summary.** Verdict counts, the three most frequent issues, the review model, time, tokens and duration, and
+  what the product discarded (a cited case that does not exist, a verdict without an issue).
+- **Pre-filled review.** Each decision says where it comes from — the comparison with the existing tests, the judge
+  (« dropped — issue », « to rework — issue ») or the default — and can be changed; a case to rework offers *Apply the
+  correction*. The report counts the cases ignored on the judge's proposal and names the review model.
+
+### Unchanged on purpose
+
+- The judge never removes, ignores or writes a case, never changes the rules, the technique or the parameters, and
+  never receives the existing tests of Azure DevOps. Its verdicts are never written to Azure DevOps (no tag, no field).
+- The deterministic checks still come first; the plan and the number of cases do not change.
+
+</Update>
+
+<Update label="0.1.114" description="2026-09-30">
+
+Conception : des **contrôles sans IA** sous les cas, une **matrice règle × technique**, **un cas par comportement même
+pour une table de décision**, des **heuristiques transverses** au choix, une génération **plus rapide et visible**, et un
+bouton **Copier** qui fonctionne dans Azure DevOps.
+
+### Added
+
+- **Checks under the cases.** Computed at every edit, without AI: a rule or a partition without a case, a duplicate
+  (same rule checked, same expected result, whatever the technique), contradicting results on one row, an expected
+  result that depends on a parameter, a parameter without a column or a column never cited, an incomplete row, two wrong
+  values on one row, an input step citing no parameter, boundary values on an unordered input, a column that became
+  infeasible, a blank input that equals an empty field when spaces are removed. Each finding leads to its case;
+  *Ignore this case* strikes the case through and leaves it out of the review, *Restore* brings it back.
+- **Rule × technique matrix** in the summary: the cases of each rule per technique; a cell filters the list of cases.
+- **Complete the coverage…** writes only the planned cases missing from the list, when a rule or a partition has none.
+- **Cross-cutting heuristics** in the *Error guessing* card, outside the explicit rules: technical interruption, session
+  expired, direct access without authentication, maximum length, double submission, browser back. Unchecked by default,
+  each with its reason; one the requirement already covers says so. A checked heuristic adds a case with no rule, filed
+  under *Outside the explicit rules* and tagged `heuristic:<id>`; it never counts in the rule coverage.
+- **Durations** of the analysis, the writing and each batch in the generation report.
+
+### Changed
+
+- **Decision tables: one case per behaviour.** A condition now has a nature — *Validation* (each column accepts or
+  refuses, like country × postal code) or *Behaviour* (each column has its own effect), proposed by the analysis and
+  changed in one click. For *Validation*, the accepted columns form one case and the refused ones one case per kind,
+  a single wrong value per row. **Infeasible combinations** (no address yet and an existing default address) are listed
+  under the table with their reason; their column is shown greyed and never planned — no more « blocked » case.
+- **Expected results never depend on a parameter.** « If @action… » is refused at writing and flagged after an edit.
+- **Comparison with the existing tests** first on the rule checked and the expected result, then on the titles; the
+  column says which.
+- **Faster generation.** Batches of 20 are written three at a time; the cases of a batch show as soon as it is back,
+  « Batch i / n written », *Cancel* stops the batches not started, *Retry batch n* writes again only a failed batch.
+
+### Fixed
+
+- **Copy in Azure DevOps.** *Copy the N questions* did nothing inside Azure DevOps, which blocks the clipboard for
+  extensions. Every *Copy* button now says « Copied », or opens the text already selected with the Ctrl+C (⌘C) hint.
+
+</Update>
+
+<Update label="0.1.113" description="2026-09-29">
+
+Conception : des **données complètes** et un **vrai Each Choice**. Chaque ligne porte toutes les saisies, **un cas
+nominal** réunit les valeurs acceptées, **un cas par nature de refus** n'a qu'une donnée fautive par ligne, et les cas
+sont rangés sous **la règle qu'ils vérifient**.
+
+### Changed
+
+- **Complete rows.** Every data row carries every form input, at its reference value (its first valid partition); only
+  the values the row exercises change. The tester never has to invent a value: nothing reads « valid values » any more
+  without the values themselves.
+- **One nominal case.** The accepted values that lead to the same outcome form a single case; its rows each take other
+  accepted values until every one is covered.
+- **One case per kind of refusal.** Refused values of the same kind (the same rules) form one case, one row per value
+  and a single wrong value per row; two kinds never mix. Inputs combined by a decision table (country × postal code)
+  are combined only there.
+- **Readable data tables.** Reference values are greyed and the varied ones in plain text; the header of a column that
+  varies is marked and the legend says it once; spaces show as « ␣ », an empty value as « (empty) ». All of it follows
+  your edits.
+- **Grouped by the rule checked.** *Nominal cases* come first, then one group per rule the case checks, in the order
+  of the rules — a valid case is never filed under a refusal rule.
+- **Gherkin examples shown once.** The data table is the scenario's examples; the *Examples* block no longer repeats in
+  the text.
+- **Writing.** A written case that never cites one of its parameters is refused and asked again; the AI is told, row by
+  row, what varies, so titles and expected results speak about it.
+- **Fewer, fuller cases.** The delivery-address example gives 12 planned cases (15 before), 8 / 8 rules covered.
+
+</Update>
+
+<Update label="0.1.112" description="2026-09-29">
+
+Conception : un **écran lisible sur une vraie spécification**. Pleine largeur, un **fil d'étapes**, une **synthèse**
+toujours visible, le modèle en **onglets et en tableaux**, une **carte par technique**, et **Exclure** une règle.
+
+### Changed
+
+- **Steps and summary.** The design screen uses the full width and follows four steps — *Test model*, *Techniques and
+  plan*, *Cases*, *Review and write* — each with its state; a step not possible yet says why. A summary stays in view:
+  planned cases split by technique, rules covered « N / M » and the clickable list of those not covered, points to
+  clarify, budget, the step's action, and *What is sent to the model* with its detail. Everything it shows is computed.
+- **The model in tabs.** *Rules* grouped (numbered rules of the requirement, then the constraints), with their coverage,
+  excerpt on demand, filters and search; *Inputs and partitions* as a table grouped by role (preconditions and starting
+  state, form inputs, user choices), validity as an icon and a word, values in a fixed font with visible spaces;
+  *Conditions* as one readable decision table each; *Points to clarify*, copyable. Tabs work with the keyboard.
+- **Exclude a rule**: it stays visible, struck through, out of the coverage and the plan; *Restore* brings it back.
+  Exclusions are kept when the model is analysed again, and never sent to the AI.
+- **Role of an input** (precondition, input, choice), proposed by the analysis and editable; points to clarify can cite
+  the rules they concern.
+- **Step 2, one card per technique**: equivalence cases, boundary values per input and partition, decision table
+  reduced or full with a link to the conditions.
+- **Very large screens** (2,400 px and more): rules and inputs side by side, with a cross filter.
+- **Analysis states**: *Analyse the requirement* or enter the model by hand; during an analysis, its model and
+  duration, *Cancel*, the previous model kept read-only; after *Analyse again*, what changed and « your corrections are
+  kept ».
+
+### Notes
+
+- The outcome of each decision-table column is not part of the test model: the possible outcomes are listed under the
+  table.
+- The overlap warning between error guessing and equivalence arrives with the design checks in a coming version.
+
+</Update>
+
+<Update label="0.1.111" description="2026-09-29">
+
+Conception : un **modèle de test stable**. L'exigence arrive au modèle **telle qu'écrite**, la table de décision est
+**réduite** par défaut, *Réanalyser* **garde vos corrections**, les points que l'exigence ne tranche pas sont
+**affichés à part**, et l'administrateur voit **la cause des échecs**.
+
+### Changed
+
+- **The requirement reaches the model as written.** Special characters (`<`, `>`, `&`…), lines, table cells and
+  Gherkin examples are kept, and so are the spaces that matter. A field is cut only beyond 40,000 characters (8,000
+  before), and when it is, a banner says so above the model — never a silent cut. This applies to every AI function.
+- **Attributes are what the tester sets.** The analysis models inputs and starting states, never an observable result
+  (a message, a refusal); when the requirement numbers its rules, it adds an `R-n` rule only for a testable constraint
+  none of them covers. A **field left empty** is a legitimate partition, shown « (empty) »; a value that repeats its
+  partition's label, or limits that are neither numbers nor dates, are refused and asked again once. The analysis runs
+  at temperature 0 when the model accepts it.
+- **Points to clarify.** What the requirement does not decide is listed under the rules with its excerpt, and *Copy*
+  puts them on the clipboard, one line per point, for the Product Owner. Nothing is ever generated for them.
+- ***Analyse again* starts from your model.** Your corrections are sent with the requirement; ids are kept and only
+  what the requirement contradicts or what is missing changes. A failed analysis leaves the model as it was.
+- **Decision tables are reduced by default**: one reference column, then one column per other value of an input; the
+  **full** table is a choice shown with its number of columns (« Decision table: reduced (13 columns) · full (32
+  columns) »). Two identical columns in two conditions make one case. On the delivery-address example: 15 planned
+  cases (16 with the full table).
+- **« Covered by … »**: a technique whose elements are all exercised by a finer technique you kept says so, rather
+  than « 0 cases ».
+- **Latest failures** (*Project settings › TestPulse Studio › AI connection*): the last 10 failures of the AI
+  functions — date, function, model, kind, and the detail on request. Members keep the generic message; the text sent
+  and the model's answer are never kept.
+
+### Notes
+
+- Gemini and a Claude proxy no longer receive a temperature when the model is declared as a reasoning model, like
+  the other providers.
+- Deterministic checks, the coverage matrix and the designed-case review still arrive in a coming version.
+
+</Update>
+
+<Update label="0.1.110" description="2026-09-29">
+
+Conception refondée, 2/3 : l'IA extrait un **modèle de test** que vous corrigez ; **le code** en déduit les techniques,
+les éléments de couverture et les combinaisons — le nombre de cas est connu **avant** l'appel ; l'IA ne fait plus que
+**rédiger** ces cas, avec des **paramètres** et une **table de données**, écrits dans Azure DevOps par un codec unique.
+
+### Changed
+
+- **Conception starts from a test model.** *Analyse* reads the requirement and returns its rules (the requirement's
+  own `RB-xx` ids kept, otherwise `R-1, R-2…`), the attributes they talk about with their valid and invalid partitions
+  and one concrete value each, combined conditions and states. You correct it in place — rules, attributes, partitions,
+  values — or build it by hand without AI; *Analyse again* says what changed.
+- **The applicable techniques are deduced from the model**, with their reason and the number of cases each plans:
+  equivalence partitioning, boundary value analysis (ordered values only, 2 values by default, 3 on choice), decision
+  table testing, state transition testing, error guessing. A technique without elements is greyed and can be forced;
+  the profile can exclude one. **There is no quantity setting any more**: the number of cases follows from the
+  coverage elements (Each Choice, one case per expected behaviour) and is shown before you generate — « 16 planned cases
+  · 8 / 8 rules covered » on the delivery-address example, which gave 50 cases before.
+- **The AI writes, it does not decide**: title, precondition, concrete steps and observable results for each planned
+  case, in batches of 20; the result says « planned · written ». A case without its rules, its coverage element, or
+  citing a parameter without data is refused and asked again once.
+- **Data-driven cases**: parameters `@name` in the steps, a data table (one row = one iteration, one run in Azure
+  DevOps), editable row by row; in Gherkin, the table is the examples.
+- **Screen as in the v3 mockup**: level and type of the profile at the top, changeable for one generation; cases grouped
+  by rule with the precondition first and the parameters highlighted; what is sent at each step and the budget in parts.
+- **Writing**: the precondition is written as the first step, the parameters and the data as the case's own iterations
+  (`Microsoft.VSTS.TCM.Parameters`, `LocalDataSource`); tags `niveau:`, `type:`, `technique:`, one `covers:` per rule,
+  `testpulse-ai`; the report shows the iterations written and the generation model; the CSV fallback carries the data.
+
+### Removed
+
+- *Generate more cases…* and the quantity settings (total, per technique): the next version brings *Complete the
+  coverage*, which only plans what is missing.
+
+### Notes
+
+- Deterministic checks, the coverage matrix and the judge (*Designed-case review*) arrive in the next version.
+- The Azure DevOps fields are produced from their documented format; reading back a written case on a real
+  organisation is part of the review.
+
+</Update>
+
+<Update label="0.1.109" description="2026-09-28">
+
+Conception refondée, 1/3 : la **grille de test ISTQB** (niveaux, types, objectifs) remplace le catalogue des types, qui
+est migré sans rien perdre ; les **cinq techniques** du syllabus ; la section **Conception** des profils ; le **modèle
+de contrôle** de la connexion IA.
+
+### Changed
+
+- **The test grid replaces the catalogue of test types.** *Project settings › TestPulse Studio › Test grid* shows three
+  lists named as in the ISTQB Foundation syllabus: **test levels** (component, component integration, system, system
+  integration, acceptance — closed), **test types** (functional and the ISO/IEC 25010 characteristics, accessibility
+  under usability) and **cross-cutting objectives** (confirmation, regression, maintenance). Types and objectives can be
+  extended; levels cannot. Only *Functional testing* is expected by default. Canonical tags are `niveau:`, `type:` and
+  `objectif:`; tags already written on test cases are still recognised, never rewritten.
+- **Your catalogue is moved to the grid once**, the first time a project administrator opens the administration, and
+  the change is logged: labels, rules, design guidance and what the project expected are kept. *Regression* becomes an
+  objective, *Integration* and *UAT* become levels, your own entries become types. *Boundaries & negative paths* is
+  removed — it is a technique, *Boundary value analysis* — and tests already classified under it stay readable as a
+  « former type ». Until then, every member already reads the grid, with nothing written. Nothing is written in Azure
+  DevOps.
+- **Report: the *Test grid* tab**, arranged by axis then by entry. A point of attention says its axis (« Expected level
+  missing », « Objective below its minimum »). It still never changes the verdict or the score, and it exists only when
+  the project has a configuration — reports of projects without one are unchanged.
+- **Five test design techniques**, with the syllabus names: equivalence partitioning, boundary value analysis, decision
+  table testing, state transition testing, error guessing. The former nominal and negative cases are counted as
+  equivalence partitioning; a test carrying a former technique tag is marked « former tag » in *Existing coverage*.
+  Decision tables and state transitions can be checked once the test model arrives, in a coming version.
+- **Conception shows the level and type** resolved from the profile at the top, with where they come from; the *Test
+  type* list is gone and the written `type:` tag comes from that type.
+- **Classifying untyped tests** can also propose a level; the optional tags written are then `type:` and `niveau:`.
+
+### Added
+
+- **Design section of the configuration profiles**: default level (system), default type (functional), allowed
+  techniques (all five) and the judge check, with provenance, read-only in *Settings › Test grid*.
+- **Judge model** in the AI connection, reserved for the fifth function, *Designed-case review*: same provider, same key,
+  its own *Test* button; empty, the review is unavailable and says why. The review itself arrives in a coming version.
+- *Existing coverage* gains a **By rule** part (from `covers:` tags, none yet); a coverage axis can carry the rules to
+  cover when it opens Conception.
+
+</Update>
+
+<Update label="0.1.108" description="2026-09-28">
+
+Pilotage (phase37, EPIC K) : un rapport de campagne ne montre que **les bugs de la campagne** ; les suites se
+disent par leur **chemin** ; la matrice regroupe les cas de test. Repris de TestPulse 2.73.0, parité ré-ancrée.
+
+### Changed
+
+- **Campaign bugs by default**: the bugs of a report are now the bugs **attached to the run results** of the selected
+  plans, in the selected suites, across all the runs read — not every bug linked to the test cases and requirements.
+  A copied plan no longer brings back the bugs of earlier campaigns. Each bug appears once, with its **test cases**,
+  sorted by **creation date** (newest first), with **Created** and **Test cases** columns on screen and in every
+  export; open bugs are sorted by severity, priority, then creation date; PowerPoint shows the 15 most recent.
+- The same list feeds the whole report: counters, Quality Score and GO / NO-GO verdict, **failures without defect**
+  (a failed test whose results carry no bug), the bug column of the traceability matrix, the multi-plan report and
+  the five exports. A banner says the source and how many runs were read, and warns when the run limit was reached;
+  exports carry a source line; history shows a **Source: runs / links** chip and comparing two reports of different
+  sources warns about it.
+- **Suites are identified by their id and shown by their path** (`CH › SALES › Pre-Payment`), on screen and in the
+  five exports; per-suite counts no longer mix suites with the same name. The *Included test suites* column is now
+  **Results (latest)**; Excel adds a **Suite path** column.
+- **Traceability matrix: one line per test case**, with a grouped status and *n/m passed · k suites*, expandable on
+  screen (keyboard too), compact in PDF, Word and HTML. Requirement statuses and matrix KPIs are unchanged.
+- The **AI analysis** of the campaign (and the question box) is told which bug source the report uses.
+
+### Added
+
+- **Bug source** setting in the project administration (Project settings › Extensions › TestPulse Studio), **reserved
+  for project administrators**, stamped with who changed it and when: *Bugs from the plan runs* (default) or *Test
+  case and User Story links* (the former behavior). Every member reads it in Settings › Thresholds & quality; the
+  **Change the source** link of the bug banner leads there.
+
+### Notes
+
+- A bug linked to a test case only by *Tested By*, or only to the requirement, is no longer in the report; if its test
+  failed, it becomes a failure without defect. The **Bugs** curve of the trends shows a break at the report where the
+  source changed. A forgotten bug is counted once it is attached to the run result in Azure DevOps.
+- Saved reports keep their bugs and read « links ». The Cockpit and the *Test coverage* tab of a User Story still read
+  the *Tested By* links.
+- Parity is now anchored on TestPulse 2.73.0: every changed baseline comes from this change and no computed figure,
+  score or verdict moved.
+
+</Update>
+
+<Update label="0.1.107" description="2026-09-22">
+
+Pilotage (phase36, EPIC F) : **poser une question** sur la campagne, et **choisir** de mettre l'analyse dans un export.
+
+### Added
+
+- **Ask a question about the campaign**: in the AI analysis tab, a free-text box answers about this campaign only,
+  with the same evidence rule — clickable ids from the report, an answer without evidence shown but marked as such,
+  and a standard sentence for anything off topic. The thread lives with the report on screen, can be cleared, and is
+  cleared by a new generation.
+- **Include the AI analysis in the export**: a switch, off by default and asked again for every report. When it is
+  on, PDF, Word, PowerPoint and HTML end with an « AI analysis — advisory » section: opinion, confidence, summary,
+  findings with their evidence, conditions for a GO, the comment on the projection, the model, the date, the tokens,
+  and the reminder that the verdict remains the one from the scale.
+
+### Notes
+
+- The section goes after the existing sections and before the signature page: with the option off, the exports are
+  byte-identical to before. Excel never receives the analysis, and the question thread never enters any export.
+- Nothing is stored: neither the thread nor the export choice; a report restored from History starts with the option
+  off.
+
+</Update>
+
+<Update label="0.1.106" description="2026-09-22">
+
+Pilotage (phase35, EPIC F) : **l'analyse IA de la campagne**, à côté du verdict calculé — jamais à sa place.
+
+### Added
+
+- **AI analysis tab in the report**: after « Test types », « Analyse the campaign » asks the AI assistant for an advisory
+  reading of the campaign — running or complete. Two cards side by side: the **computed verdict** of the scale,
+  unchanged, and the **AI opinion** (GO, NO-GO, GO with conditions), with its confidence, the model, the date and the
+  tokens used. A permanent banner: the AI comments, it does not decide.
+- **Findings with evidence**: every finding and every condition for a GO cites test cases, bugs, requirements or
+  suites of the report, clickable to Azure DevOps; a finding whose evidence is not in the report is discarded and
+  counted.
+- **Landing projection computed by TestPulse**: from the Cockpit snapshots — observed pace, projected end, gap to the
+  target, observed pass and execution rate ranges; « insufficient data » below 3 working days of snapshots. The AI's
+  comment comes after the figures.
+- **Tokens used** are now reported by the AI providers and shown with the opinion.
+
+### Notes
+
+- Only aggregated results leave: never test steps or attachments; run comments only if the project's data policy
+  allows them; testers replaced by aliases when it asks.
+- The analysis lives with the report on screen and is cleared by a new generation; it is not stored and does not
+  appear in any export in this version.
+
+</Update>
+
+<Update label="0.1.105" description="2026-09-22">
+
+Correctif (phase34-bis) : « Concevoir les tests #id » depuis un axe de couverture n'ouvrait rien.
+
+### Fixed
+
+- **Design the tests from a coverage axis opens Conception again**: the address used to move from one TestPulse area
+  to another was not always found, and the click then did nothing. It is now resolved the same way reading and writing
+  resolve the Azure DevOps address.
+- **No more silent clicks**: when moving to another area is impossible, the buttons that lead there (Design the
+  tests, help, AI badge outside Outils) are disabled and say why; axes greyed out after a change say « run Propose
+  axes again ».
+
+</Update>
+
+<Update label="0.1.104" description="2026-09-22">
+
+Couverture (phase34, EPIC G) : **axes d'amélioration** proposés par l'IA, et la boucle « boucher un trou » jusqu'à Conception et retour.
+
+### Added
+
+- **Improvement axes in the Coverage builder**: after « Analyze coverage », « Propose axes » asks the AI assistant for
+  improvement axes on the analysis already computed. Each axis has a priority, a short justification, the requirements
+  concerned (click to reach the row) and one action: design the tests, show the unplanned tests (or run the planning
+  scan), or compare duplicates (the cited tests, in Azure DevOps). The AI recomputes nothing and writes nothing; the
+  model and date are shown, with an AI label.
+- **Guard-rails**: an axis citing a requirement outside the selection is discarded and counted; duplicates need at
+  least two tests from the analysis; at most 40 requirements are sent, the first ones by priority. Requirement text is
+  sent only when the project's AI connection allows it. Axes are greyed out when the analysis or the selection changes.
+- **From an axis to Conception and back**: « Design the tests » opens Conception on the requirement with the missing
+  techniques pre-checked (and says so); after writing, « Back to coverage and analyse again » returns to the Coverage
+  builder with the same selection and runs the analysis once.
+
+### Changed
+
+- The Couverture hub now has its own page template allowing HTTPS calls to the AI provider, like Pilotage and
+  Conception.
+
+</Update>
+
+<Update label="0.1.103" description="2026-09-22">
+
+Correctif (phase33-bis) : l'écriture partait vers le CDN de l'extension.
+
+### Fixed
+
+- **Review & write now writes to Azure DevOps**: on some pages the address of the extension's file host was taken
+  for the Azure DevOps address, and test cases were refused (« Access Denied »). Writing now resolves the address the
+  same way reading always has, and never sends a request without a valid Azure DevOps address.
+- **Refusals say the right thing**: « Azure DevOps address not found » when the request did not reach the
+  organisation, « session expired » on 401, « insufficient permissions » only for a real Azure DevOps refusal; the
+  details are readable text (method, host, HTTP status), no raw HTML.
+
+</Update>
+
+<Update label="0.1.102" description="2026-09-22">
+
+Conception (phase33) : **Arbitrer & écrire** — les cas conçus arrivent dans Azure DevOps, après revue et confirmation.
+
+### Added
+
+- **Review & write**: for each case, Create / Update / Ignore, pre-filled, with its consequence in plain words; a
+  word-by-word diff against the matching existing test; warnings before an update (already run, edited by hand
+  recently, automated, in a plan) read in one batch, and « I have read these warnings » required. Shortcuts to create
+  all new cases or ignore all identical ones — never « update all ».
+- **Attach the created cases to a plan** (optional, off by default): an existing suite, a new requirement-based
+  suite, or a new plan.
+- **Confirmation, then writing with your permissions**: created test cases get their steps, priority, the
+  requirement's area, the Tested By link, the tags `type:<test type>` (detected by rule in the next report),
+  `technique:<technique>` and `testpulse-ai`, and a history entry with the provenance. Updated cases change only
+  their title, steps and priority; a case changed in the meantime is reported, with « Read again and retry ».
+- **Report** line by line, refusals translated (Azure DevOps's text under Details), « Retry attaching », and a CSV
+  export when no case could be created. Nothing is ever deleted.
+
+</Update>
+
+<Update label="0.1.101" description="2026-09-22">
+
+Conception (phase32-ter) : lire les cas avant de les modifier, ajout manuel explicite, relance ciblée, nouvelle
+disposition. Rien n'est écrit dans Azure DevOps.
+
+### Changed
+
+- **Read a case before editing it**: every case opens for reading (steps table or Gherkin scenario); several can be
+  open at once, with *Expand all / Collapse all*. *Edit* switches the same view to editing, *Done* returns to reading.
+  After a generation, cases open by themselves when the list has 6 or fewer.
+- **Add a case by hand** is now its own card under the list, which says it involves no AI.
+- **Generate more cases…** moved to the bottom of the list and opens a window to choose the techniques and the number
+  per technique; the new cases are added and marked for a few seconds; the settings at the top are left untouched.
+- **New layout**: existing coverage across the full width (open when tests are already linked, with those tests
+  listed there); generation settings and context side by side at the same height; the action bar; then the cases
+  next to the comparison column. Below 1,100 px, each pair stacks.
+- The test type sits on its own line, with its design guidance and the tag it will become when written.
+
+</Update>
+
+<Update label="0.1.100" description="2026-09-22">
+
+Correctif de présentation (phase32-bis) dans le hub Conception.
+
+### Fixed
+
+- **Steps tables are aligned from one case to the next**: the *Action* and *Expected result* columns now start at the
+  same place for every case, whatever the length of the text; long text wraps instead of widening the table or
+  scrolling sideways. The Gherkin block takes the same width.
+
+</Update>
+
+<Update label="0.1.99" description="2026-09-22">
+
+Conception (phase32) : modifier les cas générés sur place, et les confronter en continu aux tests existants. Rien
+n'est écrit dans Azure DevOps.
+
+### Added
+
+- **Edit the generated cases in place**: title, priority, steps (add, remove, move up or down), Gherkin scenario
+  checked as you type. An invalid case says why and stays editable. An edited case is marked *edited* next to
+  *Proposed by AI*; *Restore the proposal* brings the model's version back. **+ Case** adds a case by hand; removing a
+  case can be undone for 5 seconds.
+- **Continuous comparison with the tests already linked** to the requirement — local, by the words of the titles,
+  never by the AI and without any network call: each case is *Identical*, *Similar* (with the matching test) or
+  *New*, with its default decision (Ignore, Update, Create). A column counts them, warns when a case already exists,
+  and shows the *Review & write* button, disabled until the next version.
+- The browser warns before you close the tab while generated cases exist.
+
+</Update>
+
+<Update label="0.1.98" description="2026-09-22">
+
+Le hub **Conception** (phase31) : concevoir les tests d'une exigence avec l'assistant IA. Rien n'est écrit dans Azure
+DevOps.
+
+### Added
+
+- **A fourth area, Conception**, between Couverture and Outils, with one sub-tab, *Test design*. A link can open it
+  on a requirement.
+- **Existing coverage, without AI**: for each acceptance criterion, *Covered*, *Partial* or *Not covered*, with the
+  linked test cases; for each ISTQB technique, how many tests already carry it. Techniques without tests are
+  pre-checked. The panel folds away.
+- **Generation settings**: techniques, an indicative quantity (a total, or per technique), *Steps* or *Gherkin*, the
+  test language, and optionally a test type from the catalogue. The format and the language are remembered for you.
+- **Context, document by document**: linked work items, a pasted excerpt, images from your computer (reduced to
+  1,024 px when checked, only if the administration's image test validated the model). Nothing is checked by
+  default; a category turned off in the project's AI connection says so. An estimated budget is shown before
+  *Generate*. Attachments are listed; DOCX and PDF are not supported in v1, reading text attachments comes later.
+- **Generate and read**: progress per technique, *Cancel*, « N generated out of M requested », discarded proposals
+  counted, failed passes reported one by one; every case marked *Proposed by AI* with the model and the date.
+  *Generate more cases* adds to the list and flags possible duplicates.
+- When the AI is not set up or *Test design* is turned off, the area still opens and says why.
+
+</Update>
+
+<Update label="0.1.97" description="2026-09-22">
+
+Socle interne de la conception de tests (phase30) — **rien de visible** dans cette version.
+
+### Internal
+
+- Test design logic ported from an earlier in-house tool (techniques, counts, Gherkin with a scenario validator, duplicate
+  detection, review of generated cases, token estimate, acceptance criteria), existing coverage of a requirement
+  without AI (two Azure DevOps reads), image reduction before sending to a model, and the AI function that proposes
+  manual test cases (one pass per technique). A new data category, *linked work items*, is off by default; its
+  checkbox arrives with the screens.
+
+</Update>
+
+<Update label="0.1.96" description="2026-09-22">
+
+Correctif du classement des tests (phase29-bis).
+
+### Fixed
+
+- **Accepted classifications now count as soon as you regenerate the report** — no need to reload the page anymore.
+  After *Save the accepted classifications*, *Regenerate* shows them *by AI* and removes those tests from the untyped
+  ones. The banner now says « counted at the next generation ».
+- **Tags written on test cases are seen at the next generation** — the tagged tests are detected by rule without
+  reloading the page. *Regenerate* waits until the tags are written.
+
+</Update>
+
+<Update label="0.1.95" description="2026-09-22">
+
+Première fonction IA visible (phase29) : le classement des tests sans type.
+
+### Added
+
+- **Classify the untyped tests** (report › *Test types* tab), when the project's AI connection is set up and *Test
+  classification* is on for the report's plan — otherwise a sentence says why. The AI **proposes** a type for each
+  untyped test, with a short justification and a confidence; you **accept**, **change** or **ignore** each proposal
+  (*Accept all ≥ 0.8* is a shortcut, never a default). Every proposal is marked *Proposed by AI*, with the model and
+  the date. Accepted classifications are saved in the extension and count *by AI* in the next report.
+- What is sent: the catalogue, and each untyped test's id and title — its steps only if *Test steps* is checked in the
+  AI connection. At most the first 400 untyped tests, 40 at a time.
+- **Optional: write the type tag on the test cases** — off by default; a dialog lists every case and the tag
+  (`type:<name>`), with your Azure DevOps permissions; only that tag is added, nothing else changes. A per-case report
+  says added, already present or refused. Tagged tests are then detected by rule.
+- Administration › Test types: classifications whose type was deleted are listed and can be purged.
+
+### Changed
+
+- Every test type, including your own, is detected by its canonical tag `type:<name>`.
+- The Pilotage pages may call the AI endpoint (HTTPS); Couverture and Outils are unchanged.
+
+### Notes
+
+- No « What's new » entry for this version: the Studio « What's new » panel is still an open decision.
+
+</Update>
+
+<Update label="0.1.94" description="2026-09-22">
+
+Types de test visibles (phase28) : l'onglet du rapport, les points de vigilance, la vue membre. Toujours aucune IA.
+
+### Added
+
+- **« Test types (N untyped) » tab in the report.** For each type: expected or not (with where it comes from —
+  profile, project default or catalogue — and its minimum), presence (*Present*, *Below minimum*, *Missing*, *Not
+  expected*, as a word and an icon), count, share of the plan, found by rule / by AI (0 for now), suites. Untyped
+  tests are listed apart with a link to each test case. Read-only; older reports have no such tab.
+- **Points of attention**: an expected type that is missing or below its minimum is added to the box, after the
+  existing points, on screen and in the PDF. It never changes the verdict, the grade or the score.
+- **Settings › Test types**, read-only for every member: the catalogue, its rules, what is expected and the minimum,
+  with provenance for the selected plan or the project default. A project administrator gets a button to the
+  administration.
+
+### Notes
+
+- **Expectations exist only under governance.** Without a project configuration, no type is expected: the tab shows
+  the detected distribution, and the points of attention and exports are exactly as before.
+- Test types are captured when the report is generated, from what it already loaded — no additional call.
+- No « What's new » entry for this version: the Studio « What's new » panel is still an open decision.
+
+</Update>
+
+<Update label="0.1.93" description="2026-09-22">
+
+Types de test, partie déterministe (phase27) : le catalogue et les attentes se règlent dans l'administration. Le
+rapport, les exports et le verdict sont inchangés ; l'onglet « Types de test » du rapport arrive dans une version ultérieure.
+
+### Added
+
+- **Administration › Test types** (project administrators): the project's catalogue of test types. Eight built-in
+  types — Functional, Regression, Integration, UAT / business acceptance, Boundary & negative paths, Accessibility
+  and Performance, expected by default, plus Security, not expected by default. A built-in type can be renamed,
+  marked not expected and have its rules changed, not deleted; your own types can be added, renamed and deleted.
+  Each type has detection rules (tag, suite name, area path, word in the title — always evaluated in that order),
+  « expected by default » and optional design guidance. **Test the rules**: paste a few titles or tags and see
+  what would be detected, with no call to Azure DevOps. The four test design techniques (nominal, negative,
+  boundary values, equivalence partitioning) are not types.
+- **« Expected test types » panel in configuration profiles**: per type, *inherit*, *expected* or *not expected*,
+  and an optional minimum (N tests or N % of the plan), with the inherited value and where it comes from. A
+  consolidated report uses the project default.
+- The area path of test cases is read in the same request as their tags — no additional call.
+
+### Notes
+
+- An expected type that is missing, or below its minimum, will be a **point of attention**, never a factor of the
+  verdict. Nothing of it is shown in the report yet.
+- No « What's new » entry for this version: the Studio « What's new » panel is still an open decision.
+
+</Update>
+
+<Update label="0.1.92" description="2026-09-22">
+
+Finitions de l'EPIC D et largeur de Paramètres (phase26).
+
+### Changed
+
+- **Settings uses the width of the screen.** The content panel now fills the space to the right of the group list,
+  in every group. Tables, grids and composite editors (AI functions, thresholds, webhooks…) take the full width;
+  paragraphs and single fields keep a comfortable reading width (about 720 px) instead of stretching.
+- **Settings › AI assistant reads like the rest of Settings.** Same text size as the other groups; provider, default
+  model and access mode are aligned as a label / value list, the access mode's guarantee is a help line under its
+  name, and « Changed by … on … » is a caption of its own. The « Active » column shows an icon next to Yes / No.
+- The footer under Settings now says **TestPulse Studio**, and no longer appears under « AI assistant ».
+- **AI connection › functions table**: « Inherited: &lt;model&gt; » appears once — as the placeholder of an empty model
+  field; when a model is overridden, the line reads « Project default: &lt;model&gt; », with the way back.
+
+### Fixed
+
+- **Clicking the AI badge again reopens « AI assistant »** when Settings is already open on another group.
+
+</Update>
+
+<Update label="0.1.91" description="2026-09-22">
+
+Vue membre, pastille d'état et « Fonctions IA » des profils (phase25) : l'EPIC D est fermé. Aucune fonction IA
+n'est encore utilisable.
+
+### Added
+
+- **Settings › AI assistant**, for every member, read-only for everyone: the state, the provider, the default model,
+  who changed the connection last and when, the access mode with what it really guarantees, the four functions
+  (on or off, model, and which level decides) and the data that may be sent to the model. No connection detail is
+  ever shown — no endpoint, gateway, identifier, key or change log. A project administrator gets an active button to
+  the administration; other members see it disabled, with the reason.
+- **An AI badge at the top of every area** — *AI · configured*, *AI · not configured* or *AI · unavailable*, with
+  an icon and a label. A click opens *Settings › AI assistant*. *Configured* means an administrator set the
+  connection up; it does not prove a call will succeed for your account.
+- **« AI functions » panel in configuration profiles.** The connection stays the project's switch: a function turned
+  off there is off everywhere. A profile can then turn a function off (or explicitly on) for its plans — *inherit*,
+  *on*, *off* per function — resolved like every other profile setting; on a consolidated report, a function is on
+  only if it is on for every plan. The « AI connection » tab says so under its functions table.
+
+</Update>
+
+<Update label="0.1.90" description="2026-09-22">
+
+Correctif de l'onglet « Connexion IA » (phase24-bis).
+
+### Fixed
+
+- **« Test the connection » no longer fails with « Failed to fetch » against a real provider.** The administration
+  page's content security policy only allowed Azure DevOps hosts, so the browser refused the call to the provider
+  before sending it. The administration page may now call any HTTPS address (the endpoint is entered by an
+  administrator); `http:` stays forbidden, and the other pages of TestPulse Studio are unchanged.
+- **A test that gets no answer now says why.** Instead of « Failed to fetch », the administrator reads the three
+  possible causes, in order — host unreachable or misspelt, **CORS** refused for the extension's origin (given, so
+  that an enterprise gateway can allow it), network or corporate proxy — or, when the page itself blocked the call,
+  that its content security policy did, with the host. Members' messages do not change.
+
+</Update>
+
+<Update label="0.1.89" description="2026-09-22">
+
+L'onglet « Connexion IA » de l'administration du projet (phase24, EPIC D). Aucune fonction IA n'est encore
+utilisable par les membres.
+
+### Added
+
+- **« AI connection » tab in the project administration** (*Project settings › Extensions › TestPulse Studio*),
+  **reserved for project administrators** — anyone else sees the reason and no field. Every change is attributed and
+  dated, and the change log keeps the last 50 changes, never a key.
+- **Three access modes**, from the most to the least watertight: **Entra ID** (shown, **not available in this
+  version**), **enterprise gateway** (the gateway holds the key; no key leaves the browser; the only way to reach
+  Anthropic), **direct API key** (hidden in the interface, never shown again — but it passes through members'
+  browsers at call time, so use a dedicated, limited, revocable key).
+- **The key**: saved once, never shown again; **Replace…** keeps the current key until the new one is saved;
+  **Revoke** stops AI functions for every member until a new key is saved.
+- **Providers outside your tenant** (OpenAI, Mistral, Gemini, Anthropic) require an explicit confirmation before
+  saving, asked again when the provider changes.
+- **Test the connection** (model and duration, or the provider's technical detail with any key removed — shown only
+  in this tab) and **Test images** on the test design model (a tiny generated image; the result is kept with the
+  connection).
+- **Assisted functions** table (four functions, **all off by default**, run by direct call, default or own model)
+  and **Data sent to the model** (five boxes; an unchecked field never enters a prompt).
+
+</Update>
+
+<Update label="0.1.88" description="2026-09-22">
+
+Socle interne de l'assistant IA (phase23, EPIC D). **Rien de visible** : aucun écran, aucune fonction IA.
+
+### Added
+
+- **Internal AI foundation, nothing visible.** The building blocks the future AI functions will use: the six
+  providers and the connection model, stored per project in two documents (the connection, and the key apart),
+  writable by project administrators only — an application lock, not a security barrier. Member-facing AI error
+  messages never carry connection details. Nothing in this version sends data to an AI provider: no screen and no
+  function uses the foundation yet, and the product's bundles contain none of it.
+
+</Update>
+
+<Update label="0.1.87" description="2026-09-22">
+
+Retrait de l'entrée de transition sous Test Plans (phase22).
+
+### Removed
+
+- **The « TestPulse Studio » entry under Azure Test Plans is gone.** The **TestPulse Studio** group in the project
+  navigation (Pilotage, Couverture, Outils) is now the product's only entry, and the extension no longer depends on
+  Azure Test Plans being turned on. Project administration (Project settings), the « Test coverage » and
+  « Explore » tabs of work items are unchanged.
+
+</Update>
+
+<Update label="0.1.86" description="2026-09-22">
+
+Ré-ancrage de la parité sur TestPulse 2.72.4 (phase21). **Aucun changement du produit.**
+
+### Changed
+
+- **Parity is now checked against TestPulse 2.72.4.** TestPulse 2.72.4 took over the Studio Cockpit and changed no
+  file of the export engine: the 20 reference outputs, regenerated by the TestPulse engine itself, are identical to
+  the previous ones. The code base still comes from TestPulse 2.72.2.
+- The built-in help's « What Studio does differently from TestPulse » now says that the Cockpit is shared, except
+  for the administrator lock on the « Show the load per tester » setting and the configuration profile chip.
+
+</Update>
+
+<Update label="0.1.85" description="2026-09-22">
+
+Navigation par hubs (phases 19 et 20) : TestPulse Studio a son propre groupe dans la navigation du projet, en trois
+espaces.
+
+### Changed
+
+- **Three areas instead of one tab bar**: **Pilotage** (Report, Cockpit, History, Explore), **Couverture** (Coverage,
+  Requirement drift, Repository) and **Outils** (Import, Bulk reassignment, Settings, User Guide), each with only
+  its own sub-tabs and a constant **?** link to the documentation. Moving from one area to another reloads the page;
+  the selected plan (and its suites, or the plans in multi-plan mode), the report form fields — except the date —
+  and the last sub-tab of each area are kept. The report on screen is not kept: it stays in History if it was saved,
+  and Pilotage says so when you come back.
+- The former « TestPulse Studio » entry in the Test Plans group is now a light transition page: it redirects to
+  the right area and shows three links if the redirection is refused.
+- Each area loads only its own pages.
+
+### Added
+
+- **Configuration profiles, plan by plan**: the sentence « N plans with no binding follow the project default » opens
+  a view listing every plan with a profile selector (project default included); changes stay a draft until Save.
+- Links between areas carry their context in the URL: from Couverture, after creating a plan, « Open this plan in
+  the Report » opens Pilotage on the Report with that plan selected. A copied URL opens the same screen.
+
+</Update>
+
+<Update label="0.1.84" description="2026-09-22">
+
+Réglage « Charge par testeur » dans l'administration, plans sans suite d'exigence, finitions du Cockpit (EPIC J,
+phase18).
+
+### Added
+
+- **Cockpit tab in the project administration** (*Project settings › TestPulse Studio › Cockpit*): « Show the load
+  per tester », reserved for project administrators. Every change records who made it and when; the page shows it
+  (« Changed by … on … »). A failed save puts the previous value back and says what to do. Older settings saved
+  without an author and date are read as they are.
+- When the load per tester is off, a project administrator sees a discreet line in the Cockpit saying where to turn
+  it back on; other members see nothing.
+- **Plans without requirement-based suites know where to start.** The priority of each test case and the
+  requirements it tests through its *Tested By* link are read with the links to bugs, **at no extra call**.
+  « Priority 1 and 2, never run » now uses the requirement's priority (suite or link) or, with no requirement, the
+  test case's own priority. A last group, « Never run in this plan », lets the day's selection reach the pace to
+  keep; when it cannot, the card says so.
+- A group opens on one line per test — id, title (full title on hover), assigned tester — by suite, with « See the N
+  others » past eight.
+
+### Fixed
+
+- Singular and plural are now right everywhere in the Cockpit (« 1 working day after the target », « 1 test a
+  day », « 1 of 1 requirement carries a priority »): no more « (s) ».
+- « Tests without a tester » in « What is blocking » now counts the same tests as the load per tester (tests not
+  run yet); failures to retry without a tester are added in plain words on the same line.
+- « Priorities read » says what really orders the list — never « 0 of 0 requirements … relies on it ».
+- A plan over 1,000 test cases says « Plan too large for this read (more than 1,000 test cases) » on every block
+  that depends on that read, including « Priorities read ».
+- Tester names no longer carry Azure DevOps account suffixes (« &lt;domain\account&gt; »); two testers with the same
+  name stay distinguishable.
+- The application header reads « TestPulse Studio » (it still said « TestPulse AI »).
+- The « Target » and « This morning » chart labels stay inside the chart near its edges; they are on two separate
+  rows, so they never overlap.
+
+</Update>
+
+<Update label="0.1.83" description="2026-09-21">
+
+Le Cockpit devient l'écran du point du matin (EPIC J, phase17), reconstruit sur le socle de la 0.1.82.
+
+### Changed
+
+- **The Cockpit is now the morning stand-up screen.** One sentence says whether the campaign will make its date —
+  projected end at the observed pace, gap to the target in working days, pace needed — with three or four figures
+  (run / total, remaining, ahead of or behind the ideal, pass rate) and a **since the last stand-up** line: tests
+  run, failures and new failures, bugs opened and fixed, tests unblocked, scope change. When the last snapshot is
+  not from the previous working day, the title says so.
+- **Will we make the date?** draws actual, ideal, projection, target and « this morning » on a single scale, scope
+  changes annotated. A simulator (testers, tests per tester per day) starts from the observed pace; moving it moves
+  the projection and writes the end date and the gap. Nothing is saved.
+- **Load per tester**: tests left, observed pace, projected end and gap for each assigned tester, unassigned tests
+  last, with a link to the Bulk reassignment tab. Hidden when the project turns the setting off.
+- **What to run today**, grouped by reason — failures to retry, unblocked since the last stand-up, priority 1 and 2
+  requirements never tested, late suites — in the order set for the project, with the number of tests needed to
+  make the date and links to run each suite in Test Plans. A reason that cannot be computed says why.
+- **What is blocking**: tests blocked by an open bug (severity, age), failures without a linked bug, tests without a
+  tester.
+- A campaign not started yet shows the pace to keep from day one, **what the screen will show, and when**, and
+  **where to start**.
+- Requirement priorities and links to bugs are read after the headline, without holding the screen, and not read
+  for plans over 1,000 test cases. The open bugs are recorded on the day's snapshot.
+- The screen writes nothing to Azure DevOps and reassigns nothing.
+
+### Removed
+
+- The weighting profile selector (Strict / Standard / Onboarding), the per-test scores and their breakdown, the top-3
+  highlight, the KPI tiles showing « — » and the tester/hours sliders of the old remaining-effort block. The stored
+  weighting profile is no longer read; it is not erased. The report's one-line remaining-effort echo is unchanged.
+
+### Documentation
+
+- Built-in help: « Execution cockpit (burndown) » rewritten, and « Running a campaign with the Cockpit » replaces
+  « Cockpit insights ». `docs/portage-cockpit-testpulse.md` lists what to take into TestPulse as is, what to adapt,
+  and what does not exist there.
+
+</Update>
+
+<Update label="0.1.82" description="2026-09-21">
+
+Socle du Cockpit refondu (EPIC J, phase16). **Aucun changement visible** : l'écran du Cockpit est celui de la
+0.1.81 ; il sera reconstruit sur ce socle en phase17.
+
+### Added
+
+- **Cockpit logic for the morning stand-up, not yet on screen.** Pure, deterministic modules in `src/cockpit/`:
+  working-day pace, required pace, projected end date and gap to target; « since the last stand-up » diff between
+  snapshots; « what to run today » grouped by reason (failures to retry, unblocked tests, never-run high-priority
+  requirements, late suites), where a signal that was not read makes its group unavailable instead of empty; load
+  per assigned tester; and « what is blocking » (tests blocked by an open bug, failures without a linked bug, tests
+  without a tester). Nothing is computed from data that was not read.
+- Snapshots gain two optional fields for the stand-up diff; the snapshot schema version is unchanged and older
+  snapshots stay readable.
+- A project-scoped setting to show or hide the load per tester, readable by everyone and writable by project
+  administrators only (no editor yet).
+
+</Update>
+
+<Update label="0.1.81" description="2026-09-21">
+
+### Changed
+
+- **Parity is now checked against TestPulse 2.72.3.** TestPulse shipped in its 2.72.3 the same executive-summary
+  fix Studio delivered in 0.1.9 (a NO-GO verdict is never paired with a green « Satisfactory quality »). The
+  reference the parity tests compare against moves from 2.72.2 to 2.72.3, regenerated by the TestPulse engine
+  itself; that fix is no longer a Studio-specific deviation. The code base still comes from TestPulse 2.72.2.
+
+- **The HTML export's executive-summary template is now byte-identical to TestPulse 2.72.3**, blank line
+  included. Nothing visible changes in the rendered page.
+
+- The built-in help's « What Studio does differently from TestPulse » now lists a single difference — the reason
+  for a capped consolidated verdict, written in every export.
+
+</Update>
+
+<Update label="0.1.9" description="2026-09-21">
+
+Deux écarts assumés avec TestPulse 2.72.2, décidés et inscrits au registre `parity/DEVIATIONS.md`
+(constitution §1.7 bis). La parité reste la règle ; les baselines ne sont pas régénérées.
+
+### Fixed
+
+- **The executive summary no longer contradicts the release verdict.** Its badge only looked at the
+  pass rate against the alert thresholds, so a report could read NO-GO at the top and a green
+  « Satisfactory quality » in its summary — in single-plan reports as well as consolidated ones. When
+  the verdict is NO-GO, the badge is now never green (it reads « Attention required », or stays
+  « Insufficient quality »), and the risks open with « Release verdict: NO-GO — » and the first reason
+  from the score breakdown. A custom summary is not rewritten: the line appears above it. A GO verdict
+  changes nothing. On screen, in the PDF and in the HTML. Same fix, same words, as TestPulse 2.72.3.
+
+- **A capped consolidated verdict says why in every export, with or without a project
+  configuration.** 0.1.8 wrote « Capped: at least one plan is NO-GO (…) » in the exports only for
+  reports produced with a project configuration. It now accompanies the consolidated verdict under the
+  quality badge of the PDF and HTML, under the per-plan quality table of the Word file and — new — of
+  the Excel file, in every case. PowerPoint does not write the consolidated verdict.
+
+- **The watch-points panel names the real reason for a NO-GO.** With nothing to list, it used to say
+  the verdict came « from elsewhere (e.g. pass rate) » — even at a 100 % pass rate. It now names the
+  actual reason, the same one the summary gives.
+
+### Added
+
+- **« What Studio does differently from TestPulse »** — a Reference section of the built-in help,
+  French and English, listing the two deviations above.
+
+</Update>
+
+<Update label="0.1.8" description="2026-09-21">
+
+Finitions de forme sur le rapport multi-plans livré en 0.1.7, après revue sur un projet réel.
+
+### Changed
+
+- **The profile-mix warning is grouped by profile, and the profile names stand out.** A report
+  gathering four plans across two profiles used to list them one by one — « Alex (us 296), Alex
+  (plan de test DEMO Alex), défaut du projet (DEMO3) » — which reads as three profiles where there
+  are two. Each profile is now named once, followed by its plans, with the name in bold: on screen,
+  on the cover page of the PDF, Word and PowerPoint exports, and at the top of the HTML. The Excel
+  summary keeps plain text. A profile name is data an administrator typed, so it is escaped, never
+  rendered as markup.
+
+- **The settings that differ are named in plain words.** The warning borrowed its labels from the
+  Settings screen, which carries that screen's context: « Barème qualité (projet) » sent the reader
+  looking for a setting that exists nowhere under that name. Every compared setting now has a label
+  written for that sentence, in French and in English.
+
+- **The warning sits where it is needed, and the chip leads to it.** The « Profile: N profiles »
+  chip moves to the top of the report and becomes clickable; the banner it explains now sits
+  immediately above the « Quality per plan » table, instead of under the charts. Reports without a
+  profile conflict are unchanged, field for field.
+
+- **A capped verdict says why.** « 89/100 · NO-GO » with a GO threshold of 85 gave no visible
+  reason. When the consolidated verdict is capped because at least one plan is NO-GO, the reason is
+  written under it and names those plans — no need to unfold the breakdown. On screen, and in the
+  PDF, HTML and Word exports of reports produced with a project configuration. Every other cap is
+  unchanged.
+
+- **The bound-plans card is readable past four plans.** Plan identifiers of different widths (329,
+  2460) shifted every name; long names wrapped without indent. The card now shows the count in its
+  title, one row per plan on a fixed identifier column in tabular figures, the name on a single line
+  with an ellipsis and the full text on hover, a hairline between rows, and sorting by name. Past
+  eight plans the list scrolls inside the card instead of pushing the button off screen, and an
+  empty profile says so. The plan-binding dialog uses the same rows.
+
+- **The profiles screen is easier to find your way around.** « New » becomes an outlined
+  « + New profile » button; while the project has only its default, a help line explains what a
+  named profile is for; and the project default now shows, read-only, the plans that follow it,
+  with the sentence that says where to go to bind one.
+
+### Known gap
+
+- The capped-verdict reason appears in the exports only for reports produced with a project
+  configuration. Reports generated before any `ProjectConfig` existed keep exports identical to the
+  previous version, byte for byte — the parity baselines require it. On screen the reason is always
+  shown.
+
+</Update>
+
+<Update label="0.1.7" description="2026-09-20">
+
+Publiée sur la place de marché le 2026-09-20. Elle clôt l'EPIC C.
+
+### Added
+
+- **Consolidated reports now respect each plan's profile.** In a report that gathers several test
+  plans, each plan is judged by the quality scoring and the run limit its own profile defines — a
+  plan bound to a strict profile was until now judged by the project default as soon as it entered
+  a consolidated report. The consolidated verdict still keeps the least favourable one. Thresholds,
+  scoring and the run limit are captured per plan, so reopening an old consolidated report says
+  what each plan was judged with.
+
+  When the plans do not share a profile, the report **says so**: a banner naming each plan and its
+  profile, a Profile column in the quality table, and the same sentence on the cover page of the
+  PDF, Word and PowerPoint exports, at the top of the HTML and in the Excel summary. Plans that all
+  share one profile change nothing. On a project that has set nothing, a consolidated report is
+  identical to before, field for field.
+
+  How the pass rate is weighted stays common to every plan — adding up plans counted differently
+  would produce a figure that means nothing. If a profile in scope weighs it differently, the
+  report names it instead of applying it silently.
+
+### Fixed
+
+- **The Notify button now sends to the channels the project defines.** It used the personal list
+  even when a project had set its own, and nothing on screen showed it: the settings panel did
+  display the project's channels, read-only.
+
+- **A plan's pass rate is no longer green whatever it is**, in consolidated reports produced with a
+  project configuration: it is coloured against that plan's own thresholds.
+
+</Update>
+
+<Update label="0.1.6" description="2026-09-20">
+
+Publiée sur la place de marché le 2026-09-20.
+
+### Added
+
+- **Project settings now act everywhere, and Settings becomes a place to consult them.** What a
+  project administrator sets is what reports, exports and notifications use: the run limit and the
+  quality scoring are resolved when a report is generated and captured inside it, so an archived
+  report keeps its figures and its verdict for good; the cover page branding, the signature layout
+  and the export sections are resolved when you export, so re-exporting an old report gives the
+  same numbers under the branding in force. Notification channels follow the plan the report was
+  produced on. Exploratory sessions, which are not tied to a test plan, follow the project default.
+
+  In **Settings**, the five remaining panels join the thresholds panel in consultation: a value the
+  project defines is shown read-only with a badge saying where it comes from, a value the project
+  does not define stays personal and editable, and the left rail marks the groups the project
+  governs. Nothing is ever hidden. A cover page logo set by the project is shown as a preview;
+  uploading your own stays possible only while the project sets none.
+
+  **Quality scoring** is no longer written by anyone: as soon as a project has a configuration, the
+  scoring is set in the administration page, the save button disappears, and the service refuses
+  the write to a non-administrator. On a project that has set nothing, every panel, every report
+  and every export is **identical** to before.
+
+  Scheduled reports are set at the project default only — a schedule already names its plan, so
+  overriding it per profile would mean nothing. When each reminder last ran stays personal.
+
+</Update>
+
+<Update label="0.1.5" description="2026-09-20">
+
+Publiée sur la place de marché le 2026-09-20. Cette section couvre aussi les paquets 0.1.1 à
+0.1.4, construits le même jour au fil des phases 07 à 09 et livrés sans entrée propre.
+
+### Added
+
+- **Configuration profiles — project administration page.** A new page in **Project settings ›
+  Extensions** lets a project administrator hold the reporting settings at project level instead of
+  leaving each person with their own. A **project default** carries the baseline; named **profiles**
+  override only what differs, and a test plan can be bound to one of them. Each setting shows where
+  its value comes from — overridden in this profile, inherited from the project default, your
+  personal value, or the product default — with a written label and a distinct border style, never
+  colour alone. The page is **restricted to project administrators**: anyone else gets an
+  explanation instead of the editor, and the service refuses to write — the check lives in the
+  service, not only on screen. Nothing is saved until **Save** is pressed; a document changed by
+  someone else meanwhile is never overwritten silently, the screen offers to reload or to overwrite
+  deliberately. Deleting a profile that carries plans forces a choice about where those plans go,
+  and the project default can never be deleted. On a project where nothing has been set,
+  **nothing changes** for anyone: adopting a project default is an explicit step, shown in full
+  before it is written. Archived reports are never recomputed. No new permission scope, no new
+  dependency, and the `hub` bundle does not grow — the page ships as its own bundle.
+
+  Six settings were shown read-only at first; they are now editable — see below.
+
+- **Configuration profiles now drive the thresholds panel.** Pass, warning and flaky thresholds,
+  pass-rate weighting and the trend regression threshold are resolved when a report is generated
+  and **captured inside it** — a report already produced never changes, even if an administrator
+  changes a threshold afterwards. The report shows the profile applied to it, and PDF, Word and
+  HTML exports carry the name. In **Settings**, a member sees the values the project defines,
+  read-only, with where each one comes from; the settings the project does not define stay
+  personal and editable, and nothing is ever hidden. On a project with no configuration, every
+  figure, colour and export is **identical** to before — the parity suite is the gate on that.
+  Reports archived before this release, imported reports and multi-plan reports keep following
+  personal values. Thresholds also split into individual settings, so overriding one no longer
+  copies its neighbours into the profile.
+
+- **The last six settings become editable at project level.** Quality scoring, webhooks, scheduled
+  reports, the signature sheet, the cover page logo and the export sections can now be set on the
+  project default and overridden per profile, like any threshold. Each one opens in a panel that
+  unfolds **under its row**, so the value and where it comes from stay in sight while you edit;
+  *Apply* and *Cancel* work on the draft only — nothing is written until **Save**. No setting is
+  marked *editing to come* any more.
+
+  Two of them do not travel unchanged. A **scheduled report** keeps its plan, its frequency and its
+  day, but not its run history: the project carries the rule, not each person's past runs. A
+  **cover page logo** becomes a reference to its own document, so that reading the configuration —
+  which happens on every report — no longer means carrying half a megabyte of image; the same size
+  limit and the same automatic reduction apply as for a personal logo, an image that is still too
+  large after reduction is refused out loud, and removing or replacing one deletes its document.
+  The project storage gauge counts these images.
+
+  **Settings** is unchanged: the panels stay personal and editable, and the quality scoring,
+  webhook and export section editors are now literally the same components as the administration
+  page's — one presentation, two screens. The webhook URL check and the scoring bounds behave
+  exactly as they did.
+
+### Fixed
+
+- **Where a value comes from now reads as a badge in Settings, not as a heading.** The provenance
+  label carried the administration page's styling, which only that page loaded; in Settings it fell
+  back to the surrounding text size.
+
+- **Adopting your current values shows everything that will be written**, including the quality
+  scoring the project already applies, and says plainly what a scheduled report loses and what
+  happens to a logo. A logo that cannot be written no longer blocks the rest of the adoption.
+
+</Update>
+
+<Update label="0.1.0" description="2026-09-19">
+
+### Added
+
+- **Configuration panel switch on Report, Requirement Drift and Coverage.** Once a result is on
+  screen, the left column (plan, form, selection and options) no longer has to take a third of the
+  width: a switch above the page folds it away and the result spreads over the full width. Folded,
+  chips recall the context — selected plan or number of plans and environment on Report, compared
+  plans and number of fields on Requirement Drift, number of requirements and active options on
+  Coverage — and the main action of the page stays in the bar, with the same checks as the button it
+  mirrors. Nothing is lost when folding: the form keeps what was typed. The state is remembered per
+  page as a personal preference and survives a reload; the column proportions, the computations and
+  the exports are unchanged.
+
+</Update>

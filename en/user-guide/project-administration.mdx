@@ -1,0 +1,25 @@
+---
+title: "Project administration: nine pages, one way to save"
+description: "Where and who."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+**Where and who.** *Project settings › Extensions › TestPulse Studio*, reserved for project administrators. Anyone else sees why instead of the fields, and the service refuses to write. Every change is attributed and dated.
+
+**A side rail of nine pages, in four groups**, instead of tabs:
+- **Overview** — the landing page.
+- **Requirements and tests** — **Requirements and design**, **Test grid**.
+- **Reports and campaigns** — **Configuration profiles**, **Verdict and campaigns**.
+- **AI assistant** — **Connection**, **Functions and data**, **Log and failures**.
+- **Tracking** — **Usage and telemetry**.
+
+At the bottom of the rail, a link leads to the member side, **My preferences**. A link ending in `?page=<page>` opens a given page directly.
+
+**Overview.** **To look at** lists what Studio spotted in the current configuration — orphaned classifications in the test grid, a judge model identical to the design model, campaign functions turned off in the connection while a profile sets them, an answer limit below 12,000 tokens —, each with a link to the page that deals with it. Then one summary card per page, with what is in force, and **Latest changes**.
+
+**One way to save, on every page.** Each page keeps a **draft**. A sticky banner at the top says « N unsaved changes », with **Cancel** and **Save**; when the draft is invalid, **Save** is disabled and the banner says why. The banner also shows « Changed by … on … at … ». Nothing is saved as you change it — switches and choices included (bug source, Cockpit, sending to the publisher). Leaving a page with a draft, through the rail or by closing the window, asks « Leave without saving? ». If someone saved the page in the meantime, Studio says « The configuration changed while you were editing », naming who and when, and offers **Reload** (their version, your draft discarded) or **Overwrite their version**. A save that fails keeps your draft: try again.
+
+**Requirements and design.** The settings of a requirement, before it belongs to a plan, for the whole project. **Definition of Ready**: minimum score, minimum score of an essential, « Small » blocks up to, minimum verifiable share — with a **live preview** recomputed on the project’s two latest assessments, by Studio, with no call to the model. **When the DoR is not met**: *Allow*, *Warn* or *Block*. **Family weights** (the total must be 100, otherwise saving is blocked), criteria **active** and **essential ★**, display and history, **default design** (level, type, techniques, « Review by the judge, on demand ») and **code reading** (three caps, each with an estimate in tokens). The AI functions of the requirement are no longer on this page: they are turned on or off in *AI assistant › Functions and data*. Requirement settings still set in plan profiles were never applied: once there is nothing left to save, **Remove these inactive settings** clears them after confirmation.
+
+**Verdict and campaigns.** In one draft: the **Bug source** (two choices, see [Campaign bugs: where the bugs of a report come from](/en/user-guide/report-bug-source)), the **Promotion decision** — the ladder of environment stages and whether the decision is reported on the host work item; with no stage, the promotion decision disappears from the product — and the **Cockpit** (« Show load per tester »). The quality scoring is set per profile, in *Configuration profiles › Project default › Thresholds and quality*.

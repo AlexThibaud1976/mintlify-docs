@@ -1,0 +1,87 @@
+---
+title: "Générer un rapport"
+description: "Suivez ces étapes pour générer un rapport de tests complet depuis votre plan de test Azure DevOps."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+Suivez ces étapes pour générer un rapport de tests complet depuis votre plan de test Azure DevOps. Une fois le rapport affiché, l’interrupteur **Panneau de configuration** au-dessus de la page replie la colonne de gauche pour que le rapport occupe toute la largeur ; le plan choisi et l’environnement restent visibles en pastilles, et **Générer le rapport** reste dans la barre.
+
+## Sélectionner un plan de test {#plan-selector}
+
+Utilisez le menu déroulant avec **autocomplétion** pour rechercher les plans par nom, chemin d'itération, ou **identifiant de plan** — saisir un identifiant le retrouve directement dans la liste déjà chargée (aucun appel supplémentaire) ; s'il est introuvable, vous êtes invité à activer **Inclure les plans inactifs**. Les suites se chargent **intégralement, dans l'ordre d'affichage d'Azure Test Plans, avec leur hiérarchie native** — un plan de plusieurs centaines de suites les charge toutes, en une seule réponse, exactement dans l'ordre défini dans ADO (ni par ordre de création, ni alphabétique). Si des suites sont constatées manquantes, ou si leur exhaustivité n'a simplement pas pu être vérifiée, un petit bandeau non bloquant vous le signale sur le rapport — avec un message distinct pour chaque cas, sans jamais confondre les deux — jamais dans un export. La même garantie couvre les **résultats d'exécution**, dont est calculé le taux de passage : ils sont récupérés page par page jusqu'à épuisement de la collection, et si certains sont constatés manquants ou si leur exhaustivité n'a pas pu être vérifiée, son propre bandeau distinct le signale plutôt que de laisser lire un taux comme s'il avait été calculé sur la totalité. La même garantie s'étend aux **cas de test** eux-mêmes d'une suite et à l'**historique d'exécution** (tendances, durées, détail par exécution) : chacun est récupéré jusqu'à épuisement et, si l'un des deux ne peut être confirmé complet, son propre bandeau distinct le signale — le bandeau sur le contenu des cas n'implique jamais que le taux de passage soit affecté, et celui sur l'historique n'implique jamais que la liste des suites ou le taux de passage le soient. Utilisez **Tout développer** / **Tout réduire** pour naviguer. Décochez les suites à exclure. Les plans marqués **INACTIVE** sont masqués par défaut ; utilisez le toggle pour les afficher.
+
+**Filtrer les suites par nom** — saisissez dans le champ **Filtrer les suites** pour réduire l'arbre à une correspondance de nom (accents et casse ignorés) ; tout ancêtre d'une correspondance reste visible pour ne jamais perdre le repère dans la hiérarchie, et un message « aucune suite ne correspond » apparaît si rien ne correspond.
+
+**Les suites vides s'affichent désormais par défaut.** Vous pouvez toujours les masquer via l'interrupteur **Afficher les suites vides** dans *Mes préférences › Exécution* — un choix explicite de les masquer est toujours mémorisé, jamais écrasé silencieusement. Quel que soit ce réglage, la hiérarchie affichée correspond toujours à Azure DevOps : une suite parente vide avec un descendant visible n'est jamais retirée, et une suite masquée n'est jamais remontée au mauvais niveau.
+
+**Exclure les suites vides** — cliquez sur **Exclure vides** pour décocher en un clic toutes les suites sans cas de test. Les suites dégradées (erreur de chargement) ne sont jamais modifiées. Quand les suites vides sont masquées de l'affichage, un badge **(N masquées)** apparaît à côté du compteur.
+
+## Champs du formulaire {#form-fields}
+
+Tous les champs visibles sont obligatoires sauf configuration contraire dans *Mes préférences › Champs du formulaire*. **Contact IT**, **Contact Business**, **Testeur** et **Approbateur** proposent l'autocomplétion ADO (tapez ≥ 2 caractères).
+
+| Champ | Description |
+| --- | --- |
+| Titre du rapport | Nom affiché sur la page de garde |
+| Environnement | DEV / QA / UAT / PREPROD / PROD (configurable) |
+| Référence projet | Code ou identifiant du projet |
+| Numéro de change | Optionnel — référence du changement |
+| Incident / Request | Champs référence optionnels adjacents au Numéro de change |
+| Application | Nom de l'application testée |
+| Domaine fonctionnel | Domaine ou module concerné |
+| Fonctionnalités testées | Description des fonctionnalités couvertes |
+| Périmètre de tests | Portée et limites des tests |
+| Objectifs | Champ multi-lignes — sauts de ligne préservés dans les exports |
+| Critères d'entrée | Multi-lignes — conditions pour démarrer la campagne |
+| Critères de sortie | Multi-lignes — conditions pour arrêter la campagne |
+| Testeur | Personne ayant réalisé les tests (autocomplétion ADO) |
+| Approbateur | Personne approuvant le rapport (autocomplétion ADO) |
+| Rôle approbateur | Fonction de l'approbateur |
+| Date du rapport | Pré-remplie à la date du jour |
+| Build associé | Lier un build ADO — autocomplétion depuis les builds récents, branche et statut affichés. Lien cliquable dans PDF, HTML et Word. |
+
+## Validation {#validation}
+
+Chaque champ peut être configuré avec un **pattern regex** dans *Mes préférences › Champs du formulaire* (**Modifier**, dans la colonne *Format attendu*) :
+- Mode **bloquant** — la génération est impossible si le champ n'est pas conforme
+- Mode **avertissement** — la génération continue, une alerte orange s'affiche
+La validation s'exécute en temps réel dans le formulaire (indicateur rouge/orange) et à nouveau au moment de la génération.
+
+**Longueur douce** — chaque champ peut aussi porter un seuil de **longueur douce** optionnel. Au-delà, un helper **orange, non bloquant** apparaît (« n/seuil — risque de débordement sur la page de garde »). Il **ne bloque jamais la génération et ne tronque jamais** la valeur — il aide simplement à garder une page de garde lisible.
+
+**Les contacts sont des identités Azure DevOps** — Contact IT, Contact Business, Testeur et Approbateur sont choisis parmi vos utilisateurs ADO : **ni regex ni longueur douce** (tout pattern stocké est ignoré). Ils sont regroupés sous **« Contacts & validation »** avec une explication.
+
+## Page de garde : libellé d'en-tête vs titre du rapport, et choix des champs {#cover-clarity}
+
+La **page de garde** PDF se met désormais en page à **hauteur dynamique** : un titre de rapport long ou une valeur de champ longue ne peut plus chevaucher le badge, la grille d'infos ou les KPI — y compris sur d'anciens rapports d'historique contenant déjà des valeurs longues. Le titre pousse le reste vers le bas, et les valeurs longues wrappent dans leur colonne. Les rapports courts sont strictement identiques à avant.
+
+**Deux « titres » distincts** — fin de la confusion :
+- Le **Libellé d'en-tête et de pied de page** (*Mes préférences › Marque et signature*) remplace « TestPulse Studio » dans l'en-tête, le pied de page et le nom de fichier. Ce **n'est pas** le titre du rapport. (Renommé depuis l'ambigu « Titre des rapports » ; changement de libellé uniquement — aucune migration de données.)
+- Le **Titre du rapport** (formulaire) est le grand titre affiché sur la page de garde de chaque rapport.
+
+**Choisir ce qui apparaît sur la cover** — dans *Mes préférences › Champs du formulaire*, chaque champ de garde **visible** porte une case **« Page de garde »**. Défaut = comportement actuel (tout champ visible est sur la cover). Décocher un champ le retire de la cover **mais le conserve dans le corps et dans tous les exports** — cela n'épure que la cover. Aucun plafond sur le nombre de champs (la mise en page dynamique les encaisse).
+
+## Processus de génération {#generation-process}
+
+Le bouton **Générer le rapport** suit une machine d'états :
+1. **Générer le rapport** — inactif, cliquez pour démarrer
+2. **Démarrage…** — désactivation synchrone au clic
+3. **En cours N%** — la barre de progression se met à jour pendant la récupération des données
+4. **Terminé / Erreur** — rapport affiché ou message d'erreur
+
+Un bouton **Annuler** apparaît pendant la génération. Le cliquer annule tous les appels API ADO en cours via `AbortController` — aucun fichier partiel n'est généré. Le bouton revient à l'état inactif.
+
+> La liste des plans utilise le **stale-while-revalidate** : les derniers plans connus apparaissent immédiatement avec un badge "Refreshing" pendant le chargement des données fraîches.
+
+## Templates et vues sauvegardées {#form-templates}
+
+**Enregistrer comme template** — sauvegarde uniquement les métadonnées (champs du formulaire, environnement, testeur, approbateur, etc.) sous un nom personnalisé. Le charger pré-remplit le formulaire instantanément.
+
+**Enregistrer comme vue** — sauvegarde l'ID du plan, les suites cochées *et* toutes les métadonnées en une action. Charger une vue :
+1. Resélectionne le plan sauvegardé et attend le chargement des suites
+2. Coche l'intersection des suites sauvegardées
+3. Restaure tous les champs de métadonnées, **sauf la date du rapport, posée au jour même** — une vue est un modèle réutilisable, pas un instantané, et un rapport généré en août n’a pas à être daté de juin. Un bandeau non bloquant énonce les deux dates et propose de restaurer celle enregistrée ; il ne dit rien si la vue a été enregistrée aujourd’hui, et disparaît dès que vous modifiez la date vous-même. Rien n’est réécrit dans la vue : sa date enregistrée reste la sienne jusqu’à un nouvel enregistrement.
+Les suites supprimées depuis la sauvegarde sont ignorées silencieusement.
+
+> Utilisez les vues pour les campagnes récurrentes où le même plan, les mêmes suites et les mêmes métadonnées sont réutilisés (ex. régression hebdomadaire sur un périmètre fixe).

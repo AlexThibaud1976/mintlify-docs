@@ -1,0 +1,15 @@
+---
+title: "Cockpit d’exécution (burndown)"
+description: "L'onglet Cockpit du hub est l'écran du point du matin d'une campagne, pour un plan : la campagne tiendra-t-elle sa date, qu'est-ce qui a bougé depuis le dernier point, quoi lancer aujourd'hui, qu'est-ce qui bloque (voir Piloter une campagne avec le Cockpit)."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+L'onglet **Cockpit** du hub est l'écran du **point du matin** d'une campagne, pour un plan : la campagne tiendra-t-elle sa date, qu'est-ce qui a bougé depuis le dernier point, quoi lancer aujourd'hui, qu'est-ce qui bloque (voir [Piloter une campagne avec le Cockpit](/fr/user-guide/cockpit-standup)). Il est en **lecture seule sur vos données de test** : il ne garde que ses propres **instantanés** datés et, quand le plan n'a pas de date de fin, la **date cible** que vous saisissez — tous deux dans l'Extension Data du projet (**rien ne quitte votre tenant Azure DevOps**). Il ne réaffecte rien.
+
+- **Instantanés quotidiens** — à chaque ouverture du Cockpit ou génération de rapport, TestPulse Studio enregistre un petit instantané daté du plan (compteurs, ventilation par suite / par config, échecs du jour et, une fois lus, les bugs ouverts liés aux tests du plan), **une fois par jour et par plan** (le dernier de la journée gagne). La courbe réelle est tracée depuis ces instantanés : elle reste juste quand le **périmètre bouge**.
+- **Changements de périmètre, honnêtement** — ajouter / retirer / redimensionner une suite ou une config apparaît comme une **marche** sur la courbe, annotée de son ampleur ; une suite supprimée puis recréée pour la même exigence est réconciliée en **réorganisation** (par identifiant d'exigence uniquement — jamais devinée par le nom).
+- **Ligne idéale & projection** — l'idéale est **par segments, rebasée sur le restant courant** à chaque changement de périmètre vers **0 à la date de fin** : elle n'efface jamais le retard. La **projection** part de ce matin au **rythme observé** (tests exécutés par jour ouvré sur les derniers jours mesurés) — il lui faut **3 jours ouvrés** d'exécution, et elle est **suspendue** quand la dernière exécution remonte à plus de **14 jours**, plutôt que d'afficher une date inventée.
+- **Démarrage à froid** — avant l'accumulation d'instantanés, la courbe est **reconstruite** depuis les dates d'exécution des points, et étiquetée comme telle.
+
+Les jours ouvrés vont du lundi au vendredi ; le Cockpit ne connaît pas les jours fériés.

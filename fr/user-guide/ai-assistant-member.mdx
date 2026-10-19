@@ -1,0 +1,16 @@
+---
+title: "Assistant IA : ce que voit chaque membre"
+description: "Où."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+**Où.** *Mes préférences › Règles du projet* (Outils › Paramètres), sous **Assistant IA**, ouvert à tous les membres, en lecture seule pour tous — un administrateur du projet voit la même chose, plus le bouton **Ouvrir l'administration**. La **pastille IA**, en haut de chaque espace (Pilotage, Couverture, Conception, Outils), dit la même chose en deux mots : **IA · configurée**, **IA · non configurée** ou **IA · indisponible** ; un clic ouvre cette page.
+
+**Ce que vous voyez** : l'état, le fournisseur et le modèle par défaut, les fonctions IA ouvertes pour le plan sélectionné (et celles qu'un profil coupe, avec son nom), les données qui peuvent être envoyées au modèle, et le mode d'accès — chaque ligne avec sa provenance. Avec une clé d'API, la page le dit sans détour : la clé est masquée à l'écran mais reste accessible à tout membre du projet disposant d'outils développeur. **Ce que vous ne voyez jamais** : un point de terminaison, une adresse de passerelle, un identifiant de tenant ou d'application, une clé, le journal des modifications.
+
+**Configurée n'est pas une promesse.** Cela veut dire qu'un administrateur a réglé la connexion ; cela ne prouve pas qu'un appel réussira pour votre compte. Quand un appel échoue pour une raison d'accès (droit, quota, passerelle), la pastille passe à **indisponible** jusqu'au rechargement de la page.
+
+**Deux étages décident si une fonction est active.** La **connexion** est l'interrupteur du projet (un administrateur le règle dans *Assistant IA › Fonctions et données*) : une fonction qui y est coupée l'est pour tout le projet, et aucun profil ne peut la rallumer. Les **profils de configuration** ne peuvent ensuite que **restreindre** : par fonction, *hériter*, *active* ou *coupée*, résolu comme tout autre réglage de profil. Sans rien régler, une fonction active dans la connexion l'est pour tous les plans. Sur un rapport multi-plans, une fonction n'est active que si elle l'est pour **chaque** plan. La page liste les fonctions ouvertes pour le plan sélectionné, ou pour le défaut du projet quand aucun plan ne l'est, et nomme le profil qui coupe une fonction.
+
+**TestPulse Studio est complet sans IA.** Rapports, verdicts, couverture et Cockpit ne dépendent d'aucune IA ; neuf fonctions IA sont disponibles aujourd'hui. Avant le plan, sur l'exigence : l'*Évaluation de l'exigence* (la note et le verdict sont calculés par Studio, jamais par le modèle), l'*Amélioration de l'exigence*, la *Conception de tests*, qui propose des cas de test manuels pour une exigence, le *Contrôle des cas conçus*, qui relit les cas proposés avec le modèle de contrôle, la *Confrontation au code* et les *Tests automatisés*. Pendant la campagne : l'*Analyse de campagne*, qui commente un rapport, les *Axes de couverture*, qui commentent une analyse de couverture, et le *Classement des tests*, qui propose un type pour les tests sans type. Aucune ne décide.

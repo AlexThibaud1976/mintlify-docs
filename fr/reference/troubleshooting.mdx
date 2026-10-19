@@ -1,0 +1,23 @@
+---
+title: "Dépannage"
+description: "Problèmes courants et leurs solutions."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+Problèmes courants et leurs solutions.
+
+## Liste des problèmes {#issues-table}
+
+| Problème | Solution |
+| --- | --- |
+| TestPulse Studio absent de Test Plans | Extension non installée dans votre organisation. Videz le cache navigateur et rechargez. |
+| Liste des plans vide | Vérifiez que des plans existent dans le projet. Cliquez sur Rafraîchir. Niveau d'accès Basic minimum requis. |
+| Traçabilité affiche « — » | Liez vos cas de test aux User Stories/Epics dans les Work Items Azure DevOps. |
+| Autocomplétion inactive | Tapez ≥ 2 caractères. Vérifiez la connexion réseau. vso.identity peut être limité on-premise. |
+| Onglet Test coverage : Non exécuté en on-prem alors que les tests sont passés | Corrigé en 2.26.1 — sur Azure DevOps Server, les résultats des tests remontent désormais correctement dans le tableau. Mettez à jour TestPulse Studio. |
+| La génération du rapport sur un plan entier échoue avec « Cannot read properties of null (reading 'id') » en on-prem | Corrigé en 2.53.1 — sur Azure DevOps Server 2022.1, une lecture par lot de work items supprimés ne les omet pas comme sur Azure DevOps Services : elle renvoie une entrée null à leur place, ce qui faisait planter la lecture. TestPulse Studio filtre désormais ces entrées. Mettez à jour TestPulse Studio. |
+| Erreur 401 / CORS | TestPulse Studio doit être utilisé depuis Azure DevOps (menu Test Plans), pas en accès direct. |
+| Génération lente | Décochez Pièces jointes des runs dans Mes préférences › Sections et export. Baissez les runs analysés dans Mes préférences › Exécution, sauf si le projet les impose. |
+| L’ordre des sections ou la fiche de signature est sans effet | Le PDF ne fait pas partie de vos formats : recochez-le dans Mes préférences › Sections et export › Formats proposés. L’ordre et la fiche sont restés enregistrés. |
+| L'Historique complet affiche plus de lignes qu'Azure DevOps pour le même cas de test | Comportement attendu, pas un bug. Un blocage de masse crée un run qu'Azure DevOps expose via son API mais masque de l'historique propre au test point, car aucune issue n'a été publiée pour ce run (affiché « None » dans TestPulse Studio, avec une explication au survol). TestPulse Studio conserve tous les runs — la colonne Run des tableaux Résultats et Historique complet est désormais cliquable (ouvre le résultat exact, même navigation portail que le lien de run de l'onglet Couverture, fiable aussi dans la fiche work item sandboxée on-prem) pour confronter chaque ligne à Azure DevOps directement. |

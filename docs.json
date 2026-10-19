@@ -1,72 +1,285 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mintlify Starter Kit",
+  "name": "TestPulse Studio",
+  "description": "Test reporting, coverage and test design for Azure DevOps.",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#0F6E64",
+    "light": "#1E958A",
+    "dark": "#0B5A52"
   },
-  "favicon": "/favicon.svg",
-  "navigation": {
-    "pages": [
-      {
-        "group": "Getting Started",
-        "pages": [
-          "index",
-          "quickstart"
-        ]
-      }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
-  },
+  "favicon": "/images/icon.png",
   "logo": {
     "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "dark": "/logo/dark.svg",
+    "href": "/en/index"
+  },
+  "icons": {
+    "library": "lucide"
+  },
+  "navigation": {
+    "languages": [
+      {
+        "language": "en",
+        "groups": [
+          {
+            "group": "Getting started",
+            "icon": "rocket",
+            "pages": [
+              "en/index",
+              "en/quickstart",
+              "en/security-and-ai",
+              "en/getting-started/introduction",
+              "en/getting-started/installation",
+              "en/getting-started/first-report",
+              "en/user-guide/visual-refresh"
+            ]
+          },
+          {
+            "group": "Pilotage",
+            "icon": "gauge",
+            "pages": [
+              "en/user-guide/generating",
+              "en/user-guide/export-formats",
+              "en/user-guide/quality-score",
+              "en/user-guide/report-history",
+              "en/user-guide/traceability",
+              "en/user-guide/test-configurations",
+              "en/user-guide/multi-plan-profiles",
+              "en/user-guide/report-sxc-matrix",
+              "en/user-guide/report-bug-source",
+              "en/user-guide/report-suite-paths",
+              "en/user-guide/test-types-report",
+              "en/user-guide/test-types-classify",
+              "en/user-guide/wave2-features",
+              "en/user-guide/campaign-analysis",
+              "en/user-guide/campaign-question-export",
+              "en/user-guide/cockpit-tab",
+              "en/user-guide/cockpit-standup",
+              "en/user-guide/explore-hub-tab",
+              "en/user-guide/requirement-quality"
+            ]
+          },
+          {
+            "group": "Couverture",
+            "icon": "list-checks",
+            "pages": [
+              "en/user-guide/coverage-builder",
+              "en/user-guide/requirement-drift",
+              "en/user-guide/repository-tab",
+              "en/user-guide/repository-gen-plan",
+              "en/user-guide/repository-hygiene"
+            ]
+          },
+          {
+            "group": "Conception",
+            "icon": "pencil-ruler",
+            "pages": [
+              "en/user-guide/test-design-hub",
+              "en/user-guide/requirement-assessment",
+              "en/user-guide/requirement-improvement",
+              "en/user-guide/code-available",
+              "en/user-guide/code-reading",
+              "en/user-guide/code-confrontation",
+              "en/user-guide/automated-tests"
+            ]
+          },
+          {
+            "group": "Outils",
+            "icon": "wrench",
+            "pages": [
+              "en/settings/settings-navigation",
+              "en/settings/thresholds",
+              "en/settings/appearance",
+              "en/settings/export-sections",
+              "en/settings/field-config",
+              "en/settings/prefs-execution",
+              "en/settings/prefs-notifications",
+              "en/settings/prefs-rules",
+              "en/settings/templates",
+              "en/user-guide/testpulse-import",
+              "en/user-guide/bulk-reassignment-tab"
+            ]
+          },
+          {
+            "group": "Project administration",
+            "icon": "settings",
+            "pages": [
+              "en/user-guide/project-administration",
+              "en/user-guide/project-vs-personal",
+              "en/user-guide/test-types-catalog",
+              "en/user-guide/configuration-profiles-admin",
+              "en/user-guide/ai-connection-admin",
+              "en/user-guide/ai-assistant-member",
+              "en/user-guide/usage-statistics"
+            ]
+          },
+          {
+            "group": "On a work item",
+            "icon": "clipboard-list",
+            "pages": [
+              "en/user-guide/wit-coverage-tab",
+              "en/user-guide/explore-tab",
+              "en/user-guide/explore-promotion"
+            ]
+          },
+          {
+            "group": "Reference",
+            "icon": "book-open",
+            "pages": [
+              "en/reference/permissions",
+              "en/reference/preferences",
+              "en/reference/troubleshooting",
+              "en/reference/studio-vs-testpulse",
+              "en/reference/testpulse-history",
+              "en/changelog"
+            ]
+          }
+        ]
+      },
+      {
+        "language": "fr",
+        "groups": [
+          {
+            "group": "Démarrage",
+            "icon": "rocket",
+            "pages": [
+              "fr/index",
+              "fr/quickstart",
+              "fr/security-and-ai",
+              "fr/getting-started/introduction",
+              "fr/getting-started/installation",
+              "fr/getting-started/first-report",
+              "fr/user-guide/visual-refresh"
+            ]
+          },
+          {
+            "group": "Pilotage",
+            "icon": "gauge",
+            "pages": [
+              "fr/user-guide/generating",
+              "fr/user-guide/export-formats",
+              "fr/user-guide/quality-score",
+              "fr/user-guide/report-history",
+              "fr/user-guide/traceability",
+              "fr/user-guide/test-configurations",
+              "fr/user-guide/multi-plan-profiles",
+              "fr/user-guide/report-sxc-matrix",
+              "fr/user-guide/report-bug-source",
+              "fr/user-guide/report-suite-paths",
+              "fr/user-guide/test-types-report",
+              "fr/user-guide/test-types-classify",
+              "fr/user-guide/wave2-features",
+              "fr/user-guide/campaign-analysis",
+              "fr/user-guide/campaign-question-export",
+              "fr/user-guide/cockpit-tab",
+              "fr/user-guide/cockpit-standup",
+              "fr/user-guide/explore-hub-tab",
+              "fr/user-guide/requirement-quality"
+            ]
+          },
+          {
+            "group": "Couverture",
+            "icon": "list-checks",
+            "pages": [
+              "fr/user-guide/coverage-builder",
+              "fr/user-guide/requirement-drift",
+              "fr/user-guide/repository-tab",
+              "fr/user-guide/repository-gen-plan",
+              "fr/user-guide/repository-hygiene"
+            ]
+          },
+          {
+            "group": "Conception",
+            "icon": "pencil-ruler",
+            "pages": [
+              "fr/user-guide/test-design-hub",
+              "fr/user-guide/requirement-assessment",
+              "fr/user-guide/requirement-improvement",
+              "fr/user-guide/code-available",
+              "fr/user-guide/code-reading",
+              "fr/user-guide/code-confrontation",
+              "fr/user-guide/automated-tests"
+            ]
+          },
+          {
+            "group": "Outils",
+            "icon": "wrench",
+            "pages": [
+              "fr/settings/settings-navigation",
+              "fr/settings/thresholds",
+              "fr/settings/appearance",
+              "fr/settings/export-sections",
+              "fr/settings/field-config",
+              "fr/settings/prefs-execution",
+              "fr/settings/prefs-notifications",
+              "fr/settings/prefs-rules",
+              "fr/settings/templates",
+              "fr/user-guide/testpulse-import",
+              "fr/user-guide/bulk-reassignment-tab"
+            ]
+          },
+          {
+            "group": "Administration",
+            "icon": "settings",
+            "pages": [
+              "fr/user-guide/project-administration",
+              "fr/user-guide/project-vs-personal",
+              "fr/user-guide/test-types-catalog",
+              "fr/user-guide/configuration-profiles-admin",
+              "fr/user-guide/ai-connection-admin",
+              "fr/user-guide/ai-assistant-member",
+              "fr/user-guide/usage-statistics"
+            ]
+          },
+          {
+            "group": "Sur un work item",
+            "icon": "clipboard-list",
+            "pages": [
+              "fr/user-guide/wit-coverage-tab",
+              "fr/user-guide/explore-tab",
+              "fr/user-guide/explore-promotion"
+            ]
+          },
+          {
+            "group": "Référence",
+            "icon": "book-open",
+            "pages": [
+              "fr/reference/permissions",
+              "fr/reference/preferences",
+              "fr/reference/troubleshooting",
+              "fr/reference/studio-vs-testpulse",
+              "fr/reference/testpulse-history",
+              "fr/changelog"
+            ]
+          }
+        ]
+      }
+    ]
   },
   "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:support@mintlify.com"
-      }
-    ],
+    "links": [],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
+      "label": "Visual Studio Marketplace",
+      "href": "https://marketplace.visualstudio.com/items?itemName=AlexThibaud.TestPulse-Studio"
     }
   },
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/en/index"
+    }
+  ],
   "contextual": {
     "options": [
       "copy",
-      "view",
-      "chatgpt",
-      "claude",
-      "perplexity",
-      "mcp",
-      "cursor",
-      "vscode"
+      "view"
     ]
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "website": "https://atconseil.info"
     }
   }
 }

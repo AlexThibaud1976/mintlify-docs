@@ -1,0 +1,43 @@
+---
+title: "Champs du formulaire"
+description: "Les champs que vous remplissez avant de générer un rapport, leur libellé, et ce qui figure sur la page de garde — Mes préférences › Champs du formulaire."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+Les champs que vous remplissez avant de générer un rapport, leur libellé, et ce qui figure sur la page de garde — **Mes préférences › Champs du formulaire**.
+
+## Champs standard {#form-fields-settings}
+
+Un seul tableau, une ligne par champ : **Affiché** · **Champ** · **Libellé** · **Requis** · **Page de garde** · **Format attendu**.
+- **Affiché** — un champ masqué n’est ni demandé ni imprimé
+- **Libellé** — le libellé du champ dans le formulaire
+- **Requis** — un champ requis laissé vide bloque la génération
+- **Page de garde** — si le champ est imprimé sur la page de garde
+- **Format attendu** — **Modifier** l’ouvre (voir ci-dessous)
+
+Les contacts (IT, métier, testeur, approbateur) sont des identités Azure DevOps : aucun format à vérifier. Le **Build associé** se choisit dans une liste : ni requis ni format — masqué, le sélecteur de build disparaît du formulaire et aucun appel build n’est émis.
+
+## Format attendu {#validation-dialog}
+
+**Modifier**, dans la colonne *Format attendu*, ouvre ce que Studio vérifie pendant que vous remplissez le champ, avant de générer :
+- **Longueur conseillée** — au-delà, un avertissement orange ; jamais bloquant, jamais tronqué. Vide : aucune limite
+- **Expression régulière** — par exemple `^[A-Z]{2}-\d{4,6}$`. Vide : aucun format
+- **Message quand la saisie ne correspond pas**
+- **Empêcher la génération quand la saisie ne correspond pas** — sinon un avertissement orange, et la génération reste possible
+- **Tester une valeur** — saisissez une valeur et voyez aussitôt si elle correspond
+
+La validation s’exécute en temps réel dans le formulaire (bordure rouge ou orange) et à nouveau au moment de la génération.
+
+## Valeurs d'environnement {#env-values}
+
+Les valeurs proposées dans le champ **Environnement**. Ajoutez-en ou retirez-en ; une valeur déjà proposée est refusée, et une valeur tient en 20 caractères au plus.
+
+## Champs supplémentaires {#custom-fields}
+
+Jusqu’à **3 champs** propres à vos rapports, imprimés après les champs standard, dans le formulaire et dans tous les exports :
+- **Libellé**
+- **Type** — texte libre, ou liste de choix (séparés par des virgules)
+- **Champ requis** — ou non
+
+Leurs valeurs sont incluses dans la page de garde PDF, l’en-tête HTML et la section de couverture Word.

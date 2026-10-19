@@ -1,0 +1,53 @@
+---
+title: "Traçabilité"
+description: "L'onglet Traçabilité affiche la hiérarchie complète Epic → User Story → Cas de test → Bug pour votre plan de test."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+L'onglet Traçabilité affiche la hiérarchie complète **Epic → User Story → Cas de test → Bug** pour votre plan de test.
+
+## Modèle hiérarchique {#hierarchy}
+
+TestPulse Studio utilise une **stratégie hybride** pour construire la traçabilité :
+1. **Suites basées sur les exigences** — suites de type `requirementTestSuite` avec un `requirementId` (US liée) sont la source principale
+2. **Liens directs TC→US** — fallback pour les cas de test sans suite de type exigence
+
+Un cas de test peut être lié à **plusieurs User Stories et plusieurs Epics** — tous sont affichés. Les bugs sont collectés via des requêtes WIQL (relations TC→Bug et US→Bug) et dédupliqués automatiquement.
+
+**Choisir la source qui compte** — le panneau de sélection du plan porte une bascule **« Suites d'exigences uniquement »** (à côté de « Inclure les plans inactifs ») qui restreint la traçabilité à la source 1 ci-dessus, en ignorant entièrement la source 2. Elle est désactivée par défaut (comportement actuel, les deux sources combinées) — activez-la pour un plan de non-régression dont les cas de test portent encore des liens vers d'anciennes user stories sans rapport, désactivez-la à nouveau pour un plan basé sur les exigences où ces liens sont exactement ce que vous voulez. Votre choix est mémorisé, et une icône d'aide en place à côté de la bascule explique les deux modes sans quitter l'écran. Sans aucune suite basée sur les exigences dans le plan, l'activer vide la traçabilité et le score qualité signale la couverture comme indisponible (poids redistribués sur les autres critères) plutôt qu'un chiffre trompeur.
+
+## Vues : Tableau vs Cartes {#views}
+
+**Vue Tableau (3 colonnes)** — Exigence | Tests | Défauts. Les Epics s'affichent en gras avec fond gris (dépliables). Les User Stories sont indentées avec une ligne pointillée verticale. Les cas de test sont listés avec des badges d'outcome. Les bugs affichent état + titre tronqué.
+
+**Vue Cartes** — Une MUI Card par Epic (dépliable). Chaque User Story a des sous-cartes avec les colonnes Tests / Défauts. Les pills d'outcome sont cliquables et ouvrent le work item ADO.
+
+Votre vue préférée persiste entre les sessions.
+
+## Règles d'agrégation des statuts {#status-rules}
+
+| Statut | Règle |
+| --- | --- |
+| OK | Tous les cas de test liés à la US sont Passed |
+| NOK | Au moins un cas de test est Failed ou Blocked |
+| PARTIEL | Mix de Passed + (Failed ou Blocked), pas de NotExecuted |
+| NON EXÉCUTÉ | Au moins un cas de test est NotExecuted ou None, sans échec |
+
+## Suites non tracées {#untraced}
+
+Le bloc **Suites non tracées** (replié par défaut) liste toutes les suites sans User Story liée (`requirementId` absent ou null). Ces suites représentent des **angles morts de traçabilité** — des cas de test non couverts par une exigence.
+
+> Les suites parentes vides (sans cas de test) sont exclues de ce bloc.
+
+## KPIs et liens de traçabilité {#traceability-links}
+
+Quatre KPIs sont calculés pour la couverture des User Stories :
+- **Exigences couvertes** — total des US liées à au moins un cas de test
+- **OK** — US dont tous les TC sont Passed
+- **NOK** — US avec au moins un TC Failed/Blocked
+- **Non exécutés** — US sans TC exécuté
+
+Un **filtre par statut** dans la barre de contrôles permet d'afficher uniquement les NOK, non-exécutés, ou une combinaison.
+
+**Liens cliquables** — les titres Epic, US, TC et Bug sont des hyperliens qui appellent `openLink()` du SDK ADO, ouvrant le work item dans un nouvel onglet. Les work items supprimés depuis la génération du rapport sont exclus silencieusement (guard 404). Les User Stories sans Epic parent sont regroupées sous **"No Epic"**.

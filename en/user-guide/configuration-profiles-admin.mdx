@@ -1,0 +1,24 @@
+---
+title: "Configuration profiles (project administration)"
+description: "Where."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+**Where.** *Project settings › Extensions › TestPulse Studio › Configuration profiles*, reserved for project administrators: anyone else sees an explanation instead of the editor, and the service refuses to write. A **project default** holds the baseline; named **profiles** override only what differs, and a test plan can be bound to one of them. A banner reminds you: « You are changing settings for the whole project » — they apply to every member’s reports as soon as you save, every change is signed and dated, and archived reports are never recomputed. The project storage gauge stays visible.
+
+**Where a value comes from.** One line gives the order: plan profile › project default › member’s personal value › shipped value. Every setting shows its provenance with a written label, never colour alone.
+
+**The page.** On the left, the list of profiles — the project default first, then the named profiles with their plans and the number of settings they override — and the plans bound to the selected profile (**Manage bindings…**, **See the profile of each plan…**). One draft covers every profile: a profile touched by it carries a « modified » chip. On the right, real tabs — **Thresholds and quality**, **Notifications**, **Signature**, **Branding**, **Execution**, **Export**, **AI functions**, **Expected grid** — each with the number of settings overridden. On the project default, **Set** or **Remove** a setting; in a profile, **Override** it or **↩ Inherit**, and an overridden value shows « Project default: X » under it. Nothing is saved until **Save**, in the banner at the top of the page.
+
+**The editors** are the same as in the members’ **My preferences**: « Header and footer label », a colour as `#RRGGBB`, a run limit of 100, 200, 500 or 1,000, a regression threshold of at least 1, a PNG, JPEG or SVG logo with a preview, the signature sheet (5 signatories at most), scheduled reports (a readable day, a saved view), webhooks in `https` — the address is **masked** on screen, only its start and end show — with **Send a test** (when the browser blocks the send, the message is offered to copy and paste). The quality scoring is set here, in *Project default › Thresholds and quality*.
+
+**Plan by plan.** The sentence « N plans with no binding follow the project default » opens a view listing every plan of the project, each with a profile selector (project default included).
+
+**What profiles do not hold.** Requirement assessment and test design are about the requirement, before it belongs to a plan: they are set for the whole project in *Requirements and design*. The AI functions are turned on in *AI assistant › Functions and data*; a profile can only turn a campaign function off for its plans. The expected grid of a profile overrides, per plan, the expectation set in *Test grid*.
+
+On a project where nothing has been set yet, **nothing changes**: everyone keeps their personal values. Setting a project default is an explicit step, with a preview of exactly what will be written.
+
+**The thresholds panel now drives reports.** Pass, warning and flaky thresholds, pass-rate weighting and the trend regression threshold are resolved when a report is generated and **captured inside it**: a report already produced never changes, even if an administrator changes a threshold afterwards. A report shows the profile applied to it, and its exports carry the name. In **My preferences**, a member sees the values the project defines, read-only, with a lock and where each one comes from — the ones the project does not define stay personal and editable, and nothing is ever hidden. Reports archived before this release and imported reports keep following your personal values.
+
+**A consolidated report judges each plan by its own profile.** Quality scoring and the run limit follow the profile each plan is bound to, and the consolidated verdict keeps the least favourable one — how the pass rate is weighted stays common to every plan, since adding up plans counted differently would produce a figure that means nothing. When the plans do not share a profile, the report says so above the per-plan quality table: one sentence naming each profile in bold and the plans that follow it, a chip in the report header that scrolls to it, a Profile column in the table, and the same sentence on the cover page of the PDF, Word and PowerPoint exports, at the top of the HTML and in the Excel summary. When the verdict is capped because at least one plan is NO-GO, the reason is written under it and names those plans — no need to unfold anything.

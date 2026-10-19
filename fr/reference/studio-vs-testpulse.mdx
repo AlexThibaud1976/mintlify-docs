@@ -1,0 +1,32 @@
+---
+title: "Ce que Studio fait différemment de TestPulse"
+description: "TestPulse Studio est issu de TestPulse 2.72.2, et une batterie de tests de parité vérifie, rapport par rapport, qu’il se comporte comme TestPulse 2.73.0."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+TestPulse Studio est issu de TestPulse 2.72.2, et une batterie de tests de parité vérifie, rapport par rapport, qu’il se comporte comme **TestPulse 2.73.0**. Il ne s’en écarte que là où TestPulse a tort, sur décision explicite, un cas à la fois. Il y en a aujourd’hui neuf.
+
+**Le nom du produit par défaut.** Sans libellé de marque saisi, les rapports (en-tête du PDF, page de garde du Word, titre HTML) et les PDF Explore portent **TestPulse Studio** ; TestPulse y écrit « TestPulse ». Un libellé déjà saisi par le projet ne change pas.
+
+**Un verdict consolidé plafonné dit pourquoi, dans les exports aussi.** Un rapport consolidé dont un plan est NO-GO est NO-GO, même si son score dépasse le seuil GO. La phrase **Plafonné : au moins un plan est NO-GO (…)**, qui nomme ces plans, accompagne le verdict consolidé partout où il est écrit — à l’écran, sous le badge qualité du PDF et du HTML, sous le tableau « Qualité par plan » du Word et de l’Excel — que le projet ait une configuration de projet ou non. Le PowerPoint n’écrit pas le verdict consolidé : rien n’y change. TestPulse n’écrit cette raison que dans le détail replié du score.
+
+**L’analyse de profondeur compte les critères, pas les lignes.** Dans l’onglet Couverture d’un work item et dans le hub Couverture, le nombre de critères d’acceptation est celui des scénarios Gherkin (`Scenario:`, `Scenario Outline:`, `Scénario :`…), à défaut des identifiants `CA-nn` distincts, à défaut des puces — une ligne ne compte pour un critère que si rien de tout cela n’est trouvé. Les mots-clés Gherkin (Feature, Scenario, Given, When, Then…, et leurs formes françaises Fonctionnalité, Scénario, Étant donné, Quand, Alors…) ne sont jamais signalés comme termes métier absents des tests. TestPulse compte les lignes : une US de 12 scénarios y annonce plus de cent critères.
+
+**Le verdict d’une session exploratoire est un tag préfixé.** La Task de suivi d’une session close porte `verdict:passed`, `verdict:failed` ou `verdict:blocked` ; TestPulse écrit le tag nu (`Passed`, `Failed`, `Blocked`), que portent aussi les sessions closes par Studio jusqu’à la 0.2.6. Rien n’est migré : pour retrouver toutes les sessions réussies dans une requête Azure DevOps, cherchez les deux formes.
+
+**Ce n’est plus une différence : le résumé exécutif suit le verdict.** Quand le verdict de la release est NO-GO, la pastille du résumé n’est jamais verte — elle indique **Attention requise** (ou reste **Qualité insuffisante**) — et les risques s’ouvrent par **Verdict de la release : NO-GO —** suivi de la première raison du détail du score. Studio l’a livré en 0.1.9 et TestPulse le même correctif, au mot près, dans sa 2.72.3 : les deux produits se comportent désormais de la même façon.
+
+**Ce n’est pas non plus une différence : le Cockpit.** TestPulse 2.72.4 a repris le Cockpit de Studio — même écran, mêmes chiffres. Deux détails diffèrent : dans Studio, le réglage « Afficher la charge par testeur » est **réservé aux administrateurs du projet** (dans TestPulse, il se règle dans Paramètres › Cockpit, sans verrou), et Studio affiche le **profil de configuration** appliqué au plan (TestPulse n’a pas de profils).
+
+**Pas une différence non plus : la source des bugs.** TestPulse 2.73.0 lit par défaut les bugs d’un rapport dans les exécutions du plan, et Studio aussi — même liste, même tri, mêmes chemins de suite, même matrice regroupée. Seul l’endroit où le réglage se change diffère : dans Studio, le réglage **Source des bugs** se pose dans l’administration du projet, **réservé aux administrateurs du projet**, et se lit en lecture seule dans *Mes préférences › Seuils et calculs* (dans TestPulse, il se règle dans Paramètres › Seuils & qualité, sans verrou).
+
+**L’export HTML fonctionne hors ligne.** Ses deux graphiques (répartition des résultats, résultats par suite) sont dessinés dans le fichier, avec les mêmes chiffres ; le fichier n’exécute aucun script et ne charge rien de l’extérieur. TestPulse charge une bibliothèque de graphiques depuis un site tiers : hors ligne, ses graphiques manquent.
+
+**Le Cockpit lit les dates du plan.** Les dates de début et de fin du plan viennent d’Azure DevOps, et une date de fin passée affiche **Terminé depuis le …** ; TestPulse ne trouvait pas de date de fin et demandait une cible.
+
+**Rien d’exécuté : Non évalué, partout.** Un plan sans aucune exécution affiche **Non évalué** — sur la carte Qualité comme sur la pastille, grise, du résumé exécutif, à l’écran, dans le PDF et le HTML —, sans alerte ni risque de taux de réussite : la barre de taux dit **aucune exécution**, la carte **Taux succès** porte **—**, en gris, à l’écran comme dans chaque export (la carte **Taux exécution** reste à 0 %), et aucun trou de configuration n’est signalé. Le résumé exécutif ne dit **exécution complète** qu’à 100 % (**quasi complète** sinon). TestPulse affichait un taux critique de 0 % et une qualité insuffisante.
+
+**Un point jamais exécuté n’a pas de date.** Dans l’onglet Résultats du Rapport et dans l’export HTML, sa colonne Date porte **—** ; TestPulse y écrit « Invalid Date ».
+
+**Un rapport ne reprend plus la couverture du rapport précédent.** La génération d’un rapport lit les cas de test du plan deux fois en même temps, avec et sans leurs liens ; dans TestPulse, la seconde lecture pouvait remplacer la première dans le cache de la session, et le rapport suivant sur un plan qui partage ces cas (une copie de plan, une autre sélection de suites) affichait une couverture des exigences de 0 % et une note plus basse jusqu’au rechargement de la page. Dans TestPulse Studio, chaque génération donne ses propres chiffres.

@@ -1,0 +1,75 @@
+---
+title: "Export Formats"
+description: "TestPulse Studio supports four export formats — PDF, HTML, Word and Excel — each optimised for a different use case."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+TestPulse Studio supports four export formats — PDF, HTML, Word and Excel — each optimised for a different use case.
+
+## Format comparison {#format-comparison}
+
+| Format | Use case | Key features |
+| --- | --- | --- |
+| PDF | Formal delivery, audits | Paginated, signature page, charts, drag-and-drop section order |
+| HTML | Sprint reviews, dashboards | Standalone file, interactive Chart.js, clickable ADO links |
+| Word (.docx) | Editable reports | 6 sections, no charts — editable in Microsoft Word |
+| Excel (.xlsx) | Data analysis | Up to 6 sheets: KPIs, Results, Traceability, Bugs, plus 2 more when consolidating several test plans |
+
+## PDF export detail {#pdf-detail}
+
+The PDF export includes up to 12 configurable sections:
+- **Cover page** — project info grid, logo (PNG/JPEG/SVG), environment badge
+- **Executive summary** — automated verdict, or a per-report **custom** summary written via the Auto/Custom toggle in the report screen (rendered as a clean paragraph, no "Recommendations" heading)
+- **KPI cards** — pass rate, execution rate, passed/failed/blocked, linked bugs
+- **Results table** — latest outcome per test case; multi-config matrix when 2–3 configurations detected
+- **Traceability** — Epic → US → TC → Bug hierarchy (3-column table), untraced suites block
+- **Bugs section** — the report’s bugs (campaign bugs by default) with state, severity, creation date and test cases, newest first, under a line that states the source
+- **Flaky tests** — tests whose outcome changed across consecutive **real executions** (at least two needed to say anything); a test point that was never executed doesn't count as an execution, so a test run only once is never flagged as flaky, no matter what preceded it
+- **Charts** — pass/fail donut + results-by-suite bar, rendered locally via chart.js (works offline)
+- **Attachments** *(shown by default since v2.69.0)* — PNG/JPEG images embedded inline; every other file appears in a table whose **name is a clickable link** to the attachment in Azure DevOps, with a **readable type** (PDF, Word, Excel, Archive, Email…) instead of a raw MIME type. An unrecognised extension shows the generic label **File** and **keeps its link** — the extension decides the label, never whether there is a link. A file whose URL is missing or uses neither `http` nor `https` is shown as plain text, without a link
+- **Objectives, Entry criteria, Exit criteria** — multi-line scoping fields
+- **Signature page** — configurable signatories with pre-fill and sign line
+
+Sections are **reorderable** in *My preferences › Sections and export* — drag a row by its handle or use the arrows. Each section can be enabled/disabled independently.
+
+## HTML export detail {#html-detail}
+
+The HTML export produces a **standalone file** — no server needed to open it. Features:
+- Interactive **Chart.js** charts (donut + bar) embedded as base64
+- **Clickable ADO links** for work items, bugs and test cases
+- Full **results table** with outcome badges and suite grouping
+- **Traceability matrix** (flat rows) and **bugs list**
+- Compatible with browsers' local file open (CSP allows it)
+- **Attachments** section, **shown by default since v2.69.0** — images inline, other files as clickable links (the HTML report already carried these links)
+
+## Word export detail {#word-detail}
+
+The Word (.docx) export is generated via the `docx` library and is **fully editable**. It includes:
+1. Cover page (project info, environment, dates)
+2. KPI metrics table
+3. Results table (all test cases)
+4. Traceability table (TC → US → Epic → Bug)
+5. Bugs table
+6. Signature page (if enabled)
+
+> Word does not include charts or attachments. For chart-heavy reports, use PDF.
+
+## Excel export detail {#excel-detail}
+
+The Excel (.xlsx) export via ExcelJS produces 4 worksheets, plus 2 more when you consolidate several test plans:
+- **KPIs** — pass rate, execution rate, counts, metadata
+- **Results** — all test cases with outcome, suite, date, tester, configuration
+- **Per plan breakdown** *(several plans only)* — total, pass rate and execution rate for each plan
+- **Quality per plan** *(several plans only)* — verdict, US coverage and covered configurations for each plan, plus a consolidated row
+- **Traceability** — TC → US → Epic → Bug (multi-requirement join)
+- **Bugs** — the report’s bugs with state, severity, priority, assignee, creation date and test cases, followed by the source line; the results sheets also carry a **Suite path** column
+
+The whole workbook follows the language selected in the extension, sheet names included.
+
+## Controlling export button visibility {#export-visibility}
+
+In *My preferences › Sections and export › Formats offered* you choose which export buttons the toolbar offers:
+- Without PDF, the **section order** and the **signature sheet** stay saved but are no longer used (the signature is PDF-only) — a note on the page says so
+- **PowerPoint** generates a 5-slide presentation (Cover, KPIs, Results, Traceability, Bugs). The signature is **not** included in PowerPoint.
+- An unticked format is no longer offered; its settings stay in place. Your choice is saved with your preferences, once you click **Save**

@@ -1,0 +1,12 @@
+---
+title: "Suite paths and the grouped traceability matrix"
+description: "A suite is identified by its identifier and shown by its suite path from the first level under the plan root, for example CH › SALES › Pre-Payment — on screen (last level in bold, full path in the tooltip) and in the five exports."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+A suite is identified by its identifier and shown by its **suite path** from the first level under the plan root, for example `CH › SALES › Pre-Payment` — on screen (last level in bold, full path in the tooltip) and in the five exports. A long path is cut in the middle: it keeps its **first level** (what tells same-name suites apart, such as the country) and its last two. The Excel workbook keeps the **Suite** column (name) and adds a **Suite path** column, never cut, to filter by country. A report saved before this version shows the suite name alone.
+
+Every per-suite count — the per-suite breakdown on screen, the per-suite charts of the PDF and HTML exports, the *Included test suites* table, untraced suites — matches results to suites **by identifier**, so two suites with the same name keep their own figures. The *Included test suites* column is **Results (latest)**: the latest results of the suite, comparable with *Defined cases*.
+
+**Traceability matrix: one line per test case.** A test case run in several suites or configurations appears once, with a **grouped status** — at least one Failed: *Not OK*; otherwise at least one not passed: *Not run*; otherwise *Passed* (the same rule as the verdict of the Couverture tab) — and *n/m passed · k suites*. On screen, the expand button (keyboard too) lists each suite path, configuration and result; the PDF, Word and HTML exports carry the compact line. This is a display: requirement statuses (OK / NOK / PARTIAL) and matrix KPIs are unchanged.

@@ -1,0 +1,69 @@
+---
+title: "Introduction"
+description: "TestPulse Studio is an Azure DevOps extension with its own TestPulse Studio group in the project navigation."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+TestPulse Studio is an **Azure DevOps extension** with its own **TestPulse Studio** group in the project navigation. It generates professional test reports (PDF, HTML, Word, Excel) in your browser from your existing test plans. Nothing leaves Azure DevOps except what you turn on: the AI assistant (to your organization’s model provider) and usage telemetry (see “Usage and telemetry”).
+
+## Finding your way in TestPulse Studio {#finding-your-way}
+
+TestPulse Studio has its **own place in the project navigation**: the **TestPulse Studio** group in the left bar (project navigation › TestPulse Studio) — its only entry, visible even when the Test Plans service is turned off. It gathers four areas:
+
+- **Pilotage** — where is the campaign, can we ship? Sub-tabs **Report**, **Cockpit**, **History**, **Explore** (exploratory sessions stay here until an area dedicated to campaigns exists), **Requirement quality** (see [Requirement quality per iteration](/en/user-guide/requirement-quality)).
+- **Couverture** — are the requirements tested, are the tests aligned? **Coverage**, **Requirement drift**, **Repository**.
+- **Conception** — design the tests of a requirement: **Test design** (see [Designing tests with the AI assistant](/en/user-guide/test-design-hub)).
+- **Outils** — what you open now and then: **Import**, **Bulk reassignment**, **Settings**, **User Guide**.
+
+The **?** icon at the top of every area opens this documentation.
+
+**Moving from one area to another reloads the page.** TestPulse Studio keeps your selected plan (with its checked suites, or your plans in multi-plan mode), the report form fields (except the date, which follows the day) and the last sub-tab you opened in each area. **The report on screen is not kept**: it stays in History if it was saved, and Pilotage reminds you when you come back. A link from one area to another carries its context in the URL — the address copied into another browser tab opens the same screen.
+
+**Project settings** (requirements and design, the test grid, configuration profiles, the verdict and campaign settings, the AI assistant, usage) are in **Project settings › Extensions › TestPulse Studio**, reserved for project administrators: nine pages in a side rail, each saved with one **Save** (see [Project administration: nine pages, one way to save](/en/user-guide/project-administration)). The **Settings** of the Outils area open **My preferences**: your own values, except where the project or the profile of the selected plan sets its own (see [Finding your way around My preferences](/en/settings/settings-navigation)). The **Couverture** and **Exploration** tabs of work item forms do not change.
+
+| Former tab | Now in |
+| --- | --- |
+| Report | Pilotage |
+| Cockpit | Pilotage |
+| History | Pilotage |
+| Explore | Pilotage |
+| Coverage | Couverture |
+| Requirement drift | Couverture |
+| Repository | Couverture |
+| Import | Outils |
+| Bulk reassignment | Outils |
+| Settings | Outils |
+| User Guide | Outils |
+
+## Finding your way around these docs {#using-the-docs}
+
+This documentation is split into **tabs** (Getting Started, User Guide, Settings, Reference, What’s New). Inside each tab, a **sticky outline (table of contents)** on the left lists that tab’s sections — click one to jump straight to it. Use the **search box** at the top to find anything across all tabs; clicking a result opens its tab and scrolls to the matching section. The outline and search share the same anchors, so deep-links stay stable.
+
+## Staying up to date {#update-banner}
+
+TestPulse Studio updates automatically on Azure DevOps Services, silently — nothing used to tell you a new version had landed. The hub now shows a small info banner right above your reports whenever the **major** or **minor** version changes (e.g. 2.60 → 2.61), naming the new version with a one-line summary and a link to the **What's New** tab; a **patch** update (e.g. 2.60.0 → 2.60.1) stays silent — it never interrupts you for a fix alone. Closing the banner is **per-user**: it never hides anything for the rest of the project, and it won't reappear until the next major or minor release. Shown in the hub only, never on the work-item tabs.
+
+## When to use TestPulse Studio {#use-cases}
+
+| Use case | Recommended format |
+| --- | --- |
+| Formal QA delivery | PDF with signature page |
+| Sprint review dashboard | HTML (interactive) |
+| Audit trail (ISO, SOC2) | PDF + Excel |
+| Stakeholder summary | PDF with charts |
+| Raw data analysis | Excel (6 sheets) |
+
+## What it is NOT {#not-a}
+
+- Not a **test runner** — TestPulse Studio reads existing results, it doesn't execute tests
+- Not a **cloud service** — your data stays in your Azure DevOps instance; only the AI functions, once a project administrator turns them on, send the data the administrator allowed to the AI provider they configured
+- Not a **replacement** for ADO Test Plans — it complements it with reporting
+
+## Supported targets {#supported}
+
+| Target | Status |
+| --- | --- |
+| Azure DevOps Services (cloud) | ✅ Fully supported |
+| ADO Server 2022.1 (on-premise) | ✅ Fully supported |
+| ADO Server 2019 / 2020 / 2022 | ✅ Supported |
