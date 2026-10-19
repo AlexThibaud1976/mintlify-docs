@@ -5,6 +5,55 @@ description: "Every published version of TestPulse Studio, newest first."
 
 {/* Généré depuis docs/CHANGELOG.md par `npm run docs:mintlify` — ne pas éditer. */}
 
+<Update label="0.3.2" description="2026-10-19">
+
+The same caution about Azure DevOps Server everywhere, and installation steps for a private extension (TPS-266).
+
+- **Fixed**: the Marketplace listing, the extension description, the README and the help no longer state that
+  Azure DevOps Server is supported: Azure DevOps Services is; Azure DevOps Server 2022.1 is under verification. The
+  help's table of targets no longer marks Server 2019 to 2022 as supported, and a technical note no longer says an
+  endpoint was confirmed on Server 2022.1. The extension still installs on Server.
+- **Fixed**: the extension is private for now, so the help and the README no longer say to search for it on the
+  Marketplace: open its page from the link you were given or from Organization settings › Extensions › Shared, then
+  Get it free (Download for Azure DevOps Server).
+- **Fixed**: the help's first report starts from **Insights › Report**, and a section title no longer carries a
+  version number of TestPulse.
+
+</Update>
+
+<Update label="0.3.1" description="2026-10-19">
+
+The areas of TestPulse Studio take English names and their own icons; a new icon for the extension (TPS-265).
+0.3.0 was uploaded but refused by the Marketplace validation (an SVG file in the package) and never reached anyone;
+0.3.1 is the same release, with the SVG sources kept out of the package.
+
+- **Changed**: the four areas of the TestPulse Studio group are named **Insights** (was Pilotage), **Coverage** (was
+  Couverture), **Design** (was Conception) and **Tools** (was Outils), in every language: Azure DevOps shows the project
+  navigation in one language. Their addresses do not change, so links and bookmarks keep working. The labels that name
+  an area follow (usage statistics, the breadcrumb of My preferences, the links to Design, the history note written on
+  the test cases created from Design). The Couverture tab of work items keeps its name.
+- **Changed**: a new icon for the extension, the TestPulse Studio "S" monogram, on the Marketplace and on the group;
+  each area has its own icon.
+- **Fixed**: the help's installation steps. TestPulse Studio has its own group in the project navigation (not under
+  Test Plans); the `.vsix` for Azure DevOps Server comes from the extension's Marketplace page; Azure DevOps Server is
+  not checked yet (a check on Server 2022.1 is planned). Three mentions of a TestPulse version ("shown by default since
+  …") are removed.
+- **Documentation**: embedded help (EN + FR; the French help glosses each area at its first mention), README,
+  Marketplace listing, user guide, What's New with a banner, groups of the web documentation.
+
+</Update>
+
+<Update label="0.2.10" description="2026-10-19">
+
+The help names the TestPulse history page for what it is (TPS-264).
+
+- **Fixed**: the help's TestPulse history page is now named as such ("TestPulse history" / "Historique de TestPulse"),
+  and the release notes no longer point to it for TestPulse Studio's history.
+- **Fixed**: the What's New tab of the help no longer says it shows "the last 3 releases": it shows every milestone of
+  TestPulse Studio, newest first.
+
+</Update>
+
 <Update label="0.2.9" description="2026-10-16">
 
 Two follow-ups of the 0.2.8 check on Azure DevOps Services (TPS-261).

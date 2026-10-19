@@ -5,7 +5,7 @@ description: "Where."
 
 {/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
 
-**Where.** *Outils › Settings* (**My preferences**), page **Import from TestPulse**, in the **Project** group of the rail. Every member now sees it. The import reads the data of the TestPulse extension (publisher Kisskool) on the organization: **your data** (user scope) — preferences, templates and views, personal history, Cockpit snapshots — and **the project data** (project scope) — published reports, scoring scale, drift fields, promotion tiers, bug source, exploratory sessions. No AI is involved.
+**Where.** *Tools › Settings* (**My preferences**), page **Import from TestPulse**, in the **Project** group of the rail. Every member now sees it. The import reads the data of the TestPulse extension (publisher Kisskool) on the organization: **your data** (user scope) — preferences, templates and views, personal history, Cockpit snapshots — and **the project data** (project scope) — published reports, scoring scale, drift fields, promotion tiers, bug source, exploratory sessions. No AI is involved.
 
 **Reading, with a token.** Studio first tries a direct read, but Azure DevOps refuses to let an extension read another one’s data, and the screen says so: “TestPulse is installed, but Azure DevOps refuses the direct read”. **The normal path is therefore a personal access token**, scoped to “Extension data (read)” only: create it with the link **Create an “Extension data (read)” token**, paste it in the screen, then **Read with this token**. The token serves this read and nothing else: kept in the screen’s memory, it is never saved or logged, and it is cleared after the read and when the screen closes.
 

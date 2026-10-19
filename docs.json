@@ -36,7 +36,7 @@
             ]
           },
           {
-            "group": "Pilotage",
+            "group": "Insights",
             "icon": "gauge",
             "pages": [
               "en/user-guide/generating",
@@ -61,7 +61,7 @@
             ]
           },
           {
-            "group": "Couverture",
+            "group": "Coverage",
             "icon": "list-checks",
             "pages": [
               "en/user-guide/coverage-builder",
@@ -72,7 +72,7 @@
             ]
           },
           {
-            "group": "Conception",
+            "group": "Design",
             "icon": "pencil-ruler",
             "pages": [
               "en/user-guide/test-design-hub",
@@ -85,7 +85,7 @@
             ]
           },
           {
-            "group": "Outils",
+            "group": "Tools",
             "icon": "wrench",
             "pages": [
               "en/settings/settings-navigation",
@@ -154,7 +154,7 @@
             ]
           },
           {
-            "group": "Pilotage",
+            "group": "Insights",
             "icon": "gauge",
             "pages": [
               "fr/user-guide/generating",
@@ -179,7 +179,7 @@
             ]
           },
           {
-            "group": "Couverture",
+            "group": "Coverage",
             "icon": "list-checks",
             "pages": [
               "fr/user-guide/coverage-builder",
@@ -190,7 +190,7 @@
             ]
           },
           {
-            "group": "Conception",
+            "group": "Design",
             "icon": "pencil-ruler",
             "pages": [
               "fr/user-guide/test-design-hub",
@@ -203,7 +203,7 @@
             ]
           },
           {
-            "group": "Outils",
+            "group": "Tools",
             "icon": "wrench",
             "pages": [
               "fr/settings/settings-navigation",

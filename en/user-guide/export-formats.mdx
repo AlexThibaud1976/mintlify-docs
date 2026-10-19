@@ -27,7 +27,7 @@ The PDF export includes up to 12 configurable sections:
 - **Bugs section** — the report’s bugs (campaign bugs by default) with state, severity, creation date and test cases, newest first, under a line that states the source
 - **Flaky tests** — tests whose outcome changed across consecutive **real executions** (at least two needed to say anything); a test point that was never executed doesn't count as an execution, so a test run only once is never flagged as flaky, no matter what preceded it
 - **Charts** — pass/fail donut + results-by-suite bar, rendered locally via chart.js (works offline)
-- **Attachments** *(shown by default since v2.69.0)* — PNG/JPEG images embedded inline; every other file appears in a table whose **name is a clickable link** to the attachment in Azure DevOps, with a **readable type** (PDF, Word, Excel, Archive, Email…) instead of a raw MIME type. An unrecognised extension shows the generic label **File** and **keeps its link** — the extension decides the label, never whether there is a link. A file whose URL is missing or uses neither `http` nor `https` is shown as plain text, without a link
+- **Attachments** *(shown by default)* — PNG/JPEG images embedded inline; every other file appears in a table whose **name is a clickable link** to the attachment in Azure DevOps, with a **readable type** (PDF, Word, Excel, Archive, Email…) instead of a raw MIME type. An unrecognised extension shows the generic label **File** and **keeps its link** — the extension decides the label, never whether there is a link. A file whose URL is missing or uses neither `http` nor `https` is shown as plain text, without a link
 - **Objectives, Entry criteria, Exit criteria** — multi-line scoping fields
 - **Signature page** — configurable signatories with pre-fill and sign line
 
@@ -41,7 +41,7 @@ The HTML export produces a **standalone file** — no server needed to open it. 
 - Full **results table** with outcome badges and suite grouping
 - **Traceability matrix** (flat rows) and **bugs list**
 - Compatible with browsers' local file open (CSP allows it)
-- **Attachments** section, **shown by default since v2.69.0** — images inline, other files as clickable links (the HTML report already carried these links)
+- **Attachments** section, **shown by default** — images inline, other files as clickable links (the HTML report already carried these links)
 
 ## Word export detail {#word-detail}
 

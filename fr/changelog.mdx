@@ -7,6 +7,42 @@ description: "Toutes les versions publiées de TestPulse Studio, la plus récent
 
 Les versions récentes sont décrites en français, telles que les présente l’onglet Nouveautés ; les plus anciennes en anglais, la langue du journal des versions.
 
+<Update label="0.3.2" description="2026-10-19">
+
+The same caution about Azure DevOps Server everywhere, and installation steps for a private extension (TPS-266).
+
+- **Fixed**: the Marketplace listing, the extension description, the README and the help no longer state that
+  Azure DevOps Server is supported: Azure DevOps Services is; Azure DevOps Server 2022.1 is under verification. The
+  help's table of targets no longer marks Server 2019 to 2022 as supported, and a technical note no longer says an
+  endpoint was confirmed on Server 2022.1. The extension still installs on Server.
+- **Fixed**: the extension is private for now, so the help and the README no longer say to search for it on the
+  Marketplace: open its page from the link you were given or from Organization settings › Extensions › Shared, then
+  Get it free (Download for Azure DevOps Server).
+- **Fixed**: the help's first report starts from **Insights › Report**, and a section title no longer carries a
+  version number of TestPulse.
+
+</Update>
+
+<Update label="0.3.1" description="2026-10-19">
+
+- Les quatre espaces du groupe TestPulse Studio prennent des noms anglais, les mêmes pour tous puisqu’Azure DevOps n’affiche la navigation du projet qu’en une langue : Pilotage devient Insights, Couverture devient Coverage, Conception devient Design, Outils devient Tools.
+- Chaque espace a sa propre icône ; le groupe et la fiche Marketplace portent le nouveau monogramme de TestPulse Studio.
+- Rien d’autre ne change : les écrans, vos préférences, les adresses et les liens entre espaces restent les mêmes. L’onglet Couverture des work items garde son nom.
+- L’aide corrige l’installation : TestPulse Studio a son propre groupe dans la navigation du projet, et Azure DevOps Server n’est pas encore vérifié.
+
+</Update>
+
+<Update label="0.2.10" description="2026-10-19">
+
+The help names the TestPulse history page for what it is (TPS-264).
+
+- **Fixed**: the help's TestPulse history page is now named as such ("TestPulse history" / "Historique de TestPulse"),
+  and the release notes no longer point to it for TestPulse Studio's history.
+- **Fixed**: the What's New tab of the help no longer says it shows "the last 3 releases": it shows every milestone of
+  TestPulse Studio, newest first.
+
+</Update>
+
 <Update label="0.2.9" description="2026-10-16">
 
 Two follow-ups of the 0.2.8 check on Azure DevOps Services (TPS-261).
@@ -110,7 +146,7 @@ A false statement corrected in the embedded help; the end-of-step-one acceptance
 
 <Update label="0.2.4" description="2026-10-16">
 
-- Importer depuis TestPulse, dans Outils › Paramètres, pour tous les membres : vos préférences, modèles et vues, historique et snapshots du Cockpit ; pour un administrateur du projet, les rapports publiés, le barème, les champs de dérive, les paliers, la source des bugs et les sessions exploratoires.
+- Importer depuis TestPulse, dans Tools › Paramètres, pour tous les membres : vos préférences, modèles et vues, historique et snapshots du Cockpit ; pour un administrateur du projet, les rapports publiés, le barème, les champs de dérive, les paliers, la source des bugs et les sessions exploratoires.
 - Azure DevOps refuse qu’une extension lise les données d’une autre : la lecture passe par un jeton d’accès personnel à portée « Extension data (read) », collé dans l’écran, jamais enregistré ni journalisé, effacé après la lecture.
 - Un aperçu par ensemble où rien n’est coché d’office : vous choisissez ce qui est importé et ce qui se passe si l’élément existe déjà. L’import n’écrit que dans TestPulse Studio (TestPulse n’est jamais modifiée), se rejoue sans doublon et se termine par un compte rendu complet.
 - Qualité des exigences : « Exporter en CSV » et « Rapport PDF » sont grisés quand la vue choisie ne compte aucune US, même si l’itération en compte aujourd’hui.
@@ -170,7 +206,7 @@ Requirement quality: the "At start" view counts only the stories that were in th
 
 <Update label="0.2.0" description="2026-10-13">
 
-- La qualité des exigences, nouvel onglet de Pilotage : pour une itération et un chemin de zone, la Definition of Ready atteinte, les US engagées sans elle au démarrage, la note médiane, les questions critiques ouvertes et les US à traiter, avec une vue par zone, une vue d’efficacité et une tendance sur six itérations.
+- La qualité des exigences, nouvel onglet d’Insights : pour une itération et un chemin de zone, la Definition of Ready atteinte, les US engagées sans elle au démarrage, la note médiane, les questions critiques ouvertes et les US à traiter, avec une vue par zone, une vue d’efficacité et une tendance sur six itérations.
 - Les chiffres sont calculés par TestPulse Studio sur les évaluations enregistrées : aucun appel IA, rien n’est écrit. Exports CSV et PDF de ce que la page montre.
 - Le produit se nomme « TestPulse Studio » partout, y compris dans le titre par défaut des rapports ; un titre déjà saisi par un projet est conservé.
 
@@ -437,7 +473,7 @@ lowers the verifiable share (TPS-238).
 
 - Une interface plus calme : cinq tailles de texte, deux graisses, et le thème sombre d’Azure DevOps suivi.
 - Les Paramètres des membres deviennent « Mes préférences » : sept pages, les valeurs fixées par le projet affichées avec un cadenas, et le même enregistrement que l’administration du projet.
-- Conception et l’évaluation de l’exigence montrent une chose à la fois : une action principale par écran, les détails repliés, des barres lues face à une cible.
+- Design et l’évaluation de l’exigence montrent une chose à la fois : une action principale par écran, les détails repliés, des barres lues face à une cible.
 
 </Update>
 
@@ -677,7 +713,7 @@ Internal only — no visible change: test bench for the automated tests (TPS-223
 
 <Update label="0.1.143" description="2026-10-07">
 
-- Les tests automatisés, nouvelle étape « Automatiser » de Conception : à partir de vos cas de test manuels et du code lu, un test par cas, dans l’une des huit combinaisons framework · langage (Playwright, Selenium, Cypress, Cucumber).
+- Les tests automatisés, nouvelle étape « Automatiser » de Design : à partir de vos cas de test manuels et du code lu, un test par cas, dans l’une des huit combinaisons framework · langage (Playwright, Selenium, Cypress, Cucumber).
 - Un statut honnête calculé par TestPulse Studio : « prêt à relire » quand chaque sélecteur est cité dans le code lu, sinon « squelette » avec des marqueurs à compléter. Studio n’exécute rien ; vous relisez, puis récupérez une archive ou ouvrez une pull request.
 
 </Update>
@@ -912,7 +948,7 @@ Requirement assessment history and PDF export (TPS-181).
 
 <Update label="0.1.130" description="2026-10-05">
 
-- L’évaluation de l’exigence, à l’étape 0 de Conception et dans l’onglet « Exigence » d’un work item : l’assistant IA lit l’exigence critère par critère et cite ses preuves ; la note et le verdict Ready sont calculés par TestPulse Studio, avec chaque règle déclenchée.
+- L’évaluation de l’exigence, à l’étape 0 de Design et dans l’onglet « Exigence » d’un work item : l’assistant IA lit l’exigence critère par critère et cite ses preuves ; la note et le verdict Ready sont calculés par TestPulse Studio, avec chaque règle déclenchée.
 - Fermer une question, corriger un constat, marquer un critère non applicable : la note et le verdict se recalculent sans appel, chaque geste daté et signé. Rien n’est écrit dans l’US.
 
 </Update>
