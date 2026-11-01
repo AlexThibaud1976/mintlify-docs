@@ -5,6 +5,208 @@ description: "Every published version of TestPulse Studio, newest first."
 
 {/* Généré depuis docs/CHANGELOG.md par `npm run docs:mintlify` — ne pas éditer. */}
 
+<Update label="0.3.13" description="2026-11-01">
+
+Definition of Ready in one improvement, in the demonstration's real conditions — with the linked code read
+(TPS-279).
+
+- **Fixed**: the important questions you tick now get an « Assumption: » / « Out of scope: » line too, like the critical
+  ones. An important question left unanswered used to come back critical at the reassessment.
+- **Fixed**: when a question reports what the linked code does (a store kept in memory for the session, a refusal the
+  service already makes), the assumption agrees with it — the current behaviour is kept, anything beyond it is out of
+  scope — instead of promising a behaviour the code does not have, which made the reassessment raise a new critical
+  question.
+- **Changed**: the improvement no longer enlarges the story: at most one criterion per rule written in the story, with
+  the examples the story retains. An added criterion whose rule is not written in the story (a limit, a forbidden
+  character, access to a page, persistence…) is dropped by Studio and listed under « Dropped by Studio: rule not in the
+  story »; it is never written. When the last improvement added criteria and the reassessment rated Estimable or Small
+  lower, the improvement screen says so.
+- **Fixed**: an open question that only shares a passing word with an out-of-scope sentence of the story (e.g.
+  « demonstration ») is no longer unticked by default.
+- **Internal**: the « DoR loop » bench reads the linked code like « Read the code » (the demonstration commit, same
+  reader and caps as the extension), with a without-code mode for comparison.
+
+</Update>
+
+<Update label="0.3.12" description="2026-11-01">
+
+More reliable AI chain on the requirement: fewer retried or failed assessments, an error message that names the
+cause, a readable wait (TPS-278).
+
+- **Fixed**: an assessment no longer fails or runs twice because the model left out a secondary field. On the
+  demonstration model, one assessment in two used to be retried (twice the wait) and some ended with “unusable
+  answer”; the risk, the improvement and the confidence of a criterion are now optional (not asked for a criterion that
+  cannot be verified), and a piece of evidence without its source is given the assessed story.
+- **Fixed**: on reassessment, a critical question the model labels « Q-01 » although the story asks no such question is
+  matched against the written « Assumption: » / « Out of scope: » lines like any other question; a question really
+  written in the story keeps the criticality written there.
+- **Changed**: when the AI is not reachable, the member's message names the cause — the project's AI connection refused
+  by the provider (invalid or expired key), access refused by the AI resource, quota reached, gateway refusing, or
+  connection missing or incomplete — instead of « unavailable for your account », still without any technical detail.
+  In the administration, the **Connection** page says **Key refused by the provider (401)** and offers **Replace the
+  key**.
+- **Changed**: while a requirement is being assessed, the screen shows the time elapsed and the usual duration
+  (« usually 15 to 45 s »); **Cancel** is unchanged.
+- **Internal**: the bench gains a « DoR loop » mode (assessment → improvement → reassessment, the demonstration's
+  gestures) and an assessment-duration mode that records input, output and reasoning tokens per call.
+
+</Update>
+
+<Update label="0.3.11" description="2026-10-31">
+
+TestPulse Studio has no server of its own and tracks no usage (TPS-277, ADR-006): everything runs in your browser and,
+for the AI functions, on your organization's own AI resource.
+
+- **Removed**: the **Usage and telemetry** page of the project administration (eight pages now) and every usage
+  counter. Nothing was ever sent to the publisher; counters already kept in the project storage are left there, untouched
+  (they still count in the storage gauge).
+- **Internal**: the editor's backend (API, job queue, worker, Azure infrastructure) and the `backend` executor of the
+  development build are removed; the AI functions run on the direct call only. An AI connection saved by a development
+  build with the requirement assessment on the backend is read back as a direct call, still on, with its model.
+
+</Update>
+
+<Update label="0.3.10" description="2026-10-27">
+
+The requirement assessment can run on the editor's backend, in a private development build only (TPS-275): nothing
+changes in the extension.
+
+- **Internal**: the requirement assessment can run on the editor's backend (TPS-275, ADR-005 B1), behind the
+  `aiBackend` build flag, in a private development build only: app-token authentication (one key per `aud`, allowed
+  users, declared organisation), a `pg-boss` job queue and worker, the output schema shared by the extension and the
+  API, measured usage with no content. Nothing changes in the Marketplace extension.
+
+</Update>
+
+<Update label="0.3.9" description="2026-10-27">
+
+Groundwork for the backend's authentication (TPS-274, probe S13): nothing changes in the extension.
+
+- **Internal**: a private, throwaway probe extension and a temporary API route (`GET /v1/probe/s13`, enabled only when
+  `PROBE_S13_KEY` is set) to measure what the extension's app token proves before the backend relies on it (TPS-274,
+  probe S13). Nothing changes in the extension.
+
+</Update>
+
+<Update label="0.3.8" description="2026-10-27">
+
+Groundwork for the editor's backend (TPS-273, ADR-005): nothing changes in the extension.
+
+- **Internal**: the backend runs entirely on a workstation with Docker Compose (`compose.yaml`: PostgreSQL 17,
+  migrations, API), with no Azure resource; the CI starts the stack and sends a telemetry event on every API change.
+- **Internal**: the API's CORS origins are configurable (`CORS_ORIGINS`); unset, nothing changes. API integration
+  tests run on PostgreSQL 17, like Azure.
+
+</Update>
+
+<Update label="0.3.7" description="2026-10-26">
+
+The rest of the 0.3.6 rehearsal: a red pipeline, a generation blocked without a visible reason, and a skeleton caused
+by existing tests read (TPS-272, rehearsal of 0.3.6 on 26 October).
+
+- **Fixed**: a derived automated test no longer looks for a list item, a paragraph, a status or an alert by its
+  accessible name (`getByRole('listitem', { name })` never matches): Studio rewrites it as `filter({ hasText })` with a
+  review note, or marks it to complete when it cannot.
+- **Fixed**: a valid partition without a rule (« name filled in ») is a reference value and no longer blocks *Generate*;
+  only a partition without a value, or an invalid one without a rule, does. A blocked *Generate* always shows its
+  reason, folded summary included, with **Show the partitions to complete**.
+- **Fixed**: existing tests and documentation read with the code no longer hide a parameter that has no field in the
+  screens (the starting state of US 3763 was cited by the tests of an abandoned pull request).
+- **Documentation**: embedded help (EN + FR) for Design and automated tests.
+
+</Update>
+
+<Update label="0.3.6" description="2026-10-26">
+
+The rest of the 0.3.5 rehearsal: the last skeletons and the « Off topic » needed to reach the DoR (TPS-271, rehearsal
+of 0.3.5 on 26 October).
+
+- **Fixed**: a short value cited in a screen (the « — » between the name and the street of a list item) is found as JSX
+  text at the cited line ± 3, instead of « citation not found in the code read »; never in a comment.
+- **Fixed**: a parameter that keeps the same value, is in no line of the code read and has no field in the screens read
+  (every input field already taken by another parameter of the case) is a starting state: no code, a review note
+  « parameter with no field in the screen read »; a parameter that varies keeps its item to complete.
+- **Fixed**: « Propose an improvement » always receives the critical questions still open and answers each one with
+  an « Assumption: » or « Out of scope: » line written in the description; the next assessment no longer counts a
+  question such a line settles as critical.
+- **Documentation**: embedded help (EN + FR) for the requirement improvement and automated tests.
+
+</Update>
+
+<Update label="0.3.5" description="2026-10-26">
+
+Established preconditions and contradicted remarks: the demo no longer depends on how the model words a remark
+(TPS-270, rehearsal of 0.3.4 on 25 and 26 October).
+
+- **Fixed**: a derived automated test is no longer a skeleton because of a remark on an **established precondition** (a
+  Given before the first When that restates a starting state, « already signed in », or « is on the page « My
+  addresses » » when that heading is in a screen read): the remark becomes a review note, and the step is never « not
+  mapped ».
+- **Fixed**: a remark of the model that a citation of the same step contradicts (« no heading « My addresses » » while
+  the step cites `<h1>My addresses</h1>`) becomes a review note, even when another item of the step stays to complete.
+- **Fixed**: a yes/no state with a single valid value and no rule (page reached, customer signed in) is a starting
+  state, never a data column, unless a field of the code read carries it; the test model always gives each attribute
+  its role. A constant yes/no column absent from the code read is a starting state even when a When cites it.
+- **Fixed**: the designed cases state an established starting state in the precondition only; the first Given is the
+  page where the test starts.
+- **Added**: page headings (`h1` to `h3`, `title`, heading or main role) are listed to the model even without an
+  identifier; Playwright · TypeScript attaches a **named screenshot at each check** to the report (on by default, can
+  be turned off in the Automate step).
+- **Documentation**: embedded help (EN + FR) for Design and automated tests.
+
+</Update>
+
+<Update label="0.3.4" description="2026-10-24">
+
+The rest of the demo rehearsal: no more touch-up between a weak user story and four green automated tests
+(TPS-269, rehearsal of 0.3.3 on 23 October).
+
+- **Fixed**: a starting state the requirement leaves out of scope (the customer already signed in) is no longer a data
+  parameter of the designed cases: it is written in words in their precondition. A derived automated test whose only
+  remark is about such a state gets a review note instead of an item to complete, and stays ready to review.
+- **Fixed**: a case from a less fine technique that repeats another one (error guessing « empty street » after the
+  equivalence refusal of an empty street) is now **Ignore** by default at the review, « duplicate of … ».
+- **Fixed**: a data row a rule refuses (« Switzerland + 75001 » in a case that expects acceptance) is now planned as a
+  **refusal case** of that rule, with its exact message, instead of only invalidating the case; a rule with a refusal
+  message but no refusal case is flagged by the checks.
+- **Fixed**: in the Read code table, long paths wrap after a `/` or an `@` only, no longer at every character.
+- **Documentation**: embedded help (EN + FR) for Design, Read the code and automated tests.
+
+</Update>
+
+<Update label="0.3.3" description="2026-10-23">
+
+Design goes from a weak user story to green automated tests without manual touch-ups (TPS-269, defects found while
+rehearsing the TestPulse Studio demo).
+
+- **Fixed**: the partitions of a closed list (the country of an address) get their value: the value of the list itself,
+  or the option of the `<select>` of the code read that names it. *Generate* no longer waits for five values typed by
+  hand. A label that describes (« Swiss postal code », « country not offered ») still has to be completed.
+- **Fixed**: a data row of a decision table is checked against the rule it illustrates when the code can read the rule
+  (4 or 5 digits per country, 8 to 20 characters, allowed characters, required field): a contrary row makes the case
+  **invalid**, excluded from the review until it is fixed. A contradiction between two cases now invalidates the case
+  at fault (both when nothing tells which). A combination a rule decides (« Switzerland + 5 digits ») is no longer kept
+  as infeasible.
+- **Fixed**: duplicates. Two identical iterations of a case are one; two cases of the same rule with the same data are
+  one proposal, the other says « duplicate of … » and is **Ignore** by default at the review.
+- **Fixed**: the cases of a refusal perform the action that triggers the check (« he saves ») after the input, and
+  quote the exact message of their rule instead of « an error message is displayed »; the checks flag a missing action
+  and an inexact message. A derived automated test that awaits the error without clicking or submitting gets a review
+  note.
+- **Fixed**: improving a requirement no longer ticks by default a finding about observability or a subject the story
+  declares out of scope; a criterion added with several When … Then pairs is split, one scenario per rule.
+- **Fixed**: in the Exigence tab, delivering the pull request reloads the form: the automated tests draft, its
+  statuses, the delivery report and the linking step now come back for the browser session.
+- **Fixed**: when several linked commits touch the same file, Read the code reads its most recent version and says
+  which commit it kept.
+- **Fixed**: the assessment panel no longer overflows sideways when the read code is listed (long paths wrap).
+- **Changed**: linking the tests to the manual cases no longer asks to set AutomationStatus to « Automated », which
+  Azure DevOps refuses without an AutomatedTestId (never written by Studio); a refused case says why, with the raw
+  detail folded.
+- **Documentation**: embedded help (EN + FR) for Design, requirement improvement, Read the code and automated tests.
+
+</Update>
+
 <Update label="0.3.2" description="2026-10-19">
 
 The same caution about Azure DevOps Server everywhere, and installation steps for a private extension (TPS-266).

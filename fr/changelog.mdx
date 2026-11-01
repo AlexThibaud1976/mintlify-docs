@@ -7,6 +7,165 @@ description: "Toutes les versions publiées de TestPulse Studio, la plus récent
 
 Les versions récentes sont décrites en français, telles que les présente l’onglet Nouveautés ; les plus anciennes en anglais, la langue du journal des versions.
 
+<Update label="0.3.13" description="2026-11-01">
+
+Definition of Ready in one improvement, in the demonstration's real conditions — with the linked code read
+(TPS-279).
+
+- **Fixed**: the important questions you tick now get an « Assumption: » / « Out of scope: » line too, like the critical
+  ones. An important question left unanswered used to come back critical at the reassessment.
+- **Fixed**: when a question reports what the linked code does (a store kept in memory for the session, a refusal the
+  service already makes), the assumption agrees with it — the current behaviour is kept, anything beyond it is out of
+  scope — instead of promising a behaviour the code does not have, which made the reassessment raise a new critical
+  question.
+- **Changed**: the improvement no longer enlarges the story: at most one criterion per rule written in the story, with
+  the examples the story retains. An added criterion whose rule is not written in the story (a limit, a forbidden
+  character, access to a page, persistence…) is dropped by Studio and listed under « Dropped by Studio: rule not in the
+  story »; it is never written. When the last improvement added criteria and the reassessment rated Estimable or Small
+  lower, the improvement screen says so.
+- **Fixed**: an open question that only shares a passing word with an out-of-scope sentence of the story (e.g.
+  « demonstration ») is no longer unticked by default.
+- **Internal**: the « DoR loop » bench reads the linked code like « Read the code » (the demonstration commit, same
+  reader and caps as the extension), with a without-code mode for comparison.
+
+</Update>
+
+<Update label="0.3.12" description="2026-11-01">
+
+More reliable AI chain on the requirement: fewer retried or failed assessments, an error message that names the
+cause, a readable wait (TPS-278).
+
+- **Fixed**: an assessment no longer fails or runs twice because the model left out a secondary field. On the
+  demonstration model, one assessment in two used to be retried (twice the wait) and some ended with “unusable
+  answer”; the risk, the improvement and the confidence of a criterion are now optional (not asked for a criterion that
+  cannot be verified), and a piece of evidence without its source is given the assessed story.
+- **Fixed**: on reassessment, a critical question the model labels « Q-01 » although the story asks no such question is
+  matched against the written « Assumption: » / « Out of scope: » lines like any other question; a question really
+  written in the story keeps the criticality written there.
+- **Changed**: when the AI is not reachable, the member's message names the cause — the project's AI connection refused
+  by the provider (invalid or expired key), access refused by the AI resource, quota reached, gateway refusing, or
+  connection missing or incomplete — instead of « unavailable for your account », still without any technical detail.
+  In the administration, the **Connection** page says **Key refused by the provider (401)** and offers **Replace the
+  key**.
+- **Changed**: while a requirement is being assessed, the screen shows the time elapsed and the usual duration
+  (« usually 15 to 45 s »); **Cancel** is unchanged.
+- **Internal**: the bench gains a « DoR loop » mode (assessment → improvement → reassessment, the demonstration's
+  gestures) and an assessment-duration mode that records input, output and reasoning tokens per call.
+
+</Update>
+
+<Update label="0.3.11" description="2026-10-31">
+
+TestPulse Studio has no server of its own and tracks no usage (TPS-277, ADR-006): everything runs in your browser and,
+for the AI functions, on your organization's own AI resource.
+
+- **Removed**: the **Usage and telemetry** page of the project administration (eight pages now) and every usage
+  counter. Nothing was ever sent to the publisher; counters already kept in the project storage are left there, untouched
+  (they still count in the storage gauge).
+- **Internal**: the editor's backend (API, job queue, worker, Azure infrastructure) and the `backend` executor of the
+  development build are removed; the AI functions run on the direct call only. An AI connection saved by a development
+  build with the requirement assessment on the backend is read back as a direct call, still on, with its model.
+
+</Update>
+
+<Update label="0.3.10" description="2026-10-27">
+
+The requirement assessment can run on the editor's backend, in a private development build only (TPS-275): nothing
+changes in the extension.
+
+- **Internal**: the requirement assessment can run on the editor's backend (TPS-275, ADR-005 B1), behind the
+  `aiBackend` build flag, in a private development build only: app-token authentication (one key per `aud`, allowed
+  users, declared organisation), a `pg-boss` job queue and worker, the output schema shared by the extension and the
+  API, measured usage with no content. Nothing changes in the Marketplace extension.
+
+</Update>
+
+<Update label="0.3.9" description="2026-10-27">
+
+Groundwork for the backend's authentication (TPS-274, probe S13): nothing changes in the extension.
+
+- **Internal**: a private, throwaway probe extension and a temporary API route (`GET /v1/probe/s13`, enabled only when
+  `PROBE_S13_KEY` is set) to measure what the extension's app token proves before the backend relies on it (TPS-274,
+  probe S13). Nothing changes in the extension.
+
+</Update>
+
+<Update label="0.3.8" description="2026-10-27">
+
+Groundwork for the editor's backend (TPS-273, ADR-005): nothing changes in the extension.
+
+- **Internal**: the backend runs entirely on a workstation with Docker Compose (`compose.yaml`: PostgreSQL 17,
+  migrations, API), with no Azure resource; the CI starts the stack and sends a telemetry event on every API change.
+- **Internal**: the API's CORS origins are configurable (`CORS_ORIGINS`); unset, nothing changes. API integration
+  tests run on PostgreSQL 17, like Azure.
+
+</Update>
+
+<Update label="0.3.7" description="2026-10-26">
+
+- Une partition valide sans règle est une valeur de référence : elle est signalée et la génération reste possible. Quand Générer est impossible, sa raison reste visible, avec un lien vers les partitions à compléter.
+- Un élément de liste, un paragraphe, un statut ou une alerte se trouvent par leur texte dans les tests automatisés dérivés, jamais par un nom accessible qu’ils n’ont pas : Studio réécrit une telle recherche et le dit dans une note de relecture.
+- Les tests existants et la documentation lus avec le code ne cachent plus un paramètre qui n’a pas de champ dans les écrans lus.
+
+</Update>
+
+<Update label="0.3.6" description="2026-10-26">
+
+- « Proposer une amélioration » reçoit toujours les questions critiques encore ouvertes et répond à chacune par une ligne « Hypothèse : » ou « Hors périmètre : » écrite dans la description ; l’évaluation suivante ne compte plus comme critique une question qu’une telle ligne tranche.
+- Une valeur courte citée dans un écran, comme le « — » entre le nom et la rue d’un élément de liste, est retrouvée dans le code lu au lieu de faire du test un squelette.
+- Un paramètre de même valeur partout et sans champ dans les écrans lus, quand chaque champ de saisie est pris par un autre paramètre, est un état de départ : pas de code, une note de relecture.
+
+</Update>
+
+<Update label="0.3.5" description="2026-10-26">
+
+- Un Given qui reprend un état de départ, « déjà identifié », ou « se trouve sur la page « Mes adresses » » quand ce titre est dans un écran lu, reçoit une note de relecture au lieu d’un point à compléter ; de même pour une remarque que contredit une citation de la même étape.
+- Un état oui / non à une seule valeur valide et sans règle, comme la page atteinte ou le client identifié, est un état de départ écrit dans la précondition seulement, jamais une colonne de données ; les titres de page sont listés au modèle même sans identifiant.
+- Playwright · TypeScript joint au rapport une capture nommée après chaque étape de vérification ; active par défaut, elle se désactive dans l’étape « Automatiser ».
+
+</Update>
+
+<Update label="0.3.4" description="2026-10-24">
+
+- Un état de départ que l’exigence laisse hors périmètre, comme un client déjà identifié, s’écrit en mots dans la précondition au lieu de devenir un paramètre ; le test automatisé dérivé reçoit une note de relecture, pas un point à compléter.
+- Une ligne de données qu’une règle refuse, comme Suisse avec 75001 dans un cas qui attend l’acceptation, devient un cas de refus de cette règle avec son message exact ; les contrôles signalent une règle au message de refus sans cas de refus.
+- Un cas d’une technique moins fine qui en répète un autre est « Ignorer » par défaut à la revue, « doublon de … » ; les chemins longs du code lu ne se coupent qu’après un / ou un @.
+
+</Update>
+
+<Update label="0.3.3" description="2026-10-23">
+
+Design goes from a weak user story to green automated tests without manual touch-ups (TPS-269, defects found while
+rehearsing the TestPulse Studio demo).
+
+- **Fixed**: the partitions of a closed list (the country of an address) get their value: the value of the list itself,
+  or the option of the `<select>` of the code read that names it. *Generate* no longer waits for five values typed by
+  hand. A label that describes (« Swiss postal code », « country not offered ») still has to be completed.
+- **Fixed**: a data row of a decision table is checked against the rule it illustrates when the code can read the rule
+  (4 or 5 digits per country, 8 to 20 characters, allowed characters, required field): a contrary row makes the case
+  **invalid**, excluded from the review until it is fixed. A contradiction between two cases now invalidates the case
+  at fault (both when nothing tells which). A combination a rule decides (« Switzerland + 5 digits ») is no longer kept
+  as infeasible.
+- **Fixed**: duplicates. Two identical iterations of a case are one; two cases of the same rule with the same data are
+  one proposal, the other says « duplicate of … » and is **Ignore** by default at the review.
+- **Fixed**: the cases of a refusal perform the action that triggers the check (« he saves ») after the input, and
+  quote the exact message of their rule instead of « an error message is displayed »; the checks flag a missing action
+  and an inexact message. A derived automated test that awaits the error without clicking or submitting gets a review
+  note.
+- **Fixed**: improving a requirement no longer ticks by default a finding about observability or a subject the story
+  declares out of scope; a criterion added with several When … Then pairs is split, one scenario per rule.
+- **Fixed**: in the Exigence tab, delivering the pull request reloads the form: the automated tests draft, its
+  statuses, the delivery report and the linking step now come back for the browser session.
+- **Fixed**: when several linked commits touch the same file, Read the code reads its most recent version and says
+  which commit it kept.
+- **Fixed**: the assessment panel no longer overflows sideways when the read code is listed (long paths wrap).
+- **Changed**: linking the tests to the manual cases no longer asks to set AutomationStatus to « Automated », which
+  Azure DevOps refuses without an AutomatedTestId (never written by Studio); a refused case says why, with the raw
+  detail folded.
+- **Documentation**: embedded help (EN + FR) for Design, requirement improvement, Read the code and automated tests.
+
+</Update>
+
 <Update label="0.3.2" description="2026-10-19">
 
 The same caution about Azure DevOps Server everywhere, and installation steps for a private extension (TPS-266).
@@ -206,9 +365,23 @@ Requirement quality: the "At start" view counts only the stories that were in th
 
 <Update label="0.2.0" description="2026-10-13">
 
-- La qualité des exigences, nouvel onglet d’Insights : pour une itération et un chemin de zone, la Definition of Ready atteinte, les US engagées sans elle au démarrage, la note médiane, les questions critiques ouvertes et les US à traiter, avec une vue par zone, une vue d’efficacité et une tendance sur six itérations.
-- Les chiffres sont calculés par TestPulse Studio sur les évaluations enregistrées : aucun appel IA, rien n’est écrit. Exports CSV et PDF de ce que la page montre.
-- Le produit se nomme « TestPulse Studio » partout, y compris dans le titre par défaut des rapports ; un titre déjà saisi par un projet est conservé.
+Requirement quality is now visible in Pilotage, with CSV and PDF exports; the product names itself "TestPulse Studio"
+everywhere (TPS-254).
+
+- **Requirement quality** (new Pilotage tab): for an iteration and an area path, the Definition of Ready met, the stories
+  committed without it at the iteration start, the median score, the open critical questions, the DoR at first
+  assessment, why the DoR is not met, the INVEST criteria against the project target and the stories to handle; area
+  path and efficiency views; a trend over six iterations computed when asked. Computed by TestPulse Studio from the saved
+  assessments, each with its own grid: no AI call, nothing written, no person field read, read when the page opens (not
+  real time).
+- **Honest states**: indicators appear once reading ends, never on a partial sample; **Cancel reading** shows nothing;
+  beyond 200 stories nothing is read; under five measured stories, raw counts; an iteration without a start date offers
+  only "Today"; unreadable histories are excluded and counted apart. The information line is on every view and export.
+- **Exports**: CSV with one row per story, CSV of the area table (comma, UTF-8, information line first, no model text
+  beyond rule labels) and a PDF with the project's branding on its cover, stating that it contains no new model opinion.
+- **Name**: the default title of reports (PDF, HTML, Word) and of exploratory session PDFs is now "TestPulse Studio"; a
+  title already set by a project is kept. Assumed parity gap with TestPulse, written in the help ("What Studio does
+  differently").
 
 </Update>
 
@@ -471,9 +644,52 @@ lowers the verifiable share (TPS-238).
 
 <Update label="0.1.153" description="2026-10-09">
 
-- Une interface plus calme : cinq tailles de texte, deux graisses, et le thème sombre d’Azure DevOps suivi.
-- Les Paramètres des membres deviennent « Mes préférences » : sept pages, les valeurs fixées par le projet affichées avec un cadenas, et le même enregistrement que l’administration du projet.
-- Design et l’évaluation de l’exigence montrent une chose à la fois : une action principale par écran, les détails repliés, des barres lues face à une cible.
+Conception and the requirement assessment show one thing at a time: one main action per screen, details folded, bars
+read against a target (TPS-237).
+
+- **One main action per screen**: a single filled button, following the state — *Assess the requirement*, *Reassess
+  revision N*, *Improve the requirement*, *Continue to the model →* at step 0; *Analyse* then *Continue* at step 1;
+  *Generate the N cases* at step 2; *Review and write →* at step 3 (*Regenerate* becomes secondary); *Write N cases*
+  in a bar fixed at the top of step 4; *Generate* then *Deliver* at step 5; *Analyze coverage* then *Create the plan in
+  ADO* in Coverage. An action that cannot run yet is a secondary button with its reason on hover — never a greyed
+  filled button.
+- **Details folded, never removed**: radar and bars, criterion by criterion, other questions, split, journal, plan
+  detail, matrix, budget, durations and tokens sit under one-click folds (remembered for you); *Technical details*
+  holds the code checks with an alert (none shown at 0), revision, tokens. The AI provenance "model · date" stays
+  visible once in the header of each AI result.
+- **Bars against a target**: each criterion bar shows a target marker (3/5, 4/5 for an essential criterion ★), its
+  colour follows the gap and **the gap is always written** ("−1 below the target", "= at the target", "+1 above").
+  Display only: the score and the DoR verdict do not change. The criteria grid reads Criterion · Score and target ·
+  Score · Gap · Justification, with translated names; the administration shows the target of each criterion; the PDF
+  draws the same bars.
+- **The judge runs on demand**: it no longer starts by itself after a generation — *Check the cases* shows how many
+  cases are not checked yet.
+- **Narrow screens**: below 1,280 px the Conception summary sits above the step, folded to one line (total, rules,
+  action). The step banner marks the current step with a filled circle and an underline; once chosen, the
+  requirement selector shrinks to one line.
+- **Coverage and drift**: one *Analyze* button, in the bar; the selection folds after the first analysis; the coverage
+  table reads Requirement · State · Tests (· Plans) with the detail per row and the creation options folded. The drift
+  "Blocking" card, always 0, is removed — drift is advisory, never blocking.
+- **Labels**: "Review and write" everywhere (it was also "Review & write").
+
+Automated tests: Studio checks the shape of the code returned by the AI assistant — invented Page Object methods,
+code in another language, a test inside a test — and gives the assistant the Cucumber binding of each step (TPS-234).
+
+- **Page Object method missing**: a call `po.<method>(…)` to a method the assistant did not write is marked and its
+  step is no longer counted as mapped (it used to emit an empty Page Object and count the step as mapped). An empty
+  Page Object is never produced, even when a test refers to `po`. The checks count these calls.
+- **Code in another language**: `await page.…` in a Java or Python file, a JavaScript options object in Java, C# or
+  Python, `public void` in JavaScript or TypeScript — marked, step not mapped, and listed with the syntax errors
+  (strings and comments are not read).
+- **Test inside a test**: `it(…)` in the body of an `it` (Cypress), `test(…)`, `@Test`, `[Test]`, `def test_…(` in a
+  step — marked, step not mapped.
+- **Cucumber binding**: the assistant now receives, for each step of the `.feature`, the expected Cucumber Expression
+  (an unquoted `<x>` is the anonymous parameter `{}`, a quoted `"<x>"` is `{string}`); the binding is still checked by
+  simulating the framework's matching.
+- **Screen limits through the Page Object**: the values passed to a method of the Page Object (Selenium `sendKeys`,
+  an object of values in TypeScript) are checked against the screen limits like a direct `fill`.
+- **Requirement AI**: a proposal of any type (corrected reference, partition, value) is set aside when a comment of
+  the cited code contradicts it — it used to apply to rules taken from the code only.
 
 </Update>
 
@@ -713,8 +929,35 @@ Internal only — no visible change: test bench for the automated tests (TPS-223
 
 <Update label="0.1.143" description="2026-10-07">
 
-- Les tests automatisés, nouvelle étape « Automatiser » de Design : à partir de vos cas de test manuels et du code lu, un test par cas, dans l’une des huit combinaisons framework · langage (Playwright, Selenium, Cypress, Cucumber).
-- Un statut honnête calculé par TestPulse Studio : « prêt à relire » quand chaque sélecteur est cité dans le code lu, sinon « squelette » avec des marqueurs à compléter. Studio n’exécute rien ; vous relisez, puis récupérez une archive ou ouvrez une pull request.
+Automated tests derived from your manual tests, with the code read — to review, delivered as a .zip or a pull request
+(TPS-222).
+
+- **A new step 5, Automate**, in Conception (and a **Automated tests** section in the **Requirement AI** tab): tick
+  manual test cases of the requirement — linked in Azure DevOps, or designed in this session and written —, choose one
+  of **8 framework · language combinations** (Playwright · TypeScript by default, Selenium v4 · Java (JUnit 5), Cypress ·
+  JavaScript, Playwright · Python, Playwright · C# (.NET, NUnit), Cucumber · JavaScript, Cucumber · Java, Cucumber
+  (pytest-bdd) · Python) and attach the code read. The last combination chosen is remembered per project, for you.
+- **One automated test per manual test case, nothing more**: the AI assistant writes the code of each manual step from
+  the case and the code read; **Studio writes the files** (folders and names, Page Object or `.feature` + step
+  definitions, data table from the iterations of the case, test title `[TC <id>]` and tag `@tc:<id>`). A Gherkin case's
+  `.feature` is **copied from the manual case, without AI**.
+- **Honest status, computed by Studio**: every selector, route or message must be cited in the code read (file, line ±
+  3) — otherwise, and for anything the code read does not establish, a marker `À COMPLÉTER (TestPulse Studio) : <reason>`
+  is placed in the file and the test is a **skeleton** (`test.fixme`, `@Disabled`, `it.skip`, `[Ignore]`,
+  `pytest.mark.skip`, pending step); without marker it is **ready to review**. Studio runs nothing, and shows no score.
+  A light syntax check per language flags broken files.
+- **Preview** file by file, with the manual step next to its lines and the markers highlighted; **edit in place** (the
+  status is recomputed) and **regenerate one test**. A **Next steps** panel gives the install and run commands of the
+  framework.
+- **Delivery, two ways only**: download a **.zip** archive (built in the browser), or create a **pull request on a
+  new branch** `testpulse-studio/tests-auto/us-<id>` (suffixed if it exists) from the default branch of the chosen
+  repository, after a confirmation that states the repository, branch, files and commit message. Files that already
+  exist on the default branch are updated, not re-added. This is a parity gap, on purpose, with the tool these combinations come from: **no direct
+  commit and no push to an existing branch**.
+- **Link the tests to the manual cases** (optional, after a delivery, unticked by default): AutomatedTestName,
+  AutomatedTestStorage and AutomatedTestType are written with your permissions; **AutomationStatus is never set to
+  "Automated" for a skeleton**, and AutomatedTestId is never written.
+- This version uses the `vso.code_write` permission approved in TPS-220 for the first time — no new permission.
 
 </Update>
 
@@ -948,8 +1191,39 @@ Requirement assessment history and PDF export (TPS-181).
 
 <Update label="0.1.130" description="2026-10-05">
 
-- L’évaluation de l’exigence, à l’étape 0 de Design et dans l’onglet « Exigence » d’un work item : l’assistant IA lit l’exigence critère par critère et cite ses preuves ; la note et le verdict Ready sont calculés par TestPulse Studio, avec chaque règle déclenchée.
-- Fermer une question, corriger un constat, marquer un critère non applicable : la note et le verdict se recalculent sans appel, chaque geste daté et signé. Rien n’est écrit dans l’US.
+Requirement assessment (TPS-180) — the first visible feature of the second step.
+
+- **Assess a requirement** from step 0 of Conception, from the new **Requirement AI** tab of a work item, or from the
+  **Requirement assessed** column of Coverage, which shows the last saved verdict and score. The AI assistant scores the
+  profile's grid and cites its evidence; the score and the Ready verdict are computed by the product, with every rule that
+  fired, and marked **narrowly** when the score is close to the threshold. Clicking a piece of evidence highlights it in
+  Context read.
+- **Gestures without a call**: close a question, correct a finding, mark a criterion not applicable — score and verdict are
+  recomputed, each gesture dated and signed. One saved assessment per work item, marked outdated when the work item
+  changes; opening never calls the assistant.
+- **AI Connection**: the configuration measured on the bench as a hint, and an alert when the answer limit is under 12,000
+  tokens; a cut answer says so, with its limit. The requirement assessment and the context read are no longer behind a
+  build flag; the function is enabled per project in AI Connection.
+- Nothing is written to the story; the proposed split creates no work item. No new permission is asked.
+
+Internal only — no visible change. The usage-telemetry backend gets its `dev` infrastructure on Azure (TPS-147):
+Bicep templates, a manual deployment pipeline and passwordless database access. Published builds of the extension
+still have no endpoint, so nothing is sent.
+
+Internal only — no visible change. Requirement assessment (TPS-178), still switched off, measured on the reference
+bench and adjusted after three rounds:
+
+- **Checks.** A gap is contested only when all its search terms sit on the same line of the requirement; a gap that
+  the requirement already asks as a `Q-nn` is tied to that question, never contested. A fact or a deduction without
+  evidence is flagged, no longer rejected as malformed. Split references that are not identifiers of the requirement
+  are dropped and flagged instead of rejecting the whole answer. Quotes match across an apostrophe followed by a
+  space (`d' éviter`).
+- **Not verifiable.** Observability now needs the linked code, like change size and robustness; traceability is not
+  verifiable while a development link of the story (pull request, commit, branch) is unread. Azure Repos development
+  links are listed as not read until code reading arrives.
+- **Instructions to the AI** rewritten where the bench found defects (priorities, Small, hidden dependencies,
+  questions of the requirement, search terms). On the bench, with gpt-6-sol, the verdict matches the expert on all ten
+  stories and five runs each, with no false "Ready".
 
 </Update>
 
