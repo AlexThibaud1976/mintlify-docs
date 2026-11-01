@@ -8,7 +8,7 @@ description: "What TestPulse Studio reads, writes and sends — and what it neve
 TestPulse Studio runs in your browser, inside Azure DevOps. It reads your test plans, results and work items with your rights, and keeps its own data in Azure DevOps **Extension Data**. It does not send data outside Azure DevOps on its own.
 
 - Most of the data is scoped to your own user. **Exploratory session records are stored at the project scope** and can be read by anyone with access to the project.
-- Sending usage counters to the publisher is **off by default**. See [Usage and telemetry](/en/user-guide/usage-statistics).
+- TestPulse Studio has **no server of its own** and **tracks no usage**: nothing is sent to the publisher. AI calls go from your browser to the model provider your project administrator connected, and are paid by your organization.
 
 ## Nothing is written without you
 
