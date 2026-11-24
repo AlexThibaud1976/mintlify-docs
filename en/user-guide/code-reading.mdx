@@ -5,7 +5,7 @@ description: "Where."
 
 {/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
 
-**Where.** **Read the code** is at step 0 **Requirement** of **Design** and in the **Exigence** tab of a work item. Nothing is read when the screen opens.
+**Where.** **Read the code** is at step 0 **Requirement** of **Design** and in the **Exigence** tab of a work item — and, when no code was read there, under **Code used** at step 5 **Automate** too (and in its section of the tab), with the same reading. Nothing is read when the screen opens.
 
 **Before.** Your organization approves the code permissions once (an organization administrator, in Organization settings › Extensions), and a project administrator checks **Source code excerpts** in the data sent to the model (*AI assistant › Functions and data*) — it is off by default; off, Studio makes no call to the code.
 
@@ -14,3 +14,5 @@ description: "Where."
 **Before sending.** The list shows each file — repository, version, category (validators, routes, screens, tests, other), whole or changed parts, size, tokens, the link that brought it — and the estimated total. Untick what must not be sent. Lock files, generated, minified and binary files are always excluded; **a secret file is never offered**. Caps (files, characters per file, in total) are set in **Requirements and design**.
 
 **Then.** The ticked files join the next assessment of the requirement: the criteria that depend on code can be verified. Nothing is kept once the page is closed. **Compare with the code** comes in a future version. Azure DevOps Server: code reading is not validated.
+
+**After a reload.** For the same revision of the story, the ticked files are found again: the read is replayed and the ticks restored, whatever step of Design is open. Only the ids of the files (path, version) are kept for the browser session, never their content.

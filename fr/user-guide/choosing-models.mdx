@@ -1,0 +1,20 @@
+---
+title: "Assistant IA : choisir les modèles"
+description: "Ce que nous conseillons, et pourquoi."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+**Ce que nous conseillons, et pourquoi.** Mesuré au banc de novembre 2026 (six configurations sur Azure AI Foundry, 300 évaluations de dix US de référence, 10 évaluations d’une même US, la boucle d’amélioration de la démo avec et sans code) : aucune configuration n’a déclaré prête une US que l’expert ne juge pas prête. Elles diffèrent par la **stabilité** — de combien la note bouge d’une évaluation de la même US à l’autre — et par la durée. La recommandation est un conseil : l’administrateur choisit, par fonction, dans **Assistant IA › Fonctions et données**.
+
+| Fonction | Modèle conseillé | Pourquoi | Durée attendue |
+| --- | --- | --- | --- |
+| Évaluation de l’exigence | **gpt-6-astra**, modèle de raisonnement, effort `medium` | le plus stable : ± 1 point sur une US prête (± 2 à 3 pour gpt-6-sol), verdict identique sur 10 évaluations ; avec la note confirmée sur 3 évaluations, gpt-6-sol ne bascule plus non plus, mais amène moins souvent l’US de démo à la Definition of Ready après une amélioration | environ 50 s (environ 70 s avec le code lu) ; une note confirmée, environ une évaluation de plus |
+| Amélioration de l’exigence | **gpt-6-sol** | l’amélioration écrit les mêmes critères sur tous les modèles ; améliorée par gpt-6-sol et réévaluée par gpt-6-astra, l’US de démo atteint la Definition of Ready après une amélioration aussi souvent qu’avec gpt-6-astra seul, deux fois plus vite | environ 13 s |
+| Tests automatisés | **gpt-6-sol** | inchangé (décision du 12 octobre) ; rien au banc ne dit le contraire | — |
+
+**Effort.** Laissez l’effort par défaut du modèle, sauf mesure contraire : un effort `low` rend gpt-6-sol moins stable (± 3 points).
+
+**Claude (claude-opus-5-5, claude-opus-5-5-fast) : une alternative.** Aussi juste au banc (aucun faux « prêt » sur 50 passages INVEST, accord avec l’expert 49 sur 50) et parmi les plus stables (± 0,6 à 1,9 point) ; claude-opus-5-5-fast évalue en environ 26 s. Conditions : environ deux fois plus de tokens par évaluation (≈ 17 000) ; un quota d’environ 60 000 tokens par minute **par utilisateur actif en même temps** (ce qu’a consommé une boucle d’amélioration complète avec le code, au banc) ; sur l’US de démo, la note de Claude se tient plus près du seuil. Quand le quota est atteint, Studio attend jusqu’à 60 s (compte à rebours visible, **Annuler** l’interrompt).
+
+**Coût (estimation).** De l’ordre de **0,15 à 0,20 \$ US par évaluation avec gpt-6-astra** (relevé Foundry de novembre 2026), plusieurs fois moins avec gpt-6-sol ; une note confirmée sur 3 évaluations coûte 3 appels — au banc, environ une évaluation sur huit la déclenche sur gpt-6-astra. Le coût réel dépend de votre abonnement : **Azure AI Foundry › Surveillance › Coût**.

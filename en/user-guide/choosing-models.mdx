@@ -1,0 +1,20 @@
+---
+title: "AI assistant: choosing the models"
+description: "What we recommend, and why."
+---
+
+{/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
+
+**What we recommend, and why.** Measured on the bench of November 2026 (six configurations on Azure AI Foundry, 300 assessments of ten reference stories, 10 assessments of the same story, the demo improvement loop with and without code): no configuration declared a story ready that the expert does not consider ready. They differ by **stability** — how much the score moves from one assessment of the same story to the next — and by duration. The recommendation is advice: the administrator chooses, per function, in **AI assistant › Functions and data**.
+
+| Function | Recommended model | Why | Expected duration |
+| --- | --- | --- | --- |
+| Requirement assessment | **gpt-6-astra**, reasoning model, effort `medium` | the most stable: ± 1 point on a ready story (± 2 to 3 for gpt-6-sol), verdict identical over 10 assessments; with the score confirmed over 3 assessments, gpt-6-sol no longer flips either, but brings the demo story to the Definition of Ready after one improvement less often | about 50 s (about 70 s with code read); a confirmed score, about one more assessment |
+| Requirement improvement | **gpt-6-sol** | the improvement writes the same criteria on every model; improved with gpt-6-sol and reassessed with gpt-6-astra, the demo story reaches the Definition of Ready after one improvement as often as with gpt-6-astra alone, twice as fast | about 13 s |
+| Automated tests | **gpt-6-sol** | unchanged (decision of 12 October); nothing on the bench says otherwise | — |
+
+**Effort.** Leave the model’s default effort unless a measurement says otherwise: a `low` effort makes gpt-6-sol less stable (± 3 points).
+
+**Claude (claude-opus-5-5, claude-opus-5-5-fast): an alternative.** As accurate on the bench (no false ready over 50 INVEST runs, agreement with the expert 49 out of 50) and among the most stable (± 0.6 to 1.9 points); claude-opus-5-5-fast assesses in about 26 s. Conditions: about twice as many tokens per assessment (≈ 17,000); a quota of about 60,000 tokens per minute **per user active at the same time** (what one full improvement loop with the code used on the bench); on the demo story, Claude’s score stays closer to the threshold. When the quota is reached, Studio waits up to 60 s (countdown visible, **Cancel** stops it).
+
+**Cost (estimate).** In the order of **0.15 to 0.20 USD per assessment with gpt-6-astra** (Foundry reading of November 2026), several times less with gpt-6-sol; a score confirmed over 3 assessments costs 3 calls — on the bench, about one assessment in eight triggers it on gpt-6-astra. The actual cost depends on your subscription: **Azure AI Foundry › Monitoring › Cost**.
