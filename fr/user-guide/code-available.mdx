@@ -9,6 +9,8 @@ description: "Quoi."
 
 **Couverture.** La colonne **Code lié** affiche « ● Code disponible depuis la conception du &lt;date&gt; · 1 PR, 4 commits », « aucun lien de développement nouveau » ou « non suivi : aucune conception écrite ». Elle est calculée pour les exigences affichées, après l’analyse, sans faire attendre la page (« … » d’abord). Les liens GitHub sont listés « non lus (V1) ». **Avec code nouveau (n)** ne garde que ces exigences ; la pastille ouvre l’exigence dans **Design**.
 
-**Design et l’onglet Exigence.** À l’ouverture de l’exigence, le même bandeau dit depuis quand du code est disponible ; Design liste aussi les liens nouveaux — le lien, le work item qui le porte, « dépôt Azure Repos » (son identifiant en infobulle), la date de liaison.
+**Design et l’onglet Exigence.** À l’ouverture de l’exigence, le même bandeau dit depuis quand du code est disponible ; Design liste aussi les liens nouveaux — le lien, le work item qui le porte, « dépôt Azure Repos » (son identifiant en infobulle), la date de liaison. Une fois le code lu, le bandeau le suit : « Lecture du code en cours… », puis les fichiers lus et ceux joints à l’évaluation, puis la date de la confrontation.
 
 **Ignorer ces liens.** Masque la pastille pour tout le projet jusqu’à l’arrivée d’un autre lien ; qui a ignoré et quand restent affichés, avec **annuler**. **Confronter au code** est affiché désactivé tant que votre organisation n’a pas autorisé la lecture du code.
+
+**Confronter au code.** Le bouton du bandeau mène à la confrontation, en lisant le code d’abord si rien n’est lu. Désactivé, il dit pourquoi : assistant IA non connecté, confrontation ou catégorie « Code source » coupée par un administrateur, ou lecture du code non autorisée par l’organisation.

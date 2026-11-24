@@ -5,7 +5,7 @@ description: "Où."
 
 {/* Généré depuis doc-content.ts par `npm run docs:mintlify` — ne pas éditer. */}
 
-**Où.** **Lire le code** se trouve à l’étape 0 **Exigence** de **Design** et dans l’onglet **Exigence** d’un work item. Rien n’est lu à l’ouverture.
+**Où.** **Lire le code** se trouve à l’étape 0 **Exigence** de **Design** et dans l’onglet **Exigence** d’un work item — et, quand aucun code n’y a été lu, sous **Code utilisé** de l’étape 5 **Automatiser** aussi (et de sa section dans l’onglet), avec la même lecture. Rien n’est lu à l’ouverture.
 
 **Avant.** Votre organisation approuve une fois les autorisations du code (un administrateur de l’organisation, dans Paramètres de l’organisation › Extensions), et un administrateur du projet coche **Extraits du code source** dans les données envoyées au modèle (*Assistant IA › Fonctions et données*) — décochée par défaut ; coupée, Studio ne fait aucun appel au code.
 
@@ -14,3 +14,5 @@ description: "Où."
 **Avant l’envoi.** La liste montre chaque fichier — dépôt, version, catégorie (validateurs, routes, écrans, tests, autres), entier ou parties modifiées, taille, tokens, le lien qui l’a amené — et le total estimé. Décochez ce qui ne doit pas partir. Verrous, fichiers générés, minifiés et binaires sont toujours exclus ; **un fichier secret n’est jamais proposé**. Les plafonds (fichiers, caractères par fichier, au total) se règlent dans **Exigences et conception**.
 
 **Ensuite.** Les fichiers cochés rejoignent la prochaine évaluation de l’exigence : les critères qui dépendent du code peuvent être vérifiés. Rien n’est gardé une fois la page fermée. **Confronter au code** arrive dans une prochaine version. Azure DevOps Server : la lecture du code n’est pas validée.
+
+**Après un rechargement.** Pour la même révision de l’US, les fichiers cochés sont retrouvés : la lecture est rejouée, les cases rétablies, quelle que soit l’étape de Design ouverte. Seuls les identifiants des fichiers (chemin, version) sont gardés le temps de la session du navigateur, jamais leur contenu.

@@ -5,6 +5,170 @@ description: "Every published version of TestPulse Studio, newest first."
 
 {/* Généré depuis docs/CHANGELOG.md par `npm run docs:mintlify` — ne pas éditer. */}
 
+<Update label="0.3.20" description="2026-11-21">
+
+The fixes of the 0.3.19 rehearsal.
+
+- **Fixed**: the help section « Assessing a requirement before testing it » shows its title again in the contents of the
+  User guide; the « Ignored cases » paragraph is in « Designing tests with the AI assistant (Design) ».
+- **Fixed**: in « Review and write », a test case set to « Ignore » says why on its row: identical to an existing test
+  (the link opens it), duplicate of a kept case (the link leads to it), dropped by the judge, or ignored by you. The
+  reason follows the decision.
+- **Fixed**: the requirement improvement and the requirement assessment are written in the language of the
+  requirement, whatever the language of the interface.
+- **Fixed**: the « Code available » banner follows the code read: reading, files read and attached to the assessment,
+  then the date of the comparison with the code. After a reload, the code read comes back whatever step of Design is
+  open.
+- **Fixed**: in « What is sent to the model », the « Source » column keeps its width, and the code read is shown by its
+  path (repository name, short version).
+- **Changed**: the header of the requirement improvement counts what the AI added and what you added separately.
+- **Fixed**: the step 4 tab says what it counts: « N to arbitrate » (the test cases entering the review), then, while
+  « Review and write » is open, « N to write », the count of the screen.
+- **Fixed**: the tooltip of an evaluated criterion opens with the keyboard and on touch, in the assessment and in the
+  project administration.
+
+</Update>
+
+<Update label="0.3.19" description="2026-11-21">
+
+Safer HTML exports, the follow-ups of the 0.3.17 and 0.3.18 rehearsals, and finishing touches in Design and the
+requirement improvement.
+
+- **Fixed**: the HTML export of a report and the History comparison file write every name, state, severity,
+  environment, application and step result exactly as written — a name such as `<img src=x onerror=…>` is no longer
+  interpreted; links accept `http` and `https` only, attached images `png`, `jpeg`, `gif` or `webp` only.
+- **Fixed**: « Reassess » on an assessment saved before 0.3.17 no longer says the settings have not changed when the
+  model has changed.
+- **Fixed**: tables in the embedded help (« Choosing the models ») are displayed as tables.
+- **Changed**: the usual duration announced while assessing comes from the latest assessments of the project with the
+  same model.
+- **Fixed**: « Open help » of the CSV import opens its help page; the help of the confirmation setting says that the
+  assessment whose score is the median of the 3 is kept.
+- **Fixed**: « Compare with the code » in the « Code available » banner and in Coverage is active when it can run and
+  leads to the comparison (reading the code first if nothing is read); disabled, it says why.
+- **Added**: when the improvement has nothing left to write, the screen says so and offers « Reassess ».
+- **Added**: the code read for a requirement stays selected after reloading Design (same revision).
+- **Added**: a tooltip on each evaluated criterion says what it checks.
+- **Added**: each ignored test case says why (duplicate of a kept case, identical to an existing test, or the check),
+  on its row and before writing.
+- **Added**: in the improvement, edit the proposed definition and add your own acceptance criteria (Gherkin, Scenario
+  Outline with Examples), possibly answering an open question — the next assessment recognises the answer.
+- **Changed**: the « Choosing the models » help presents Claude as an alternative, with its conditions.
+
+</Update>
+
+<Update label="0.3.18" description="2026-11-17">
+
+CSV import of test cases and suites into Azure Test Plans, folder suites named in the bulk reassignment tree, and two
+safety fixes in History and the CSV exports — brought over from TestPulse.
+
+- **Added**: « CSV test cases » in Tools › Import, next to the XML import. Load a CSV file (UTF-8, comma, semicolon or
+  tab, 5 MB at most), map its columns, choose an existing plan or a new one (its test configurations chosen
+  explicitly), send each group of the file to an existing static suite or to a path to create, review the preview,
+  then confirm. Nothing is written before the confirmation. An existing ID reuses the test case without changing its
+  fields or steps. A progress journal kept in your browser lets you « Verify and resume » after an interruption; the
+  JSON report you can download is a record, not an undo. No AI is involved. Help: « CSV test cases and static
+  suites » in the User guide.
+- **Fixed**: in the bulk reassignment, mode « Apply to a suite and its sub-suites », a folder suite with no direct
+  test point now shows its name (« Application », « Commandes ») instead of « Suite 3087 »; the suites, their order
+  and their counts are unchanged.
+- **Fixed**: History shows plan names and report titles, shared ones included, exactly as written — a name such as
+  `<b>test</b>` is no longer interpreted as HTML; the search highlight is kept.
+- **Fixed**: every CSV export (AI log, bulk reassignment, History, design fallback file, requirement quality,
+  coverage) puts an apostrophe in front of a cell that starts with `=`, `+`, `-`, `@`, a tab or a carriage return, so
+  a spreadsheet never runs it as a formula: `=1+1` stays text. Separators, quotes and columns are unchanged.
+
+</Update>
+
+<Update label="0.3.17" description="2026-11-15">
+
+A steadier requirement assessment: a score close to the threshold is confirmed over 3 assessments, an unchanged
+story is not reassessed by mistake, and a provider quota is waited for (TPS-285).
+
+- **Added**: « Score confirmed over 3 assessments ». When the score is 3 points or less from the Definition of Ready
+  threshold, or reaches it while only a critical question raised by the assistant blocks it, Studio runs 2 more
+  assessments in parallel with the same context. The code keeps the assessment whose score is the median of the three,
+  whole, and recomputes the score and the verdict; a critical question only blocks when at least 2 assessments out of
+  3 ask it — asked by only one, it stays shown without blocking (« question raised by 1 assessment out of 3 »). The
+  header, the history and the PDF show the three scores (« Score confirmed over 3 assessments: 74 · 82.5 · 74 → 74 »);
+  if a confirming assessment fails, the first one is kept, « score not confirmed ». New setting « Confirm a score close
+  to the threshold » in « Requirements and design » (3 points by default, 0 = never, up to 5).
+- **Changed**: « Reassess » asks for confirmation only when the story, the code read and the assessment settings
+  (model, effort, grid, thresholds) have not changed since the last assessment, and recalls the confirmed score; a
+  different checked code, model or threshold reassesses without a warning.
+- **Changed**: an exceeded provider quota (429) that announces a wait of up to 60 seconds (20 before) is waited for
+  and retried once; the line of the running operation shows « Provider quota reached — retrying in N s », and
+  « Cancel » stops the wait.
+- **Added**: help « AI assistant: choosing the models » — gpt-6-astra (effort `medium`) recommended for the
+  assessment, gpt-6-sol for the improvement and the automated tests, measured on the model bench of November 2026;
+  an order of magnitude of the cost, with a pointer to Foundry's cost view.
+- **Internal**: the benches read `STUDIO_BENCH_CONFIRM`; the DoR-loop bench can run the improvement on another
+  deployment (`STUDIO_BENCH_IMPROVE_MODEL`).
+
+</Update>
+
+<Update label="0.3.16" description="2026-11-14">
+
+Azure AI Foundry open to its other model families: the API format, not the maker (TPS-283).
+
+- **Added**: « API format » in the Azure AI Foundry connection — « Chat Completions (OpenAI v1) » (default, as before)
+  or « Messages (Anthropic) » — for the default model, the review model and each model overridden in « Functions and
+  data » (inherited from the default model until changed). Claude models deployed on Foundry now work: they were
+  refused with « HTTP 404 ». Existing connections stay on Chat Completions.
+- **Added**: when « Test the connection » gets a 404 on Chat Completions, the page offers to try the Messages format;
+  one click sets the format of the tested model and runs the test again. The format is never guessed from the
+  deployment name.
+- **Changed**: paste the address of the resource or the one Foundry shows (`…/openai/v1`, `…/anthropic/v1/messages`,
+  on either host): Studio keeps the host and adds the route of the chosen format; an address pointing to the other
+  format is flagged under the field.
+- **Changed**: the Messages format accepts the key (`x-api-key`), Entra ID and the enterprise gateway; a parameter the
+  model refuses (the temperature, on Claude) is removed and remembered for the page, and transient errors are retried,
+  as with Chat Completions. Reasoning effort and verbosity are not sent in this format (said on « Functions and
+  data »). The « Anthropic » provider (gateway) uses the same transport.
+- **Fixed**: the estimated cost of an image follows the API format of the design model (Claude rate in the Messages
+  format), and the image test uses the format of that model.
+- **Internal**: the benches read `STUDIO_BENCH_AI_API_FORMAT` (`chat` · `messages`).
+
+</Update>
+
+<Update label="0.3.15" description="2026-11-14">
+
+More robust AI calls: transient errors retried, reasoning models without refused calls, reasoning effort and verbosity
+per function (TPS-282).
+
+- **Fixed**: a transient provider error (HTTP 500, 502, 503, 504, 408, or no network) no longer ends the call: it is
+  retried automatically, at most twice (after about 1 then 3 seconds). An exceeded quota (429) that announces a wait of
+  20 seconds or less is waited for and retried once; a longer one says how long to wait. A timeout or a cancellation is
+  never retried. Same behaviour for every provider, Anthropic and Gemini included.
+- **Changed**: a successful call after a retry stays silent for the member, but is listed for the administrator in
+  « Latest failures » (« Retried, then succeeded », with the original status and the number of retries); a failure after
+  retries says so in its detail.
+- **Fixed**: an undeclared reasoning model no longer pays two refused calls on every request: the adaptation found on
+  the first call is reused for the next calls to the same model during the page.
+- **Added**: « Reasoning model » can be set per model — the default model, the judge model, and each model overridden
+  in « Functions and data » (inherited from the default model until set; existing connections unchanged). When the
+  connection test finds that a model refuses `max_tokens` or `temperature`, it offers to declare it.
+- **Added**: « Reasoning effort » (Model default, Low, Medium, High, Very high) and « Verbosity » (Model default, Low,
+  Medium, High) per function in « Functions and data ». « Model default » everywhere by default: nothing more is sent. A
+  model that refuses the setting ignores it, and « Latest failures » says so. Not sent to Anthropic and Gemini yet.
+- **Internal**: the benches read `STUDIO_BENCH_AI_EFFORT` and `STUDIO_BENCH_AI_VERBOSITY`.
+
+</Update>
+
+<Update label="0.3.14" description="2026-11-14">
+
+Read the code from the automated tests step (TPS-281).
+
+- **Fixed**: when no code was read at the Requirement step, the automated tests step (step 5 of Design and the
+  Exigence tab) now offers **Read the code** under « Code used » — the same reading, the same list before sending and
+  the same data policy as at step 0. Once read, « Attach the code read » is ticked and the generation sends the ticked
+  files: tests can be « ready to review » without going back to step 0. A test generated without code is generated again
+  with it by « Regenerate ». With the « source code » data category off, the screen says so and offers no reading.
+- **Changed**: the code read at this step joins the same session as step 0 — the next assessment and design use it too;
+  in the Exigence tab, both « Read the code » panels show the same files. Nothing more is kept once the page is closed.
+
+</Update>
+
 <Update label="0.3.13" description="2026-11-01">
 
 Definition of Ready in one improvement, in the demonstration's real conditions — with the linked code read
