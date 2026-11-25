@@ -7,6 +7,32 @@ description: "Toutes les versions publiées de TestPulse Studio, la plus récent
 
 Les versions récentes sont décrites en français, telles que les présente l’onglet Nouveautés ; les plus anciennes en anglais, la langue du journal des versions.
 
+<Update label="0.3.21" description="2026-11-25">
+
+- **Internal only — no visible change**: the base of the closed-question scoring of the requirement assessment —
+  questions and scale as versioned data, signals computed by the code, extended context reading, stored scoring
+  method — behind the build flag `closedQuestionScoring`, off by default: with the flag off, the product behaves as
+  0.3.20. The engine is wired behind the same flag (closed questions asked, answers checked, scores computed by the
+  scale, question-by-question vote, stored method and score variants, bench ready but not run); no new screen. The
+  screens follow: a stored closed-questions assessment shows its questions, method, history and PDF, and, behind the
+  flag, the extended context, the signal settings and the form findings without AI. Their texts are loaded on demand,
+  with the screens that need them. Behind the same flag, "Requirement quality" gains a **By parent** view (each Feature
+  or Epic with its stories: assessed, Definition of Ready met, without a task, possible duplicates and undelivered
+  dependencies between sisters, read from the stored assessments; no parent score), with its detail and CSV export.
+- **Changed**: the six INVEST criteria keep their English names in the French interface too — Independent, Negotiable,
+  Valuable, Estimable, Small, Testable — in the assessment, « Requirement quality », the PDF and CSV exports and the
+  settings; their descriptions and tooltips stay in French.
+- **Fixed**: a result of the help search opens its tab, scrolls to the section found and moves the focus to it; result
+  excerpts show plain text, without raw Markdown marks.
+- **Fixed**: after reloading Design, « What will be sent » at step 0 shows the code read as soon as it is restored,
+  without another reading of the code.
+- **Fixed**: the « Assumption: » and « Out of scope: » lines written by the requirement improvement, their section title
+  and the « Answer: » lines are written in the language of the requirement, whatever the language of the interface.
+- **Internal only**: test hygiene — no global timeout raised, two slow Design test files get their own timeout, fake
+  assessment runs always return an outcome, and an unhandled rejection fails the test that left it.
+
+</Update>
+
 <Update label="0.3.20" description="2026-11-21">
 
 The fixes of the 0.3.19 rehearsal.
